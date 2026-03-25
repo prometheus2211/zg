@@ -108,20 +108,19 @@ body {
   bottom: 36px;
   left: 72px;
   z-index: 2;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
   color: var(--mid);
   display: flex;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
   text-decoration: none;
   background: var(--bg);
   padding: 4px 0;
+  transition: color 0.2s;
 }
-.scroll-hint { font-size: 18px; letter-spacing: 0; }
+.scroll-hint:hover { color: var(--black); }
 
 /* ══════════════════════════════════════
    FADE — long gradient, satz floats in it
@@ -151,7 +150,7 @@ body {
   color: var(--black);
   max-width: 780px;
 }
-.satz em { font-style: normal; font-weight: 700; color: var(--vermil); }
+.satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
 /* ══════════════════════════════════════
    BELOW — solid bg only from contact down
@@ -160,6 +159,15 @@ body {
   position: relative;
   z-index: 2;
   background: var(--bg);
+}
+.below::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .contact-section {
@@ -280,17 +288,35 @@ footer {
 .modal a { color: var(--black); }
 
 /* ══════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — TABLET
+══════════════════════════════════════ */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .nav { padding: 24px 48px; }
+  .content { padding: 0 48px; }
+  .scroll-hint { left: 48px; }
+  .satz-section { padding: 0 48px 80px; }
+  .contact-section { padding: 64px 48px 80px; }
+  footer { padding: 24px 48px; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE
 ══════════════════════════════════════ */
 @media (max-width: 640px) {
-  .nav { padding: 24px 32px; }
-  .content { padding: 0 32px; }
-  .bg-text { padding: 32px; font-size: 11px; }
-  .scroll-hint { left: 32px; }
-  .satz-section { padding: 72px 32px; }
-  .contact-section { padding: 72px 32px; }
-  footer { padding: 28px 32px; }
-  .modal { padding: 36px 28px; }
+  .nav { padding: 20px 24px; }
+  .wordmark { font-size: 11px; }
+  .content { padding: 0 24px; }
+  .bg-text { padding: 24px; font-size: 10px; line-height: 2.0; }
+  .scroll-hint { left: 24px; bottom: 28px; }
+  .hero { min-height: 480px; }
+  .satz-section { padding: 60px 24px 80px; }
+  .contact-section { padding: 60px 24px 80px; }
+  .contact-email { font-size: clamp(18px, 5vw, 26px); }
+  footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .modal { padding: 32px 20px; }
+  .modal h2 { font-size: 18px; }
+  /* Prevent bounce on iOS while modal open */
+  body.modal-open { position: fixed; width: 100%; }
 }
 </style>
 </head>
@@ -320,7 +346,8 @@ footer {
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
-    <a class="contact-email" href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
+    <p class="contact-label">Kontakt</p>
+    <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
   </section>
 
   <!-- FOOTER -->
@@ -347,7 +374,7 @@ footer {
       13158 Berlin
     </address>
     <h3>Kontakt</h3>
-    <p><a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a></p>
+    <p><a id="email-impressum" href="#">kontakt@zentrumgrundrechte.de</a></p>
     <h3>Vereinsregister</h3>
     <p>Eintragung beim Amtsgericht Charlottenburg beantragt.</p>
     <h3>Verantwortlich für den Inhalt</h3>
@@ -364,7 +391,7 @@ footer {
     <address>
       Zentrum Grundrechte e.V.<br>
       Hauptstraße 2b, 13158 Berlin<br>
-      <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
+      <a id="email-datenschutz" href="#">kontakt@zentrumgrundrechte.de</a>
     </address>
     <h3>Erhebung personenbezogener Daten</h3>
     <p>Diese Website erhebt keine personenbezogenen Daten. Es werden keine Cookies gesetzt, kein Tracking durchgeführt und keine Analyse-Tools eingesetzt.</p>
@@ -382,6 +409,16 @@ footer {
 <script>
 const ABWEHR = 'Art. 1 — Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt. Art. 2 — Jeder hat das Recht auf die freie Entfaltung seiner Persönlichkeit, soweit er nicht die Rechte anderer verletzt. Die Freiheit der Person ist unverletzlich. In diese Rechte darf nur auf Grund eines Gesetzes eingegriffen werden. Art. 4 — Die Freiheit des Glaubens, des Gewissens und die Freiheit des religiösen und weltanschaulichen Bekenntnisses sind unverletzlich. Art. 5 — Jeder hat das Recht, seine Meinung in Wort, Schrift und Bild frei zu äußern und zu verbreiten. Die Pressefreiheit und die Freiheit der Berichterstattung sind gewährleistet. Art. 6 — Ehe und Familie stehen unter dem besonderen Schutze der staatlichen Ordnung. Pflege und Erziehung der Kinder sind das natürliche Recht der Eltern. Art. 8 — Alle Deutschen haben das Recht, sich ohne Anmeldung oder Erlaubnis friedlich und ohne Waffen zu versammeln. Art. 9 — Alle Deutschen haben das Recht, Vereine und Gesellschaften zu bilden. Art. 10 — Das Briefgeheimnis sowie das Post- und Fernmeldegeheimnis sind unverletzlich. Art. 11 — Alle Deutschen genießen Freizügigkeit im ganzen Bundesgebiet. Art. 12 — Alle Deutschen haben das Recht, Beruf, Arbeitsplatz und Ausbildungsstätte frei zu wählen. Art. 13 — Die Wohnung ist unverletzlich. Art. 14 — Das Eigentum und das Erbrecht werden gewährleistet. Enteignung ist nur zum Wohle der Allgemeinheit zulässig. ';
 document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
+
+/* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
+(function() {
+  var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
+  var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
+  ['email-main', 'email-impressum', 'email-datenschutz'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.href = href;
+  });
+})();
 
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
