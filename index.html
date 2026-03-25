@@ -142,6 +142,22 @@ body {
 /* ══════════════════════════════════════
    CONTACT
 ══════════════════════════════════════ */
+
+/* ── Satz ── */
+.satz-section {
+  padding: 100px 72px;
+  border-top: 1px solid var(--rule);
+}
+.satz {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  max-width: 780px;
+}
+.satz em { font-style: normal; font-weight: 700; }
+
 .contact-section {
   padding: 100px 72px 100px;
   border-top: 1px solid var(--rule);
@@ -268,6 +284,7 @@ footer {
   .content { padding: 0 32px; }
   .bg-text { padding: 32px; font-size: 11px; }
   .scroll-hint { left: 32px; }
+  .satz-section { padding: 72px 32px; }
   .contact-section { padding: 72px 32px; }
   footer { padding: 28px 32px; }
   .modal { padding: 36px 28px; }
@@ -292,6 +309,11 @@ footer {
 
 <!-- ══ BELOW HERO (solid bg, covers fixed articles) ══ -->
 <div class="below">
+
+  <!-- SATZ -->
+  <section class="satz-section">
+    <p class="satz">Als Verein für strategische Prozessführung <em>klagen wir, wo der Staat seine Grenzen überschreitet</em> — um Freiheitsrechte zu schützen und wiederherzustellen.</p>
+  </section>
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
