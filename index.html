@@ -36,21 +36,11 @@ body {
 }
 
 /* ══════════════════════════════════════
-   HERO
+   PARALLAX: articles are fixed to viewport
+   everything else scrolls over them
 ══════════════════════════════════════ */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 560px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--bg);
-}
-
 .bg-text {
-  position: absolute;
+  position: fixed;
   inset: 0;
   padding: 52px;
   font-size: 12.5px;
@@ -61,6 +51,22 @@ body {
   overflow: hidden;
   pointer-events: none;
   user-select: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+  /* transparent — lets fixed bg-text show through */
+  background: transparent;
 }
 
 .nav {
@@ -70,7 +76,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 3;
+  z-index: 2;
 }
 .wordmark {
   font-size: 13px;
@@ -78,8 +84,9 @@ body {
   color: var(--black);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  /* small bg chip so wordmark stays legible over the texture */
   background: var(--bg);
-  padding: 4px 0;
+  padding: 4px 8px 4px 0;
 }
 
 .content {
@@ -94,6 +101,12 @@ body {
   color: var(--black);
   line-height: 1.0;
   letter-spacing: -0.04em;
+  /* headline sits on a subtle bg so it punches through the texture */
+  background: var(--bg);
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 4px 0 0;
 }
 .headline em { font-style: normal; color: var(--vermil); }
 
@@ -101,7 +114,7 @@ body {
   position: absolute;
   bottom: 36px;
   left: 72px;
-  z-index: 3;
+  z-index: 2;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -111,55 +124,26 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  text-decoration: none;
   background: var(--bg);
   padding: 4px 0;
-  text-decoration: none;
 }
-.scroll-hint::after {
-  content: '↓';
-  font-size: 14px;
-}
+.scroll-hint::after { content: '↓'; font-size: 14px; }
 
 /* ══════════════════════════════════════
-   VISION / MISSION
+   BELOW HERO — solid bg covers fixed articles
 ══════════════════════════════════════ */
-.vm-section {
-  padding: 120px 72px;
-  max-width: 1000px;
-  margin: 0 auto;
-  border-top: 1px solid var(--rule);
-}
-
-.vm-block {
-  margin-bottom: 96px;
-}
-.vm-block:last-child { margin-bottom: 0; }
-
-.vm-tag {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--vermil);
-  margin-bottom: 24px;
-}
-.vm-text {
-  font-size: clamp(24px, 3.2vw, 40px);
-  font-weight: 300;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
-  color: var(--black);
-  max-width: 820px;
-}
-.vm-text strong {
-  font-weight: 900;
+.below {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
 }
 
 /* ══════════════════════════════════════
-   KONTAKT
+   CONTACT
 ══════════════════════════════════════ */
 .contact-section {
-  padding: 80px 72px 120px;
+  padding: 100px 72px 100px;
   border-top: 1px solid var(--rule);
 }
 .contact-label {
@@ -171,7 +155,7 @@ body {
   margin-bottom: 20px;
 }
 .contact-email {
-  font-size: clamp(20px, 2.8vw, 36px);
+  font-size: clamp(22px, 3vw, 40px);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--black);
@@ -205,10 +189,7 @@ footer {
   text-transform: uppercase;
   color: var(--mid);
 }
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
+.footer-links { display: flex; gap: 24px; }
 .footer-links a {
   font-size: 10px;
   font-weight: 600;
@@ -261,7 +242,6 @@ footer {
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-bottom: 32px;
-  color: var(--black);
 }
 .modal h3 {
   font-size: 11px;
@@ -288,7 +268,7 @@ footer {
   .content { padding: 0 32px; }
   .bg-text { padding: 32px; font-size: 11px; }
   .scroll-hint { left: 32px; }
-  .vm-section, .contact-section { padding-left: 32px; padding-right: 32px; }
+  .contact-section { padding: 72px 32px; }
   footer { padding: 28px 32px; }
   .modal { padding: 36px 28px; }
 }
@@ -296,44 +276,39 @@ footer {
 </head>
 <body>
 
-<!-- ══ HERO ══ -->
+<!-- Fixed background: Abwehrrechte -->
+<div class="bg-text" id="bg"></div>
+
+<!-- ══ HERO (transparent, scrolls over fixed bg) ══ -->
 <section class="hero">
-  <div class="bg-text" id="bg"></div>
   <nav class="nav">
     <div class="wordmark">Zentrum Grundrechte</div>
   </nav>
   <div class="content">
     <h1 class="headline">Grenzen gelten<br>auch für den <em>Staat.</em></h1>
   </div>
-  <a class="scroll-hint" href="#vm">Mehr erfahren</a>
+  <a class="scroll-hint" href="#kontakt">Kontakt</a>
 </section>
 
-<!-- ══ VISION / MISSION ══ -->
-<section class="vm-section" id="vm">
-  <div class="vm-block">
-    <div class="vm-tag">Vision</div>
-    <p class="vm-text">In Deutschland die <strong>Freiheitsrechte des Einzelnen als Abwehrrechte gegen den Staat</strong> konsequent durchgesetzt.</p>
-  </div>
-  <div class="vm-block">
-    <div class="vm-tag">Mission</div>
-    <p class="vm-text">Als Organisation für strategische Prozessführung nutzen wir den <strong>Rechtsweg als Hebel</strong>, um individuelle Freiheitsrechte zu schützen und wiederherzustellen.</p>
-  </div>
-</section>
+<!-- ══ BELOW HERO (solid bg, covers fixed articles) ══ -->
+<div class="below">
 
-<!-- ══ KONTAKT ══ -->
-<section class="contact-section">
-  <div class="contact-label">Kontakt</div>
-  <a class="contact-email" href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
-</section>
+  <!-- KONTAKT -->
+  <section class="contact-section" id="kontakt">
+    <div class="contact-label">Kontakt</div>
+    <a class="contact-email" href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
+  </section>
 
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-wm">Zentrum Grundrechte e.V.</div>
-  <nav class="footer-links">
-    <a href="#" onclick="openModal('impressum'); return false;">Impressum</a>
-    <a href="#" onclick="openModal('datenschutz'); return false;">Datenschutz</a>
-  </nav>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-wm">Zentrum Grundrechte e.V.</div>
+    <nav class="footer-links">
+      <a href="#" onclick="openModal('impressum'); return false;">Impressum</a>
+      <a href="#" onclick="openModal('datenschutz'); return false;">Datenschutz</a>
+    </nav>
+  </footer>
+
+</div>
 
 <!-- ══ MODAL: IMPRESSUM ══ -->
 <div class="modal-overlay" id="modal-impressum" onclick="if(event.target===this)closeModal('impressum')">
@@ -369,25 +344,23 @@ footer {
       Hauptstraße 2b, 13158 Berlin<br>
       <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
     </address>
-    <h3>Erhebung und Verarbeitung personenbezogener Daten</h3>
+    <h3>Erhebung personenbezogener Daten</h3>
     <p>Diese Website erhebt keine personenbezogenen Daten. Es werden keine Cookies gesetzt, kein Tracking durchgeführt und keine Analyse-Tools eingesetzt.</p>
     <h3>Kontaktaufnahme per E-Mail</h3>
-    <p>Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage und für mögliche Rückfragen gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+    <p>Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
     <h3>Hosting</h3>
-    <p>Diese Website wird über Netlify, Inc., 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA gehostet. Beim Aufruf der Website werden technische Zugriffsdaten (IP-Adresse, Zeitpunkt, aufgerufene Seite) im Serverlog gespeichert. Weitere Informationen: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.</p>
+    <p>Diese Website wird über Netlify, Inc., 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA gehostet. Beim Aufruf werden technische Zugriffsdaten im Serverlog gespeichert. Weitere Informationen: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.</p>
     <h3>Ihre Rechte</h3>
-    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Beschwerden richten Sie an die zuständige Aufsichtsbehörde: Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer personenbezogenen Daten. Beschwerden richten Sie an die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
     <h3>Stand</h3>
     <p>März 2026</p>
   </div>
 </div>
 
 <script>
-// Background texture
 const ABWEHR = 'Art. 1 — Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt. Art. 2 — Jeder hat das Recht auf die freie Entfaltung seiner Persönlichkeit, soweit er nicht die Rechte anderer verletzt. Die Freiheit der Person ist unverletzlich. In diese Rechte darf nur auf Grund eines Gesetzes eingegriffen werden. Art. 4 — Die Freiheit des Glaubens, des Gewissens und die Freiheit des religiösen und weltanschaulichen Bekenntnisses sind unverletzlich. Art. 5 — Jeder hat das Recht, seine Meinung in Wort, Schrift und Bild frei zu äußern und zu verbreiten. Die Pressefreiheit und die Freiheit der Berichterstattung sind gewährleistet. Art. 6 — Ehe und Familie stehen unter dem besonderen Schutze der staatlichen Ordnung. Pflege und Erziehung der Kinder sind das natürliche Recht der Eltern. Art. 8 — Alle Deutschen haben das Recht, sich ohne Anmeldung oder Erlaubnis friedlich und ohne Waffen zu versammeln. Art. 9 — Alle Deutschen haben das Recht, Vereine und Gesellschaften zu bilden. Art. 10 — Das Briefgeheimnis sowie das Post- und Fernmeldegeheimnis sind unverletzlich. Art. 11 — Alle Deutschen genießen Freizügigkeit im ganzen Bundesgebiet. Art. 12 — Alle Deutschen haben das Recht, Beruf, Arbeitsplatz und Ausbildungsstätte frei zu wählen. Art. 13 — Die Wohnung ist unverletzlich. Art. 14 — Das Eigentum und das Erbrecht werden gewährleistet. Enteignung ist nur zum Wohle der Allgemeinheit zulässig. ';
 document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
 
-// Modals
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -398,12 +371,11 @@ function closeModal(id) {
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m => {
-      m.classList.remove('open');
-    });
+    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
     document.body.style.overflow = '';
   }
 });
 </script>
+
 </body>
 </html>
