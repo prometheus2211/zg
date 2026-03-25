@@ -121,7 +121,20 @@ body {
   background: var(--bg);
   padding: 4px 0;
 }
-.scroll-hint::after { content: '↓'; font-size: 14px; }
+.scroll-hint { font-size: 18px; letter-spacing: 0; }
+
+/* ══════════════════════════════════════
+   FADE — gradient transition hero → content
+══════════════════════════════════════ */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 220px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
 
 /* ══════════════════════════════════════
    BELOW HERO — solid bg covers fixed articles
@@ -297,7 +310,7 @@ footer {
   <div class="content">
     <h1 class="headline">Grenzen gelten<br>auch für den <em>Staat.</em></h1>
   </div>
-  <a class="scroll-hint" href="#kontakt">Kontakt</a>
+  <a class="scroll-hint" href="#kontakt">↓</a>
 </section>
 
 <!-- ══ BELOW HERO (solid bg, covers fixed articles) ══ -->
@@ -310,7 +323,6 @@ footer {
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
-    <div class="contact-label">Kontakt</div>
     <a class="contact-email" href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
   </section>
 
@@ -333,8 +345,7 @@ footer {
     <h3>Angaben gemäß § 5 TMG</h3>
     <address>
       Zentrum Grundrechte e.V.<br>
-      vertreten durch den Vorstand:<br>
-      Josef Städter (Vorsitzender)<br>
+      vertreten durch den Vorstand<br>
       Hauptstraße 2b<br>
       13158 Berlin
     </address>
@@ -343,7 +354,7 @@ footer {
     <h3>Vereinsregister</h3>
     <p>Eintragung beim Amtsgericht Charlottenburg beantragt.</p>
     <h3>Verantwortlich für den Inhalt</h3>
-    <p>Josef Städter, Hauptstraße 2b, 13158 Berlin</p>
+    <p>Der Vorstand, Hauptstraße 2b, 13158 Berlin</p>
   </div>
 </div>
 
@@ -355,7 +366,6 @@ footer {
     <h3>Verantwortlicher</h3>
     <address>
       Zentrum Grundrechte e.V.<br>
-      Josef Städter<br>
       Hauptstraße 2b, 13158 Berlin<br>
       <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
     </address>
