@@ -124,35 +124,24 @@ body {
 .scroll-hint { font-size: 18px; letter-spacing: 0; }
 
 /* ══════════════════════════════════════
-   FADE — gradient transition hero → content
+   FADE — long gradient, satz floats in it
 ══════════════════════════════════════ */
 .hero::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 220px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
+  height: 340px;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 85%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* ══════════════════════════════════════
-   BELOW HERO — solid bg covers fixed articles
-══════════════════════════════════════ */
-.below {
+/* Satz sits in the fade zone — transparent, part of the scroll */
+.satz-section {
   position: relative;
   z-index: 2;
-  background: var(--bg);
-}
-
-/* ══════════════════════════════════════
-   CONTACT
-══════════════════════════════════════ */
-
-/* ── Satz ── */
-.satz-section {
-  padding: 100px 72px;
-  border-top: 1px solid var(--rule);
+  padding: 0 72px 100px;
+  /* no background, no border — floats over the fading articles */
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -164,9 +153,17 @@ body {
 }
 .satz em { font-style: normal; font-weight: 700; color: var(--vermil); }
 
+/* ══════════════════════════════════════
+   BELOW — solid bg only from contact down
+══════════════════════════════════════ */
+.below {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+}
+
 .contact-section {
-  padding: 100px 72px 100px;
-  border-top: 1px solid var(--rule);
+  padding: 80px 72px 100px;
 }
 .contact-label {
   font-size: 9px;
@@ -313,13 +310,13 @@ footer {
   <a class="scroll-hint" href="#kontakt">↓</a>
 </section>
 
-<!-- ══ BELOW HERO (solid bg, covers fixed articles) ══ -->
-<div class="below">
+<!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
+<section class="satz-section">
+  <p class="satz">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — um <em>Freiheitsrechte zu schützen</em> und wiederherzustellen.</p>
+</section>
 
-  <!-- SATZ -->
-  <section class="satz-section">
-    <p class="satz">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat <em>seine Grenzen überschreitet</em> — um <em>Freiheitsrechte zu schützen</em> und wiederherzustellen.</p>
-  </section>
+<!-- ══ BELOW — solid bg from contact down ══ -->
+<div class="below">
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
