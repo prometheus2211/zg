@@ -135,12 +135,19 @@ body {
   z-index: 1;
 }
 
-/* Satz sits in the fade zone — transparent, part of the scroll */
+/* Satz sits in the fade zone — fades in at top (hero::after) and out at bottom (::after) */
 .satz-section {
   position: relative;
   z-index: 2;
-  padding: 0 72px 100px;
-  /* no background, no border — floats over the fading articles */
+  padding: 0 72px 120px;
+}
+.satz-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -159,15 +166,6 @@ body {
   position: relative;
   z-index: 2;
   background: var(--bg);
-}
-.below::before {
-  content: '';
-  position: absolute;
-  top: -80px; left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
-  pointer-events: none;
-  z-index: 1;
 }
 
 .contact-section {
