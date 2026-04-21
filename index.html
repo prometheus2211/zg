@@ -63,7 +63,8 @@ body {
   min-height: 520px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 20vh;
   z-index: 1;
   /* transparent — lets fixed bg-text show through */
   background: transparent;
@@ -132,19 +133,19 @@ body {
   bottom: 36px;
   left: 72px;
   z-index: 2;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
   letter-spacing: 0;
-  color: var(--mid);
+  color: var(--vermil);
   display: flex;
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-  background: var(--bg);
-  padding: 4px 0;
-  transition: color 0.2s;
+  padding: 0;
+  transition: color 0.2s, transform 0.2s;
 }
-.scroll-hint:hover { color: var(--black); }
+.scroll-hint:hover { color: var(--black); transform: translateY(2px); }
 
 /* ══════════════════════════════════════
    FADE — long gradient, satz floats in it
@@ -368,7 +369,7 @@ footer {
       <h1 class="headline" id="headline" data-de="Das Recht bindet<br>auch den <em>Staat.</em>" data-en="The law binds<br>even the <em>State.</em>">Das Recht bindet<br>auch den <em>Staat.</em></h1>
     </div>
   </div>
-  <a class="scroll-hint" href="#kontakt">↓</a>
+  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten">⬇</a>
 </section>
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
