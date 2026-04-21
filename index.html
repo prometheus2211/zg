@@ -71,13 +71,13 @@ body {
 }
 
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0;
   padding: 28px 72px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  z-index: 10;
 }
 .wordmark {
   font-size: 22px;
@@ -143,9 +143,10 @@ body {
   cursor: pointer;
   text-decoration: none;
   padding: 0;
-  transition: color 0.2s, transform 0.2s;
+  transition: color 0.2s, transform 0.3s, opacity 0.4s;
 }
 .scroll-hint:hover { color: var(--black); transform: translateY(2px); }
+.scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
 
 /* ══════════════════════════════════════
    FADE — long gradient, satz floats in it
@@ -484,6 +485,18 @@ document.addEventListener('keydown', e => {
     document.body.style.overflow = '';
   }
 });
+
+/* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
+(function() {
+  var hint = document.querySelector('.scroll-hint');
+  if (!hint) return;
+  var toggle = function() {
+    if (window.scrollY > 40) hint.classList.add('hidden');
+    else hint.classList.remove('hidden');
+  };
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+})();
 </script>
 
 </body>
