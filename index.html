@@ -149,31 +149,13 @@ body {
 .scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
 
 /* ══════════════════════════════════════
-   FADE — long gradient, satz floats in it
+   FADE — Hintergrundschrift bleibt durchgehend sichtbar,
+   nur am Uebergang zum Kontakt-Block wird zu warmwei&szlig; ausgeblendet
 ══════════════════════════════════════ */
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 220px;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg) 85%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Satz sits in the fade zone — fades in at top (hero::after) and out at bottom (::after) */
 .satz-section {
   position: relative;
   z-index: 2;
   padding: 64px 72px 88px;
-}
-.satz-section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 60px;
-  background: linear-gradient(to bottom, var(--bg), transparent);
-  pointer-events: none;
 }
 .satz-section::after {
   content: '';
