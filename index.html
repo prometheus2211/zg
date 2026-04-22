@@ -188,19 +188,22 @@ body {
   margin-bottom: 20px;
 }
 .contact-email {
+  display: inline-block;
+  background: var(--vermil);
+  color: #fff;
+  padding: 20px 32px 24px;
+  border-radius: 6px;
   font-size: clamp(22px, 3vw, 40px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--black);
   text-decoration: none;
-  border-bottom: 2px solid var(--rule);
-  padding-bottom: 3px;
-  transition: border-color 0.2s, color 0.2s;
-  display: inline-block;
+  transition: background 0.2s;
 }
 .contact-email:hover {
-  color: var(--vermil);
-  border-color: var(--vermil);
+  background: var(--black);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* ══════════════════════════════════════
@@ -319,7 +322,7 @@ footer {
   .hero { min-height: 440px; }
   .satz-section { padding: 48px 24px 60px; }
   .contact-section { padding: 44px 24px 60px; }
-  .contact-email { font-size: clamp(18px, 5vw, 26px); }
+  .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .modal { padding: 32px 20px; }
   .modal h2 { font-size: 18px; }
