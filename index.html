@@ -80,18 +80,24 @@ body {
   z-index: 10;
 }
 .wordmark {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  background: var(--vermil);
-  color: #fff;
-  padding: 8px 12px 9px;
-  border-radius: 4px;
-  line-height: 1.0;
-  font-weight: 900;
+  line-height: 0.92;
+  color: var(--black);
+  text-transform: none;
 }
-.wordmark .wm-line {
-  font-size: 17px;
-  letter-spacing: -0.025em;
+.wordmark .wm-l1 {
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.wordmark .wm-l2 {
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -0.035em;
+}
+.wordmark .wm-dot {
+  color: var(--vermil);
 }
 .lang-toggle {
   font-size: 11px;
@@ -321,8 +327,7 @@ footer {
 ══════════════════════════════════════ */
 @media (max-width: 640px) {
   .nav { padding: 20px 24px; }
-  .wordmark { padding: 6px 10px 7px; }
-  .wordmark .wm-line { font-size: 14px; }
+  .wordmark .wm-l1, .wordmark .wm-l2 { font-size: 16px; }
   .content { padding: 0 24px; }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
@@ -348,8 +353,8 @@ footer {
 <section class="hero">
   <nav class="nav">
     <div class="wordmark">
-      <span class="wm-line">Zentrum</span>
-      <span class="wm-line">Grundrechte</span>
+      <span class="wm-l1">Zentrum</span>
+      <span class="wm-l2">Grundrechte<span class="wm-dot">.</span></span>
     </div>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
   </nav>
