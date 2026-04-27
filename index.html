@@ -338,6 +338,112 @@ footer {
   /* Prevent bounce on iOS while modal open */
   body.modal-open { position: fixed; width: 100%; }
 }
+
+/* ══════════════════════════════════════
+   STICKY TOP-NAV (visible only when scrolled into "below" section)
+══════════════════════════════════════ */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: rgba(250, 250, 248, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  transform: translateY(-100%);
+  transition: transform 0.32s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
+}
+.top-nav.visible { transform: translateY(0); }
+.top-nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.top-nav .wordmark {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  text-decoration: none;
+}
+.top-nav .wordmark .mark {
+  border-bottom: 2px solid var(--vermil);
+  padding-bottom: 1px;
+}
+.top-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.top-nav .nav-links {
+  display: flex;
+  gap: 22px;
+}
+.top-nav .nav-links a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.top-nav .nav-links a:hover {
+  color: var(--black);
+  border-bottom-color: var(--vermil);
+}
+.top-nav .cta {
+  background: var(--vermil);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.top-nav .cta:hover { background: var(--black); color: #fff; }
+.top-nav .lang-toggle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--mid);
+  border: 1px solid var(--rule);
+  padding: 5px 9px;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s, border-color 0.2s;
+}
+.top-nav .lang-toggle:hover {
+  color: var(--black);
+  border-color: var(--black);
+}
+
+/* Sentinel — invisible trigger at start of .below */
+#nav-sentinel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1px; height: 1px;
+  pointer-events: none;
+}
+
+/* mobile adjustments for top-nav */
+@media (max-width: 640px) {
+  .top-nav-inner { padding: 12px 24px; gap: 12px; }
+  .top-nav .nav-links { display: none; }
+  .top-nav-right { gap: 12px; }
+  .top-nav .cta { padding: 7px 11px; font-size: 10px; }
+}
 </style>
 </head>
 <body>
@@ -345,8 +451,24 @@ footer {
 <!-- Fixed background: Abwehrrechte -->
 <div class="bg-text" id="bg"></div>
 
+<!-- ══ STICKY TOP-NAV (initially hidden, slides in once "below" is reached) ══ -->
+<header class="top-nav" id="topNav" aria-hidden="true">
+  <div class="top-nav-inner">
+    <a class="wordmark" href="#top" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
+    <div class="top-nav-right">
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="#" id="nav-mission" data-de="Mission" data-en="Mission">Mission</a>
+        <a href="#" id="nav-team" data-de="Team" data-en="Team">Team</a>
+        <a href="#" id="nav-themen" data-de="Themen" data-en="Topics">Themen</a>
+      </nav>
+      <a href="#" class="cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
+      <button class="lang-toggle" id="lang-toggle-top" onclick="toggleLang()">EN</button>
+    </div>
+  </div>
+</header>
+
 <!-- ══ HERO (transparent, scrolls over fixed bg) ══ -->
-<section class="hero">
+<section class="hero" id="top">
   <nav class="nav">
     <a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
@@ -366,6 +488,9 @@ footer {
 
 <!-- ══ BELOW — solid bg from contact down ══ -->
 <div class="below">
+
+  <!-- Sentinel: trigger top-nav visibility -->
+  <span id="nav-sentinel" aria-hidden="true"></span>
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
@@ -447,8 +572,13 @@ document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
 let currentLang = 'de';
 function toggleLang() {
   currentLang = currentLang === 'de' ? 'en' : 'de';
-  document.getElementById('lang-toggle').textContent = currentLang === 'de' ? 'EN' : 'DE';
-  ['headline','satz','contact-label','link-impressum','link-datenschutz'].forEach(function(id) {
+  var label = currentLang === 'de' ? 'EN' : 'DE';
+  ['lang-toggle','lang-toggle-top'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = label;
+  });
+  ['headline','satz','contact-label','link-impressum','link-datenschutz',
+   'nav-mission','nav-team','nav-themen','nav-unterstuetzen'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
@@ -456,6 +586,44 @@ function toggleLang() {
   });
 
 }
+
+/* ── Sticky top-nav: show only when scrolled into "below" section ── */
+(function() {
+  var topNav = document.getElementById('topNav');
+  var sentinel = document.getElementById('nav-sentinel');
+  if (!topNav || !sentinel) return;
+
+  function update() {
+    var passed = sentinel.getBoundingClientRect().top < 0;
+    if (passed) {
+      topNav.classList.add('visible');
+      topNav.setAttribute('aria-hidden', 'false');
+    } else {
+      topNav.classList.remove('visible');
+      topNav.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var passed = entry.boundingClientRect.top < 0;
+        if (passed) {
+          topNav.classList.add('visible');
+          topNav.setAttribute('aria-hidden', 'false');
+        } else {
+          topNav.classList.remove('visible');
+          topNav.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }, { threshold: [0, 1] });
+    io.observe(sentinel);
+  }
+
+  /* Always also bind a scroll listener — covers fast jumps and ensures hide on scroll-up */
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
 
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
