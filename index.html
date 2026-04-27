@@ -560,13 +560,18 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
+/* ── Scroll-Pfeil ausblenden + Nav-Reveal beim Scrollen ── */
 (function() {
   var hint = document.querySelector('.scroll-hint');
-  if (!hint) return;
+  var nav  = document.getElementById('mainNav');
   var toggle = function() {
-    if (window.scrollY > 40) hint.classList.add('hidden');
-    else hint.classList.remove('hidden');
+    if (window.scrollY > 40) {
+      if (hint) hint.classList.add('hidden');
+      if (nav) nav.classList.add('revealed');
+    } else {
+      if (hint) hint.classList.remove('hidden');
+      /* Nav bleibt revealed, sobald einmal aufgedeckt — kein Zurückblenden */
+    }
   };
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
