@@ -178,14 +178,15 @@ body {
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
-/* „Wer wir sind"-Link unterhalb des Satz — schliesst direkt an, gleiche Schriftfamilie */
+/* „Wer wir sind"-Link unterhalb des Satz — gleiche Schriftgröße/-familie wie Satz */
 .wer-link {
   display: inline-block;
   margin-top: 20px;
   font-family: inherit;
-  font-size: clamp(15px, 1.4vw, 18px);
-  font-weight: 400;
-  letter-spacing: -0.005em;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
   color: var(--black);
   text-decoration: none;
   padding-bottom: 3px;
@@ -195,7 +196,7 @@ body {
 .wer-link:hover { color: var(--vermil); }
 .wer-link .arrow {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 8px;
   color: var(--vermil);
   transition: transform 0.2s;
 }
