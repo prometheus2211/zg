@@ -166,7 +166,7 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  padding: 40px 72px 88px;
+  padding: 56px 72px 88px;
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -178,24 +178,25 @@ body {
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
-/* „Wer wir sind"-Link unterhalb des Satz */
+/* „Wer wir sind"-Link unterhalb des Satz — schliesst direkt an, gleiche Schriftfamilie */
 .wer-link {
   display: inline-block;
-  margin-top: 56px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mid);
+  margin-top: 20px;
+  font-family: inherit;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--black);
   text-decoration: none;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
   border-bottom: 1.5px solid var(--vermil);
   transition: color 0.2s;
 }
-.wer-link:hover { color: var(--black); }
+.wer-link:hover { color: var(--vermil); }
 .wer-link .arrow {
   display: inline-block;
   margin-left: 6px;
+  color: var(--vermil);
   transition: transform 0.2s;
 }
 .wer-link:hover .arrow { transform: translateX(3px); }
@@ -337,7 +338,7 @@ footer {
   .content { padding: 0 48px; }
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 32px 48px 64px; }
+  .satz-section { padding: 44px 48px 64px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
@@ -354,8 +355,8 @@ footer {
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
   .scroll-hint { left: 24px; bottom: 28px; }
   .hero { min-height: 440px; }
-  .satz-section { padding: 28px 24px 60px; }
-  .wer-link { margin-top: 40px; }
+  .satz-section { padding: 36px 24px 60px; }
+  .wer-link { margin-top: 16px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
