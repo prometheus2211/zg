@@ -343,7 +343,7 @@ footer {
 }
 
 /* ══════════════════════════════════════
-   NAV-RIGHT (links + CTA + lang) — appears on scroll-arrow click
+   NAV-RIGHT (links + CTA + lang) — always visible
 ══════════════════════════════════════ */
 .nav-right {
   display: flex;
@@ -353,15 +353,6 @@ footer {
 .nav-links {
   display: flex;
   gap: 22px;
-  opacity: 0;
-  transform: translateX(8px);
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.nav.revealed .nav-links {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
 }
 .nav-links a {
   font-size: 11px;
@@ -388,15 +379,7 @@ footer {
   padding: 8px 14px;
   border-radius: 2px;
   text-decoration: none;
-  opacity: 0;
-  transform: translateX(8px);
-  pointer-events: none;
-  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s, background 0.2s;
-}
-.nav.revealed .nav-cta {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
+  transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--black); }
 
@@ -432,7 +415,7 @@ footer {
       <h1 class="headline" id="headline" data-de="Das Recht bindet<br>auch den <em>Staat.</em>" data-en="The law binds<br>even the <em>State.</em>">Das Recht bindet<br>auch den <em>Staat.</em></h1>
     </div>
   </div>
-  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten" onclick="document.getElementById('mainNav').classList.add('revealed')">⬇</a>
+  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten">⬇</a>
 </section>
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
@@ -535,16 +518,6 @@ function toggleLang() {
 
 }
 
-/* ── Reveal nav links + CTA on scroll-arrow click ── */
-(function() {
-  var hint = document.querySelector('.scroll-hint');
-  var nav  = document.getElementById('mainNav');
-  if (!hint || !nav) return;
-  hint.addEventListener('click', function() {
-    nav.classList.add('revealed');
-  });
-})();
-
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -560,18 +533,13 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── Scroll-Pfeil ausblenden + Nav-Reveal beim Scrollen ── */
+/* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
 (function() {
   var hint = document.querySelector('.scroll-hint');
-  var nav  = document.getElementById('mainNav');
+  if (!hint) return;
   var toggle = function() {
-    if (window.scrollY > 40) {
-      if (hint) hint.classList.add('hidden');
-      if (nav) nav.classList.add('revealed');
-    } else {
-      if (hint) hint.classList.remove('hidden');
-      /* Nav bleibt revealed, sobald einmal aufgedeckt — kein Zurückblenden */
-    }
+    if (window.scrollY > 40) hint.classList.add('hidden');
+    else hint.classList.remove('hidden');
   };
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
