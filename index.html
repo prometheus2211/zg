@@ -166,7 +166,7 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  padding: 56px 72px 88px;
+  padding: 96px 72px 96px;
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -181,7 +181,7 @@ body {
 /* „Wer wir sind"-Link unterhalb des Satz — gleiche Schriftgröße/-familie wie Satz */
 .wer-link {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 0;
   font-family: inherit;
   font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 300;
@@ -194,13 +194,24 @@ body {
   transition: color 0.2s;
 }
 .wer-link:hover { color: var(--vermil); }
-.wer-link .arrow {
+.wer-arrow {
   display: inline-block;
-  margin-left: 8px;
+  width: 1.4em;
+  height: 0.5em;
+  margin-left: 0.4em;
+  vertical-align: 0.05em;
   color: var(--vermil);
   transition: transform 0.2s;
+  overflow: visible;
 }
-.wer-link:hover .arrow { transform: translateX(3px); }
+.wer-arrow line, .wer-arrow polyline {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+.wer-link:hover .wer-arrow { transform: translateX(4px); }
 
 /* ══════════════════════════════════════
    BELOW — solid bg only from contact down
@@ -339,7 +350,7 @@ footer {
   .content { padding: 0 48px; }
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 44px 48px 64px; }
+  .satz-section { padding: 80px 48px 80px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
@@ -356,8 +367,7 @@ footer {
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
   .scroll-hint { left: 24px; bottom: 28px; }
   .hero { min-height: 440px; }
-  .satz-section { padding: 36px 24px 60px; }
-  .wer-link { margin-top: 16px; }
+  .satz-section { padding: 64px 24px 64px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -446,7 +456,7 @@ footer {
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
   <p class="satz" id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen." data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights.">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen.</p>
-  <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind <span class=&quot;arrow&quot;>→</span>" data-en="Who we are <span class=&quot;arrow&quot;>→</span>">Wer wir sind <span class="arrow">→</span></a>
+  <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>" data-en="Who we are <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>">Wer wir sind <svg class="wer-arrow" viewBox="0 0 32 12" aria-hidden="true"><line x1="0" y1="6" x2="28" y2="6"/><polyline points="22,1 28,6 22,11"/></svg></a>
 </section>
 
 <!-- ══ BELOW — solid bg from contact down ══ -->
