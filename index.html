@@ -189,8 +189,6 @@ body {
   line-height: 1.5;
   color: var(--black);
   text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 1.5px solid var(--vermil);
   transition: color 0.2s;
 }
 .wer-link:hover { color: var(--vermil); }
@@ -198,10 +196,13 @@ body {
   display: inline-block;
   width: 1.4em;
   height: 0.5em;
-  margin-left: 0.4em;
-  vertical-align: 0.05em;
+  margin-left: 0.45em;
+  padding: 0.35em 0.5em;
+  border: 1.5px solid var(--vermil);
+  box-sizing: content-box;
+  vertical-align: middle;
   color: var(--vermil);
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
   overflow: visible;
 }
 .wer-arrow line, .wer-arrow polyline {
@@ -455,7 +456,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz" id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen." data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights.">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen.</p>
+  <p class="satz" id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</p>
   <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>" data-en="Who we are <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>">Wer wir sind <svg class="wer-arrow" viewBox="0 0 32 12" aria-hidden="true"><line x1="0" y1="6" x2="28" y2="6"/><polyline points="22,1 28,6 22,11"/></svg></a>
 </section>
 
