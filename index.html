@@ -195,11 +195,9 @@ body {
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: var(--black);
-  max-width: 780px;
-  /* KEIN text-wrap: balance — wir wollen, dass die letzte Zeile (mit
-     "wiederherzustellen:") kurz bleibt, damit die "Wer wir sind"-Box
-     dort noch in dieselbe Zeile passt. Greedy line-fill liefert
-     genau dieses Verhalten. */
+  /* max-width bewusst etwas reduziert (war 780px), damit auf der letzten
+     Zeile garantiert Platz für die "Wer wir sind"-Box (inkl. Pfeil) bleibt. */
+  max-width: 700px;
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
@@ -214,8 +212,8 @@ body {
   line-height: 1.2;
   color: var(--black);
   text-decoration: none;
-  /* etwas kompakter, damit die Box flacher in die Textzeile passt */
-  padding: 0.12em 0.55em;
+  /* kompakt, damit die Box (inkl. Pfeil) flach in die Textzeile passt */
+  padding: 0.10em 0.45em;
   background: var(--bg);
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
@@ -224,8 +222,8 @@ body {
 .wer-link:hover { color: var(--vermil); }
 .wer-arrow {
   display: inline-block;
-  margin-left: 0.35em;
-  font-weight: 400;
+  margin-left: 0.25em;
+  font-weight: 300;
   transition: transform 0.2s;
 }
 .wer-link:hover .wer-arrow { transform: translateX(3px); }
