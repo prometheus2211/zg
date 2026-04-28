@@ -216,24 +216,6 @@ body {
   transition: color 0.2s, background 0.2s;
 }
 .wer-link:hover { color: var(--vermil); }
-.wer-arrow {
-  display: inline-block;
-  width: 1.4em;
-  height: 0.5em;
-  margin-left: 0.45em;
-  vertical-align: middle;
-  color: var(--vermil);
-  transition: transform 0.2s;
-  overflow: visible;
-}
-.wer-arrow line, .wer-arrow polyline {
-  stroke: currentColor;
-  stroke-width: 1.5;
-  fill: none;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-}
-.wer-link:hover .wer-arrow { transform: translateX(4px); }
 
 /* ══════════════════════════════════════
    MISSION VIEW
@@ -537,7 +519,7 @@ footer {
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
   <p class="satz" id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</p>
-  <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>" data-en="Who we are <svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 32 12&quot; aria-hidden=&quot;true&quot;><line x1=&quot;0&quot; y1=&quot;6&quot; x2=&quot;28&quot; y2=&quot;6&quot;/><polyline points=&quot;22,1 28,6 22,11&quot;/></svg>">Wer wir sind <svg class="wer-arrow" viewBox="0 0 32 12" aria-hidden="true"><line x1="0" y1="6" x2="28" y2="6"/><polyline points="22,1 28,6 22,11"/></svg></a>
+  <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind" data-en="Who we are">Wer wir sind</a>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
