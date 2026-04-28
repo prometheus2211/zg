@@ -187,9 +187,7 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* padding-bottom verringert (war: 50vh - 500px), um den Text bei
-     entferntem Wer-wir-sind-Block weiterhin mittig zu zentrieren. */
-  padding: 96px 72px max(40px, calc(50vh - 540px));
+  padding: 96px 72px max(40px, calc(50vh - 500px));
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -198,8 +196,10 @@ body {
   letter-spacing: -0.02em;
   color: var(--black);
   max-width: 780px;
-  /* gleichmäßige Zeilenverteilung, damit Wer-wir-sind-Box nicht aus der Reihe tanzt */
-  text-wrap: balance;
+  /* KEIN text-wrap: balance — wir wollen, dass die letzte Zeile (mit
+     "wiederherzustellen:") kurz bleibt, damit die "Wer wir sind"-Box
+     dort noch in dieselbe Zeile passt. Greedy line-fill liefert
+     genau dieses Verhalten. */
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
@@ -408,7 +408,7 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 80px 48px max(40px, calc(50vh - 540px)); }
+  .satz-section { padding: 80px 48px max(40px, calc(50vh - 500px)); }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
