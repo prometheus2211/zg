@@ -80,14 +80,20 @@ body {
 
 .nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0; right: 0;
   padding: 28px 72px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   z-index: 100;
 }
 .wordmark {
+  /* fixed, niedriger z-index als .hero (15) → Hero-Inhalte (Headline-Box)
+     überdecken den Schriftzug visuell, wenn beide aufeinandertreffen. */
+  position: fixed;
+  top: 28px;
+  left: 72px;
+  z-index: 5;
   font-family: inherit;
   font-weight: 900;
   font-size: 22px;
@@ -403,6 +409,7 @@ footer {
 ══════════════════════════════════════ */
 @media (min-width: 641px) and (max-width: 1024px) {
   .nav { padding: 24px 48px; }
+  .wordmark { top: 24px; left: 48px; }
   .content { padding: 0 48px; }
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
@@ -419,7 +426,7 @@ footer {
 ══════════════════════════════════════ */
 @media (max-width: 640px) {
   .nav { padding: 20px 24px; }
-  .wordmark { font-size: 18px; }
+  .wordmark { top: 20px; left: 24px; font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift */
@@ -495,9 +502,11 @@ footer {
 <!-- Fixed background: Abwehrrechte -->
 <div class="bg-text" id="bg"></div>
 
+<!-- ══ Logo (fixed, niedriger z-index → wird von Headline-Box überdeckt) ══ -->
+<a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
+
 <!-- ══ NAV (global, fixed; visible on all views) ══ -->
 <nav class="nav" id="mainNav">
-  <a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
   <div class="nav-right">
     <div class="nav-links" aria-label="Hauptnavigation" role="navigation">
       <a href="#" id="nav-mission" data-de="Mission" data-en="Mission">Mission</a>
