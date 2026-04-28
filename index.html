@@ -187,7 +187,9 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  padding: 96px 72px max(40px, calc(50vh - 500px));
+  /* padding-bottom verringert (war: 50vh - 500px), um den Text bei
+     entferntem Wer-wir-sind-Block weiterhin mittig zu zentrieren. */
+  padding: 96px 72px max(40px, calc(50vh - 540px));
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -196,6 +198,8 @@ body {
   letter-spacing: -0.02em;
   color: var(--black);
   max-width: 780px;
+  /* gleichmäßige Zeilenverteilung, damit Wer-wir-sind-Box nicht aus der Reihe tanzt */
+  text-wrap: balance;
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
@@ -210,10 +214,12 @@ body {
   line-height: 1.2;
   color: var(--black);
   text-decoration: none;
-  padding: 0.3em 0.6em;
+  /* etwas kompakter, damit die Box flacher in die Textzeile passt */
+  padding: 0.12em 0.55em;
   background: var(--bg);
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
+  vertical-align: baseline;
 }
 .wer-link:hover { color: var(--vermil); }
 
@@ -402,7 +408,7 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 80px 48px max(40px, calc(50vh - 500px)); }
+  .satz-section { padding: 80px 48px max(40px, calc(50vh - 540px)); }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
@@ -422,7 +428,7 @@ footer {
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
   .scroll-hint { left: 24px; bottom: 28px; }
   .hero { min-height: 440px; }
-  .satz-section { padding: 64px 24px max(40px, calc(50vh - 460px)); }
+  .satz-section { padding: 64px 24px max(40px, calc(50vh - 500px)); }
   .mission-section { padding: 14vh 24px 64px; }
   .mission-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
   .mission-headline { font-size: clamp(34px, 9vw, 56px); }
@@ -518,8 +524,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz" id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</p>
-  <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind" data-en="Who we are">Wer wir sind</a>
+  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind" data-en="Who we are">Wer wir sind</a></p>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
