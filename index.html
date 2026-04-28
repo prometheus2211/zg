@@ -76,7 +76,11 @@ body {
   z-index: 15;
   /* transparent — lets fixed bg-text show through */
   background: transparent;
+  /* Klicks rieseln durch den Hero hindurch auf die darunterliegende Nav
+     (z-index 5), damit die Buttons trotz visueller Überdeckung klickbar bleiben. */
+  pointer-events: none;
 }
+.hero a, .hero button { pointer-events: auto; }
 
 .nav {
   position: fixed;
@@ -85,7 +89,9 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  z-index: 100;
+  /* z-index 5 (= wordmark) → Hero (15) und damit die Headline-Box
+     überdecken die Nav-Icons visuell, wenn sie aufeinandertreffen. */
+  z-index: 5;
 }
 .wordmark {
   /* fixed, niedriger z-index als .hero (15) → Hero-Inhalte (Headline-Box)
