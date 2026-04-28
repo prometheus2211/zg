@@ -186,10 +186,12 @@ body {
   font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 300;
   letter-spacing: -0.02em;
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--black);
   text-decoration: none;
-  transition: color 0.2s;
+  padding: 0.3em 0.6em;
+  border: 1.5px solid var(--vermil);
+  transition: color 0.2s, background 0.2s;
 }
 .wer-link:hover { color: var(--vermil); }
 .wer-arrow {
@@ -197,12 +199,9 @@ body {
   width: 1.4em;
   height: 0.5em;
   margin-left: 0.45em;
-  padding: 0.35em 0.5em;
-  border: 1.5px solid var(--vermil);
-  box-sizing: content-box;
   vertical-align: middle;
   color: var(--vermil);
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s;
   overflow: visible;
 }
 .wer-arrow line, .wer-arrow polyline {
