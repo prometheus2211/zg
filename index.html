@@ -40,6 +40,7 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern", "liga", "calt";
   font-kerning: normal;
+  overflow-x: hidden;
 }
 
 /* ══════════════════════════════════════
@@ -135,6 +136,11 @@ body {
   color: #fff;
   line-height: 1.0;
   letter-spacing: -0.04em;
+  /* Forces consistent 3-line layout regardless of viewport.
+     "Das Recht bindet"  ≈ 7.83em → wraps to 2 lines
+     "auch den Staat."   ≈ 7.24em → stays on 1 line
+     Total: 3 lines at every font-size. */
+  max-width: 7.55em;
 }
 .headline em {
   font-style: normal;
@@ -416,6 +422,7 @@ footer {
   .wordmark { font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
+  .headline { font-size: clamp(36px, 10vw, 56px); }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
   .scroll-hint { left: 24px; bottom: 28px; }
