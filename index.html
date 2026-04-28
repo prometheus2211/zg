@@ -222,6 +222,13 @@ body {
   vertical-align: baseline;
 }
 .wer-link:hover { color: var(--vermil); }
+.wer-arrow {
+  display: inline-block;
+  margin-left: 0.35em;
+  font-weight: 400;
+  transition: transform 0.2s;
+}
+.wer-link:hover .wer-arrow { transform: translateX(3px); }
 
 /* ══════════════════════════════════════
    MISSION VIEW
@@ -524,7 +531,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind" data-en="Who we are">Wer wir sind</a></p>
+  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></p>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
