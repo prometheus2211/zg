@@ -201,9 +201,17 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* padding-top skaliert mit vh, damit der Abstand zwischen Hero und
-     Satz auf kleineren Fenstern proportional kleiner wird. */
-  padding: clamp(20px, 5vh, 56px) 72px max(40px, calc(50vh - 460px));
+  /* min-height stellt sicher, dass das Dokument hoch genug ist,
+     damit die Titelbox beim Scrollen ans Seitenende immer aus dem
+     Viewport gedrückt wird – auch auf kurzen Fenstern.
+     Als Flex-Container mit justify-content: flex-end wird der BT
+     am unteren Rand verankert: bei max-scroll liegt er im unteren
+     Viewport-Bereich, klar unterhalb des Logos. */
+  min-height: max(360px, calc(100vh - 200px));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(20px, 5vh, 56px) 72px 0;
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -308,10 +316,7 @@ body.mission-view { background: var(--bg); }
 }
 
 .contact-section {
-  /* padding-bottom skaliert mit vh: stellt sicher, dass das Dokument
-     IMMER hoch genug ist, um beim Scrollen ans Seitenende die
-     Titelbox aus dem Viewport zu drücken – auch auf kurzen Fenstern. */
-  padding: 56px 72px clamp(80px, 35vh, 320px);
+  padding: 56px 72px 72px;
 }
 .contact-label {
   font-size: 9px;
@@ -440,10 +445,10 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
-  .satz-section { padding: clamp(16px, 4vh, 48px) 48px max(40px, calc(50vh - 460px)); }
+  .satz-section { padding: clamp(16px, 4vh, 48px) 48px 0; }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
-  .contact-section { padding: 48px 48px clamp(64px, 30vh, 280px); }
+  .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
 
@@ -463,12 +468,12 @@ footer {
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
      min-height schützt extrem niedrige Landscape-Viewports. */
   .hero { height: 100vh; min-height: 440px; }
-  .satz-section { padding: clamp(16px, 4vh, 48px) 24px max(40px, calc(50vh - 500px)); }
+  .satz-section { padding: clamp(16px, 4vh, 48px) 24px 0; }
   .mission-section { padding: 14vh 24px 64px; }
   .mission-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
   .mission-headline { font-size: clamp(34px, 9vw, 56px); }
   .mission-body { margin-top: 40px; font-size: 16px; }
-  .contact-section { padding: 44px 24px clamp(60px, 25vh, 220px); }
+  .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .modal { padding: 32px 20px; }
