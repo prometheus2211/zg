@@ -50,7 +50,10 @@ body {
 .bg-text {
   position: fixed;
   inset: 0;
-  padding: 130px 52px 52px;
+  /* padding-top muss kleiner sein als hero padding-top
+     (clamp(56px, 16vh, 200px)), damit der Hintergrundtext IMMER
+     oberhalb der Headline-Box beginnt – auf jedem Viewport. */
+  padding: clamp(40px, 11vh, 130px) 52px 52px;
   font-size: 16px;
   font-weight: 400;
   line-height: 2.2;
@@ -67,11 +70,13 @@ body {
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  /* Hero-Höhe skaliert mit Viewport-Größe (beide Achsen).
-     vorher: height: 100vh; min-height: 620px → blieb auf kleinen
-     Fenstern bei 620px stehen. Jetzt: clamp + min-height,
-     das mit vh+vw mitwächst. */
-  min-height: clamp(360px, 56vh + 6vw, 760px);
+  /* Hero füllt den Viewport vertikal → klare Zweiteilung der Seite
+     (Hero = oberer Bildschirm, Satz-Section = unterer Bildschirm).
+     min-height: 360px schützt sehr kleine Viewports davor, dass die
+     Headline-Box den ganzen Hero ausfüllt. Auf normalen Fenstern
+     dominiert height: 100vh und skaliert linear mit vh. */
+  height: 100vh;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -165,24 +170,26 @@ body {
 }
 
 .scroll-hint {
+  /* Mittig unten am Hero – als Chevron (V-Form), inspiriert von
+     freiheitsrechte.org. SVG nutzt currentColor → Farbe via
+     color-Property steuerbar (vermil → schwarz beim Hover). */
   position: absolute;
-  bottom: 36px;
-  left: 72px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0;
   color: var(--vermil);
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   text-decoration: none;
-  padding: 0;
+  padding: 8px 14px;
   transition: color 0.2s, transform 0.3s, opacity 0.4s;
 }
-.scroll-hint:hover { color: var(--black); transform: translateY(2px); }
-.scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
+.scroll-hint svg { display: block; }
+.scroll-hint:hover { color: var(--black); transform: translateX(-50%) translateY(3px); }
+.scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); }
 
 /* ══════════════════════════════════════
    FADE — Hintergrundschrift bleibt durchgehend sichtbar,
@@ -426,7 +433,7 @@ footer {
   .content { padding: 0 48px; }
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
-  .scroll-hint { left: 48px; }
+  /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
   .satz-section { padding: clamp(16px, 4vh, 48px) 48px max(40px, calc(50vh - 460px)); }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
@@ -445,7 +452,8 @@ footer {
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift */
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
-  .scroll-hint { left: 24px; bottom: 28px; }
+  /* .scroll-hint bleibt zentriert; nur bottom anpassen */
+  .scroll-hint { bottom: 28px; }
   .hero { min-height: 440px; }
   .satz-section { padding: clamp(16px, 4vh, 48px) 24px max(40px, calc(50vh - 500px)); }
   .mission-section { padding: 14vh 24px 64px; }
@@ -538,7 +546,11 @@ footer {
       <h1 class="headline" id="headline" data-de="Das Recht bindet<br>auch den <em>Staat.</em>" data-en="The law binds<br>even the <em>State.</em>">Das Recht bindet<br>auch den <em>Staat.</em></h1>
     </div>
   </div>
-  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten">⬇</a>
+  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten">
+    <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 </section>
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
