@@ -203,11 +203,10 @@ body {
      letzte Zeile (mit Box) ist über den Hard-Break entkoppelt. */
   text-wrap: balance;
 }
-/* erzwungener Umbruch vor letztem Segment — Desktop only,
-   auf Mobile übernimmt der natürliche Umbruch */
-@media (max-width: 768px) {
-  .satz-br { display: none; }
-}
+/* Letzter Textbaustein + "Wer wir sind"-Box als unteilbare Einheit:
+   sorgt dafür, dass Doppelpunkt und Box IMMER auf derselben Zeile landen,
+   während text-wrap: balance auf dem Vortext für gleichmäßige Zeilen sorgt. */
+.satz-tail-wrap { white-space: nowrap; }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
 /* „Wer wir sind"-Link unterhalb des Satz — gleiche Schriftgröße/-familie wie Satz */
@@ -538,7 +537,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em><br class=&quot;satz-br&quot;>und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore<br class=&quot;satz-br&quot;>fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em><br class="satz-br">und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></p>
+  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und</span> <span class="satz-tail-wrap"><span id="satz-tail" data-de="wiederherzustellen:" data-en="fundamental rights:">wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></span></p>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
@@ -636,7 +635,7 @@ function toggleLang() {
   currentLang = currentLang === 'de' ? 'en' : 'de';
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
-  ['headline','satz','contact-label','link-impressum','link-datenschutz',
+  ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-themen','nav-unterstuetzen','wer-link',
    'mission-headline','mission-body'].forEach(function(id) {
     var el = document.getElementById(id);
