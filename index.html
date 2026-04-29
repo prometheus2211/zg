@@ -253,9 +253,14 @@ body {
 }
 .wer-link:hover { color: var(--vermil); }
 .wer-arrow {
+  /* Chevron: gleiche Form wie scroll-hint, nur um 90° gedreht (">").
+     Inline neben dem Text — Größen in em, damit es mit der Schriftgröße skaliert. */
   display: inline-block;
-  margin-left: 0.25em;
-  font-weight: 300;
+  margin-left: 0.32em;
+  width: 0.42em;
+  height: 0.7em;
+  vertical-align: -0.04em;
+  overflow: visible;
   transition: transform 0.2s;
 }
 .wer-link:hover .wer-arrow { transform: translateX(3px); }
@@ -568,7 +573,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und</span> <span class="satz-tail-wrap"><span id="satz-tail" data-de="wiederherzustellen:" data-en="fundamental rights:">wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></span></p>
+  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und</span> <span class="satz-tail-wrap"><span id="satz-tail" data-de="wiederherzustellen:" data-en="fundamental rights:">wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Who we are<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Wer wir sind<svg class="wer-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></p>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
