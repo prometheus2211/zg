@@ -195,9 +195,14 @@ body {
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: var(--black);
-  /* max-width bewusst etwas reduziert (war 780px), damit auf der letzten
-     Zeile garantiert Platz für die "Wer wir sind"-Box (inkl. Pfeil) bleibt. */
-  max-width: 700px;
+  /* großzügiges max-width, damit der erzwungene Umbruch (.satz-br)
+     vor "und wiederherzustellen:" zusammen mit der Box auf eine Zeile passt. */
+  max-width: 880px;
+}
+/* erzwungener Umbruch vor letztem Segment — Desktop only,
+   auf Mobile übernimmt der natürliche Umbruch */
+@media (max-width: 768px) {
+  .satz-br { display: none; }
 }
 .satz em { font-style: normal; font-weight: 900; color: var(--vermil); }
 
@@ -529,7 +534,7 @@ footer {
 
 <!-- ══ SATZ — floats in gradient zone, no solid bg ══ -->
 <section class="satz-section">
-  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em> und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></p>
+  <p class="satz"><span id="satz" data-de="Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em><br class=&quot;satz-br&quot;>und wiederherzustellen:" data-en="As an association for strategic litigation, <em>we take the state to court</em> wherever it oversteps its limits — <em>to protect</em> and restore<br class=&quot;satz-br&quot;>fundamental rights:">Als Verein für strategische Prozessführung <em>klagen wir</em>, wo der Staat seine Grenzen überschreitet — <em>um Freiheitsrechte zu schützen</em><br class="satz-br">und wiederherzustellen:</span>&nbsp;<a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<span class=&quot;wer-arrow&quot;>→</span>" data-en="Who we are<span class=&quot;wer-arrow&quot;>→</span>">Wer wir sind<span class="wer-arrow">→</span></a></p>
 </section>
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
