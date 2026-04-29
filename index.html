@@ -68,7 +68,9 @@ body {
 .hero {
   position: relative;
   height: 100vh;
-  min-height: 620px;
+  /* min-height reduziert (war 620), damit auf kleineren Fenstern der
+     Hero (und damit der Abstand zur Satz-Sektion) mitschrumpft. */
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -187,8 +189,9 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* padding-top etwas reduziert (war 96px), damit der Satz weiter oben sitzt */
-  padding: 56px 72px max(40px, calc(50vh - 460px));
+  /* padding-top skaliert mit vh, damit der Abstand zwischen Hero und
+     Satz auf kleineren Fenstern proportional kleiner wird. */
+  padding: clamp(20px, 5vh, 56px) 72px max(40px, calc(50vh - 460px));
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -421,7 +424,7 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 48px 48px max(40px, calc(50vh - 460px)); }
+  .satz-section { padding: clamp(16px, 4vh, 48px) 48px max(40px, calc(50vh - 460px)); }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
@@ -441,7 +444,7 @@ footer {
   .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
   .scroll-hint { left: 24px; bottom: 28px; }
   .hero { min-height: 440px; }
-  .satz-section { padding: 64px 24px max(40px, calc(50vh - 500px)); }
+  .satz-section { padding: clamp(16px, 4vh, 48px) 24px max(40px, calc(50vh - 500px)); }
   .mission-section { padding: 14vh 24px 64px; }
   .mission-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
   .mission-headline { font-size: clamp(34px, 9vw, 56px); }
