@@ -254,13 +254,15 @@ body {
 .wer-link:hover { color: var(--vermil); }
 .wer-arrow {
   /* Chevron: gleiche Form wie scroll-hint, nur um 90° gedreht (">").
-     Inline neben dem Text — Größen in em, damit es mit der Schriftgröße skaliert. */
+     Inline neben dem Text — Größen in em, damit es mit der Schriftgröße skaliert.
+     color: var(--vermil) → Pfeil ist rot, unabhängig vom Hover-Status des Links. */
   display: inline-block;
   margin-left: 0.32em;
   width: 0.42em;
   height: 0.7em;
   vertical-align: -0.04em;
   overflow: visible;
+  color: var(--vermil);
   transition: transform 0.2s;
 }
 .wer-link:hover .wer-arrow { transform: translateX(3px); }
