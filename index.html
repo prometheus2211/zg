@@ -347,10 +347,15 @@ body.mission-view { background: var(--bg); }
 }
 .contact-email:hover {
   background: var(--black);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
 }
+/* „grundrechte" innerhalb der Mailadresse — analog zum Logo-Wordmark
+   unterstrichen, hier in Weiß auf Vermillion-Hintergrund. */
+.contact-email .mark {
+  border-bottom: 3px solid #fff;
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+.contact-email:hover .mark { border-bottom-color: var(--vermil); }
 
 /* ══════════════════════════════════════
    FOOTER
@@ -594,7 +599,7 @@ footer {
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
     <p class="contact-label" id="contact-label" data-de="Kontakt" data-en="Contact">Kontakt</p>
-    <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
+    <a class="contact-email" id="email-main" href="#">kontakt@zentrum<span class="mark">grundrechte</span>.de</a>
   </section>
 
   <!-- FOOTER -->
