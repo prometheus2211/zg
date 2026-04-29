@@ -56,7 +56,8 @@ body {
   padding: clamp(40px, 11vh, 130px) 52px 52px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 2.2;
+  /* explizit in px, damit das JS-Snapping unten zuverlässig rechnen kann */
+  line-height: 36px;
   letter-spacing: 0.015em;
   color: rgba(0,0,0,0.12);
   overflow: hidden;
@@ -469,7 +470,7 @@ footer {
   .content { padding: 0 24px; }
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift */
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
-  .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 2.0; }
+  .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 26px; }
   /* .scroll-hint bleibt zentriert; nur bottom anpassen */
   .scroll-hint { bottom: 28px; }
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
@@ -657,22 +658,34 @@ const ABWEHR = 'Art. 1 — Die Würde des Menschen ist unantastbar. Sie zu achte
 document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
 
 /* ── bg-text bottom an Zeilen-Boundary snappen, damit die letzte sichtbare
-   Zeile NIE mittendrin abgeschnitten ist (viewport-unabhängig). ── */
+   Zeile NIE mittendrin abgeschnitten ist (viewport-unabhängig).
+   Empirische Methode: erstes Wort messen, daraus exakte Pixel-Position
+   der ersten Zeile lesen — robuster als getComputedStyle bei clamp/em. ── */
 function alignBgTextBottom() {
   var bg = document.getElementById('bg');
   if (!bg) return;
   var cs = getComputedStyle(bg);
-  var lh = parseFloat(cs.lineHeight);
+  var fs = parseFloat(cs.fontSize);
+  // line-height robust auflösen: px direkt, Multiplier × font-size, "normal" → 1.2×fs
+  var lhRaw = cs.lineHeight;
+  var lh;
+  if (lhRaw === 'normal') {
+    lh = fs * 1.2;
+  } else {
+    var v = parseFloat(lhRaw);
+    if (isNaN(v) || v <= 0) return;
+    lh = v < fs ? v * fs : v;   // Multiplier vs. px
+  }
   var pt = parseFloat(cs.paddingTop);
-  if (!lh || isNaN(lh)) return;
   var vh = window.innerHeight;
   var n = Math.floor((vh - pt) / lh);          // wie viele volle Zeilen passen
   var clipY = pt + n * lh;                     // exakter Zeilen-Boundary
   bg.style.bottom = (vh - clipY) + 'px';       // Box-Unterkante auf diesen Boundary
 }
-alignBgTextBottom();
-window.addEventListener('resize', alignBgTextBottom);
-window.addEventListener('load', alignBgTextBottom);
+function scheduleAlignBg() { requestAnimationFrame(alignBgTextBottom); }
+scheduleAlignBg();
+window.addEventListener('resize', scheduleAlignBg);
+window.addEventListener('load', scheduleAlignBg);
 
 /* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
 (function() {
