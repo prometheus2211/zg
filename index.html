@@ -187,7 +187,8 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  padding: 96px 72px max(40px, calc(50vh - 500px));
+  /* padding-top etwas reduziert (war 96px), damit der Satz weiter oben sitzt */
+  padding: 56px 72px max(40px, calc(50vh - 460px));
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -198,6 +199,9 @@ body {
   /* großzügiges max-width, damit der erzwungene Umbruch (.satz-br)
      vor "und wiederherzustellen:" zusammen mit der Box auf eine Zeile passt. */
   max-width: 880px;
+  /* balance verteilt die Zeilen vor dem .satz-br gleichmäßig — die
+     letzte Zeile (mit Box) ist über den Hard-Break entkoppelt. */
+  text-wrap: balance;
 }
 /* erzwungener Umbruch vor letztem Segment — Desktop only,
    auf Mobile übernimmt der natürliche Umbruch */
@@ -418,7 +422,7 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   .scroll-hint { left: 48px; }
-  .satz-section { padding: 80px 48px max(40px, calc(50vh - 500px)); }
+  .satz-section { padding: 48px 48px max(40px, calc(50vh - 460px)); }
   .mission-section { padding: 18vh 48px 80px; }
   .mission-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
