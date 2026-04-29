@@ -67,14 +67,16 @@ body {
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  height: 100vh;
-  /* min-height reduziert (war 620), damit auf kleineren Fenstern der
-     Hero (und damit der Abstand zur Satz-Sektion) mitschrumpft. */
-  min-height: 480px;
+  /* Hero-Höhe skaliert mit Viewport-Größe (beide Achsen).
+     vorher: height: 100vh; min-height: 620px → blieb auf kleinen
+     Fenstern bei 620px stehen. Jetzt: clamp + min-height,
+     das mit vh+vw mitwächst. */
+  min-height: clamp(360px, 56vh + 6vw, 760px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 22vh;
+  padding-top: clamp(56px, 16vh, 200px);
+  padding-bottom: clamp(32px, 5vh, 80px);
   z-index: 15;
   /* transparent — lets fixed bg-text show through */
   background: transparent;
@@ -202,9 +204,10 @@ body {
   /* großzügiges max-width, damit der erzwungene Umbruch (.satz-br)
      vor "und wiederherzustellen:" zusammen mit der Box auf eine Zeile passt. */
   max-width: 880px;
-  /* balance verteilt die Zeilen vor dem .satz-br gleichmäßig — die
-     letzte Zeile (mit Box) ist über den Hard-Break entkoppelt. */
-  text-wrap: balance;
+  /* KEIN text-wrap: balance — Safari aktualisiert die Balance bei
+     Fenster-Vergrößerung nicht zuverlässig (Layout bleibt im engeren
+     Stand „eingerastet"). Der nowrap-Atom (.satz-tail-wrap) hält
+     Doppelpunkt + Box ohnehin zwingend zusammen. */
 }
 /* Letzter Textbaustein + "Wer wir sind"-Box als unteilbare Einheit:
    sorgt dafür, dass Doppelpunkt und Box IMMER auf derselben Zeile landen,
