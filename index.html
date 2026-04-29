@@ -552,7 +552,6 @@ footer {
     <div class="nav-links" aria-label="Hauptnavigation" role="navigation">
       <a href="#" id="nav-mission" data-de="Mission" data-en="Mission">Mission</a>
       <a href="#" id="nav-team" data-de="Team" data-en="Team">Team</a>
-      <a href="#" id="nav-themen" data-de="Themen" data-en="Topics">Themen</a>
     </div>
     <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
@@ -674,7 +673,7 @@ function toggleLang() {
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
-   'nav-mission','nav-team','nav-themen','nav-unterstuetzen','wer-link',
+   'nav-mission','nav-team','nav-unterstuetzen','wer-link',
    'mission-headline','mission-body'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
