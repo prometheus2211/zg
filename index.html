@@ -481,6 +481,11 @@ footer {
   font-style: normal;
 }
 .modal a { color: var(--black); }
+/* Vermillion-Unterstrich auf Modal-Titel-Marke (analog zur Wortmarke) */
+.modal h2 .mark {
+  border-bottom: 2.5px solid var(--vermil);
+  padding-bottom: 1.5px;
+}
 
 /* ── Newsletter-Modal: Formular ── */
 .newsletter-intro {
@@ -771,7 +776,7 @@ footer {
 <div class="modal-overlay" id="modal-newsletter" onclick="if(event.target===this)closeModal('newsletter')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('newsletter')" aria-label="Schließen">✕</button>
-    <h2>Newsletter</h2>
+    <h2><span class="mark">Newsletter</span></h2>
     <p class="newsletter-intro">Der Newsletter kommt — wir melden uns, wenn es los geht! Melden Sie sich schon jetzt an:</p>
     <form id="newsletter-form" novalidate>
       <label for="newsletter-email" style="position:absolute;left:-9999px;">E-Mail-Adresse</label>
@@ -906,10 +911,12 @@ document.getElementById('wer-link').addEventListener('click', function(e) {
    Backend-Anbindung folgt separat (kein Versand bisher). ── */
 document.getElementById('newsletter-link').addEventListener('click', function(e) {
   e.preventDefault();
-  // bei jedem Öffnen Formular zurücksetzen (Danke-Box ausblenden)
+  // bei jedem Öffnen Formular + Intro zurücksetzen (Danke-Box ausblenden)
   var form = document.getElementById('newsletter-form');
+  var intro = document.querySelector('#modal-newsletter .newsletter-intro');
   var thanks = document.querySelector('#modal-newsletter .newsletter-thanks');
   if (form) { form.style.display = ''; form.reset(); }
+  if (intro) intro.style.display = '';
   if (thanks) thanks.style.display = 'none';
   openModal('newsletter');
 });
@@ -924,6 +931,8 @@ document.getElementById('newsletter-link').addEventListener('click', function(e)
     if (!consent.checked) { consent.focus(); return; }
     // TODO: Versand-/Speicher-Backend anbinden, sobald entschieden.
     form.style.display = 'none';
+    var intro = document.querySelector('#modal-newsletter .newsletter-intro');
+    if (intro) intro.style.display = 'none';
     var thanks = document.querySelector('#modal-newsletter .newsletter-thanks');
     if (thanks) thanks.style.display = 'block';
   });
