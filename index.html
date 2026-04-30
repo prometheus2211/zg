@@ -482,6 +482,75 @@ footer {
 }
 .modal a { color: var(--black); }
 
+/* ── Newsletter-Modal: Formular ── */
+.newsletter-intro {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: var(--black) !important;
+  margin-bottom: 28px;
+}
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#newsletter-email {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--black);
+  background: var(--bg);
+  border: 1.5px solid var(--mid);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+#newsletter-email:focus { border-color: var(--vermil); }
+.newsletter-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #444;
+  cursor: pointer;
+}
+.newsletter-consent input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--vermil);
+  cursor: pointer;
+}
+.newsletter-consent a {
+  color: var(--black);
+  text-decoration: underline;
+}
+.newsletter-submit {
+  align-self: flex-start;
+  padding: 12px 28px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--vermil);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.newsletter-submit:hover { opacity: 0.86; }
+.newsletter-thanks {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: var(--black) !important;
+  padding: 18px 20px;
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid var(--vermil);
+  margin: 0;
+}
+
 /* ══════════════════════════════════════
    RESPONSIVE — TABLET
 ══════════════════════════════════════ */
@@ -691,8 +760,29 @@ footer {
     <p>Diese Website wird über GitHub Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf werden technische Zugriffsdaten im Serverlog gespeichert. Weitere Informationen: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection" target="_blank" rel="noopener">GitHub Pages Datenschutz</a>.</p>
     <h3>Ihre Rechte</h3>
     <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer personenbezogenen Daten. Beschwerden richten Sie an die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
+    <h3>Newsletter</h3>
+    <p>Wenn Sie sich für unseren Newsletter anmelden, verarbeiten wir die von Ihnen angegebene E-Mail-Adresse zu dem Zweck, Ihnen Informationen über die Tätigkeit des Zentrum Grundrechte e.V. zuzusenden. Rechtsgrundlage ist Ihre ausdrückliche Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen, etwa per E-Mail an <a href="#" id="email-datenschutz-nl">kontakt@zentrumgrundrechte.de</a>; durch den Widerruf wird die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung nicht berührt. Wir speichern Ihre E-Mail-Adresse, bis Sie die Einwilligung widerrufen. Eine Weitergabe an Dritte findet, abgesehen von einer technischen Versanddienstleistung, nicht statt; sobald wir einen Versanddienstleister einsetzen, ergänzen wir diese Erklärung entsprechend.</p>
     <h3>Stand</h3>
     <p>April 2026</p>
+  </div>
+</div>
+
+<!-- ══ MODAL: NEWSLETTER ══ -->
+<div class="modal-overlay" id="modal-newsletter" onclick="if(event.target===this)closeModal('newsletter')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('newsletter')" aria-label="Schließen">✕</button>
+    <h2>Newsletter</h2>
+    <p class="newsletter-intro">Der Newsletter kommt — wir melden uns, wenn es los geht! Melden Sie sich schon jetzt an:</p>
+    <form id="newsletter-form" novalidate>
+      <label for="newsletter-email" style="position:absolute;left:-9999px;">E-Mail-Adresse</label>
+      <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de" autocomplete="email">
+      <label class="newsletter-consent">
+        <input type="checkbox" id="newsletter-consent" required>
+        <span>Ich willige ein, dass das Zentrum Grundrechte e.V. die von mir angegebene E-Mail-Adresse zum Zweck des Newsletter-Versands speichert und verarbeitet (Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, etwa per E-Mail an <a id="email-newsletter-consent" href="#">kontakt@zentrumgrundrechte.de</a>. Weitere Informationen in der <a href="#" onclick="closeModal('newsletter');openModal('datenschutz');return false;">Datenschutzerklärung</a>.</span>
+      </label>
+      <button type="submit" class="newsletter-submit">Anmelden</button>
+    </form>
+    <p class="newsletter-thanks" style="display:none;">Vielen Dank — wir notieren Ihre Adresse vor und melden uns, sobald der Newsletter startet.</p>
   </div>
 </div>
 
@@ -748,7 +838,7 @@ setTimeout(scheduleAlignBg, 750);
 (function() {
   var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
   var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz'].forEach(function(id) {
+  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.href = href;
   });
@@ -811,6 +901,33 @@ document.getElementById('wer-link').addEventListener('click', function(e) {
   e.preventDefault();
   navigate('mission');
 });
+
+/* ── Newsletter: Klick öffnet Modal; Submit zeigt Danke-Box.
+   Backend-Anbindung folgt separat (kein Versand bisher). ── */
+document.getElementById('newsletter-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  // bei jedem Öffnen Formular zurücksetzen (Danke-Box ausblenden)
+  var form = document.getElementById('newsletter-form');
+  var thanks = document.querySelector('#modal-newsletter .newsletter-thanks');
+  if (form) { form.style.display = ''; form.reset(); }
+  if (thanks) thanks.style.display = 'none';
+  openModal('newsletter');
+});
+(function() {
+  var form = document.getElementById('newsletter-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('newsletter-email');
+    var consent = document.getElementById('newsletter-consent');
+    if (!email.value || !email.checkValidity()) { email.focus(); return; }
+    if (!consent.checked) { consent.focus(); return; }
+    // TODO: Versand-/Speicher-Backend anbinden, sobald entschieden.
+    form.style.display = 'none';
+    var thanks = document.querySelector('#modal-newsletter .newsletter-thanks');
+    if (thanks) thanks.style.display = 'block';
+  });
+})();
 document.querySelectorAll('.wordmark').forEach(function(wm) {
   wm.addEventListener('click', function(e) {
     e.preventDefault();
