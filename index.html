@@ -308,9 +308,11 @@ body {
 .newsletter-link:hover .newsletter-arrow { transform: translateX(3px); }
 
 /* ══════════════════════════════════════
-   MISSION VIEW
+   MISSION + TEAM VIEW
+   Beide Sektionen teilen sich das Layout, daher Mehrfach-Selektoren.
 ══════════════════════════════════════ */
-.mission-section {
+.mission-section,
+.team-section {
   display: none;
   position: relative;
   z-index: 2;
@@ -318,27 +320,32 @@ body {
   padding: 22vh 72px 96px;
   background: var(--bg);
 }
-.mission-content { max-width: 1100px; }
-.mission-headline-box {
+.mission-content,
+.team-content { max-width: 1100px; }
+.mission-headline-box,
+.team-headline-box {
   display: inline-block;
   background: var(--vermil);
   padding: 28px 40px 32px;
   border-radius: 6px;
 }
-.mission-headline {
+.mission-headline,
+.team-headline {
   font-size: clamp(40px, 6vw, 88px);
   font-weight: 900;
   color: #fff;
   line-height: 1.0;
   letter-spacing: -0.04em;
 }
-.mission-headline em {
+.mission-headline em,
+.team-headline em {
   font-style: normal;
   color: #fff;
   border-bottom: 5px solid #fff;
   padding-bottom: 4px;
 }
-.mission-body {
+.mission-body,
+.team-body {
   margin-top: 56px;
   max-width: 720px;
   font-size: clamp(18px, 1.5vw, 22px);
@@ -349,9 +356,14 @@ body {
 }
 body.mission-view .bg-text,
 body.mission-view .hero,
-body.mission-view .satz-section { display: none; }
+body.mission-view .satz-section,
+body.team-view .bg-text,
+body.team-view .hero,
+body.team-view .satz-section { display: none; }
 body.mission-view .mission-section { display: block; }
-body.mission-view { background: var(--bg); }
+body.team-view .team-section { display: block; }
+body.mission-view,
+body.team-view { background: var(--bg); }
 
 /* ══════════════════════════════════════
    BELOW — solid bg only from contact down
@@ -567,8 +579,10 @@ footer {
   .headline-box { padding: 28px 36px 32px; }
   /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
   .satz-section { padding: clamp(120px, 30vh, 320px) 48px clamp(16px, 4vh, 48px); }
-  .mission-section { padding: 18vh 48px 80px; }
-  .mission-headline-box { padding: 24px 32px 28px; }
+  .mission-section,
+  .team-section { padding: 18vh 48px 80px; }
+  .mission-headline-box,
+  .team-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
@@ -590,10 +604,14 @@ footer {
      min-height schützt extrem niedrige Landscape-Viewports. */
   .hero { height: 100vh; min-height: 440px; }
   .satz-section { padding: clamp(100px, 25vh, 280px) 24px clamp(16px, 4vh, 48px); }
-  .mission-section { padding: 14vh 24px 64px; }
-  .mission-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
-  .mission-headline { font-size: clamp(34px, 9vw, 56px); }
-  .mission-body { margin-top: 40px; font-size: 16px; }
+  .mission-section,
+  .team-section { padding: 14vh 24px 64px; }
+  .mission-headline-box,
+  .team-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
+  .mission-headline,
+  .team-headline { font-size: clamp(34px, 9vw, 56px); }
+  .mission-body,
+  .team-body { margin-top: 40px; font-size: 16px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -702,6 +720,16 @@ footer {
       <h1 class="mission-headline" id="mission-headline" data-de="Wir verteidigen<br><em>Abwehrrechte</em>" data-en="We defend<br><em>defensive rights</em>">Wir verteidigen<br><em>Abwehrrechte</em></h1>
     </div>
     <p class="mission-body" id="mission-body" data-de="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." data-en="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</section>
+
+<!-- ══ TEAM (sichtbar nur in team view) ══ -->
+<section class="team-section" id="team">
+  <div class="team-content">
+    <div class="team-headline-box">
+      <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte" data-en="<em>We</em> defend<br>defensive rights"><em>Wir</em> verteidigen<br>Abwehrrechte</h1>
+    </div>
+    <p class="team-body" id="team-body" data-de="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." data-en="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </section>
 
@@ -857,7 +885,7 @@ function toggleLang() {
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','wer-link','newsletter-link',
-   'mission-headline','mission-body'].forEach(function(id) {
+   'mission-headline','mission-body','team-headline','team-body'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
@@ -881,17 +909,21 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── View-Routing: Hauptseite ↔ Mission-Sektion via Hash ── */
+/* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team) via Hash ── */
 function applyView() {
+  document.body.classList.remove('mission-view', 'team-view');
   if (window.location.hash === '#mission') {
     document.body.classList.add('mission-view');
-  } else {
-    document.body.classList.remove('mission-view');
+  } else if (window.location.hash === '#team') {
+    document.body.classList.add('team-view');
   }
   window.scrollTo(0, 0);
 }
 function navigate(view) {
-  var newUrl = view === 'mission' ? '#mission' : window.location.pathname;
+  var newUrl;
+  if (view === 'mission') newUrl = '#mission';
+  else if (view === 'team') newUrl = '#team';
+  else newUrl = window.location.pathname;
   history.pushState(null, '', newUrl);
   applyView();
 }
@@ -901,6 +933,10 @@ applyView();
 document.getElementById('nav-mission').addEventListener('click', function(e) {
   e.preventDefault();
   navigate('mission');
+});
+document.getElementById('nav-team').addEventListener('click', function(e) {
+  e.preventDefault();
+  navigate('team');
 });
 document.getElementById('wer-link').addEventListener('click', function(e) {
   e.preventDefault();
