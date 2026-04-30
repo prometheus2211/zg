@@ -657,34 +657,38 @@ footer {
 const ABWEHR = 'Art. 1 — Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt. Art. 2 — Jeder hat das Recht auf die freie Entfaltung seiner Persönlichkeit, soweit er nicht die Rechte anderer verletzt. Die Freiheit der Person ist unverletzlich. In diese Rechte darf nur auf Grund eines Gesetzes eingegriffen werden. Art. 4 — Die Freiheit des Glaubens, des Gewissens und die Freiheit des religiösen und weltanschaulichen Bekenntnisses sind unverletzlich. Art. 5 — Jeder hat das Recht, seine Meinung in Wort, Schrift und Bild frei zu äußern und zu verbreiten. Die Pressefreiheit und die Freiheit der Berichterstattung sind gewährleistet. Art. 6 — Ehe und Familie stehen unter dem besonderen Schutze der staatlichen Ordnung. Pflege und Erziehung der Kinder sind das natürliche Recht der Eltern. Art. 8 — Alle Deutschen haben das Recht, sich ohne Anmeldung oder Erlaubnis friedlich und ohne Waffen zu versammeln. Art. 9 — Alle Deutschen haben das Recht, Vereine und Gesellschaften zu bilden. Art. 10 — Das Briefgeheimnis sowie das Post- und Fernmeldegeheimnis sind unverletzlich. Art. 11 — Alle Deutschen genießen Freizügigkeit im ganzen Bundesgebiet. Art. 12 — Alle Deutschen haben das Recht, Beruf, Arbeitsplatz und Ausbildungsstätte frei zu wählen. Art. 13 — Die Wohnung ist unverletzlich. Art. 14 — Das Eigentum und das Erbrecht werden gewährleistet. Enteignung ist nur zum Wohle der Allgemeinheit zulässig. ';
 document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
 
-/* ── bg-text bottom an Zeilen-Boundary snappen, damit die letzte sichtbare
-   Zeile NIE mittendrin abgeschnitten ist (viewport-unabhängig).
-   Empirisch via Range.getClientRects(): wir messen die tatsächlich
-   gerenderten Zeilen-Rechtecke (inkl. Descender) und snappen die Box-
-   Unterkante an das letzte Rect, das noch komplett im Viewport liegt. ── */
+/* ── bg-text Höhe an ein ganzzahliges Vielfaches der Zeilenhöhe snappen,
+   damit die letzte sichtbare Zeile NIE mittendrin abgeschnitten ist
+   (viewport-unabhängig). Direkt rechnen ist robuster als Rect-Messung:
+   Box-Höhe = padding-top + n*line-height, mit n = floor((vh - pt) / lh).
+   inset:0 liefert top:0 + bottom:0; wir überschreiben bottom:auto und
+   setzen height explizit. Aufgrund von 'overflow: hidden' wird alles
+   darunter sauber abgeschnitten — die Schnittlinie liegt exakt am Ende
+   der letzten vollständig gerenderten Zeile. ── */
 function alignBgTextBottom() {
   var bg = document.getElementById('bg');
-  if (!bg || !bg.firstChild) return;
-  // Vor dem Messen kurz auf inset: 0 zurücksetzen, sonst beeinflusst ein
-  // bereits gesetztes 'bottom' das Layout (Breite/Wrapping bleibt zwar gleich,
-  // aber sicher ist sicher).
-  bg.style.bottom = '0px';
-  var range = document.createRange();
-  range.selectNodeContents(bg);
-  var rects = range.getClientRects();
-  if (!rects.length) return;
+  if (!bg) return;
+  // erst zurücksetzen, dann messen
+  bg.style.bottom = '';
+  bg.style.height = '';
+  // force layout
+  void bg.offsetHeight;
+  var cs = window.getComputedStyle(bg);
+  var lh = parseFloat(cs.lineHeight);
+  var pt = parseFloat(cs.paddingTop);
+  // Fallbacks falls getComputedStyle 'normal' o.ä. liefert
+  if (!lh || isNaN(lh) || lh < 4) {
+    var fs = parseFloat(cs.fontSize) || 16;
+    lh = fs * 2.25; // grobe Heuristik (Desktop ~36 für 16px)
+  }
+  if (isNaN(pt)) pt = 0;
   var vh = window.innerHeight;
-  var lastFullBottom = 0;
-  for (var i = 0; i < rects.length; i++) {
-    if (rects[i].bottom <= vh) {
-      lastFullBottom = rects[i].bottom;
-    } else {
-      break;
-    }
-  }
-  if (lastFullBottom > 0) {
-    bg.style.bottom = (vh - lastFullBottom) + 'px';
-  }
+  var avail = vh - pt;
+  if (avail <= lh) return;
+  var n = Math.max(1, Math.floor(avail / lh));
+  // 0.5px Sicherheit gegen Subpixel-Rundung
+  bg.style.height = (pt + n * lh - 0.5) + 'px';
+  bg.style.bottom = 'auto';
 }
 function scheduleAlignBg() { requestAnimationFrame(alignBgTextBottom); }
 scheduleAlignBg();
@@ -693,6 +697,9 @@ window.addEventListener('load', scheduleAlignBg);
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(scheduleAlignBg);
 }
+// extra Re-Trigger nach 250/750ms — fängt Late-Layout (Webfont-Swap, iOS-URL-Bar) ab
+setTimeout(scheduleAlignBg, 250);
+setTimeout(scheduleAlignBg, 750);
 
 /* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
 (function() {
