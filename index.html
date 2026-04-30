@@ -659,33 +659,40 @@ document.getElementById('bg').textContent = Array(30).fill(ABWEHR).join(' ');
 
 /* ── bg-text bottom an Zeilen-Boundary snappen, damit die letzte sichtbare
    Zeile NIE mittendrin abgeschnitten ist (viewport-unabhängig).
-   Empirische Methode: erstes Wort messen, daraus exakte Pixel-Position
-   der ersten Zeile lesen — robuster als getComputedStyle bei clamp/em. ── */
+   Empirisch via Range.getClientRects(): wir messen die tatsächlich
+   gerenderten Zeilen-Rechtecke (inkl. Descender) und snappen die Box-
+   Unterkante an das letzte Rect, das noch komplett im Viewport liegt. ── */
 function alignBgTextBottom() {
   var bg = document.getElementById('bg');
-  if (!bg) return;
-  var cs = getComputedStyle(bg);
-  var fs = parseFloat(cs.fontSize);
-  // line-height robust auflösen: px direkt, Multiplier × font-size, "normal" → 1.2×fs
-  var lhRaw = cs.lineHeight;
-  var lh;
-  if (lhRaw === 'normal') {
-    lh = fs * 1.2;
-  } else {
-    var v = parseFloat(lhRaw);
-    if (isNaN(v) || v <= 0) return;
-    lh = v < fs ? v * fs : v;   // Multiplier vs. px
-  }
-  var pt = parseFloat(cs.paddingTop);
+  if (!bg || !bg.firstChild) return;
+  // Vor dem Messen kurz auf inset: 0 zurücksetzen, sonst beeinflusst ein
+  // bereits gesetztes 'bottom' das Layout (Breite/Wrapping bleibt zwar gleich,
+  // aber sicher ist sicher).
+  bg.style.bottom = '0px';
+  var range = document.createRange();
+  range.selectNodeContents(bg);
+  var rects = range.getClientRects();
+  if (!rects.length) return;
   var vh = window.innerHeight;
-  var n = Math.floor((vh - pt) / lh);          // wie viele volle Zeilen passen
-  var clipY = pt + n * lh;                     // exakter Zeilen-Boundary
-  bg.style.bottom = (vh - clipY) + 'px';       // Box-Unterkante auf diesen Boundary
+  var lastFullBottom = 0;
+  for (var i = 0; i < rects.length; i++) {
+    if (rects[i].bottom <= vh) {
+      lastFullBottom = rects[i].bottom;
+    } else {
+      break;
+    }
+  }
+  if (lastFullBottom > 0) {
+    bg.style.bottom = (vh - lastFullBottom) + 'px';
+  }
 }
 function scheduleAlignBg() { requestAnimationFrame(alignBgTextBottom); }
 scheduleAlignBg();
 window.addEventListener('resize', scheduleAlignBg);
 window.addEventListener('load', scheduleAlignBg);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(scheduleAlignBg);
+}
 
 /* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
 (function() {
