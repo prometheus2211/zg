@@ -120,6 +120,11 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+.wordmark.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 .wordmark .mark {
   border-bottom: 2.5px solid var(--vermil);
@@ -354,12 +359,17 @@ body {
 .team-intro {
   margin: 48px 0 0;
   max-width: 720px;
-  /* gleicher Typ wie .mission-body, nur fetter */
+  /* Schriftbild der Wortmarke: extra-schwere Stärke, enges letter-spacing */
   font-size: clamp(18px, 1.5vw, 22px);
-  font-weight: 700;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
   color: var(--black);
+}
+.mission-intro .mark,
+.team-intro .mark {
+  border-bottom: 2.5px solid var(--vermil);
+  padding-bottom: 1.5px;
 }
 .mission-body,
 .team-body {
@@ -736,7 +746,7 @@ footer {
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
     </div>
-    <p class="mission-intro" id="mission-intro" data-de="Das Zentrum Grundrechte ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff." data-en="The Zentrum Grundrechte is the independent institute defending individual freedom against state overreach.">Das Zentrum Grundrechte ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff.</p>
+    <p class="mission-intro" id="mission-intro" data-de="Das Zentrum <span class=&quot;mark&quot;>Grundrechte</span> ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff." data-en="The Zentrum <span class=&quot;mark&quot;>Grundrechte</span> is the independent institute defending individual freedom against state overreach.">Das Zentrum <span class="mark">Grundrechte</span> ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff.</p>
     <p class="mission-body" id="mission-body" data-de="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." data-en="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </section>
@@ -1008,6 +1018,34 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
   };
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
+})();
+
+/* ── Wortmarke auf Mission/Team verschwindet, sobald sie unterhalb der
+   oberen Kante der Headline-Box steht (also beim Hochscrollen
+   überdeckt würde). Ihre Funktion übernimmt der gefettete Intro-Text
+   mit der unterstrichenen "Grundrechte"-Marke. ── */
+(function() {
+  var wm = document.querySelector('.wordmark');
+  if (!wm) return;
+  function update() {
+    var hash = window.location.hash;
+    if (hash !== '#mission' && hash !== '#team') {
+      wm.classList.remove('is-hidden');
+      return;
+    }
+    var box = hash === '#mission'
+      ? document.querySelector('.mission-headline-box')
+      : document.querySelector('.team-headline-box');
+    if (!box) { wm.classList.remove('is-hidden'); return; }
+    var wmTop = wm.getBoundingClientRect().top;
+    var boxTop = box.getBoundingClientRect().top;
+    if (wmTop >= boxTop) wm.classList.add('is-hidden');
+    else wm.classList.remove('is-hidden');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  window.addEventListener('hashchange', function() { setTimeout(update, 0); });
+  update();
 })();
 </script>
 
