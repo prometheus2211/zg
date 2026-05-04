@@ -315,7 +315,9 @@ body {
 .team-section {
   display: none;
   position: relative;
-  z-index: 2;
+  /* kein z-index → keine eigene stacking context. Damit kann die
+     Headline-Box per z-index die fixed Wortmarke (z 5) überdecken,
+     während die Section selbst hinter der Wortmarke liegt. */
   min-height: 100vh;
   padding: 22vh 72px 96px;
   background: var(--bg);
@@ -325,6 +327,10 @@ body {
 .mission-headline-box,
 .team-headline-box {
   display: inline-block;
+  position: relative;
+  /* muss > Wortmarke (z 5) sein, damit das Logo niemals vor der Textbox
+     erscheint, wenn beide beim Scrollen aufeinandertreffen */
+  z-index: 6;
   background: var(--vermil);
   padding: 28px 40px 32px;
   border-radius: 6px;
