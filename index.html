@@ -350,6 +350,16 @@ body {
   border-bottom: 5px solid #fff;
   padding-bottom: 4px;
 }
+.mission-intro,
+.team-intro {
+  margin: 0 0 28px;
+  max-width: 720px;
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
 .mission-body,
 .team-body {
   margin-top: 56px;
@@ -722,6 +732,7 @@ footer {
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
 <section class="mission-section" id="mission">
   <div class="mission-content">
+    <p class="mission-intro" id="mission-intro" data-de="Das Zentrum Grundrechte ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff." data-en="The Zentrum Grundrechte is the independent institute defending individual freedom against state overreach.">Das Zentrum Grundrechte ist das unabhängige Institut zur Verteidigung der Freiheit des Einzelnen gegenüber staatlichem Zugriff.</p>
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
     </div>
@@ -891,7 +902,7 @@ function toggleLang() {
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','wer-link','newsletter-link',
-   'mission-headline','mission-body','team-headline','team-body'].forEach(function(id) {
+   'mission-intro','mission-headline','mission-body','team-headline','team-body'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
