@@ -411,7 +411,8 @@ body {
 }
 .support-box a:hover .support-arrow { transform: translateX(3px); }
 
-/* Body + Support nebeneinander; Box vertikal orientiert rechts */
+/* Body + Support nebeneinander; Box ist hochformatig (schmal+hoch),
+   Text bleibt horizontal */
 .mission-body-row,
 .team-body-row {
   display: flex;
@@ -428,27 +429,13 @@ body {
 .mission-body-row > .support-box,
 .team-body-row > .support-box {
   margin: 0;
-  flex: 0 0 auto;
+  flex: 0 0 clamp(180px, 18vw, 240px);
   align-self: stretch;
-  writing-mode: vertical-rl;
-  /* Text liest von unten nach oben, damit der Kopf normal stehend lesbar ist */
-  transform: rotate(180deg);
-  text-orientation: mixed;
-  padding: 0.85em 0.55em;
+  padding: clamp(20px, 2.5vw, 32px) clamp(16px, 1.6vw, 22px);
   max-width: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.mission-body-row > .support-box .support-arrow,
-.team-body-row > .support-box .support-arrow {
-  transform: rotate(90deg);
-  margin-left: 0;
-  margin-top: 0.28em;
-}
-.mission-body-row > .support-box a:hover .support-arrow,
-.team-body-row > .support-box a:hover .support-arrow {
-  transform: rotate(90deg) translateX(3px);
+  text-align: left;
 }
 body.mission-view .bg-text,
 body.mission-view .hero,
@@ -709,21 +696,16 @@ footer {
   .mission-body,
   .team-body { margin-top: 40px; font-size: 16px; }
   .support-box { margin-top: 40px; font-size: 17px; padding: 0.55em 0.8em; }
-  /* Auf Mobile: vertikal-Layout aufgeben, Box klassisch unter den Text */
+  /* Auf Mobile: nicht mehr nebeneinander — Box klassisch unter den Text */
   .mission-body-row,
   .team-body-row { flex-direction: column; gap: 32px; }
   .mission-body-row > .support-box,
   .team-body-row > .support-box {
-    writing-mode: horizontal-tb;
-    transform: none;
+    flex: 0 0 auto;
     padding: 0.55em 0.8em;
     align-self: flex-start;
     display: inline-block;
   }
-  .mission-body-row > .support-box .support-arrow,
-  .team-body-row > .support-box .support-arrow { transform: none; margin-left: 0.28em; margin-top: 0; }
-  .mission-body-row > .support-box a:hover .support-arrow,
-  .team-body-row > .support-box a:hover .support-arrow { transform: translateX(3px); }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
