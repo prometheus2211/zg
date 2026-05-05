@@ -350,6 +350,17 @@ body {
   line-height: 1.18;
   letter-spacing: -0.04em;
 }
+/* Eyebrow-Label über der Headline-Box */
+.eyebrow {
+  display: block;
+  margin: 0 0 14px;
+  font-family: inherit;
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vermil);
+}
 .mission-headline em,
 .team-headline em {
   font-style: normal;
@@ -773,6 +784,7 @@ footer {
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
 <section class="mission-section" id="mission">
   <div class="mission-content">
+    <span class="eyebrow">Mission</span>
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
     </div>
@@ -785,6 +797,7 @@ footer {
 <!-- ══ TEAM (sichtbar nur in team view) ══ -->
 <section class="team-section" id="team">
   <div class="team-content">
+    <span class="eyebrow">Team</span>
     <div class="team-headline-box">
       <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte." data-en="<em>We</em> defend<br>defensive rights."><em>Wir</em> verteidigen<br>Abwehrrechte.</h1>
     </div>
