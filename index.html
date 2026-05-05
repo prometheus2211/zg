@@ -1311,22 +1311,26 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
         if (nav) nav.classList.remove('is-hidden');
         return;
       }
-      var boxTop = box.getBoundingClientRect().top;
+      var boxRect = box.getBoundingClientRect();
       /* Wortmarke: ausblenden, sobald das Eyebrow-Label ("Mission" / "Team")
-         auf Höhe der Wortmarke ankommt — sonst würden sich "Mission" und
-         "Zentrum Grundrechte" optisch überlagern. Fällt zurück auf die
-         Headline-Box, falls kein Eyebrow vorhanden ist. */
+         oder die Headline-Box vertikal mit der Wortmarke überlappen — sonst
+         würden sich "Mission" und "Zentrum Grundrechte" optisch überlagern.
+         Wir prüfen beides als ein gemeinsames "Header-Band" vom Top des
+         Eyebrows bis zum Bottom der Headline-Box. */
       if (wm) {
-        var triggerTop = ebr ? ebr.getBoundingClientRect().top : boxTop;
-        var wmTop = wm.getBoundingClientRect().top;
-        if (wmTop >= triggerTop) wm.classList.add('is-hidden');
+        var wmRect = wm.getBoundingClientRect();
+        var ebrRect = ebr ? ebr.getBoundingClientRect() : null;
+        var bandTop = ebrRect ? ebrRect.top : boxRect.top;
+        var bandBottom = boxRect.bottom;
+        var overlap = bandBottom > wmRect.top && bandTop < wmRect.bottom;
+        if (overlap) wm.classList.add('is-hidden');
         else wm.classList.remove('is-hidden');
       }
       /* Nav-Ribbon: weiterhin an der Headline-Box (rechts oben, kein
          Konflikt mit dem links sitzenden Eyebrow). */
       if (nav) {
         var navTop = nav.getBoundingClientRect().top;
-        if (navTop >= boxTop) nav.classList.add('is-hidden');
+        if (navTop >= boxRect.top) nav.classList.add('is-hidden');
         else nav.classList.remove('is-hidden');
       }
       return;
