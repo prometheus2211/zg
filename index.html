@@ -470,11 +470,31 @@ body.mission-view .hero,
 body.mission-view .satz-section,
 body.team-view .bg-text,
 body.team-view .hero,
-body.team-view .satz-section { display: none; }
+body.team-view .satz-section,
+body.kontakt-view .bg-text,
+body.kontakt-view .hero,
+body.kontakt-view .satz-section,
+body.kontakt-view .mission-section,
+body.kontakt-view .team-section { display: none; }
 body.mission-view .mission-section { display: block; }
 body.team-view .team-section { display: block; }
 body.mission-view,
-body.team-view { background: var(--bg); }
+body.team-view,
+body.kontakt-view { background: var(--bg); }
+/* Kontakt-View: Kontakt-Sektion bekommt Hero-ähnlichen Top-Abstand */
+body.kontakt-view .contact-section { padding-top: 14vh; }
+/* Adresse: nur auf Kontakt-View sichtbar */
+.contact-address { display: none; font-style: normal; }
+body.kontakt-view .contact-address {
+  display: block;
+  margin-top: 36px;
+  max-width: 720px;
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
 
 /* ══════════════════════════════════════
    BELOW — solid bg only from contact down
@@ -794,7 +814,7 @@ footer {
 }
 .nav-cta:hover { background: var(--black); }
 /* Kontakt-Sektion: nur auf Mission/Team sichtbar, auf Home ausgeblendet */
-body:not(.mission-view):not(.team-view) .contact-section { display: none; }
+body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { display: none; }
 
 /* mobile adjustments */
 @media (max-width: 640px) {
@@ -819,7 +839,7 @@ body:not(.mission-view):not(.team-view) .contact-section { display: none; }
       <a href="#" id="nav-mission" data-de="Mission" data-en="Mission">Mission</a>
       <a href="#" id="nav-team" data-de="Team" data-en="Team">Team</a>
     </div>
-    <a class="nav-kontakt" id="nav-kontakt" href="#" data-de="Kontakt" data-en="Contact">Kontakt</a>
+    <a class="nav-kontakt" id="nav-kontakt" href="#kontakt" data-de="Kontakt" data-en="Contact">Kontakt</a>
     <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
   </div>
@@ -887,6 +907,11 @@ body:not(.mission-view):not(.team-view) .contact-section { display: none; }
   <section class="contact-section" id="kontakt">
     <p class="contact-label" id="contact-label" data-de="Kontakt" data-en="Contact">Kontakt</p>
     <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
+    <address class="contact-address" id="contact-address">
+      Zentrum Grundrechte e.V.<br>
+      Hauptstraße 2b<br>
+      13158 Berlin
+    </address>
   </section>
 
   <!-- FOOTER -->
@@ -1018,7 +1043,7 @@ setTimeout(scheduleAlignBg, 750);
 (function() {
   var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
   var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'nav-kontakt'].forEach(function(id) {
+  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.href = href;
   });
@@ -1057,13 +1082,15 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team) via Hash ── */
+/* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team, Kontakt) via Hash ── */
 function applyView() {
-  document.body.classList.remove('mission-view', 'team-view');
+  document.body.classList.remove('mission-view', 'team-view', 'kontakt-view');
   if (window.location.hash === '#mission') {
     document.body.classList.add('mission-view');
   } else if (window.location.hash === '#team') {
     document.body.classList.add('team-view');
+  } else if (window.location.hash === '#kontakt') {
+    document.body.classList.add('kontakt-view');
   }
   window.scrollTo(0, 0);
 }
@@ -1071,6 +1098,7 @@ function navigate(view) {
   var newUrl;
   if (view === 'mission') newUrl = '#mission';
   else if (view === 'team') newUrl = '#team';
+  else if (view === 'kontakt') newUrl = '#kontakt';
   else newUrl = window.location.pathname;
   history.pushState(null, '', newUrl);
   applyView();
@@ -1085,6 +1113,10 @@ document.getElementById('nav-mission').addEventListener('click', function(e) {
 document.getElementById('nav-team').addEventListener('click', function(e) {
   e.preventDefault();
   navigate('team');
+});
+document.getElementById('nav-kontakt').addEventListener('click', function(e) {
+  e.preventDefault();
+  navigate('kontakt');
 });
 /* ── Newsletter: Klick öffnet Modal; Submit zeigt Danke-Box.
    Backend-Anbindung folgt separat (kein Versand bisher). ── */
