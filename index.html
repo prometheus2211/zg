@@ -313,6 +313,34 @@ body {
   transition: transform 0.2s;
 }
 .newsletter-link:hover .newsletter-arrow { transform: translateX(3px); }
+/* Mitmachen-Box — identischer Stil wie .wer-link / .newsletter-link */
+.mitmachen-link {
+  display: inline-block;
+  font-family: inherit;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.10em 0.45em;
+  background: var(--bg);
+  border: 1.5px solid var(--vermil);
+  transition: color 0.2s, background 0.2s;
+  vertical-align: baseline;
+}
+.mitmachen-link:hover { color: var(--vermil); }
+.mitmachen-arrow {
+  display: inline-block;
+  margin-left: 0.32em;
+  width: 0.42em;
+  height: 0.7em;
+  vertical-align: -0.04em;
+  overflow: visible;
+  color: var(--vermil);
+  transition: transform 0.2s;
+}
+.mitmachen-link:hover .mitmachen-arrow { transform: translateX(3px); }
 
 /* ══════════════════════════════════════
    MISSION + TEAM VIEW
@@ -787,6 +815,7 @@ footer {
   <div class="cta-row">
     <a class="wer-link" id="wer-link" href="#" data-de="Wer wir sind<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Who we are<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Wer wir sind<svg class="wer-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <a class="newsletter-link" id="newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="mitmachen-link" id="mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </section>
 
@@ -968,7 +997,7 @@ function toggleLang() {
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
-   'nav-mission','nav-team','nav-unterstuetzen','wer-link','newsletter-link',
+   'nav-mission','nav-team','nav-unterstuetzen','wer-link','newsletter-link','mitmachen-link',
    'mission-intro','mission-headline','mission-body','mission-support','mission-newsletter','team-headline','team-body','team-support','team-newsletter'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
