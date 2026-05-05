@@ -397,11 +397,25 @@ body {
    der direkt auf die Kontakt-Seite verlinkt. */
 body.team-view .contact-section { padding-top: 28px; }
 body.mission-view .contact-section { display: none; }
-/* Mission-Sonderfall: Body und CTA-Reihe ähnlich breit wie die drei
-   Buttons (Newsletter, Mitmachen, Fragen?) zusammen. Buttons sind bei
-   maximaler Schriftgröße ca. 660–680 px breit; Body läuft bündig dazu. */
+/* Mission-Sonderfall: Drei Buttons bleiben in einer Reihe (nowrap), und der
+   Container schrumpft passgenau auf die Button-Reihen-Breite. Body und Intro
+   werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
+   text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
+body.mission-view .mission-section .section-cta {
+  flex-wrap: nowrap;
+  width: max-content;
+  max-width: 100%;
+}
 body.mission-view .mission-body,
-body.mission-view .mission-section .section-cta { max-width: 680px; }
+body.mission-view .mission-intro { max-width: 720px; }
+@media (max-width: 600px) {
+  /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
+     keine Buttons über den Bildschirm hinauslaufen. */
+  body.mission-view .mission-section .section-cta {
+    flex-wrap: wrap;
+    width: auto;
+  }
+}
 .mission-content,
 .team-content { max-width: 1300px; }
 .mission-headline-box,
@@ -1219,6 +1233,49 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
     navigate('main');
   });
 });
+
+/* ── Mission-Layout: Body + Intro auf exakt dieselbe Breite ziehen wie die
+   3-Button-CTA-Reihe, damit Text und Box-Reihe bündig sitzen. Die CTA-Reihe
+   ist via CSS auf width: max-content + nowrap konfiguriert; sie sized sich
+   also passgenau auf die Summe der drei Buttons + Gaps. JS misst diese
+   Breite und gibt sie an Body und Intro weiter. Auf sehr schmalen Viewports
+   (Wrap-Modus) bleibt die CSS-Fallback-Breite. ── */
+(function() {
+  var section = document.querySelector('.mission-section');
+  if (!section) return;
+  var cta = section.querySelector('.section-cta');
+  var body = section.querySelector('.mission-body');
+  var intro = section.querySelector('.mission-intro');
+  if (!cta) return;
+  function sync() {
+    /* Nur synchronisieren, wenn die Mission-Sektion sichtbar ist
+       (display: block via .mission-view). Sonst sind Messungen 0. */
+    if (!document.body.classList.contains('mission-view')) return;
+    /* Wrap-Modus auf schmalen Viewports: Inline-Styles entfernen, damit
+       Body/Intro auf ihre CSS-Fallback-max-width zurückfallen. */
+    if (window.matchMedia('(max-width: 600px)').matches) {
+      if (body) body.style.maxWidth = '';
+      if (intro) intro.style.maxWidth = '';
+      return;
+    }
+    var w = cta.getBoundingClientRect().width;
+    if (!w) return;
+    var px = Math.ceil(w) + 'px';
+    if (body) body.style.maxWidth = px;
+    if (intro) intro.style.maxWidth = px;
+  }
+  window.addEventListener('resize', sync);
+  window.addEventListener('hashchange', function() { setTimeout(sync, 0); });
+  /* Inter wird im File embedded, aber das Layout wird trotzdem stabiler,
+     wenn wir nach document.fonts.ready noch einmal nachmessen. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sync);
+  }
+  /* Auch nach Sprachwechsel (innerHTML wird neu geschrieben) neu messen. */
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
+  sync();
+})();
 
 /* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
 (function() {
