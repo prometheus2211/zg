@@ -218,7 +218,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(24px, 4vh, 56px) 72px clamp(72px, 12vh, 130px);
+  padding: clamp(8px, 1.5vh, 24px) 72px clamp(140px, 22vh, 240px);
 }
 .satz {
   font-size: clamp(26px, 3.2vw, 42px);
@@ -851,7 +851,7 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
       <h1 class="headline" id="headline" data-de="Das Recht bindet<br>auch den <em>Staat.</em>" data-en="The law binds<br>even the <em>State.</em>">Das Recht bindet<br>auch den <em>Staat.</em></h1>
     </div>
   </div>
-  <a class="scroll-hint" href="#kontakt" aria-label="Weiter nach unten">
+  <a class="scroll-hint" href="#" aria-label="Weiter nach unten">
     <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -1183,6 +1183,11 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
   };
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
+  /* Click: nur weich nach unten scrollen – KEINE Navigation. */
+  hint.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+  });
 })();
 
 /* ── Wortmarke + Top-Nav (Ribbon) auf Mission/Team verschwinden, sobald
