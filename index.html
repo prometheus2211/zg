@@ -73,16 +73,13 @@ body {
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  /* Hero-Höhe skaliert mit BEIDEN Viewport-Achsen:
-       - Bei großem Fenster (typisch 16:9 desktop): cap = 100vh
-         → klare Zweiteilung der Seite (TB oben, BT auf Folgeschirm).
-       - Bei schmalem Fenster (vw schrumpft, vh bleibt groß): die
-         Formel 30vh+50vw bleibt UNTER 100vh und reduziert den Hero
-         proportional, sodass die Lücke zwischen Titelbox und
-         Beschreibungstext nicht aufreißt.
-       - min-height 360px schützt extrem kleine Viewports.
-     Mobile (≤640px) überschreibt diese Formel im Media-Query unten. */
-  height: max(360px, min(100vh, 30vh + 50vw));
+  /* Hero immer 100vh hoch: garantiert, dass die Titelbox beim
+     Maximal-Scroll IMMER aus dem Viewport geschoben wird – auch bei
+     schmal gezogenem Fenster. Auf sehr kleinen Viewports schützt
+     min-height. (Trade-off: auf schmalen, hohen Fenstern entsteht
+     etwas mehr Leerraum unter der TB.) */
+  height: 100vh;
+  min-height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -211,12 +208,13 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* Kompakter Block in der unteren Seitenhälfte. min-height knapp
-     über dem Headline-Box-Bottom (~60vh), damit beim Max-Scroll die
-     Titelbox gerade aus dem Viewport ist. Inhalt sitzt durch
-     justify-content: flex-start direkt am oberen Rand der Sektion
-     (statt mittig in einer großen Lücke). */
-  min-height: 62vh;
+  /* min-height: 70vh deckt typische Desktop-Auflösungen
+     (1024–1920px) – die Titelbox liegt bei diesen Viewports
+     bei ~58–68vh und wird sicher aus dem Sichtfeld gescrollt.
+     500px-Floor fängt sehr kurze Fenster (<700px hoch) ab.
+     justify-content: flex-start mit kleinem padding-top platziert
+     den ET direkt am oberen Rand der Sektion. */
+  min-height: max(70vh, 500px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
