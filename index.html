@@ -765,6 +765,21 @@ footer {
   color: var(--black);
   border-bottom-color: var(--vermil);
 }
+.nav-kontakt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-kontakt:hover {
+  color: var(--black);
+  border-bottom-color: var(--vermil);
+}
 .nav-cta {
   background: var(--vermil);
   color: #fff;
@@ -778,6 +793,8 @@ footer {
   transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--black); }
+/* Kontakt-Sektion: nur auf Mission/Team sichtbar, auf Home ausgeblendet */
+body:not(.mission-view):not(.team-view) .contact-section { display: none; }
 
 /* mobile adjustments */
 @media (max-width: 640px) {
@@ -802,6 +819,7 @@ footer {
       <a href="#" id="nav-mission" data-de="Mission" data-en="Mission">Mission</a>
       <a href="#" id="nav-team" data-de="Team" data-en="Team">Team</a>
     </div>
+    <a class="nav-kontakt" id="nav-kontakt" href="#" data-de="Kontakt" data-en="Contact">Kontakt</a>
     <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
   </div>
@@ -1000,7 +1018,7 @@ setTimeout(scheduleAlignBg, 750);
 (function() {
   var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
   var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent'].forEach(function(id) {
+  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'nav-kontakt'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.href = href;
   });
@@ -1013,7 +1031,7 @@ function toggleLang() {
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
-   'nav-mission','nav-team','nav-unterstuetzen','wer-link','newsletter-link','mitmachen-link',
+   'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-intro','mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link'].forEach(function(id) {
     var el = document.getElementById(id);
