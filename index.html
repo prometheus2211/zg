@@ -211,10 +211,12 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* Untere Hälfte der Landing Page: ET + CTA-Boxen sitzen vertikal
-     mittig in einem kompakteren Block. Symmetrisches Padding
-     ermöglicht echte Zentrierung über justify-content: center. */
-  min-height: max(320px, 60vh);
+  /* min-height = 100vh: bei vollem Scroll-Stand füllt die untere
+     Hälfte exakt den Viewport, die Titelbox ist dann gerade aus dem
+     Sichtfeld geschoben. Symmetrisches Padding sorgt dafür, dass
+     justify-content: center den ET zusammen mit den CTA-Boxen
+     vertikal mittig im Viewport platziert. */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
