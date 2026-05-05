@@ -212,13 +212,13 @@ body {
      (1024–1920px) – die Titelbox liegt bei diesen Viewports
      bei ~58–68vh und wird sicher aus dem Sichtfeld gescrollt.
      500px-Floor fängt sehr kurze Fenster (<700px hoch) ab.
-     justify-content: center + symmetrisches Padding zentriert
-     den ET zusammen mit den CTA-Boxen vertikal in der Sektion. */
+     Asymmetrisches Padding (kleines top, großes bottom) verschiebt
+     den vertikal zentrierten ET-Block leicht nach oben. */
   min-height: max(70vh, 500px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(40px, 7vh, 88px) 72px clamp(40px, 7vh, 88px);
+  padding: clamp(24px, 4vh, 56px) 72px clamp(72px, 12vh, 130px);
 }
 .satz {
   font-size: clamp(26px, 3.2vw, 42px);
