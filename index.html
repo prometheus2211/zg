@@ -52,8 +52,10 @@ body {
   inset: 0;
   /* padding-top muss kleiner sein als hero padding-top
      (clamp(56px, 16vh, 200px)), damit der Hintergrundtext IMMER
-     oberhalb der Headline-Box beginnt – auf jedem Viewport. */
-  padding: clamp(40px, 11vh, 130px) 52px 52px;
+     oberhalb der Headline-Box beginnt – auf jedem Viewport.
+     padding-bottom wird vom JS (alignBgTextBottom) respektiert,
+     damit am unteren Rand symmetrisch Platz bleibt. */
+  padding: clamp(40px, 11vh, 130px) 52px clamp(40px, 11vh, 130px);
   font-size: 16px;
   font-weight: 400;
   /* explizit in px, damit das JS-Snapping unten zuverlässig rechnen kann */
@@ -209,17 +211,14 @@ body {
 .satz-section {
   position: relative;
   z-index: 2;
-  /* min-height stellt sicher, dass das Dokument hoch genug ist,
-     damit die Titelbox beim Scrollen ans Seitenende immer aus dem
-     Viewport gedrückt wird – auch auf kurzen Fenstern.
-     Asymmetrisches Padding (großes top, kleines bottom) verschiebt
-     den BT leicht unter die Mitte (ca. 60% von oben) – optisch
-     zentriert, beim Max-Scroll deutlich unterhalb des Logos. */
-  min-height: max(360px, calc(100vh - 200px));
+  /* Untere Hälfte der Landing Page: ET + CTA-Boxen sitzen vertikal
+     mittig in einem kompakteren Block. Symmetrisches Padding
+     ermöglicht echte Zentrierung über justify-content: center. */
+  min-height: max(320px, 60vh);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(140px, 35vh, 380px) 72px clamp(20px, 5vh, 56px);
+  padding: clamp(48px, 9vh, 110px) 72px clamp(48px, 9vh, 110px);
 }
 .satz {
   font-size: clamp(22px, 2.8vw, 36px);
@@ -709,7 +708,7 @@ footer {
   .headline { max-width: 5em; }   /* 4 Zeilen */
   .headline-box { padding: 28px 36px 32px; }
   /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
-  .satz-section { padding: clamp(120px, 30vh, 320px) 48px clamp(16px, 4vh, 48px); }
+  .satz-section { padding: clamp(40px, 8vh, 96px) 48px clamp(40px, 8vh, 96px); }
   .mission-section,
   .team-section { padding: 12vh 48px 12px; }
   .mission-headline-box,
@@ -730,13 +729,13 @@ footer {
   .content { padding: 0 24px; }
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift */
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
-  .bg-text { padding: 88px 24px 24px; font-size: 13px; line-height: 26px; }
+  .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* .scroll-hint bleibt zentriert; nur bottom anpassen */
   .scroll-hint { bottom: 28px; }
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
      min-height schützt extrem niedrige Landscape-Viewports. */
   .hero { height: 100vh; min-height: 440px; }
-  .satz-section { padding: clamp(100px, 25vh, 280px) 24px clamp(16px, 4vh, 48px); }
+  .satz-section { padding: clamp(32px, 7vh, 80px) 24px clamp(32px, 7vh, 80px); }
   .mission-section,
   .team-section { padding: 10vh 24px 8px; }
   .mission-headline-box,
@@ -1014,14 +1013,18 @@ function alignBgTextBottom() {
   var cs = window.getComputedStyle(bg);
   var lh = parseFloat(cs.lineHeight);
   var pt = parseFloat(cs.paddingTop);
+  var pb = parseFloat(cs.paddingBottom);
   // Fallbacks falls getComputedStyle 'normal' o.ä. liefert
   if (!lh || isNaN(lh) || lh < 4) {
     var fs = parseFloat(cs.fontSize) || 16;
     lh = fs * 2.25; // grobe Heuristik (Desktop ~36 für 16px)
   }
   if (isNaN(pt)) pt = 0;
+  if (isNaN(pb)) pb = 0;
   var vh = window.innerHeight;
-  var avail = vh - pt;
+  // Padding-bottom wird respektiert -> garantierter Abstand am unteren Rand
+  // (symmetrisch zum padding-top)
+  var avail = vh - pt - pb;
   if (avail <= lh) return;
   var n = Math.max(1, Math.floor(avail / lh));
   // 0.5px Sicherheit gegen Subpixel-Rundung
