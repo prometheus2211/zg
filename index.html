@@ -1197,37 +1197,59 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
   });
 })();
 
-/* ── Wortmarke + Top-Nav (Ribbon) auf Mission/Team verschwinden, sobald
-   sie unterhalb der oberen Kante der Headline-Box stehen (also beim
-   Hochscrollen überdeckt würden). ── */
+/* ── Wortmarke + Top-Nav (Ribbon) ausblenden, sobald die jeweilige
+   Headline-Box vertikal mit ihnen überlappt:
+   • Mission/Team: hide, sobald die Section-Headline-Box auf Höhe von
+     wm/nav steht (Box ist die Hauptüberschrift der Section).
+   • Landing: nav (Ribbon) hide, solange die Hero-Titelbox vertikal
+     überlappt; sobald die TB darüber gescrollt ist, wieder einblenden.
+   • Kontakt: immer anzeigen. ── */
 (function() {
   var wm = document.querySelector('.wordmark');
   var nav = document.querySelector('.nav');
   if (!wm && !nav) return;
   function update() {
     var hash = window.location.hash;
-    if (hash !== '#mission' && hash !== '#team') {
+
+    if (hash === '#mission' || hash === '#team') {
+      var box = hash === '#mission'
+        ? document.querySelector('.mission-headline-box')
+        : document.querySelector('.team-headline-box');
+      if (!box) {
+        if (wm) wm.classList.remove('is-hidden');
+        if (nav) nav.classList.remove('is-hidden');
+        return;
+      }
+      var boxTop = box.getBoundingClientRect().top;
+      if (wm) {
+        var wmTop = wm.getBoundingClientRect().top;
+        if (wmTop >= boxTop) wm.classList.add('is-hidden');
+        else wm.classList.remove('is-hidden');
+      }
+      if (nav) {
+        var navTop = nav.getBoundingClientRect().top;
+        if (navTop >= boxTop) nav.classList.add('is-hidden');
+        else nav.classList.remove('is-hidden');
+      }
+      return;
+    }
+
+    if (hash === '#kontakt') {
       if (wm) wm.classList.remove('is-hidden');
       if (nav) nav.classList.remove('is-hidden');
       return;
     }
-    var box = hash === '#mission'
-      ? document.querySelector('.mission-headline-box')
-      : document.querySelector('.team-headline-box');
-    if (!box) {
-      if (wm) wm.classList.remove('is-hidden');
-      if (nav) nav.classList.remove('is-hidden');
-      return;
-    }
-    var boxTop = box.getBoundingClientRect().top;
-    if (wm) {
-      var wmTop = wm.getBoundingClientRect().top;
-      if (wmTop >= boxTop) wm.classList.add('is-hidden');
-      else wm.classList.remove('is-hidden');
-    }
+
+    /* Landing-Page: nav (Ribbon) bei vertikaler Überlappung mit der
+       Hero-Titelbox ausblenden. Wordmark bleibt unangetastet. */
+    if (wm) wm.classList.remove('is-hidden');
     if (nav) {
-      var navTop = nav.getBoundingClientRect().top;
-      if (navTop >= boxTop) nav.classList.add('is-hidden');
+      var heroBox = document.querySelector('.hero .headline-box');
+      if (!heroBox) { nav.classList.remove('is-hidden'); return; }
+      var bRect = heroBox.getBoundingClientRect();
+      var nRect = nav.getBoundingClientRect();
+      var overlap = bRect.bottom > nRect.top && bRect.top < nRect.bottom;
+      if (overlap) nav.classList.add('is-hidden');
       else nav.classList.remove('is-hidden');
     }
   }
