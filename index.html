@@ -341,6 +341,13 @@ body {
 }
 .mitmachen-link:hover .mitmachen-arrow { transform: translateX(3px); }
 
+/* Pfeile in den CTA-Boxen kräftiger zeichnen, passend zum bold gesetzten
+   Text (font-weight: 700). Inline-SVG hat stroke-width="2.6" als Default;
+   CSS überschreibt das. */
+.wer-arrow path,
+.newsletter-arrow path,
+.mitmachen-arrow path { stroke-width: 4; }
+
 /* ══════════════════════════════════════
    MISSION + TEAM VIEW
    Beide Sektionen teilen sich das Layout, daher Mehrfach-Selektoren.
