@@ -249,27 +249,27 @@ body {
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: var(--black);
+  color: #fff;
   text-decoration: none;
   /* kompakt, damit die Box (inkl. Pfeil) flach in die Textzeile passt */
   padding: 0.10em 0.45em;
-  background: var(--bg);
+  background: var(--vermil);
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.wer-link:hover { color: var(--vermil); }
+.wer-link:hover { background: var(--bg); color: var(--vermil); }
 .wer-arrow {
   /* Chevron: gleiche Form wie scroll-hint, nur um 90° gedreht (">").
      Inline neben dem Text — Größen in em, damit es mit der Schriftgröße skaliert.
-     color: var(--vermil) → Pfeil ist rot, unabhängig vom Hover-Status des Links. */
+     Auf rotem Box-Hintergrund weiß; bei Hover invertiert mit der Box. */
   display: inline-block;
   margin-left: 0.32em;
   width: 0.42em;
   height: 0.7em;
   vertical-align: -0.04em;
   overflow: visible;
-  color: var(--vermil);
+  color: currentColor;
   transition: transform 0.2s;
 }
 .wer-link:hover .wer-arrow { transform: translateX(3px); }
@@ -292,15 +292,15 @@ body {
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: var(--black);
+  color: #fff;
   text-decoration: none;
   padding: 0.10em 0.45em;
-  background: var(--bg);
+  background: var(--vermil);
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.newsletter-link:hover { color: var(--vermil); }
+.newsletter-link:hover { background: var(--bg); color: var(--vermil); }
 .newsletter-arrow {
   display: inline-block;
   margin-left: 0.32em;
@@ -308,7 +308,7 @@ body {
   height: 0.7em;
   vertical-align: -0.04em;
   overflow: visible;
-  color: var(--vermil);
+  color: currentColor;
   transition: transform 0.2s;
 }
 .newsletter-link:hover .newsletter-arrow { transform: translateX(3px); }
@@ -320,15 +320,15 @@ body {
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: var(--black);
+  color: #fff;
   text-decoration: none;
   padding: 0.10em 0.45em;
-  background: var(--bg);
+  background: var(--vermil);
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.mitmachen-link:hover { color: var(--vermil); }
+.mitmachen-link:hover { background: var(--bg); color: var(--vermil); }
 .mitmachen-arrow {
   display: inline-block;
   margin-left: 0.32em;
@@ -336,7 +336,7 @@ body {
   height: 0.7em;
   vertical-align: -0.04em;
   overflow: visible;
-  color: var(--vermil);
+  color: currentColor;
   transition: transform 0.2s;
 }
 .mitmachen-link:hover .mitmachen-arrow { transform: translateX(3px); }
