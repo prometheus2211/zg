@@ -340,13 +340,42 @@ body {
   transition: transform 0.2s;
 }
 .mitmachen-link:hover .mitmachen-arrow { transform: translateX(3px); }
+/* Fragen?-Box — identischer Stil wie .newsletter-link / .mitmachen-link */
+.fragen-link {
+  display: inline-block;
+  font-family: inherit;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.10em 0.45em;
+  background: var(--vermil);
+  border: 1.5px solid var(--vermil);
+  transition: color 0.2s, background 0.2s;
+  vertical-align: baseline;
+}
+.fragen-link:hover { background: var(--bg); color: var(--vermil); }
+.fragen-arrow {
+  display: inline-block;
+  margin-left: 0.32em;
+  width: 0.42em;
+  height: 0.7em;
+  vertical-align: -0.04em;
+  overflow: visible;
+  color: currentColor;
+  transition: transform 0.2s;
+}
+.fragen-link:hover .fragen-arrow { transform: translateX(3px); }
 
 /* Pfeile in den CTA-Boxen kräftiger zeichnen, passend zum bold gesetzten
    Text (font-weight: 700). Inline-SVG hat stroke-width="2.6" als Default;
    CSS überschreibt das. */
 .wer-arrow path,
 .newsletter-arrow path,
-.mitmachen-arrow path { stroke-width: 4; }
+.mitmachen-arrow path,
+.fragen-arrow path { stroke-width: 4; }
 
 /* ══════════════════════════════════════
    MISSION + TEAM VIEW
@@ -363,9 +392,15 @@ body {
   padding: 14vh 72px 16px;
   background: var(--bg);
 }
-/* Auf Mission/Team rückt die Kontakt-Sektion näher an die Button-Reihe heran */
-body.mission-view .contact-section,
+/* Auf Team rückt die Kontakt-Sektion näher an die Button-Reihe heran.
+   Mission hat statt der Kontakt-Sektion einen "Fragen?"-Button in der CTA-Reihe,
+   der direkt auf die Kontakt-Seite verlinkt. */
 body.team-view .contact-section { padding-top: 28px; }
+body.mission-view .contact-section { display: none; }
+/* Mission-Sonderfall: Body und CTA-Reihe ähnlich breit wie die drei
+   Buttons (Newsletter, Mitmachen, Fragen?) zusammen. */
+body.mission-view .mission-body,
+body.mission-view .mission-section .section-cta { max-width: 920px; }
 .mission-content,
 .team-content { max-width: 1300px; }
 .mission-headline-box,
@@ -720,7 +755,6 @@ footer {
   .team-section { padding: 12vh 48px 12px; }
   .mission-headline-box,
   .team-headline-box { padding: 24px 32px 28px; }
-  body.mission-view .contact-section,
   body.team-view .contact-section { padding-top: 24px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
@@ -753,7 +787,6 @@ footer {
   .team-body { margin-top: 40px; font-size: 16px; }
   .support-box { margin-top: 40px; font-size: 17px; padding: 4px 0 4px 16px; }
   .support-box.is-secondary { margin-top: 22px; font-size: 14px; padding: 3px 0 3px 16px; }
-  body.mission-view .contact-section,
   body.team-view .contact-section { padding-top: 20px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
@@ -887,6 +920,7 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="mission-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="mission-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="fragen-link" id="mission-fragen-link" href="#kontakt" data-de="Fragen?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Questions?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Fragen?<svg class="fragen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </section>
@@ -1067,7 +1101,7 @@ function toggleLang() {
   document.getElementById('lang-toggle').textContent = label;
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
-   'mission-intro','mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link',
+   'mission-intro','mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -1153,6 +1187,11 @@ document.addEventListener('click', function(e) {
   }
   if (e.target.closest('.newsletter-link') || e.target.closest('.js-newsletter-trigger')) {
     openNewsletterModal(e);
+    return;
+  }
+  if (e.target.closest('.fragen-link')) {
+    e.preventDefault();
+    navigate('kontakt');
     return;
   }
 });
