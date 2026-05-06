@@ -992,8 +992,22 @@ body.inverted .team-intro { color: #fff; }
 body.inverted .contact-section { background: transparent; }
 body.inverted .contact-headline,
 body.inverted .contact-text,
-body.inverted .contact-address { color: #fff; }
+body.inverted .contact-address,
+body.inverted .contact-label { color: #fff; }
 body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
+
+/* .below-Container (Kontakt + Footer) — von off-white auf transparent */
+body.inverted .below { background: transparent; }
+
+/* Kontakt-Email: war Vermil auf Vermil → weiss-auf-Vermil mit Vermil-Schrift */
+body.inverted .contact-email {
+  background: #fff;
+  color: var(--vermil);
+}
+body.inverted .contact-email:hover {
+  background: rgba(255,255,255,0.85);
+  color: var(--vermil);
+}
 
 /* Mission/Team/Kontakt-View Body-BG-Override */
 body.inverted.mission-view,
