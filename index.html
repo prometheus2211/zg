@@ -521,6 +521,10 @@ body.mission-view .mission-body { max-width: 720px; }
   /* Optische Ausrichtung: minimaler negativer margin-left zieht die Kante
      visuell bündig mit dem Body. */
   margin-left: -6px;
+  /* Beide Boxen sollen ähnlich breit sein. Min-Width entspricht ungefähr
+     der natürlichen Breite des breiteren Slogans ("Macht braucht Grenzen."),
+     der schmalere Slogan wird so auf die gleiche Mindestbreite gezogen. */
+  min-width: clamp(360px, 68vw, 920px);
 }
 .mission-headline,
 .team-headline {
@@ -655,21 +659,12 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
-/* Footer-Wortmarke: an Hero-Wortmarke angeglichen — Mixed-Case, weight 900,
-   schwarz, vermillion-Unterstrich auf "Grundrechte". e.V. weggelassen, weil
-   die rechtliche Bezeichnung im Impressum steht; im Footer geht es um die
-   Marken-Konsistenz. */
 .footer-wm {
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  text-transform: none;
-  color: var(--black);
-  line-height: 1;
-}
-.footer-wm .mark {
-  border-bottom: 1.5px solid var(--vermil);
-  padding-bottom: 1px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
 }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a {
@@ -957,8 +952,6 @@ body.inverted .vertical-wordmark-inner .mark { text-decoration-color: #fff; }
 body.inverted .wordmark { color: #fff; }
 body.inverted .wordmark .mark,
 body.inverted .wordmark:hover .mark { border-bottom-color: #fff; }
-body.inverted .footer-wm { color: #fff; }
-body.inverted .footer-wm .mark { border-bottom-color: #fff; }
 
 /* Nav */
 body.inverted .nav-links a,
@@ -1107,7 +1100,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
   <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
   <div class="mission-content">
     <div class="mission-headline-box">
-      <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
+      <h1 class="mission-headline" id="mission-headline" data-de="Wir verteidigen<br><em>Abwehrrechte</em>." data-en="We defend<br><em>defensive rights</em>.">Wir verteidigen<br><em>Abwehrrechte</em>.</h1>
     </div>
     <p class="mission-body" id="mission-body" data-de="Dies ist ein Platzhaltertext, der ausschließlich der visuellen Vorschau dient. Hier wird später ein redaktionell finalisierter Beschreibungstext stehen, der die Mission, unsere Arbeitsweise und unsere zentralen Anliegen ausformuliert. Bis dahin füllt dieser Text die vorgesehene Fläche und gibt einen Eindruck davon, wie das Layout mit echtem Inhalt wirken wird. Schriftgröße, Zeilenabstand und Spaltenbreite lassen sich an einem solchen Platzhalter besser beurteilen als an einer leeren Fläche. Auch die Lesbarkeit auf unterschiedlichen Bildschirmgrößen, der Kontrast zur orangen Headline-Box und das Verhältnis von Text zu Weißraum werden so überprüfbar. Sobald der finale Text vorliegt, ersetzt er diesen Platzhalter ohne weitere Anpassungen am Layout. Bis dahin dient alles hier nur der Vorschau und der typografischen Beurteilung des Gesamteindrucks. Auch die Wirkung des Absatzes im Verhältnis zur Headline-Box, zum Intro und zum darunterliegenden Weißraum lässt sich so prüfen. Lange Absätze offenbaren Schwächen in der Mikrotypografie, die in kurzen Zitaten unsichtbar bleiben — etwa harte Trennstellen, ungleichmäßige Wortabstände oder Absatzenden mit nur einem oder zwei Wörtern in der letzten Zeile. Genauso sichtbar werden Stolperstellen wie zu enge Zeilenabstände bei kleineren Viewports, problematische Umbrüche an Fremdwörtern oder eine zu hohe Textdichte im Verhältnis zum umgebenden Layout. Mit einem Platzhalter dieser Länge lässt sich auch testen, ob der Spaltenfluss bei sehr breiten Bildschirmen noch lesbar bleibt oder ob eine schmalere max-width vorteilhafter wäre. Erst wenn der echte Text mit ähnlicher Länge eingesetzt wird, zeigt sich, ob die getroffenen Layoutentscheidungen tragen. Bis dahin verstehen Sie diesen Block bitte ausschließlich als Skizze." data-en="This is a placeholder text whose sole purpose is visual preview. The final, editorially approved description will appear here, outlining our mission, our methods, and our core concerns. Until then, this text fills the intended area and gives an impression of how the layout will look once real content is in place. Type size, line height, and column width can all be evaluated more accurately against a placeholder than against empty space. Readability on different screen sizes, contrast with the vermillion headline box, and the balance between text and whitespace can also be assessed this way. As soon as the final copy is ready, it will replace this placeholder without further layout changes. The way the paragraph behaves in relation to the headline box, the intro, and the surrounding whitespace can also be checked here. Longer paragraphs expose weaknesses in microtypography that remain invisible in short quotations — awkward break points, uneven word spacing, or paragraph endings that leave only one or two words on the final line. Equally visible are tighter issues like cramped line height on smaller viewports, problematic breaks at long compound words, or text density that feels heavy against the surrounding layout. A placeholder of this length also makes it possible to test whether the column still reads well on very wide screens or whether a narrower max-width would serve the page better. Only once real copy of similar length appears in this slot will it become clear whether the layout decisions hold. Until then, please treat this block as nothing more than a sketch.">Dies ist ein Platzhaltertext, der ausschließlich der visuellen Vorschau dient. Hier wird später ein redaktionell finalisierter Beschreibungstext stehen, der die Mission, unsere Arbeitsweise und unsere zentralen Anliegen ausformuliert. Bis dahin füllt dieser Text die vorgesehene Fläche und gibt einen Eindruck davon, wie das Layout mit echtem Inhalt wirken wird. Schriftgröße, Zeilenabstand und Spaltenbreite lassen sich an einem solchen Platzhalter besser beurteilen als an einer leeren Fläche. Auch die Lesbarkeit auf unterschiedlichen Bildschirmgrößen, der Kontrast zur orangen Headline-Box und das Verhältnis von Text zu Weißraum werden so überprüfbar. Sobald der finale Text vorliegt, ersetzt er diesen Platzhalter ohne weitere Anpassungen am Layout. Bis dahin dient alles hier nur der Vorschau und der typografischen Beurteilung des Gesamteindrucks. Auch die Wirkung des Absatzes im Verhältnis zur Headline-Box, zum Intro und zum darunterliegenden Weißraum lässt sich so prüfen. Lange Absätze offenbaren Schwächen in der Mikrotypografie, die in kurzen Zitaten unsichtbar bleiben — etwa harte Trennstellen, ungleichmäßige Wortabstände oder Absatzenden mit nur einem oder zwei Wörtern in der letzten Zeile. Genauso sichtbar werden Stolperstellen wie zu enge Zeilenabstände bei kleineren Viewports, problematische Umbrüche an Fremdwörtern oder eine zu hohe Textdichte im Verhältnis zum umgebenden Layout. Mit einem Platzhalter dieser Länge lässt sich auch testen, ob der Spaltenfluss bei sehr breiten Bildschirmen noch lesbar bleibt oder ob eine schmalere max-width vorteilhafter wäre. Erst wenn der echte Text mit ähnlicher Länge eingesetzt wird, zeigt sich, ob die getroffenen Layoutentscheidungen tragen. Bis dahin verstehen Sie diesen Block bitte ausschließlich als Skizze.</p>
     <div class="cta-row section-cta">
@@ -1123,7 +1116,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
   <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
   <div class="team-content">
     <div class="team-headline-box">
-      <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte." data-en="<em>We</em> defend<br>defensive rights."><em>Wir</em> verteidigen<br>Abwehrrechte.</h1>
+      <h1 class="team-headline" id="team-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
     </div>
     <p class="team-body" id="team-body" data-de="Dies ist ein Platzhaltertext, der ausschließlich der visuellen Vorschau dient. Hier wird später ein redaktionell finalisierter Beschreibungstext stehen, der das Team, unsere Arbeitsweise und unsere zentralen Anliegen ausformuliert. Bis dahin füllt dieser Text die vorgesehene Fläche und gibt einen Eindruck davon, wie das Layout mit echtem Inhalt wirken wird. Schriftgröße, Zeilenabstand und Spaltenbreite lassen sich an einem solchen Platzhalter besser beurteilen als an einer leeren Fläche. Auch die Lesbarkeit auf unterschiedlichen Bildschirmgrößen, der Kontrast zur orangen Headline-Box und das Verhältnis von Text zu Weißraum werden so überprüfbar. Sobald der finale Text vorliegt, ersetzt er diesen Platzhalter ohne weitere Anpassungen am Layout. Bis dahin dient alles hier nur der Vorschau und der typografischen Beurteilung des Gesamteindrucks. Auch die Wirkung des Absatzes im Verhältnis zur Headline-Box, zum Intro und zum darunterliegenden Weißraum lässt sich so prüfen. Lange Absätze offenbaren Schwächen in der Mikrotypografie, die in kurzen Zitaten unsichtbar bleiben — etwa harte Trennstellen, ungleichmäßige Wortabstände oder Absatzenden mit nur einem oder zwei Wörtern in der letzten Zeile. Genauso sichtbar werden Stolperstellen wie zu enge Zeilenabstände bei kleineren Viewports, problematische Umbrüche an Fremdwörtern oder eine zu hohe Textdichte im Verhältnis zum umgebenden Layout. Mit einem Platzhalter dieser Länge lässt sich auch testen, ob der Spaltenfluss bei sehr breiten Bildschirmen noch lesbar bleibt oder ob eine schmalere max-width vorteilhafter wäre. Erst wenn der echte Text mit ähnlicher Länge eingesetzt wird, zeigt sich, ob die getroffenen Layoutentscheidungen tragen. Bis dahin verstehen Sie diesen Block bitte ausschließlich als Skizze." data-en="This is a placeholder text whose sole purpose is visual preview. The final, editorially approved description will appear here, outlining our team, our methods, and our core concerns. Until then, this text fills the intended area and gives an impression of how the layout will look once real content is in place. Type size, line height, and column width can all be evaluated more accurately against a placeholder than against empty space. Readability on different screen sizes, contrast with the vermillion headline box, and the balance between text and whitespace can also be assessed this way. As soon as the final copy is ready, it will replace this placeholder without further layout changes. The way the paragraph behaves in relation to the headline box, the intro, and the surrounding whitespace can also be checked here. Longer paragraphs expose weaknesses in microtypography that remain invisible in short quotations — awkward break points, uneven word spacing, or paragraph endings that leave only one or two words on the final line. Equally visible are tighter issues like cramped line height on smaller viewports, problematic breaks at long compound words, or text density that feels heavy against the surrounding layout. A placeholder of this length also makes it possible to test whether the column still reads well on very wide screens or whether a narrower max-width would serve the page better. Only once real copy of similar length appears in this slot will it become clear whether the layout decisions hold. Until then, please treat this block as nothing more than a sketch.">Dies ist ein Platzhaltertext, der ausschließlich der visuellen Vorschau dient. Hier wird später ein redaktionell finalisierter Beschreibungstext stehen, der das Team, unsere Arbeitsweise und unsere zentralen Anliegen ausformuliert. Bis dahin füllt dieser Text die vorgesehene Fläche und gibt einen Eindruck davon, wie das Layout mit echtem Inhalt wirken wird. Schriftgröße, Zeilenabstand und Spaltenbreite lassen sich an einem solchen Platzhalter besser beurteilen als an einer leeren Fläche. Auch die Lesbarkeit auf unterschiedlichen Bildschirmgrößen, der Kontrast zur orangen Headline-Box und das Verhältnis von Text zu Weißraum werden so überprüfbar. Sobald der finale Text vorliegt, ersetzt er diesen Platzhalter ohne weitere Anpassungen am Layout. Bis dahin dient alles hier nur der Vorschau und der typografischen Beurteilung des Gesamteindrucks. Auch die Wirkung des Absatzes im Verhältnis zur Headline-Box, zum Intro und zum darunterliegenden Weißraum lässt sich so prüfen. Lange Absätze offenbaren Schwächen in der Mikrotypografie, die in kurzen Zitaten unsichtbar bleiben — etwa harte Trennstellen, ungleichmäßige Wortabstände oder Absatzenden mit nur einem oder zwei Wörtern in der letzten Zeile. Genauso sichtbar werden Stolperstellen wie zu enge Zeilenabstände bei kleineren Viewports, problematische Umbrüche an Fremdwörtern oder eine zu hohe Textdichte im Verhältnis zum umgebenden Layout. Mit einem Platzhalter dieser Länge lässt sich auch testen, ob der Spaltenfluss bei sehr breiten Bildschirmen noch lesbar bleibt oder ob eine schmalere max-width vorteilhafter wäre. Erst wenn der echte Text mit ähnlicher Länge eingesetzt wird, zeigt sich, ob die getroffenen Layoutentscheidungen tragen. Bis dahin verstehen Sie diesen Block bitte ausschließlich als Skizze.</p>
     <div class="cta-row section-cta">
@@ -1149,7 +1142,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-wm">Zentrum <span class="mark">Grundrechte</span></div>
+    <div class="footer-wm">Zentrum Grundrechte e.V.</div>
     <nav class="footer-links">
       <a href="#" id="link-impressum" data-de="Impressum" data-en="Legal Notice" onclick="openModal('impressum'); return false;">Impressum</a>
       <a href="#" id="link-datenschutz" data-de="Datenschutz" data-en="Privacy Policy" onclick="openModal('datenschutz'); return false;">Datenschutz</a>
