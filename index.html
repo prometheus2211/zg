@@ -189,6 +189,13 @@ body {
   transition: opacity 0.2s;
 }
 .lang-toggle:hover { opacity: 0.7; }
+.invert-toggle {
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-left: 4px;
+  text-transform: none;
+}
 
 .content {
   position: relative;
@@ -910,6 +917,90 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
   .nav-right { gap: 12px; }
   .nav-cta { padding: 7px 11px; font-size: 10px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   INVERTED-MODUS — optionaler A/B-Vergleich
+   Aktivierung über body.inverted (Toggle in der Nav, persistiert
+   in localStorage unter "zg-invert"). Default-Theme bleibt Light.
+══════════════════════════════════════════════════════════ */
+body.inverted { background: var(--vermil); color: #fff; }
+body.inverted .bg-text { color: rgba(255,255,255,0.14); }
+
+/* Wortmarke */
+body.inverted .wordmark { color: #fff; }
+body.inverted .wordmark .mark,
+body.inverted .wordmark:hover .mark { border-bottom-color: #fff; }
+
+/* Nav */
+body.inverted .nav-links a,
+body.inverted .nav-kontakt { color: #fff; }
+body.inverted .nav-links a:hover,
+body.inverted .nav-kontakt:hover,
+body.inverted .nav-links a.is-active,
+body.inverted .nav-kontakt.is-active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+body.inverted .nav-cta { background: #fff; color: var(--vermil); }
+body.inverted .nav-cta:hover { background: rgba(255,255,255,0.85); color: var(--vermil); }
+body.inverted .lang-toggle { color: #fff; }
+body.inverted .invert-toggle { color: #fff; }
+
+/* Headline-Boxen — transparent mit weisser Umrandung statt Vermil-Fläche */
+body.inverted .headline-box,
+body.inverted .mission-headline-box,
+body.inverted .team-headline-box {
+  background: transparent;
+  border: 4px solid #fff;
+}
+
+/* Hero-Headline em (war: weiss auf vermil mit weisser Unterlinie — bleibt) */
+/* Mission/Team em sind ohnehin weiss + weisse Unterlinie — passt */
+
+/* CTA-Buttons (wer-link, newsletter, mitmachen, fragen) — outline-Style */
+body.inverted .wer-link,
+body.inverted .newsletter-link,
+body.inverted .mitmachen-link,
+body.inverted .fragen-link {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+body.inverted .wer-link:hover,
+body.inverted .newsletter-link:hover,
+body.inverted .mitmachen-link:hover,
+body.inverted .fragen-link:hover {
+  background: #fff;
+  color: var(--vermil);
+}
+
+/* Scroll-Hint */
+body.inverted .scroll-hint { color: #fff; }
+body.inverted .scroll-hint:hover { color: #fff; opacity: 0.7; }
+
+/* Satz-Sektion (Landing) */
+body.inverted .satz { color: #fff; }
+body.inverted .satz em { color: #fff; }
+
+/* Mission/Team Body & Intro */
+body.inverted .mission-body,
+body.inverted .team-body,
+body.inverted .mission-intro,
+body.inverted .team-intro { color: #fff; }
+
+/* Pull-Quote / Mission-Contact-Section / Pull-Quote-Block */
+body.inverted .contact-section { background: transparent; }
+body.inverted .contact-headline,
+body.inverted .contact-text,
+body.inverted .contact-address { color: #fff; }
+body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
+
+/* Mission/Team/Kontakt-View Body-BG-Override */
+body.inverted.mission-view,
+body.inverted.team-view,
+body.inverted.kontakt-view { background: var(--vermil); }
+
+/* Footer bleibt dunkel — bewährt als Erdgegenpol zum roten Page-BG */
 </style>
 </head>
 <body>
@@ -930,6 +1021,7 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
     <a class="nav-kontakt" id="nav-kontakt" href="#kontakt" data-de="Kontakt" data-en="Contact">Kontakt</a>
     <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
+    <button class="lang-toggle invert-toggle" id="invert-toggle" onclick="toggleInvert()" aria-label="Farbschema invertieren" title="Farbschema invertieren">◐</button>
   </div>
 </nav>
 
@@ -1138,6 +1230,18 @@ setTimeout(scheduleAlignBg, 750);
     if (el) el.href = href;
   });
 })();
+
+/* ── Inverted-Modus Toggle (A/B-Vergleich) ── */
+function applyInvert() {
+  var on = localStorage.getItem('zg-invert') === '1';
+  document.body.classList.toggle('inverted', on);
+}
+function toggleInvert() {
+  var next = localStorage.getItem('zg-invert') === '1' ? '0' : '1';
+  localStorage.setItem('zg-invert', next);
+  applyInvert();
+}
+applyInvert();
 
 /* ── Language toggle ── */
 let currentLang = 'de';
