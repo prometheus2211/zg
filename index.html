@@ -483,25 +483,29 @@ body {
   padding: 14vh 72px 16px;
   background: var(--bg);
 }
-/* Auf Team rückt die Kontakt-Sektion näher an die Button-Reihe heran.
-   Mission hat statt der Kontakt-Sektion einen "Fragen?"-Button in der CTA-Reihe,
-   der direkt auf die Kontakt-Seite verlinkt. */
-body.team-view .contact-section { padding-top: 28px; }
-body.mission-view .contact-section { display: none; }
-/* Mission-Sonderfall: Drei Buttons bleiben in einer Reihe (nowrap), und der
+/* Mission und Team haben beide eine 3-Button-CTA-Reihe (Newsletter / Mit-
+   machen / Fragen?), die direkt auf die Kontakt-Seite verlinkt. Die
+   Kontakt-Sektion selbst wird daher in beiden Views ausgeblendet — sie
+   ist über den dedizierten #kontakt-Tab im Ribbon erreichbar. */
+body.mission-view .contact-section,
+body.team-view .contact-section { display: none; }
+/* Mission und Team: Drei Buttons bleiben in einer Reihe (nowrap), und der
    Container schrumpft passgenau auf die Button-Reihen-Breite. Body und Intro
    werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
-body.mission-view .mission-section .section-cta {
+body.mission-view .mission-section .section-cta,
+body.team-view .team-section .section-cta {
   flex-wrap: nowrap;
   width: max-content;
   max-width: 100%;
 }
-body.mission-view .mission-body { max-width: 720px; }
+body.mission-view .mission-body,
+body.team-view .team-body { max-width: 720px; }
 @media (max-width: 600px) {
   /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
      keine Buttons über den Bildschirm hinauslaufen. */
-  body.mission-view .mission-section .section-cta {
+  body.mission-view .mission-section .section-cta,
+  body.team-view .team-section .section-cta {
     flex-wrap: wrap;
     width: auto;
   }
@@ -826,7 +830,6 @@ footer {
   .team-section { padding: 12vh 48px 12px; }
   .mission-headline-box,
   .team-headline-box { padding: 24px 32px 28px; }
-  body.team-view .contact-section { padding-top: 24px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
@@ -858,7 +861,6 @@ footer {
   .team-headline { font-size: clamp(34px, 9vw, 56px); }
   .mission-body,
   .team-body { margin-top: 40px; font-size: 16px; }
-  body.team-view .contact-section { padding-top: 20px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -1122,6 +1124,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="team-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="team-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="fragen-link" id="team-fragen-link" href="#kontakt" data-de="Fragen?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Questions?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Fragen?<svg class="fragen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </section>
@@ -1300,7 +1303,7 @@ function toggleLang() {
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
-   'team-headline','team-body','team-newsletter-link','team-mitmachen-link'].forEach(function(id) {
+   'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
@@ -1428,32 +1431,41 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   });
 });
 
-/* ── Mission-Layout: Body auf exakt dieselbe Breite ziehen wie die
+/* ── Mission/Team-Layout: Body auf exakt dieselbe Breite ziehen wie die
    3-Button-CTA-Reihe, damit Text und Box-Reihe bündig sitzen. Die CTA-Reihe
    ist via CSS auf width: max-content + nowrap konfiguriert; sie sized sich
    also passgenau auf die Summe der drei Buttons + Gaps. JS misst diese
    Breite und gibt sie an den Body weiter. Auf sehr schmalen Viewports
    (Wrap-Modus) bleibt die CSS-Fallback-Breite. ── */
 (function() {
-  var section = document.querySelector('.mission-section');
-  if (!section) return;
-  var cta = section.querySelector('.section-cta');
-  var body = section.querySelector('.mission-body');
-  if (!cta || !body) return;
-  function sync() {
-    /* Nur synchronisieren, wenn die Mission-Sektion sichtbar ist
-       (display: block via .mission-view). Sonst sind Messungen 0. */
-    if (!document.body.classList.contains('mission-view')) return;
+  var sections = [
+    { sel: '.mission-section', bodySel: '.mission-body', viewClass: 'mission-view' },
+    { sel: '.team-section',    bodySel: '.team-body',    viewClass: 'team-view'    }
+  ].map(function(cfg) {
+    var section = document.querySelector(cfg.sel);
+    if (!section) return null;
+    var cta = section.querySelector('.section-cta');
+    var body = section.querySelector(cfg.bodySel);
+    if (!cta || !body) return null;
+    return { cta: cta, body: body, viewClass: cfg.viewClass };
+  }).filter(Boolean);
+  if (!sections.length) return;
+  function syncOne(s) {
+    /* Nur synchronisieren, wenn die zugehörige Sektion sichtbar ist
+       (display: block via .mission-view / .team-view). Sonst sind
+       Messungen 0. */
+    if (!document.body.classList.contains(s.viewClass)) return;
     /* Wrap-Modus auf schmalen Viewports: Inline-Styles entfernen, damit
        der Body auf seine CSS-Fallback-max-width zurückfällt. */
     if (window.matchMedia('(max-width: 600px)').matches) {
-      body.style.maxWidth = '';
+      s.body.style.maxWidth = '';
       return;
     }
-    var w = cta.getBoundingClientRect().width;
+    var w = s.cta.getBoundingClientRect().width;
     if (!w) return;
-    body.style.maxWidth = Math.ceil(w) + 'px';
+    s.body.style.maxWidth = Math.ceil(w) + 'px';
   }
+  function sync() { sections.forEach(syncOne); }
   window.addEventListener('resize', sync);
   window.addEventListener('hashchange', function() { setTimeout(sync, 0); });
   /* Inter wird im File embedded, aber das Layout wird trotzdem stabiler,
