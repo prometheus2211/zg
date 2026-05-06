@@ -477,17 +477,6 @@ body.mission-view .mission-body { max-width: 720px; }
   line-height: 1.18;
   letter-spacing: -0.04em;
 }
-/* Eyebrow-Label über der Headline-Box */
-.eyebrow {
-  display: block;
-  margin: 0 0 14px;
-  font-family: inherit;
-  font-size: clamp(11px, 0.85vw, 13px);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--vermil);
-}
 .mission-headline em,
 .team-headline em {
   font-style: normal;
@@ -894,6 +883,11 @@ footer {
   color: var(--black);
   border-bottom-color: var(--vermil);
 }
+.nav-links a.is-active,
+.nav-kontakt.is-active {
+  color: var(--black);
+  border-bottom-color: var(--vermil);
+}
 .nav-cta {
   background: var(--vermil);
   color: #fff;
@@ -966,7 +960,6 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
 <section class="mission-section" id="mission">
   <div class="mission-content">
-    <span class="eyebrow">Mission</span>
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
     </div>
@@ -982,7 +975,6 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
 <!-- ══ TEAM (sichtbar nur in team view) ══ -->
 <section class="team-section" id="team">
   <div class="team-content">
-    <span class="eyebrow">Team</span>
     <div class="team-headline-box">
       <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte." data-en="<em>We</em> defend<br>defensive rights."><em>Wir</em> verteidigen<br>Abwehrrechte.</h1>
     </div>
@@ -1183,12 +1175,23 @@ document.addEventListener('keydown', e => {
 /* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team, Kontakt) via Hash ── */
 function applyView() {
   document.body.classList.remove('mission-view', 'team-view', 'kontakt-view');
-  if (window.location.hash === '#mission') {
+  ['nav-mission', 'nav-team', 'nav-kontakt'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('is-active');
+  });
+  var hash = window.location.hash;
+  if (hash === '#mission') {
     document.body.classList.add('mission-view');
-  } else if (window.location.hash === '#team') {
+  } else if (hash === '#team') {
     document.body.classList.add('team-view');
-  } else if (window.location.hash === '#kontakt') {
+  } else if (hash === '#kontakt') {
     document.body.classList.add('kontakt-view');
+  }
+  var navMap = { '#mission': 'nav-mission', '#team': 'nav-team', '#kontakt': 'nav-kontakt' };
+  var activeId = navMap[hash];
+  if (activeId) {
+    var activeEl = document.getElementById(activeId);
+    if (activeEl) activeEl.classList.add('is-active');
   }
   window.scrollTo(0, 0);
 }
