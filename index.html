@@ -109,6 +109,32 @@ body {
   z-index: 0;
 }
 
+/* Vertikale Hintergrund-Wortmarke — rechts am Bildschirmrand,
+   sehr blass, nur auf Mission/Team-View sichtbar. Verankert die
+   Marke ohne den Lesetext zu stören. */
+.vertical-wordmark {
+  display: none;
+  position: fixed;
+  right: clamp(8px, 1.5vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(64px, 9vw, 140px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+body.mission-view .vertical-wordmark,
+body.team-view .vertical-wordmark { display: block; }
+
 /* ══════════════════════════════════════
    HERO
 ══════════════════════════════════════ */
@@ -792,6 +818,9 @@ footer {
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift */
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
+  /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
+  body.mission-view .vertical-wordmark,
+  body.team-view .vertical-wordmark { display: none; }
   /* .scroll-hint bleibt zentriert; nur bottom anpassen */
   .scroll-hint { bottom: 28px; }
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
@@ -893,6 +922,7 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
 ══════════════════════════════════════════════════════════ */
 body.inverted { background: var(--vermil); color: #fff; }
 body.inverted .bg-text { color: rgba(255,255,255,0.14); }
+body.inverted .vertical-wordmark { color: #fff; opacity: 0.08; }
 
 /* Wortmarke */
 body.inverted .wordmark { color: #fff; }
@@ -999,6 +1029,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- Fixed background: Abwehrrechte -->
 <div class="bg-text" id="bg"></div>
+<div class="vertical-wordmark" aria-hidden="true">Zentrum Grundrechte</div>
 
 <!-- ══ Logo (fixed, niedriger z-index → wird von Headline-Box überdeckt) ══ -->
 <a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
