@@ -655,12 +655,21 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
+/* Footer-Wortmarke: an Hero-Wortmarke angeglichen — Mixed-Case, weight 900,
+   schwarz, vermillion-Unterstrich auf "Grundrechte". e.V. weggelassen, weil
+   die rechtliche Bezeichnung im Impressum steht; im Footer geht es um die
+   Marken-Konsistenz. */
 .footer-wm {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mid);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--black);
+  line-height: 1;
+}
+.footer-wm .mark {
+  border-bottom: 1.5px solid var(--vermil);
+  padding-bottom: 1px;
 }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a {
@@ -948,6 +957,8 @@ body.inverted .vertical-wordmark-inner .mark { text-decoration-color: #fff; }
 body.inverted .wordmark { color: #fff; }
 body.inverted .wordmark .mark,
 body.inverted .wordmark:hover .mark { border-bottom-color: #fff; }
+body.inverted .footer-wm { color: #fff; }
+body.inverted .footer-wm .mark { border-bottom-color: #fff; }
 
 /* Nav */
 body.inverted .nav-links a,
@@ -1138,7 +1149,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-wm">Zentrum Grundrechte e.V.</div>
+    <div class="footer-wm">Zentrum <span class="mark">Grundrechte</span></div>
     <nav class="footer-links">
       <a href="#" id="link-impressum" data-de="Impressum" data-en="Legal Notice" onclick="openModal('impressum'); return false;">Impressum</a>
       <a href="#" id="link-datenschutz" data-de="Datenschutz" data-en="Privacy Policy" onclick="openModal('datenschutz'); return false;">Datenschutz</a>
