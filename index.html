@@ -946,16 +946,22 @@ body.inverted .nav-cta:hover { background: rgba(255,255,255,0.85); color: var(--
 body.inverted .lang-toggle { color: #fff; }
 body.inverted .invert-toggle { color: #fff; }
 
-/* Headline-Boxen — transparent mit weisser Umrandung statt Vermil-Fläche */
+/* Headline-Boxen — weisse Flaeche mit Vermil-Schrift */
 body.inverted .headline-box,
 body.inverted .mission-headline-box,
 body.inverted .team-headline-box {
-  background: transparent;
-  border: 4px solid #fff;
+  background: #fff;
+  border: none;
 }
-
-/* Hero-Headline em (war: weiss auf vermil mit weisser Unterlinie — bleibt) */
-/* Mission/Team em sind ohnehin weiss + weisse Unterlinie — passt */
+body.inverted .headline,
+body.inverted .mission-headline,
+body.inverted .team-headline { color: var(--vermil); }
+body.inverted .headline em,
+body.inverted .mission-headline em,
+body.inverted .team-headline em {
+  color: var(--vermil);
+  border-bottom-color: var(--vermil);
+}
 
 /* CTA-Buttons (wer-link, newsletter, mitmachen, fragen) — outline-Style */
 body.inverted .wer-link,
