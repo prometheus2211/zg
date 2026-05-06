@@ -527,46 +527,6 @@ body.mission-view .mission-body { max-width: 720px; }
   margin-top: clamp(36px, 5vh, 56px);
   max-width: 720px;
 }
-/* Support-Box auf Mission/Team — Pull-Quote-Stil mit linkem Akzentbalken */
-.support-box {
-  display: block;
-  margin: 56px 0 0;
-  max-width: 720px;
-  padding: 6px 0 6px 22px;
-  border-left: 4px solid var(--vermil);
-  background: transparent;
-  font-size: clamp(20px, 1.8vw, 26px);
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: -0.015em;
-  color: var(--black);
-}
-.support-box a {
-  color: var(--vermil);
-  text-decoration: none;
-  border-bottom: 1.5px solid var(--vermil);
-  transition: opacity 0.2s;
-}
-.support-box a:hover { opacity: 0.7; }
-.support-arrow {
-  display: inline-block;
-  margin-left: 0.28em;
-  width: 0.42em;
-  height: 0.7em;
-  vertical-align: -0.04em;
-  overflow: visible;
-  color: var(--vermil);
-  transition: transform 0.2s;
-}
-.support-box a:hover .support-arrow { transform: translateX(3px); }
-/* Sekundäre Variante: Footer-Anker (Newsletter-Zeile unter Support-Box) */
-.support-box.is-secondary {
-  margin-top: 28px;
-  padding: 4px 0 4px 22px;
-  font-size: clamp(16px, 1.3vw, 20px);
-  font-weight: 400;
-  border-left-width: 3px;
-}
 body.mission-view .bg-text,
 body.mission-view .hero,
 body.mission-view .satz-section,
@@ -846,8 +806,6 @@ footer {
   .team-headline { font-size: clamp(34px, 9vw, 56px); }
   .mission-body,
   .team-body { margin-top: 40px; font-size: 16px; }
-  .support-box { margin-top: 40px; font-size: 17px; padding: 4px 0 4px 16px; }
-  .support-box.is-secondary { margin-top: 22px; font-size: 14px; padding: 3px 0 3px 16px; }
   body.team-view .contact-section { padding-top: 20px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
