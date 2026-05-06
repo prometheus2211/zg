@@ -109,34 +109,41 @@ body {
   z-index: 0;
 }
 
-/* Vertikale Wortmarke — rechts am Bildschirmrand, um 90° gekippt.
-   Das echte Logo (Zentrum Grundrechte mit Vermillion-Unterstrich auf
-   "Grundrechte"). Nur auf Mission/Team-View sichtbar. */
+/* Vertikale Wortmarke — innerhalb von Mission/Team-Section, läuft vom oberen
+   bis zum unteren Rand der Section. Realisiert via writing-mode: vertical-rl.
+   letter-spacing wird per JS dynamisch gesetzt, sodass der Text die Section
+   vertikal ausfüllt. Schriftgröße bleibt konstant. */
 .vertical-wordmark {
-  display: none;
-  position: fixed;
-  right: clamp(8px, 1.5vw, 28px);
-  top: 50%;
-  transform: translateY(-50%);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: clamp(20px, 3vw, 56px);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+.vertical-wordmark-inner {
+  display: block;
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  right: 0;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   font-family: 'Inter', sans-serif;
   font-weight: 900;
-  font-size: clamp(28px, 4vh, 48px);
-  letter-spacing: -0.02em;
+  font-size: clamp(56px, 6vw, 88px);
   line-height: 1;
+  letter-spacing: 0;
   color: var(--black);
-  pointer-events: none;
-  user-select: none;
   white-space: nowrap;
-  z-index: 1;
 }
-.vertical-wordmark .mark {
-  text-decoration: underline 2.5px solid var(--vermil);
-  text-underline-offset: 4px;
+.vertical-wordmark-inner .mark {
+  text-decoration-line: underline;
+  text-decoration-color: var(--vermil);
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.12em;
 }
-body.mission-view .vertical-wordmark,
-body.team-view .vertical-wordmark { display: block; }
 
 /* ══════════════════════════════════════
    HERO
@@ -822,8 +829,7 @@ footer {
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
-  body.mission-view .vertical-wordmark,
-  body.team-view .vertical-wordmark { display: none; }
+  .vertical-wordmark { display: none; }
   /* .scroll-hint bleibt zentriert; nur bottom anpassen */
   .scroll-hint { bottom: 28px; }
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
@@ -925,8 +931,8 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
 ══════════════════════════════════════════════════════════ */
 body.inverted { background: var(--vermil); color: #fff; }
 body.inverted .bg-text { color: rgba(255,255,255,0.14); }
-body.inverted .vertical-wordmark { color: #fff; }
-body.inverted .vertical-wordmark .mark { text-decoration-color: #fff; }
+body.inverted .vertical-wordmark-inner { color: #fff; }
+body.inverted .vertical-wordmark-inner .mark { text-decoration-color: #fff; }
 
 /* Wortmarke */
 body.inverted .wordmark { color: #fff; }
@@ -1033,7 +1039,6 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- Fixed background: Abwehrrechte -->
 <div class="bg-text" id="bg"></div>
-<div class="vertical-wordmark" aria-hidden="true">Zentrum <span class="mark">Grundrechte</span></div>
 
 <!-- ══ Logo (fixed, niedriger z-index → wird von Headline-Box überdeckt) ══ -->
 <a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
@@ -1078,6 +1083,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
 <section class="mission-section" id="mission">
+  <div class="vertical-wordmark" aria-hidden="true"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></div>
   <div class="mission-content">
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
@@ -1093,6 +1099,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- ══ TEAM (sichtbar nur in team view) ══ -->
 <section class="team-section" id="team">
+  <div class="vertical-wordmark" aria-hidden="true"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></div>
   <div class="team-content">
     <div class="team-headline-box">
       <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte." data-en="<em>We</em> defend<br>defensive rights."><em>Wir</em> verteidigen<br>Abwehrrechte.</h1>
@@ -1444,6 +1451,45 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
   var langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
   sync();
+})();
+
+/* ── Vertikale Wortmarke: letter-spacing so wählen, dass die rotierte
+   Logo-Zeile genau die Höhe der zugehörigen Section ausfüllt. Die Schrift-
+   größe bleibt konstant; nur der Buchstabenabstand variiert. Wird bei
+   View-Wechsel, Resize und nach Font-Load neu berechnet. ── */
+(function() {
+  function fitOne(wm) {
+    var section = wm.closest('.mission-section, .team-section');
+    var inner = wm.querySelector('.vertical-wordmark-inner');
+    if (!section || !inner) return;
+    /* Messung nur sinnvoll, wenn die Section sichtbar ist. */
+    if (section.offsetHeight === 0) return;
+    /* Reset, dann Ist-Höhe (writing-mode: vertical-rl → Inline-Achse vertikal,
+       scrollHeight = Textlänge in Pixeln) messen. */
+    inner.style.letterSpacing = '0px';
+    var have = inner.scrollHeight;
+    /* Zielhöhe: Section-Höhe minus etwas Atem (oben/unten je ~24px). */
+    var need = section.offsetHeight - 48;
+    var charCount = inner.textContent.length - 1;
+    if (charCount <= 0 || need <= have) {
+      inner.style.letterSpacing = '0px';
+      return;
+    }
+    var extra = (need - have) / charCount;
+    inner.style.letterSpacing = extra + 'px';
+  }
+  function fitAll() {
+    document.querySelectorAll('.vertical-wordmark').forEach(fitOne);
+  }
+  window.addEventListener('resize', fitAll);
+  window.addEventListener('hashchange', function() { setTimeout(fitAll, 0); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitAll);
+  }
+  /* Sprachwechsel kann Section-Höhe ändern (Bodytext länger/kürzer). */
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', function() { setTimeout(fitAll, 0); });
+  fitAll();
 })();
 
 /* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
