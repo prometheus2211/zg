@@ -622,6 +622,11 @@ body.kontakt-view .contact-address {
 }
 
 .contact-section {
+  position: relative;
+  /* In kontakt-view füllt die Section den gesamten Viewport, damit die
+     vertikale Wortmarke am rechten Rand die volle Bildschirmhöhe nutzen
+     kann (analog Mission/Team-Section). */
+  min-height: 100vh;
   padding: 56px 72px 72px;
 }
 .contact-label {
@@ -1134,6 +1139,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
   <!-- KONTAKT -->
   <section class="contact-section" id="kontakt">
+    <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
     <p class="contact-label" id="contact-label" data-de="Kontakt" data-en="Contact">Kontakt</p>
     <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
     <address class="contact-address" id="contact-address">
