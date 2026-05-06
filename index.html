@@ -115,18 +115,21 @@ body {
    vertikal ausfüllt. Schriftgröße bleibt konstant. */
 .vertical-wordmark {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: clamp(96px, 14vh, 168px);
+  bottom: clamp(40px, 6vh, 80px);
   right: clamp(20px, 3vw, 56px);
-  pointer-events: none;
+  text-decoration: none;
+  color: inherit;
   user-select: none;
   z-index: 1;
+  transition: opacity 0.18s ease;
 }
+.vertical-wordmark:hover { opacity: 0.7; }
 .vertical-wordmark-inner {
   display: block;
   position: absolute;
-  top: 24px;
-  bottom: 24px;
+  top: 0;
+  bottom: 0;
   right: 0;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -1083,7 +1086,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- ══ MISSION (sichtbar nur in mission view) ══ -->
 <section class="mission-section" id="mission">
-  <div class="vertical-wordmark" aria-hidden="true"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></div>
+  <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
   <div class="mission-content">
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
@@ -1099,7 +1102,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- ══ TEAM (sichtbar nur in team view) ══ -->
 <section class="team-section" id="team">
-  <div class="vertical-wordmark" aria-hidden="true"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></div>
+  <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
   <div class="team-content">
     <div class="team-headline-box">
       <h1 class="team-headline" id="team-headline" data-de="<em>Wir</em> verteidigen<br>Abwehrrechte." data-en="<em>We</em> defend<br>defensive rights."><em>Wir</em> verteidigen<br>Abwehrrechte.</h1>
@@ -1407,7 +1410,7 @@ document.addEventListener('click', function(e) {
     if (thanks) thanks.style.display = 'block';
   });
 })();
-document.querySelectorAll('.wordmark').forEach(function(wm) {
+document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) {
   wm.addEventListener('click', function(e) {
     e.preventDefault();
     navigate('main');
@@ -1459,17 +1462,17 @@ document.querySelectorAll('.wordmark').forEach(function(wm) {
    View-Wechsel, Resize und nach Font-Load neu berechnet. ── */
 (function() {
   function fitOne(wm) {
-    var section = wm.closest('.mission-section, .team-section');
     var inner = wm.querySelector('.vertical-wordmark-inner');
-    if (!section || !inner) return;
-    /* Messung nur sinnvoll, wenn die Section sichtbar ist. */
-    if (section.offsetHeight === 0) return;
+    if (!inner) return;
+    /* Messung nur sinnvoll, wenn die Wortmarke sichtbar ist. */
+    if (wm.offsetHeight === 0) return;
     /* Reset, dann Ist-Höhe (writing-mode: vertical-rl → Inline-Achse vertikal,
        scrollHeight = Textlänge in Pixeln) messen. */
     inner.style.letterSpacing = '0px';
     var have = inner.scrollHeight;
-    /* Zielhöhe: Section-Höhe minus etwas Atem (oben/unten je ~24px). */
-    var need = section.offsetHeight - 48;
+    /* Zielhöhe = Wortmarken-Container-Höhe (top/bottom-Offsets sind in CSS
+       gesetzt, halten Abstand zum Ribbon oben und zur nächsten Section unten). */
+    var need = wm.offsetHeight;
     var charCount = inner.textContent.length - 1;
     if (charCount <= 0 || need <= have) {
       inner.style.letterSpacing = '0px';
