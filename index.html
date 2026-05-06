@@ -109,9 +109,9 @@ body {
   z-index: 0;
 }
 
-/* Vertikale Hintergrund-Wortmarke — rechts am Bildschirmrand,
-   sehr blass, nur auf Mission/Team-View sichtbar. Verankert die
-   Marke ohne den Lesetext zu stören. */
+/* Vertikale Wortmarke — rechts am Bildschirmrand, um 90° gekippt.
+   Das echte Logo (Zentrum Grundrechte mit Vermillion-Unterstrich auf
+   "Grundrechte"). Nur auf Mission/Team-View sichtbar. */
 .vertical-wordmark {
   display: none;
   position: fixed;
@@ -122,15 +122,18 @@ body {
   text-orientation: mixed;
   font-family: 'Inter', sans-serif;
   font-weight: 900;
-  font-size: clamp(64px, 9vw, 140px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: clamp(28px, 4vh, 48px);
+  letter-spacing: -0.02em;
+  line-height: 1;
   color: var(--black);
-  opacity: 0.04;
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
   z-index: 1;
+}
+.vertical-wordmark .mark {
+  text-decoration: underline 2.5px solid var(--vermil);
+  text-underline-offset: 4px;
 }
 body.mission-view .vertical-wordmark,
 body.team-view .vertical-wordmark { display: block; }
@@ -922,7 +925,8 @@ body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { di
 ══════════════════════════════════════════════════════════ */
 body.inverted { background: var(--vermil); color: #fff; }
 body.inverted .bg-text { color: rgba(255,255,255,0.14); }
-body.inverted .vertical-wordmark { color: #fff; opacity: 0.08; }
+body.inverted .vertical-wordmark { color: #fff; }
+body.inverted .vertical-wordmark .mark { text-decoration-color: #fff; }
 
 /* Wortmarke */
 body.inverted .wordmark { color: #fff; }
@@ -1029,7 +1033,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
 
 <!-- Fixed background: Abwehrrechte -->
 <div class="bg-text" id="bg"></div>
-<div class="vertical-wordmark" aria-hidden="true">Zentrum Grundrechte</div>
+<div class="vertical-wordmark" aria-hidden="true">Zentrum <span class="mark">Grundrechte</span></div>
 
 <!-- ══ Logo (fixed, niedriger z-index → wird von Headline-Box überdeckt) ══ -->
 <a class="wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite">Zentrum <span class="mark">Grundrechte</span></a>
