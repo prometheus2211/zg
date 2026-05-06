@@ -247,6 +247,10 @@ body {
   background: var(--vermil);
   padding: 32px 44px 36px;
   border-radius: 6px;
+  /* Optische Ausrichtung: die orange Fläche wirkt sonst leicht nach rechts
+     versetzt; minimaler negativer margin-left zieht die Kante visuell bündig
+     mit dem Body. */
+  margin-left: -6px;
 }
 .headline {
   font-size: clamp(56px, 9vw, 128px);
@@ -514,6 +518,9 @@ body.mission-view .mission-body { max-width: 720px; }
   background: var(--vermil);
   padding: 28px 40px 32px;
   border-radius: 6px;
+  /* Optische Ausrichtung: minimaler negativer margin-left zieht die Kante
+     visuell bündig mit dem Body. */
+  margin-left: -6px;
 }
 .mission-headline,
 .team-headline {
