@@ -1607,30 +1607,16 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     }
 
     if (hash === '#kontakt') {
-      /* Trigger ist die graue "Kontakt"-Label-Zeile direkt über der
-         E-Mail-Box. Die vertikale Wortmarke startet an ungefähr
-         derselben Höhe (Section-padding-top ≈ vertical-wordmark-top),
-         deswegen fängt der Label-Trigger beide Kandidaten ab. Ein
-         kleiner Buffer schaltet den Fade noch ein paar Pixel früher,
-         damit Label/Vertikallogo nicht in die Nav rutschen. */
-      var label = document.querySelector('.contact-label');
-      if (!label) {
-        if (wm) wm.classList.remove('is-hidden');
-        if (nav) nav.classList.remove('is-hidden');
-        return;
-      }
-      var labelRect = label.getBoundingClientRect();
-      var KONTAKT_BUFFER = 32;
-      if (wm) {
-        var kWmRect = wm.getBoundingClientRect();
-        if (labelRect.top - KONTAKT_BUFFER <= kWmRect.bottom) wm.classList.add('is-hidden');
-        else wm.classList.remove('is-hidden');
-      }
-      if (nav) {
-        var kNavBottom = nav.getBoundingClientRect().bottom;
-        if (labelRect.top - KONTAKT_BUFFER <= kNavBottom) nav.classList.add('is-hidden');
-        else nav.classList.remove('is-hidden');
-      }
+      /* Einfacher Scroll-Threshold: Wortmarke und Nav sind bei scroll=0
+         immer sichtbar; sobald der Nutzer ein paar Pixel nach unten
+         scrollt (KONTAKT_SCROLL_THRESHOLD), wird beides ausgeblendet.
+         Verhindert, dass die graue "Kontakt"-Label-Zeile und das
+         vertikale Logo am rechten Rand in den Header-Bereich rutschen.
+         Zahl bei Bedarf anpassen — kleiner = früher faden. */
+      var KONTAKT_SCROLL_THRESHOLD = 24;
+      var hideOnKontakt = window.scrollY > KONTAKT_SCROLL_THRESHOLD;
+      if (wm) wm.classList.toggle('is-hidden', hideOnKontakt);
+      if (nav) nav.classList.toggle('is-hidden', hideOnKontakt);
       return;
     }
 
