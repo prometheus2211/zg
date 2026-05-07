@@ -1564,7 +1564,8 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
      wm/nav steht (Box ist die Hauptüberschrift der Section).
    • Landing: nav (Ribbon) hide, solange die Hero-Titelbox vertikal
      überlappt; sobald die TB darüber gescrollt ist, wieder einblenden.
-   • Kontakt: immer anzeigen. ── */
+   • Kontakt: hide, sobald die contact-email-Box vertikal mit
+     wm/nav überlappt (Box ist die Hauptfläche der Section). ── */
 (function() {
   var wm = document.querySelector('.wordmark');
   var nav = document.querySelector('.nav');
@@ -1606,8 +1607,27 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     }
 
     if (hash === '#kontakt') {
-      if (wm) wm.classList.remove('is-hidden');
-      if (nav) nav.classList.remove('is-hidden');
+      var emailBox = document.querySelector('.contact-email');
+      if (!emailBox) {
+        if (wm) wm.classList.remove('is-hidden');
+        if (nav) nav.classList.remove('is-hidden');
+        return;
+      }
+      var emailRect = emailBox.getBoundingClientRect();
+      /* Wortmarke: ausblenden, sobald die E-Mail-Box auf Höhe der
+         Wortmarke ankommt — und auch danach hidden bleiben. */
+      if (wm) {
+        var kWmRect = wm.getBoundingClientRect();
+        if (emailRect.top <= kWmRect.bottom) wm.classList.add('is-hidden');
+        else wm.classList.remove('is-hidden');
+      }
+      /* Nav-Ribbon: ausblenden, sobald die E-Mail-Box mit der Nav
+         vertikal überlappt. */
+      if (nav) {
+        var kNavTop = nav.getBoundingClientRect().top;
+        if (kNavTop >= emailRect.top) nav.classList.add('is-hidden');
+        else nav.classList.remove('is-hidden');
+      }
       return;
     }
 
