@@ -1288,6 +1288,13 @@ body.inverted.kontakt-view { background: var(--vermil); }
         <a href="mailto:staedter@zentrumgrundrechte.de">staedter@zentrumgrundrechte.de</a>
       </address>
     </div>
+    <div class="press-block register-block">
+      <p class="press-label" id="register-label" data-de="Im Vereinsregister" data-en="Association register">Im Vereinsregister</p>
+      <p class="press-contact register-contact">
+        Amtsgericht Charlottenburg<br>
+        VR XXXXX B
+      </p>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -1463,7 +1470,7 @@ function toggleLang() {
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
-   'kontakt-headline','kontakt-intro','press-label'].forEach(function(id) {
+   'kontakt-headline','kontakt-intro','press-label','register-label'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
