@@ -692,24 +692,25 @@ body.kontakt-view .contact-address {
   color: var(--mid);
   margin-bottom: 20px;
 }
+/* E-Mail-Box im Stil der CTA-Buttons (Newsletter / Mitmachen / Fragen?):
+   eckig statt abgerundet, em-basiertes Padding, Vermil-Border, Hover
+   wechselt auf hellen Hintergrund mit Vermil-Schrift. */
 .contact-email {
   display: inline-block;
-  background: var(--vermil);
-  color: #fff;
-  padding: 20px 32px 24px;
-  border-radius: 6px;
-  font-size: clamp(22px, 3vw, 40px);
+  font-family: inherit;
+  font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
   text-decoration: none;
-  transition: background 0.2s;
+  padding: 0.10em 0.45em;
+  background: var(--vermil);
+  border: 1.5px solid var(--vermil);
+  transition: color 0.2s, background 0.2s;
+  vertical-align: baseline;
 }
-.contact-email:hover {
-  background: var(--black);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
-}
+.contact-email:hover { background: var(--bg); color: var(--vermil); }
 
 /* ══════════════════════════════════════
    FOOTER
@@ -925,7 +926,7 @@ footer {
   .mission-body,
   .team-body { margin-top: 40px; font-size: 16px; }
   .contact-section { padding: 44px 24px 60px; }
-  .contact-email { font-size: clamp(18px, 5vw, 26px); padding: 14px 20px 18px; border-radius: 4px; }
+  .contact-email { font-size: clamp(18px, 5vw, 26px); }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .modal { padding: 32px 20px; }
   .modal h2 { font-size: 18px; }
@@ -1101,14 +1102,16 @@ body.inverted .below { background: transparent; }
 body.inverted .mission-section,
 body.inverted .team-section { background: transparent; }
 
-/* Kontakt-Email: war Vermil auf Vermil → weiss-auf-Vermil mit Vermil-Schrift */
+/* Kontakt-Email auf Vermil-BG: weisse Box mit Vermil-Schrift, Hover
+   dreht auf transparent + weisse Schrift (analog CTA-Buttons im Inverted). */
 body.inverted .contact-email {
   background: #fff;
   color: var(--vermil);
+  border-color: #fff;
 }
 body.inverted .contact-email:hover {
-  background: rgba(255,255,255,0.85);
-  color: var(--vermil);
+  background: transparent;
+  color: #fff;
 }
 
 /* Mission/Team/Kontakt-View Body-BG-Override */
