@@ -466,7 +466,20 @@ body {
 .wer-arrow path,
 .newsletter-arrow path,
 .mitmachen-arrow path,
-.fragen-arrow path { stroke-width: 4; }
+.fragen-arrow path,
+.contact-arrow path { stroke-width: 4; }
+/* Pfeil in der E-Mail-Box — analog zu den CTA-Pfeilen */
+.contact-arrow {
+  display: inline-block;
+  margin-left: 0.32em;
+  width: 0.42em;
+  height: 0.7em;
+  vertical-align: -0.04em;
+  overflow: visible;
+  color: currentColor;
+  transition: transform 0.2s;
+}
+.contact-email:hover .contact-arrow { transform: translateX(3px); }
 
 /* ══════════════════════════════════════
    MISSION + TEAM VIEW
@@ -1200,7 +1213,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
       <h1 class="kontakt-headline" id="kontakt-headline" data-de="Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em>" data-en="Want to learn more?<br><em>Write to us.</em>">Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em></h1>
     </div>
     <p class="kontakt-intro" id="kontakt-intro" data-de="Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:" data-en="Want to support us with expertise and ideas? Or get in touch? Write to:">Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:</p>
-    <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
+    <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <p class="kontakt-oran" id="kontakt-oran" data-de="oder an:" data-en="or to:">oder an:</p>
     <address class="contact-address" id="contact-address">
       Zentrum Grundrechte e.V.<br>
