@@ -654,22 +654,17 @@ body.kontakt-view .kontakt-oran {
 /* Adresse rückt direkt an "oder an:" — eigener margin-top der Adresse
    würde sonst doppelten Abstand erzeugen. */
 body.kontakt-view .kontakt-oran + .contact-address { margin-top: 0; }
-/* Adresse: nur auf Kontakt-View sichtbar, im Stil der E-Mail-Box
-   (transparent, Vermil-Border, Vermil-Schrift) — ohne Pfeil, ohne Hover. */
+/* Adresse: nur auf Kontakt-View sichtbar, schlichter Fließtext in Schwarz. */
 .contact-address { display: none; font-style: normal; }
 body.kontakt-view .contact-address {
-  display: inline-block;
+  display: block;
   margin-top: 36px;
-  font-family: inherit;
-  font-size: clamp(22px, 2.8vw, 36px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--vermil);
-  padding: 0.30em 0.45em;
-  background: transparent;
-  border: 1.5px solid var(--vermil);
-  vertical-align: baseline;
+  max-width: 720px;
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 300;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--black);
 }
 
 /* ══════════════════════════════════════
@@ -1097,8 +1092,6 @@ body.inverted .contact-address,
 body.inverted .contact-label,
 body.inverted .kontakt-intro,
 body.inverted .kontakt-oran { color: #fff; }
-/* Adresse-Box im Inverted: weisser Border statt Vermil */
-body.inverted.kontakt-view .contact-address { border-color: #fff; }
 body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
 
 /* .below-Container (Kontakt + Footer) — von off-white auf transparent */
