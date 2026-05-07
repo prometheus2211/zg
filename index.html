@@ -459,6 +459,34 @@ body {
   transition: transform 0.2s;
 }
 .fragen-link:hover .fragen-arrow { transform: translateX(3px); }
+/* Spenden-Box — identischer Stil wie .fragen-link */
+.spenden-link {
+  display: inline-block;
+  font-family: inherit;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.10em 0.45em;
+  background: var(--vermil);
+  border: 1.5px solid var(--vermil);
+  transition: color 0.2s, background 0.2s;
+  vertical-align: baseline;
+}
+.spenden-link:hover { background: var(--bg); color: var(--vermil); }
+.spenden-arrow {
+  display: inline-block;
+  margin-left: 0.32em;
+  width: 0.42em;
+  height: 0.7em;
+  vertical-align: -0.04em;
+  overflow: visible;
+  color: currentColor;
+  transition: transform 0.2s;
+}
+.spenden-link:hover .spenden-arrow { transform: translateX(3px); }
 
 /* Pfeile in den CTA-Boxen kräftiger zeichnen, passend zum bold gesetzten
    Text (font-weight: 700). Inline-SVG hat stroke-width="2.6" als Default;
@@ -467,6 +495,7 @@ body {
 .newsletter-arrow path,
 .mitmachen-arrow path,
 .fragen-arrow path,
+.spenden-arrow path,
 .contact-arrow path { stroke-width: 4; }
 /* Pfeil in der E-Mail-Box — analog zu den CTA-Pfeilen */
 .contact-arrow {
@@ -615,14 +644,12 @@ body.team-view,
 body.kontakt-view { background: var(--bg); }
 /* Kontakt-View: Kontakt-Sektion bekommt Hero-ähnlichen Top-Abstand */
 body.kontakt-view .contact-section { padding-top: 14vh; }
-/* Kontakt-View: Footer deutlich unter das vertikale Logo. Die Section
-   ist min-height: 100vh und das Logo füllt sie fast komplett (top: 14vh
-   bis bottom: clamp(40,6vh,80)). Damit der Footer auch auf großen
-   Bildschirmen klar unter der Logo-Unterkante sitzt, bekommt er einen
-   margin-top von einer kompletten Viewport-Höhe minus Footer-Höhe.
-   So ist beim Scrollen ans Seitenende garantiert, dass das Logo sicher
-   über dem Footer steht — unabhängig von der Fenstergröße. */
-body.kontakt-view footer { margin-top: calc(100vh - 80px); }
+/* Kontakt-View: Footer schließt direkt nach den Inhalten der Section ab
+   (zuletzt die CTA-Reihe Newsletter/Mitmachen/Spenden). Kein zusätzlicher
+   Spacer — die Section selbst hat min-height: 100vh und sorgt damit auf
+   inhaltsärmeren Viewports für genug Hoehe; bei vollem Inhalt wächst die
+   Section über 100vh hinaus und der Footer rutscht entsprechend mit. */
+body.kontakt-view footer { margin-top: 0; }
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
@@ -1101,11 +1128,12 @@ body.inverted .kontakt-headline em {
   border-bottom-color: var(--vermil);
 }
 
-/* CTA-Buttons (wer-link, newsletter, mitmachen, fragen) — weisse Flaeche, Vermil-Schrift */
+/* CTA-Buttons (wer-link, newsletter, mitmachen, fragen, spenden) — weisse Flaeche, Vermil-Schrift */
 body.inverted .wer-link,
 body.inverted .newsletter-link,
 body.inverted .mitmachen-link,
-body.inverted .fragen-link {
+body.inverted .fragen-link,
+body.inverted .spenden-link {
   background: #fff;
   border-color: #fff;
   color: var(--vermil);
@@ -1113,7 +1141,8 @@ body.inverted .fragen-link {
 body.inverted .wer-link:hover,
 body.inverted .newsletter-link:hover,
 body.inverted .mitmachen-link:hover,
-body.inverted .fragen-link:hover {
+body.inverted .fragen-link:hover,
+body.inverted .spenden-link:hover {
   background: var(--vermil);
   color: #fff;
 }
@@ -1295,6 +1324,11 @@ body.inverted.kontakt-view { background: var(--vermil); }
         VR XXXXX B
       </p>
     </div>
+    <div class="cta-row section-cta">
+      <a class="newsletter-link" id="kontakt-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="mitmachen-link" id="kontakt-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="spenden-link" id="kontakt-spenden-link" href="#" data-de="Spenden<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Donate<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Spenden<svg class="spenden-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -1470,7 +1504,8 @@ function toggleLang() {
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
-   'kontakt-headline','kontakt-intro','press-label','register-label'].forEach(function(id) {
+   'kontakt-headline','kontakt-intro','press-label','register-label',
+   'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
