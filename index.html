@@ -1439,7 +1439,7 @@ setTimeout(scheduleAlignBg, 750);
 var INVERT_TOGGLE_ENABLED = false;
 function applyInvert() {
   if (!INVERT_TOGGLE_ENABLED) {
-    document.body.classList.remove('inverted');
+    document.body.classList.add('inverted');
     return;
   }
   var on = localStorage.getItem('zg-invert') === '1';
