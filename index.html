@@ -667,6 +667,14 @@ body.kontakt-view .contact-address {
   letter-spacing: -0.015em;
   color: var(--black);
 }
+body.kontakt-view .contact-address a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid var(--vermil);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+body.kontakt-view .contact-address a:hover { color: var(--vermil); }
 
 /* Pressekontakt-Block: nur auf Kontakt-View sichtbar, kompakter als der
    Hauptkontakt — schwarze Schrift mit Eyebrow-Label, Mail unterstrichen. */
@@ -1128,11 +1136,13 @@ body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
 body.inverted .press-label { color: rgba(255,255,255,0.75); }
-body.inverted .press-contact a {
+body.inverted .press-contact a,
+body.inverted .contact-address a {
   color: #fff;
   border-bottom-color: #fff;
 }
-body.inverted .press-contact a:hover { color: rgba(255,255,255,0.85); }
+body.inverted .press-contact a:hover,
+body.inverted .contact-address a:hover { color: rgba(255,255,255,0.85); }
 body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
 
 /* .below-Container (Kontakt + Footer) — von off-white auf transparent */
@@ -1261,7 +1271,8 @@ body.inverted.kontakt-view { background: var(--vermil); }
     <address class="contact-address" id="contact-address">
       Zentrum Grundrechte e.V.<br>
       Hauptstraße 2b<br>
-      13158 Berlin
+      13158 Berlin<br>
+      <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
     </address>
     <div class="press-block">
       <p class="press-label" id="press-label" data-de="Pressekontakt" data-en="Press contact">Pressekontakt</p>
