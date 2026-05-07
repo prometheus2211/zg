@@ -536,7 +536,8 @@ body.team-view .contact-section { display: none; }
    werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
 body.mission-view .mission-section .section-cta,
-body.team-view .team-section .section-cta {
+body.team-view .team-section .section-cta,
+body.kontakt-view .contact-section .section-cta {
   flex-wrap: nowrap;
   width: max-content;
   max-width: 100%;
@@ -547,7 +548,8 @@ body.team-view .team-body { max-width: 720px; }
   /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
      keine Buttons über den Bildschirm hinauslaufen. */
   body.mission-view .mission-section .section-cta,
-  body.team-view .team-section .section-cta {
+  body.team-view .team-section .section-cta,
+  body.kontakt-view .contact-section .section-cta {
     flex-wrap: wrap;
     width: auto;
   }
