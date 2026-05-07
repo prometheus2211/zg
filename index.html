@@ -691,8 +691,8 @@ body.kontakt-view .press-label {
   letter-spacing: -0.02em;
   line-height: 1.2;
   text-transform: none;
-  color: var(--vermil);
-  background: transparent;
+  color: #fff;
+  background: var(--vermil);
   border: 1.5px solid var(--vermil);
   padding: 0.10em 0.45em;
   margin: 0 0 24px;
@@ -1141,7 +1141,7 @@ body.inverted .contact-label,
 body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
-body.inverted .press-label { color: #fff; border-color: #fff; }
+body.inverted .press-label { color: var(--vermil); background: #fff; border-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
@@ -1439,7 +1439,7 @@ setTimeout(scheduleAlignBg, 750);
 var INVERT_TOGGLE_ENABLED = false;
 function applyInvert() {
   if (!INVERT_TOGGLE_ENABLED) {
-    document.body.classList.add('inverted');
+    document.body.classList.remove('inverted');
     return;
   }
   var on = localStorage.getItem('zg-invert') === '1';
