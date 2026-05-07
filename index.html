@@ -599,6 +599,12 @@ body.team-view,
 body.kontakt-view { background: var(--bg); }
 /* Kontakt-View: Kontakt-Sektion bekommt Hero-ähnlichen Top-Abstand */
 body.kontakt-view .contact-section { padding-top: 14vh; }
+/* Kontakt-View: Footer weiter nach unten, damit er sich nicht mit der
+   Unterkante der vertikalen Wortmarke (rechts) überschneidet. Vertikales
+   Logo endet bei clamp(40px, 6vh, 80px) über Section-Unterkante; mit
+   diesem zusätzlichen margin-top auf dem Footer entsteht ein klar
+   sichtbarer Abstand zwischen Logo-Ende und Footer-Oberkante. */
+body.kontakt-view footer { margin-top: clamp(60px, 8vh, 120px); }
 /* Adresse: nur auf Kontakt-View sichtbar */
 .contact-address { display: none; font-style: normal; }
 body.kontakt-view .contact-address {
