@@ -610,11 +610,37 @@ body.kontakt-view .contact-section { padding-top: 14vh; }
    So ist beim Scrollen ans Seitenende garantiert, dass das Logo sicher
    über dem Footer steht — unabhängig von der Fenstergröße. */
 body.kontakt-view footer { margin-top: calc(100vh - 80px); }
-/* Kontakt-View: Abstand zwischen Headline-Box und E-Mail-Button */
-body.kontakt-view .kontakt-headline-box { margin-bottom: 48px; }
+/* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
+body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
    die Headline ist jetzt selbst eindeutig genug. */
 body.kontakt-view .contact-label { display: none; }
+/* Kontakt-View: Intro-Absatz über der E-Mail-Box und "oder an:"-Verbinder
+   zwischen E-Mail-Box und Adresse. Beide gleicher Stil — Fließtext-Größe. */
+.kontakt-intro,
+.kontakt-oran { display: none; }
+body.kontakt-view .kontakt-intro {
+  display: block;
+  max-width: 720px;
+  margin: 0 0 24px;
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+body.kontakt-view .kontakt-oran {
+  display: block;
+  margin: 24px 0 16px;
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+/* Adresse rückt direkt an "oder an:" — eigener margin-top der Adresse
+   würde sonst doppelten Abstand erzeugen. */
+body.kontakt-view .kontakt-oran + .contact-address { margin-top: 0; }
 /* Adresse: nur auf Kontakt-View sichtbar */
 .contact-address { display: none; font-style: normal; }
 body.kontakt-view .contact-address {
@@ -1050,7 +1076,9 @@ body.inverted .contact-section { background: transparent; }
 body.inverted .contact-headline,
 body.inverted .contact-text,
 body.inverted .contact-address,
-body.inverted .contact-label { color: #fff; }
+body.inverted .contact-label,
+body.inverted .kontakt-intro,
+body.inverted .kontakt-oran { color: #fff; }
 body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
 
 /* .below-Container (Kontakt + Footer) — von off-white auf transparent */
@@ -1171,7 +1199,9 @@ body.inverted.kontakt-view { background: var(--vermil); }
     <div class="kontakt-headline-box">
       <h1 class="kontakt-headline" id="kontakt-headline" data-de="Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em>" data-en="Want to learn more?<br><em>Write to us.</em>">Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em></h1>
     </div>
+    <p class="kontakt-intro" id="kontakt-intro" data-de="Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:" data-en="Want to support us with expertise and ideas? Or get in touch? Write to:">Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:</p>
     <a class="contact-email" id="email-main" href="#">kontakt@zentrumgrundrechte.de</a>
+    <p class="kontakt-oran" id="kontakt-oran" data-de="oder an:" data-en="or to:">oder an:</p>
     <address class="contact-address" id="contact-address">
       Zentrum Grundrechte e.V.<br>
       Hauptstraße 2b<br>
@@ -1352,7 +1382,7 @@ function toggleLang() {
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
-   'kontakt-headline'].forEach(function(id) {
+   'kontakt-headline','kontakt-intro','kontakt-oran'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
