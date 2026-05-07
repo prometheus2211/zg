@@ -685,12 +685,17 @@ body.kontakt-view .press-block {
   max-width: 720px;
 }
 body.kontakt-view .press-label {
-  font-size: 9px;
+  display: inline-block;
+  font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-transform: none;
   color: var(--vermil);
-  margin: 0 0 14px;
+  background: transparent;
+  border: 1.5px solid var(--vermil);
+  padding: 0.10em 0.45em;
+  margin: 0 0 24px;
 }
 body.kontakt-view .press-contact {
   margin: 0;
@@ -1136,7 +1141,7 @@ body.inverted .contact-label,
 body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
-body.inverted .press-label { color: rgba(255,255,255,0.75); }
+body.inverted .press-label { color: #fff; border-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
