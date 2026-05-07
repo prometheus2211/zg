@@ -692,9 +692,8 @@ body.kontakt-view .contact-address {
   color: var(--mid);
   margin-bottom: 20px;
 }
-/* E-Mail-Box im Stil der CTA-Buttons (Newsletter / Mitmachen / Fragen?):
-   eckig statt abgerundet, em-basiertes Padding, Vermil-Border, Hover
-   wechselt auf hellen Hintergrund mit Vermil-Schrift. */
+/* E-Mail-Box im Stil der CTA-Buttons, aber invertiert: transparente Box
+   mit Vermil-Border und Vermil-Schrift; Hover füllt Vermil + weisse Schrift. */
 .contact-email {
   display: inline-block;
   font-family: inherit;
@@ -702,15 +701,15 @@ body.kontakt-view .contact-address {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: #fff;
+  color: var(--vermil);
   text-decoration: none;
   padding: 0.10em 0.45em;
-  background: var(--vermil);
+  background: transparent;
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.contact-email:hover { background: var(--bg); color: var(--vermil); }
+.contact-email:hover { background: var(--vermil); color: #fff; }
 
 /* ══════════════════════════════════════
    FOOTER
@@ -1102,16 +1101,16 @@ body.inverted .below { background: transparent; }
 body.inverted .mission-section,
 body.inverted .team-section { background: transparent; }
 
-/* Kontakt-Email auf Vermil-BG: weisse Box mit Vermil-Schrift, Hover
-   dreht auf transparent + weisse Schrift (analog CTA-Buttons im Inverted). */
+/* Kontakt-Email auf Vermil-BG: transparente Box mit weisser Schrift &
+   weissem Border, Hover dreht auf weisse Box mit Vermil-Schrift. */
 body.inverted .contact-email {
-  background: #fff;
-  color: var(--vermil);
+  background: transparent;
+  color: #fff;
   border-color: #fff;
 }
 body.inverted .contact-email:hover {
-  background: transparent;
-  color: #fff;
+  background: #fff;
+  color: var(--vermil);
 }
 
 /* Mission/Team/Kontakt-View Body-BG-Override */
