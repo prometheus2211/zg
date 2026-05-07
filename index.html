@@ -668,6 +668,39 @@ body.kontakt-view .contact-address {
   color: var(--black);
 }
 
+/* Pressekontakt-Block: nur auf Kontakt-View sichtbar, kompakter als der
+   Hauptkontakt — schwarze Schrift mit Eyebrow-Label, Mail unterstrichen. */
+.press-block { display: none; }
+body.kontakt-view .press-block {
+  display: block;
+  margin-top: 64px;
+  max-width: 720px;
+}
+body.kontakt-view .press-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin: 0 0 14px;
+}
+body.kontakt-view .press-contact {
+  margin: 0;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--black);
+}
+body.kontakt-view .press-contact a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid var(--vermil);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+body.kontakt-view .press-contact a:hover { color: var(--vermil); }
+
 /* ══════════════════════════════════════
    BELOW — solid bg only from contact down
 ══════════════════════════════════════ */
@@ -1092,7 +1125,14 @@ body.inverted .contact-text,
 body.inverted .contact-address,
 body.inverted .contact-label,
 body.inverted .kontakt-intro,
-body.inverted .kontakt-oran { color: #fff; }
+body.inverted .kontakt-oran,
+body.inverted .press-contact { color: #fff; }
+body.inverted .press-label { color: rgba(255,255,255,0.75); }
+body.inverted .press-contact a {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+body.inverted .press-contact a:hover { color: rgba(255,255,255,0.85); }
 body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
 
 /* .below-Container (Kontakt + Footer) — von off-white auf transparent */
@@ -1223,6 +1263,16 @@ body.inverted.kontakt-view { background: var(--vermil); }
       Hauptstraße 2b<br>
       13158 Berlin
     </address>
+    <div class="press-block">
+      <p class="press-label" id="press-label" data-de="Pressekontakt" data-en="Press contact">Pressekontakt</p>
+      <address class="press-contact">
+        Josef Städter<br>
+        Vorsitzender, Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b<br>
+        13158 Berlin<br>
+        <a href="mailto:staedter@zentrumgrundrechte.de">staedter@zentrumgrundrechte.de</a>
+      </address>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -1398,7 +1448,7 @@ function toggleLang() {
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
-   'kontakt-headline','kontakt-intro','kontakt-oran'].forEach(function(id) {
+   'kontakt-headline','kontakt-intro','kontakt-oran','press-label'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
