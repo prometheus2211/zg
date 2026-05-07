@@ -1074,7 +1074,12 @@ body.inverted.kontakt-view { background: var(--vermil); }
     <a class="nav-kontakt" id="nav-kontakt" href="#kontakt" data-de="Kontakt" data-en="Contact">Kontakt</a>
     <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
-    <button class="lang-toggle invert-toggle" id="invert-toggle" onclick="toggleInvert()" aria-label="Farbschema invertieren" title="Farbschema invertieren">◐</button>
+    <!-- Invert-Toggle (A/B-Vergleich Light/Vermillion-Theme).
+         Vorerst deaktiviert. Zum Reaktivieren: diesen HTML-Block einkommen-
+         tieren UND in der JS-Sektion das Feature-Flag INVERT_TOGGLE_ENABLED
+         auf true setzen. CSS-Regeln (.invert-toggle, body.inverted *) und
+         JS-Funktionen (toggleInvert / applyInvert) bleiben unverändert. -->
+    <!-- <button class="lang-toggle invert-toggle" id="invert-toggle" onclick="toggleInvert()" aria-label="Farbschema invertieren" title="Farbschema invertieren">◐</button> -->
   </div>
 </nav>
 
@@ -1288,12 +1293,24 @@ setTimeout(scheduleAlignBg, 750);
   });
 })();
 
-/* ── Inverted-Modus Toggle (A/B-Vergleich) ── */
+/* ── Inverted-Modus Toggle (A/B-Vergleich) ──
+   Feature-Flag steuert, ob der Invert-Modus überhaupt zur Verfügung steht.
+   Auf false ignoriert die Seite den localStorage-Eintrag (also auch bei
+   Besuchern, die den Toggle früher mal aktiviert hatten) und das Theme
+   bleibt im Light-Default. Zum Reaktivieren: Flag auf true setzen UND
+   das Toggle-Button-HTML in der Nav einkommentieren. CSS und Funktionen
+   bleiben unverändert in Place. */
+var INVERT_TOGGLE_ENABLED = false;
 function applyInvert() {
+  if (!INVERT_TOGGLE_ENABLED) {
+    document.body.classList.remove('inverted');
+    return;
+  }
   var on = localStorage.getItem('zg-invert') === '1';
   document.body.classList.toggle('inverted', on);
 }
 function toggleInvert() {
+  if (!INVERT_TOGGLE_ENABLED) return;
   var next = localStorage.getItem('zg-invert') === '1' ? '0' : '1';
   localStorage.setItem('zg-invert', next);
   applyInvert();
