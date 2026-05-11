@@ -633,6 +633,21 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   letter-spacing: -0.01em;
   color: var(--black);
 }
+/* Foerder-Label: weisse Box mit Vermil-Border + Vermil-Schrift, analog
+   zu den Kontaktseiten-Labels (Adresse / Pressekontakt / Vereinsregister). */
+.foerder-label { display: none; }
+body.unterstuetzen-view .foerder-label {
+  display: inline-block;
+  margin: 56px 0 0;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--vermil);
+  background: transparent;
+  border: 1.5px solid var(--vermil);
+  padding: 0.10em 0.45em;
+}
 /* Foerdermitgliedschafts-Absatz: gleiche Typografie wie der Body, nur
    ohne Drop-Cap und mit etwas geringerem Abstand nach oben. */
 .unterstuetzen-foerder {
@@ -644,6 +659,9 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   letter-spacing: -0.01em;
   color: var(--black);
 }
+/* Wenn das Label direkt davor sitzt: Abstand auf den klassischen
+   Label-Content-Gap (24px) reduzieren. */
+body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder { margin-top: 24px; }
 /* CTA-Button "Foerdermitglied werden" — Stil wie .spenden-link
    (vermil-gefuellt, weisse Schrift, Hover invertiert). */
 .foerder-link {
@@ -1266,7 +1284,8 @@ body.inverted .contact-label,
 body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
-body.inverted .press-label { color: var(--vermil); background: #fff; border-color: #fff; }
+body.inverted .press-label,
+body.inverted .foerder-label { color: var(--vermil); background: #fff; border-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
@@ -1396,6 +1415,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
       <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen für Grundrech-<br>te. <em>Sie machen es möglich.</em>" data-en="We litigate for fundamental<br>rights. <em>You make it possible.</em>">Wir klagen für Grundrech-<br>te. <em>Sie machen es möglich.</em></h1>
     </div>
     <p class="unterstuetzen-body" id="unterstuetzen-body" data-de="Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise." data-en="Fundamental rights matter for every one of us. That is why we stand up for them. In doing so, we accept no government funding whatsoever. That is why we welcome your support — financial, through your ideas, or through your expertise.">Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise.</p>
+    <p class="foerder-label" id="foerder-label" data-de="Fördermitgliedschaft" data-en="Supporting membership">Fördermitgliedschaft</p>
     <p class="unterstuetzen-foerder" id="unterstuetzen-foerder" data-de="Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert." data-en="A supporting membership backs our work for the long term — from 100 euros a year onwards. Amounts above the minimum qualify as tax-deductible donations and are confirmed with a receipt.">Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert.</p>
     <a class="foerder-link" id="foerder-link" href="#" data-de="Fördermitglied werden<svg class=&quot;foerder-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Become a member<svg class=&quot;foerder-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Fördermitglied werden<svg class="foerder-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
@@ -1620,7 +1640,7 @@ function toggleLang() {
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
    'kontakt-headline','kontakt-intro','address-label','press-label','register-label',
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
-   'unterstuetzen-headline','unterstuetzen-body','unterstuetzen-foerder','foerder-link'].forEach(function(id) {
+   'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
