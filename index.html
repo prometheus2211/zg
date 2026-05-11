@@ -668,6 +668,11 @@ body.kontakt-view .contact-section { padding-top: 14vh; }
    inhaltsärmeren Viewports für genug Hoehe; bei vollem Inhalt wächst die
    Section über 100vh hinaus und der Footer rutscht entsprechend mit. */
 body.kontakt-view footer { margin-top: 0; }
+/* Unterstützen-View: Section ist noch leer (nur Headline-Box). Damit das
+   vertikale Logo (absolute innerhalb der Section, bis kurz vor Section-
+   Unterkante) den Footer nicht visuell streift, schieben wir den Footer
+   um eine Viewport-Höhe nach unten — analog zum frueheren Kontakt-Fix. */
+body.unterstuetzen-view footer { margin-top: calc(100vh - 80px); }
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
