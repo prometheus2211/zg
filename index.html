@@ -1807,9 +1807,13 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   function update() {
     var hash = window.location.hash;
 
-    if (hash === '#mission' || hash === '#team') {
-      var sec = document.querySelector(hash === '#mission' ? '.mission-section' : '.team-section');
-      var box = sec ? sec.querySelector('.mission-headline-box, .team-headline-box') : null;
+    if (hash === '#mission' || hash === '#team' || hash === '#unterstuetzen') {
+      var secSel;
+      if (hash === '#mission') secSel = '.mission-section';
+      else if (hash === '#team') secSel = '.team-section';
+      else secSel = '.unterstuetzen-section';
+      var sec = document.querySelector(secSel);
+      var box = sec ? sec.querySelector('.mission-headline-box, .team-headline-box, .unterstuetzen-headline-box') : null;
       var ebr = sec ? sec.querySelector('.eyebrow') : null;
       if (!box) {
         if (wm) wm.classList.remove('is-hidden');
