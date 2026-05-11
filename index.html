@@ -1807,13 +1807,9 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   function update() {
     var hash = window.location.hash;
 
-    if (hash === '#mission' || hash === '#team' || hash === '#unterstuetzen') {
-      var secSel;
-      if (hash === '#mission') secSel = '.mission-section';
-      else if (hash === '#team') secSel = '.team-section';
-      else secSel = '.unterstuetzen-section';
-      var sec = document.querySelector(secSel);
-      var box = sec ? sec.querySelector('.mission-headline-box, .team-headline-box, .unterstuetzen-headline-box') : null;
+    if (hash === '#mission' || hash === '#team') {
+      var sec = document.querySelector(hash === '#mission' ? '.mission-section' : '.team-section');
+      var box = sec ? sec.querySelector('.mission-headline-box, .team-headline-box') : null;
       var ebr = sec ? sec.querySelector('.eyebrow') : null;
       if (!box) {
         if (wm) wm.classList.remove('is-hidden');
@@ -1844,17 +1840,18 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
       return;
     }
 
-    if (hash === '#kontakt') {
+    if (hash === '#kontakt' || hash === '#unterstuetzen') {
       /* Einfacher Scroll-Threshold: Wortmarke und Nav sind bei scroll=0
          immer sichtbar; sobald der Nutzer ein paar Pixel nach unten
-         scrollt (KONTAKT_SCROLL_THRESHOLD), wird beides ausgeblendet.
-         Verhindert, dass die graue "Kontakt"-Label-Zeile und das
-         vertikale Logo am rechten Rand in den Header-Bereich rutschen.
-         Zahl bei Bedarf anpassen — kleiner = früher faden. */
-      var KONTAKT_SCROLL_THRESHOLD = 24;
-      var hideOnKontakt = window.scrollY > KONTAKT_SCROLL_THRESHOLD;
-      if (wm) wm.classList.toggle('is-hidden', hideOnKontakt);
-      if (nav) nav.classList.toggle('is-hidden', hideOnKontakt);
+         scrollt (SCROLL_THRESHOLD), wird beides ausgeblendet.
+         Verhindert, dass die graue Label-Zeile und das vertikale Logo
+         am rechten Rand in den Header-Bereich rutschen bzw. das Ribbon
+         in das vertikale Logo hineinhängt. Zahl bei Bedarf anpassen —
+         kleiner = früher faden. */
+      var SCROLL_THRESHOLD = 24;
+      var hideOnView = window.scrollY > SCROLL_THRESHOLD;
+      if (wm) wm.classList.toggle('is-hidden', hideOnView);
+      if (nav) nav.classList.toggle('is-hidden', hideOnView);
       return;
     }
 
