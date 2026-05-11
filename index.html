@@ -511,11 +511,12 @@ body {
 .contact-email:hover .contact-arrow { transform: translateX(3px); }
 
 /* ══════════════════════════════════════
-   MISSION + TEAM VIEW
-   Beide Sektionen teilen sich das Layout, daher Mehrfach-Selektoren.
+   MISSION + TEAM + UNTERSTÜTZEN VIEW
+   Drei Sektionen teilen sich das Layout, daher Mehrfach-Selektoren.
 ══════════════════════════════════════ */
 .mission-section,
-.team-section {
+.team-section,
+.unterstuetzen-section {
   display: none;
   position: relative;
   /* kein z-index → keine eigene stacking context. Damit kann die
@@ -530,7 +531,8 @@ body {
    Kontakt-Sektion selbst wird daher in beiden Views ausgeblendet — sie
    ist über den dedizierten #kontakt-Tab im Ribbon erreichbar. */
 body.mission-view .contact-section,
-body.team-view .contact-section { display: none; }
+body.team-view .contact-section,
+body.unterstuetzen-view .contact-section { display: none; }
 /* Mission und Team: Drei Buttons bleiben in einer Reihe (nowrap), und der
    Container schrumpft passgenau auf die Button-Reihen-Breite. Body und Intro
    werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
@@ -555,10 +557,12 @@ body.team-view .team-body { max-width: 720px; }
   }
 }
 .mission-content,
-.team-content { max-width: 1300px; }
+.team-content,
+.unterstuetzen-content { max-width: 1300px; }
 .mission-headline-box,
 .team-headline-box,
-.kontakt-headline-box {
+.kontakt-headline-box,
+.unterstuetzen-headline-box {
   display: inline-block;
   position: relative;
   /* muss > Wortmarke (z 5) sein, damit das Logo niemals vor der Textbox
@@ -577,7 +581,8 @@ body.team-view .team-body { max-width: 720px; }
 }
 .mission-headline,
 .team-headline,
-.kontakt-headline {
+.kontakt-headline,
+.unterstuetzen-headline {
   font-size: clamp(40px, 6vw, 88px);
   font-weight: 900;
   color: #fff;
@@ -586,7 +591,8 @@ body.team-view .team-body { max-width: 720px; }
 }
 .mission-headline em,
 .team-headline em,
-.kontakt-headline em {
+.kontakt-headline em,
+.unterstuetzen-headline em {
   font-style: normal;
   color: #fff;
   border-bottom: 5px solid #fff;
@@ -631,19 +637,29 @@ body.team-view .team-body { max-width: 720px; }
 body.mission-view .bg-text,
 body.mission-view .hero,
 body.mission-view .satz-section,
+body.mission-view .unterstuetzen-section,
 body.team-view .bg-text,
 body.team-view .hero,
 body.team-view .satz-section,
+body.team-view .unterstuetzen-section,
 body.kontakt-view .bg-text,
 body.kontakt-view .hero,
 body.kontakt-view .satz-section,
 body.kontakt-view .mission-section,
-body.kontakt-view .team-section { display: none; }
+body.kontakt-view .team-section,
+body.kontakt-view .unterstuetzen-section,
+body.unterstuetzen-view .bg-text,
+body.unterstuetzen-view .hero,
+body.unterstuetzen-view .satz-section,
+body.unterstuetzen-view .mission-section,
+body.unterstuetzen-view .team-section { display: none; }
 body.mission-view .mission-section { display: block; }
 body.team-view .team-section { display: block; }
+body.unterstuetzen-view .unterstuetzen-section { display: block; }
 body.mission-view,
 body.team-view,
-body.kontakt-view { background: var(--bg); }
+body.kontakt-view,
+body.unterstuetzen-view { background: var(--bg); }
 /* Kontakt-View: Kontakt-Sektion bekommt Hero-ähnlichen Top-Abstand */
 body.kontakt-view .contact-section { padding-top: 14vh; }
 /* Kontakt-View: Footer schließt direkt nach den Inhalten der Section ab
@@ -964,10 +980,12 @@ footer {
   /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
   .satz-section { padding: clamp(40px, 8vh, 96px) 48px clamp(40px, 8vh, 96px); }
   .mission-section,
-  .team-section { padding: 12vh 48px 12px; }
+  .team-section,
+  .unterstuetzen-section { padding: 12vh 48px 12px; }
   .mission-headline-box,
   .team-headline-box,
-  .kontakt-headline-box { padding: 24px 32px 28px; }
+  .kontakt-headline-box,
+  .unterstuetzen-headline-box { padding: 24px 32px 28px; }
   .contact-section { padding: 48px 48px 64px; }
   footer { padding: 24px 48px; }
 }
@@ -995,10 +1013,12 @@ footer {
   .team-section { padding: 10vh 24px 8px; }
   .mission-headline-box,
   .team-headline-box,
-  .kontakt-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
+  .kontakt-headline-box,
+  .unterstuetzen-headline-box { padding: 18px 20px 22px; border-radius: 4px; }
   .mission-headline,
   .team-headline,
-  .kontakt-headline { font-size: clamp(34px, 9vw, 56px); }
+  .kontakt-headline,
+  .unterstuetzen-headline { font-size: clamp(34px, 9vw, 56px); }
   .mission-body,
   .team-body { margin-top: 40px; font-size: 16px; }
   .contact-section { padding: 44px 24px 60px; }
@@ -1071,7 +1091,7 @@ footer {
 }
 .nav-cta:hover { background: var(--black); }
 /* Kontakt-Sektion: nur auf Mission/Team sichtbar, auf Home ausgeblendet */
-body:not(.mission-view):not(.team-view):not(.kontakt-view) .contact-section { display: none; }
+body:not(.mission-view):not(.team-view):not(.kontakt-view):not(.unterstuetzen-view) .contact-section { display: none; }
 
 /* mobile adjustments */
 @media (max-width: 640px) {
@@ -1114,18 +1134,21 @@ body.inverted .invert-toggle { color: #fff; }
 body.inverted .headline-box,
 body.inverted .mission-headline-box,
 body.inverted .team-headline-box,
-body.inverted .kontakt-headline-box {
+body.inverted .kontakt-headline-box,
+body.inverted .unterstuetzen-headline-box {
   background: #fff;
   border: none;
 }
 body.inverted .headline,
 body.inverted .mission-headline,
 body.inverted .team-headline,
-body.inverted .kontakt-headline { color: var(--vermil); }
+body.inverted .kontakt-headline,
+body.inverted .unterstuetzen-headline { color: var(--vermil); }
 body.inverted .headline em,
 body.inverted .mission-headline em,
 body.inverted .team-headline em,
-body.inverted .kontakt-headline em {
+body.inverted .kontakt-headline em,
+body.inverted .unterstuetzen-headline em {
   color: var(--vermil);
   border-bottom-color: var(--vermil);
 }
@@ -1185,9 +1208,10 @@ body.inverted .contact-text a { color: #fff; border-bottom-color: #fff; }
 /* .below-Container (Kontakt + Footer) — von off-white auf transparent */
 body.inverted .below { background: transparent; }
 
-/* Mission-/Team-Sektion: eigener off-white BG → transparent */
+/* Mission-/Team-/Unterstützen-Sektion: eigener off-white BG → transparent */
 body.inverted .mission-section,
-body.inverted .team-section { background: transparent; }
+body.inverted .team-section,
+body.inverted .unterstuetzen-section { background: transparent; }
 
 /* Kontakt-Email auf Vermil-BG: transparente Box mit weisser Schrift &
    weissem Border, Hover dreht auf weisse Box mit Vermil-Schrift. */
@@ -1204,7 +1228,8 @@ body.inverted .contact-email:hover {
 /* Mission/Team/Kontakt-View Body-BG-Override */
 body.inverted.mission-view,
 body.inverted.team-view,
-body.inverted.kontakt-view { background: var(--vermil); }
+body.inverted.kontakt-view,
+body.inverted.unterstuetzen-view { background: var(--vermil); }
 
 /* Footer bleibt dunkel — bewährt als Erdgegenpol zum roten Page-BG */
 </style>
@@ -1225,7 +1250,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
       <a href="#" id="nav-team" data-de="Team" data-en="Team">Team</a>
     </div>
     <a class="nav-kontakt" id="nav-kontakt" href="#kontakt" data-de="Kontakt" data-en="Contact">Kontakt</a>
-    <a href="#" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
+    <a href="#unterstuetzen" class="nav-cta" id="nav-unterstuetzen" data-de="Unterstützen" data-en="Support">Unterstützen</a>
     <button class="lang-toggle" id="lang-toggle" onclick="toggleLang()">EN</button>
     <!-- Invert-Toggle (A/B-Vergleich Light/Vermillion-Theme).
          Vorerst deaktiviert. Zum Reaktivieren: diesen HTML-Block einkommen-
@@ -1292,6 +1317,16 @@ body.inverted.kontakt-view { background: var(--vermil); }
   </div>
 </section>
 
+<!-- ══ UNTERSTÜTZEN (sichtbar nur in unterstuetzen view) ══ -->
+<section class="unterstuetzen-section" id="unterstuetzen">
+  <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
+  <div class="unterstuetzen-content">
+    <div class="unterstuetzen-headline-box">
+      <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em>" data-en="We litigate for fundamental rights.<br><em>You make it possible.</em>">Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em></h1>
+    </div>
+  </div>
+</section>
+
 <!-- ══ BELOW — solid bg from contact down ══ -->
 <div class="below">
 
@@ -1329,7 +1364,7 @@ body.inverted.kontakt-view { background: var(--vermil); }
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="kontakt-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="kontakt-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="spenden-link" id="kontakt-spenden-link" href="#" data-de="Spenden<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Donate<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Spenden<svg class="spenden-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="spenden-link" id="kontakt-spenden-link" href="#unterstuetzen" data-de="Spenden<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Donate<svg class=&quot;spenden-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Spenden<svg class="spenden-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </section>
 
@@ -1507,7 +1542,8 @@ function toggleLang() {
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
    'kontakt-headline','kontakt-intro','press-label','register-label',
-   'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link'].forEach(function(id) {
+   'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
+   'unterstuetzen-headline'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
@@ -1531,10 +1567,10 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team, Kontakt) via Hash ── */
+/* ── View-Routing: Hauptseite ↔ Sektionen (Mission, Team, Kontakt, Unterstützen) via Hash ── */
 function applyView() {
-  document.body.classList.remove('mission-view', 'team-view', 'kontakt-view');
-  ['nav-mission', 'nav-team', 'nav-kontakt'].forEach(function(id) {
+  document.body.classList.remove('mission-view', 'team-view', 'kontakt-view', 'unterstuetzen-view');
+  ['nav-mission', 'nav-team', 'nav-kontakt', 'nav-unterstuetzen'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.classList.remove('is-active');
   });
@@ -1545,8 +1581,10 @@ function applyView() {
     document.body.classList.add('team-view');
   } else if (hash === '#kontakt') {
     document.body.classList.add('kontakt-view');
+  } else if (hash === '#unterstuetzen') {
+    document.body.classList.add('unterstuetzen-view');
   }
-  var navMap = { '#mission': 'nav-mission', '#team': 'nav-team', '#kontakt': 'nav-kontakt' };
+  var navMap = { '#mission': 'nav-mission', '#team': 'nav-team', '#kontakt': 'nav-kontakt', '#unterstuetzen': 'nav-unterstuetzen' };
   var activeId = navMap[hash];
   if (activeId) {
     var activeEl = document.getElementById(activeId);
@@ -1559,6 +1597,7 @@ function navigate(view) {
   if (view === 'mission') newUrl = '#mission';
   else if (view === 'team') newUrl = '#team';
   else if (view === 'kontakt') newUrl = '#kontakt';
+  else if (view === 'unterstuetzen') newUrl = '#unterstuetzen';
   else newUrl = window.location.pathname;
   history.pushState(null, '', newUrl);
   applyView();
@@ -1577,6 +1616,10 @@ document.getElementById('nav-team').addEventListener('click', function(e) {
 document.getElementById('nav-kontakt').addEventListener('click', function(e) {
   e.preventDefault();
   navigate('kontakt');
+});
+document.getElementById('nav-unterstuetzen').addEventListener('click', function(e) {
+  e.preventDefault();
+  navigate('unterstuetzen');
 });
 /* ── Newsletter: Klick öffnet Modal; Submit zeigt Danke-Box.
    Backend-Anbindung folgt separat (kein Versand bisher). ── */
@@ -1608,6 +1651,11 @@ document.addEventListener('click', function(e) {
   if (e.target.closest('.fragen-link')) {
     e.preventDefault();
     navigate('kontakt');
+    return;
+  }
+  if (e.target.closest('.mitmachen-link') || e.target.closest('.spenden-link')) {
+    e.preventDefault();
+    navigate('unterstuetzen');
     return;
   }
 });
