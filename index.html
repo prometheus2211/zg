@@ -687,6 +687,10 @@ body.kontakt-view footer { margin-top: 0; }
    Unterkante) den Footer nicht visuell streift, schieben wir den Footer
    um eine Viewport-Höhe nach unten — analog zum frueheren Kontakt-Fix. */
 body.unterstuetzen-view footer { margin-top: calc(100vh - 80px); }
+/* Unterstützen-Headline-Box: ohne Mindestbreite — der Slogan ist mit
+   Bindestrich-Umbruch in "Grundrech-/te." schmaler als Mission/Team,
+   die Box soll sich entsprechend auf den Inhalt zusammenziehen. */
+body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
@@ -1345,7 +1349,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   <a class="vertical-wordmark" href="/" aria-label="Zentrum Grundrechte — Startseite"><span class="vertical-wordmark-inner">Zentrum <span class="mark">Grundrechte</span></span></a>
   <div class="unterstuetzen-content">
     <div class="unterstuetzen-headline-box">
-      <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em>" data-en="We litigate for fundamental rights.<br><em>You make it possible.</em>">Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em></h1>
+      <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen für Grundrech-<br>te. <em>Sie machen es möglich.</em>" data-en="We litigate for fundamental<br>rights. <em>You make it possible.</em>">Wir klagen für Grundrech-<br>te. <em>Sie machen es möglich.</em></h1>
     </div>
     <p class="unterstuetzen-body" id="unterstuetzen-body" data-de="Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise." data-en="Fundamental rights matter for every one of us. That is why we stand up for them. In doing so, we accept no government funding whatsoever. That is why we welcome your support — financial, through your ideas, or through your expertise.">Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise.</p>
   </div>
