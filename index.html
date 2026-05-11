@@ -633,20 +633,21 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   letter-spacing: -0.01em;
   color: var(--black);
 }
-/* Foerder-Label: weisse Box mit Vermil-Border + Vermil-Schrift, analog
-   zu den Kontaktseiten-Labels (Adresse / Pressekontakt / Vereinsregister). */
+/* Foerder-Label: fetter schwarzer Text mit Vermil-Unterstrich — bewusst
+   ohne Box-Rahmen, sodass die Ueberschrift eher als typografischer
+   Akzent denn als Button-Element wirkt. */
 .foerder-label { display: none; }
 body.unterstuetzen-view .foerder-label {
   display: inline-block;
   margin: 56px 0 0;
   font-size: clamp(22px, 2.8vw, 36px);
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: var(--vermil);
+  color: var(--black);
   background: transparent;
-  border: 1.5px solid var(--vermil);
-  padding: 0.10em 0.45em;
+  border-bottom: 5px solid var(--vermil);
+  padding: 0 0 4px;
 }
 /* Foerdermitgliedschafts-Absatz: gleiche Typografie wie der Body, nur
    ohne Drop-Cap und mit etwas geringerem Abstand nach oben. */
@@ -1284,8 +1285,8 @@ body.inverted .contact-label,
 body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
-body.inverted .press-label,
-body.inverted .foerder-label { color: var(--vermil); background: #fff; border-color: #fff; }
+body.inverted .press-label { color: var(--vermil); background: #fff; border-color: #fff; }
+body.inverted .foerder-label { color: #fff; border-bottom-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
