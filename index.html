@@ -545,7 +545,8 @@ body.kontakt-view .contact-section .section-cta {
   max-width: 100%;
 }
 body.mission-view .mission-body,
-body.team-view .team-body { max-width: 720px; }
+body.team-view .team-body,
+body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
 @media (max-width: 600px) {
   /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
      keine Buttons über den Bildschirm hinauslaufen. */
@@ -610,7 +611,8 @@ body.team-view .team-body { max-width: 720px; }
   color: var(--black);
 }
 .mission-body,
-.team-body {
+.team-body,
+.unterstuetzen-body {
   margin-top: 28px;
   max-width: 720px;
   font-size: clamp(18px, 1.5vw, 22px);
@@ -621,7 +623,8 @@ body.team-view .team-body { max-width: 720px; }
 }
 /* Drop Cap — editorialer Initial signalisiert Lesetext und bricht die Absatzwand. */
 .mission-body::first-letter,
-.team-body::first-letter {
+.team-body::first-letter,
+.unterstuetzen-body::first-letter {
   float: left;
   font-size: 4em;
   line-height: 1;
@@ -1027,7 +1030,8 @@ footer {
   .kontakt-headline,
   .unterstuetzen-headline { font-size: clamp(34px, 9vw, 56px); }
   .mission-body,
-  .team-body { margin-top: 40px; font-size: 16px; }
+  .team-body,
+  .unterstuetzen-body { margin-top: 40px; font-size: 16px; }
   .contact-section { padding: 44px 24px 60px; }
   .contact-email { font-size: clamp(18px, 5vw, 26px); }
   footer { padding: 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -1187,9 +1191,10 @@ body.inverted .scroll-hint:hover { color: #fff; opacity: 0.7; }
 body.inverted .satz { color: #fff; }
 body.inverted .satz em { color: #fff; }
 
-/* Mission/Team Body & Intro */
+/* Mission/Team/Unterstützen Body & Intro */
 body.inverted .mission-body,
 body.inverted .team-body,
+body.inverted .unterstuetzen-body,
 body.inverted .mission-intro,
 body.inverted .team-intro { color: #fff; }
 
@@ -1331,6 +1336,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     <div class="unterstuetzen-headline-box">
       <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em>" data-en="We litigate for fundamental rights.<br><em>You make it possible.</em>">Wir klagen für Grundrechte.<br><em>Sie machen es möglich.</em></h1>
     </div>
+    <p class="unterstuetzen-body" id="unterstuetzen-body" data-de="Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise." data-en="Fundamental rights matter for every one of us. That is why we stand up for them. In doing so, we accept no government funding whatsoever. That is why we welcome your support — financial, through your ideas, or through your expertise.">Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise.</p>
   </div>
 </section>
 
@@ -1553,7 +1559,7 @@ function toggleLang() {
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
    'kontakt-headline','kontakt-intro','address-label','press-label','register-label',
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
-   'unterstuetzen-headline'].forEach(function(id) {
+   'unterstuetzen-headline','unterstuetzen-body'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
