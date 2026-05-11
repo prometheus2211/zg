@@ -696,15 +696,14 @@ body.kontakt-view .kontakt-oran {
   letter-spacing: -0.01em;
   color: var(--black);
 }
-/* Adresse rückt direkt an "oder an:" — eigener margin-top der Adresse
-   würde sonst doppelten Abstand erzeugen. */
-body.kontakt-view .kontakt-oran + .contact-address { margin-top: 0; }
-/* Adresse: nur auf Kontakt-View sichtbar. Typografie wie der Pressekontakt-
-   Block (kompakter als die E-Mail-Box, fett, schwarz). */
+/* Adresse: nur auf Kontakt-View sichtbar. Sitzt im .press-block.address-
+   block-Container, daher kein eigener margin-top — die press-label oben
+   liefert bereits 24px margin-bottom als Abstand. Typografie wie der
+   Pressekontakt-Block (kompakter als die E-Mail-Box, fett, schwarz). */
 .contact-address { display: none; font-style: normal; }
 body.kontakt-view .contact-address {
   display: block;
-  margin-top: 36px;
+  margin: 0;
   max-width: 720px;
   font-size: clamp(20px, 2.2vw, 28px);
   font-weight: 700;
@@ -1337,13 +1336,15 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     <div class="kontakt-headline-box">
       <h1 class="kontakt-headline" id="kontakt-headline" data-de="Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em>" data-en="Want to learn more?<br><em>Write to us.</em>">Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em></h1>
     </div>
-    <p class="kontakt-intro" id="kontakt-intro" data-de="Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:" data-en="Want to support us with expertise and ideas? Or get in touch? Write to:">Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:</p>
-    <address class="contact-address" id="contact-address">
-      Zentrum Grundrechte e.V.<br>
-      Hauptstraße 2b<br>
-      13158 Berlin<br>
-      <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
-    </address>
+    <div class="press-block address-block">
+      <p class="press-label" id="address-label" data-de="Adresse" data-en="Address">Adresse</p>
+      <address class="contact-address" id="contact-address">
+        Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b<br>
+        13158 Berlin<br>
+        <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
+      </address>
+    </div>
     <div class="press-block">
       <p class="press-label" id="press-label" data-de="Pressekontakt" data-en="Press contact">Pressekontakt</p>
       <address class="press-contact">
@@ -1541,7 +1542,7 @@ function toggleLang() {
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
-   'kontakt-headline','kontakt-intro','press-label','register-label',
+   'kontakt-headline','address-label','press-label','register-label',
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
    'unterstuetzen-headline'].forEach(function(id) {
     var el = document.getElementById(id);
