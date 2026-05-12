@@ -663,8 +663,8 @@ body.unterstuetzen-view .foerder-label {
 /* Wenn das Label direkt davor sitzt: Abstand auf den klassischen
    Label-Content-Gap (24px) reduzieren. */
 body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder { margin-top: 24px; }
-/* CTA-Button "Foerdermitglied werden" — Stil wie .spenden-link
-   (vermil-gefuellt, weisse Schrift, Hover invertiert). */
+/* CTA-Button "Foerdermitglied werden" — invertierter Stil zu den uebrigen
+   CTAs: transparent + Vermil-Border + Vermil-Schrift, Hover fuellt vermil. */
 .foerder-link {
   display: inline-block;
   margin-top: 24px;
@@ -673,15 +673,15 @@ body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder { margin-top: 24
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: #fff;
+  color: var(--vermil);
   text-decoration: none;
   padding: 0.10em 0.45em;
-  background: var(--vermil);
+  background: transparent;
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.foerder-link:hover { background: var(--bg); color: var(--vermil); }
+.foerder-link:hover { background: var(--vermil); color: #fff; }
 .foerder-arrow {
   display: inline-block;
   margin-left: 0.32em;
@@ -1240,13 +1240,12 @@ body.inverted .unterstuetzen-headline em {
   border-bottom-color: var(--vermil);
 }
 
-/* CTA-Buttons (wer-link, newsletter, mitmachen, fragen, spenden, foerder) — weisse Flaeche, Vermil-Schrift */
+/* CTA-Buttons (wer-link, newsletter, mitmachen, fragen, spenden) — weisse Flaeche, Vermil-Schrift */
 body.inverted .wer-link,
 body.inverted .newsletter-link,
 body.inverted .mitmachen-link,
 body.inverted .fragen-link,
-body.inverted .spenden-link,
-body.inverted .foerder-link {
+body.inverted .spenden-link {
   background: #fff;
   border-color: #fff;
   color: var(--vermil);
@@ -1255,10 +1254,21 @@ body.inverted .wer-link:hover,
 body.inverted .newsletter-link:hover,
 body.inverted .mitmachen-link:hover,
 body.inverted .fragen-link:hover,
-body.inverted .spenden-link:hover,
-body.inverted .foerder-link:hover {
+body.inverted .spenden-link:hover {
   background: var(--vermil);
   color: #fff;
+}
+/* Foerder-Link ist im Default-Theme bereits invertiert (transparent +
+   Vermil-Border). Im inverted-Theme spiegelt sich das: transparent +
+   weisser Border + weisse Schrift, Hover fuellt weiss mit Vermil-Schrift. */
+body.inverted .foerder-link {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+body.inverted .foerder-link:hover {
+  background: #fff;
+  color: var(--vermil);
 }
 
 /* Scroll-Hint */
