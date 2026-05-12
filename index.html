@@ -633,22 +633,21 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   letter-spacing: -0.01em;
   color: var(--black);
 }
-/* Foerder-Label: klassisches Eyebrow im Vermil-Akzent — kleine
-   Großbuchstaben mit weitem Letter-Spacing. Macht die Überschrift
-   zu einem typografisch zurückhaltenden Signal statt zu einem
-   gewichtigen Block. */
+/* Foerder-Label: fetter schwarzer Text mit Vermil-Unterstrich — bewusst
+   ohne Box-Rahmen, sodass die Ueberschrift eher als typografischer
+   Akzent denn als Button-Element wirkt. */
 .foerder-label { display: none; }
 body.unterstuetzen-view .foerder-label {
-  display: block;
+  display: inline-block;
   margin: 56px 0 0;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--vermil);
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--black);
   background: transparent;
-  border: none;
-  padding: 0;
+  border-bottom: 5px solid var(--vermil);
+  padding: 0 0 4px;
 }
 /* Foerdermitgliedschafts-Absatz: gleiche Typografie wie der Body, nur
    ohne Drop-Cap und mit etwas geringerem Abstand nach oben. */
@@ -1298,7 +1297,7 @@ body.inverted .kontakt-intro,
 body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
 body.inverted .press-label { color: var(--vermil); background: #fff; border-color: #fff; }
-body.inverted .foerder-label { color: rgba(255,255,255,0.85); }
+body.inverted .foerder-label { color: #fff; border-bottom-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
