@@ -1945,47 +1945,14 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   function update() {
     var hash = window.location.hash;
 
-    if (hash === '#mission' || hash === '#team') {
-      var sec = document.querySelector(hash === '#mission' ? '.mission-section' : '.team-section');
-      var box = sec ? sec.querySelector('.mission-headline-box, .team-headline-box') : null;
-      var ebr = sec ? sec.querySelector('.eyebrow') : null;
-      if (!box) {
-        if (wm) wm.classList.remove('is-hidden');
-        if (nav) nav.classList.remove('is-hidden');
-        return;
-      }
-      var boxRect = box.getBoundingClientRect();
-      /* Wortmarke: ausblenden, sobald das Eyebrow-Label ("Mission" / "Team")
-         oder die Headline-Box auf Höhe der Wortmarke ankommen — und auch
-         danach hidden bleiben, wenn der Header weiter nach oben gescrollt
-         ist. Sonst würden sich "Mission" und "Zentrum Grundrechte" optisch
-         überlagern, oder die Wortmarke würde unterhalb des Header-Blocks
-         wieder auftauchen. */
-      if (wm) {
-        var wmRect = wm.getBoundingClientRect();
-        var ebrRect = ebr ? ebr.getBoundingClientRect() : null;
-        var bandTop = ebrRect ? ebrRect.top : boxRect.top;
-        if (bandTop <= wmRect.bottom) wm.classList.add('is-hidden');
-        else wm.classList.remove('is-hidden');
-      }
-      /* Nav-Ribbon: weiterhin an der Headline-Box (rechts oben, kein
-         Konflikt mit dem links sitzenden Eyebrow). */
-      if (nav) {
-        var navTop = nav.getBoundingClientRect().top;
-        if (navTop >= boxRect.top) nav.classList.add('is-hidden');
-        else nav.classList.remove('is-hidden');
-      }
-      return;
-    }
-
-    if (hash === '#kontakt' || hash === '#unterstuetzen') {
-      /* Einfacher Scroll-Threshold: Wortmarke und Nav sind bei scroll=0
-         immer sichtbar; sobald der Nutzer ein paar Pixel nach unten
-         scrollt (SCROLL_THRESHOLD), wird beides ausgeblendet.
-         Verhindert, dass die graue Label-Zeile und das vertikale Logo
-         am rechten Rand in den Header-Bereich rutschen bzw. das Ribbon
-         in das vertikale Logo hineinhängt. Zahl bei Bedarf anpassen —
-         kleiner = früher faden. */
+    if (hash === '#mission' || hash === '#team' || hash === '#kontakt' || hash === '#unterstuetzen') {
+      /* Einfacher Scroll-Threshold fuer alle Section-Views (Mission, Team,
+         Unterstuetzen, Kontakt): Wortmarke und Nav sind bei scroll=0 immer
+         sichtbar; sobald der Nutzer ein paar Pixel nach unten scrollt
+         (SCROLL_THRESHOLD), wird beides ausgeblendet. Verhindert, dass
+         der Ribbon mit dem vertikalen Logo bzw. der Section-Headline-
+         Box visuell kollidiert. Zahl bei Bedarf anpassen — kleiner =
+         frueher faden. */
       var SCROLL_THRESHOLD = 24;
       var hideOnView = window.scrollY > SCROLL_THRESHOLD;
       if (wm) wm.classList.toggle('is-hidden', hideOnView);
