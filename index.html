@@ -638,9 +638,11 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
    — bewusst ohne Box-Rahmen, sodass die Ueberschrift eher als typografischer
    Akzent denn als Button-Element wirkt. */
 .foerder-label,
-.einmalspende-label { display: none; }
+.einmalspende-label,
+.mitmachen-label { display: none; }
 body.unterstuetzen-view .foerder-label,
-body.unterstuetzen-view .einmalspende-label {
+body.unterstuetzen-view .einmalspende-label,
+body.unterstuetzen-view .mitmachen-label {
   /* display: table = block-level (Label startet auf eigener Zeile, auch wenn
      der vorherige CTA-Link inline-block ist) und schrumpft trotzdem auf die
      Content-Breite (Unterstrich endet sauber am Textende). */
@@ -655,10 +657,12 @@ body.unterstuetzen-view .einmalspende-label {
   border-bottom: 5px solid var(--vermil);
   padding: 0 0 4px;
 }
-/* Foerdermitgliedschafts-/Einmalspende-Absatz: gleiche Typografie wie der
-   Body, nur ohne Drop-Cap und mit etwas geringerem Abstand nach oben. */
+/* Foerdermitgliedschafts-/Einmalspende-/Mitmachen-Absatz: gleiche
+   Typografie wie der Body, nur ohne Drop-Cap und mit etwas geringerem
+   Abstand nach oben. */
 .unterstuetzen-foerder,
-.unterstuetzen-einmalspende {
+.unterstuetzen-einmalspende,
+.unterstuetzen-mitmachen {
   margin-top: 28px;
   max-width: 720px;
   font-size: clamp(20px, 1.7vw, 26px);
@@ -670,7 +674,11 @@ body.unterstuetzen-view .einmalspende-label {
 /* Wenn das Label direkt davor sitzt: Abstand auf den klassischen
    Label-Content-Gap (24px) reduzieren. */
 body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder,
-body.unterstuetzen-view .einmalspende-label + .unterstuetzen-einmalspende { margin-top: 24px; }
+body.unterstuetzen-view .einmalspende-label + .unterstuetzen-einmalspende,
+body.unterstuetzen-view .mitmachen-label + .unterstuetzen-mitmachen { margin-top: 24px; }
+/* E-Mail-Box nach dem Mitmachen-Absatz: gleicher Abstand wie die CTA-
+   Buttons der anderen Bloecke (24px). */
+body.unterstuetzen-view .contact-email { margin-top: 24px; }
 /* CTA-Buttons "Foerdermitglied werden" + "Jetzt spenden" — invertierter
    Stil zu den uebrigen CTAs: transparent + Vermil-Border + Vermil-Schrift,
    Hover fuellt vermil. */
@@ -1314,7 +1322,8 @@ body.inverted .kontakt-oran,
 body.inverted .press-contact { color: #fff; }
 body.inverted .press-label { color: var(--vermil); background: #fff; border-color: #fff; }
 body.inverted .foerder-label,
-body.inverted .einmalspende-label { color: #fff; border-bottom-color: #fff; }
+body.inverted .einmalspende-label,
+body.inverted .mitmachen-label { color: #fff; border-bottom-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
   color: #fff;
@@ -1450,6 +1459,9 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     <p class="einmalspende-label" id="einmalspende-label" data-de="Einmalspende" data-en="One-time donation">Einmalspende</p>
     <p class="unterstuetzen-einmalspende" id="unterstuetzen-einmalspende" data-de="Auch eine einmalige Spende unterstützt unsere Arbeit — in jeder Höhe und ohne Bindung. Jeder Betrag wird mit einer Zuwendungsbestätigung quittiert und ist steuerlich absetzbar." data-en="A one-time donation supports our work as well — at any amount, with no commitment. Every contribution is tax-deductible and confirmed with a donation receipt.">Auch eine einmalige Spende unterstützt unsere Arbeit — in jeder Höhe und ohne Bindung. Jeder Betrag wird mit einer Zuwendungsbestätigung quittiert und ist steuerlich absetzbar.</p>
     <a class="einmalspende-link" id="einmalspende-link" href="#" data-de="Jetzt spenden<svg class=&quot;einmalspende-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Donate now<svg class=&quot;einmalspende-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Jetzt spenden<svg class="einmalspende-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <p class="mitmachen-label" id="mitmachen-label" data-de="Mitmachen" data-en="Get involved">Mitmachen</p>
+    <p class="unterstuetzen-mitmachen" id="unterstuetzen-mitmachen" data-de="Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben. Schreiben Sie uns:" data-en="Want to support our mission through your work? Here you can experience strategic litigation first-hand and have real impact. Write to us:">Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben. Schreiben Sie uns:</p>
+    <a class="contact-email" id="unterstuetzen-email" href="#">kontakt@zentrumgrundrechte.de<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </section>
 
@@ -1630,7 +1642,7 @@ setTimeout(scheduleAlignBg, 750);
 (function() {
   var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
   var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent'].forEach(function(id) {
+  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'unterstuetzen-email'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.href = href;
   });
@@ -1673,7 +1685,8 @@ function toggleLang() {
    'kontakt-headline','kontakt-intro','address-label','press-label','register-label',
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
    'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link',
-   'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link'].forEach(function(id) {
+   'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link',
+   'mitmachen-label','unterstuetzen-mitmachen'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
