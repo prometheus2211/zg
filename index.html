@@ -696,10 +696,12 @@ body.unterstuetzen-view .support-block {
 body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder,
 body.unterstuetzen-view .einmalspende-label + .unterstuetzen-einmalspende,
 body.unterstuetzen-view .mitmachen-label + .unterstuetzen-mitmachen { margin-top: 24px; }
-/* E-Mail-Box nach dem Mitmachen-Absatz: Abstand wie die CTA-Buttons der
-   anderen Bloecke (24px); uebernimmt automatisch den globalen Outline-
-   Stil der .contact-email-Klasse (transparent + Vermil-Border). */
-body.unterstuetzen-view .contact-email { margin-top: 24px; }
+/* E-Mail-Box am Ende der Mitmachen-/Adress-/Pressekontakt-Bloecke: Abstand
+   wie die CTA-Buttons der anderen Bloecke (24px); uebernimmt automatisch
+   den globalen Outline-Stil der .contact-email-Klasse (transparent +
+   Vermil-Border). */
+body.unterstuetzen-view .contact-email,
+body.kontakt-view .contact-email { margin-top: 24px; }
 /* CTA-Buttons "Foerdermitglied werden" + "Jetzt spenden" — invertierter
    Outline-Stil: transparent + Vermil-Border + Vermil-Schrift. Hover
    fuellt vermil mit weisser Schrift. */
@@ -832,10 +834,10 @@ body.kontakt-view .contact-address {
   display: block;
   margin: 0;
   max-width: 720px;
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   color: var(--black);
 }
 body.kontakt-view .contact-address a {
@@ -874,10 +876,10 @@ body.kontakt-view .press-label {
 body.kontakt-view .press-contact {
   margin: 0;
   font-style: normal;
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   color: var(--black);
 }
 body.kontakt-view .press-contact a {
@@ -1509,9 +1511,9 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
       <address class="contact-address" id="contact-address">
         Zentrum Grundrechte e.V.<br>
         Hauptstraße 2b<br>
-        13158 Berlin<br>
-        <a href="mailto:kontakt@zentrumgrundrechte.de">kontakt@zentrumgrundrechte.de</a>
+        13158 Berlin
       </address>
+      <a class="contact-email" id="kontakt-mail-icon" href="#" data-de="Schreiben Sie uns<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Write to us<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Schreiben Sie uns<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <div class="press-block">
       <p class="press-label" id="press-label" data-de="Pressekontakt" data-en="Press contact">Pressekontakt</p>
@@ -1519,9 +1521,9 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         Josef Städter<br>
         Vorsitzender Zentrum Grundrechte e.V.<br>
         Hauptstraße 2b<br>
-        13158 Berlin<br>
-        <a href="mailto:staedter@zentrumgrundrechte.de">staedter@zentrumgrundrechte.de</a>
+        13158 Berlin
       </address>
+      <a class="contact-email" id="presse-mail-icon" href="#" data-de="Ihre Anfrage an uns<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Your inquiry<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Ihre Anfrage an uns<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <div class="press-block register-block">
       <p class="press-label" id="register-label" data-de="Im Vereinsregister" data-en="Association register">Im Vereinsregister</p>
@@ -1668,12 +1670,16 @@ setTimeout(scheduleAlignBg, 750);
 
 /* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
 (function() {
-  var u = 'kontakt', d = 'zentrumgrundrechte' + '.' + 'de';
-  var href = ['mai', 'lto', ':'].join('') + u + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'unterstuetzen-email'].forEach(function(id) {
+  var d = 'zentrumgrundrechte' + '.' + 'de';
+  var mailto = ['mai', 'lto', ':'].join('');
+  var hrefKontakt = mailto + 'kontakt' + '@' + d;
+  var hrefStaedter = mailto + 'staedter' + '@' + d;
+  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'unterstuetzen-email', 'kontakt-mail-icon'].forEach(function(id) {
     var el = document.getElementById(id);
-    if (el) el.href = href;
+    if (el) el.href = hrefKontakt;
   });
+  var presseEl = document.getElementById('presse-mail-icon');
+  if (presseEl) presseEl.href = hrefStaedter;
 })();
 
 /* ── Inverted-Modus Toggle (A/B-Vergleich) ──
@@ -1711,6 +1717,7 @@ function toggleLang() {
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-body','team-newsletter-link','team-mitmachen-link','team-fragen-link',
    'kontakt-headline','kontakt-intro','address-label','press-label','register-label',
+   'kontakt-mail-icon','presse-mail-icon',
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
    'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link',
    'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link',
