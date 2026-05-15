@@ -774,11 +774,11 @@ body.kontakt-view .contact-section { padding-top: 14vh; }
    inhaltsärmeren Viewports für genug Hoehe; bei vollem Inhalt wächst die
    Section über 100vh hinaus und der Footer rutscht entsprechend mit. */
 body.kontakt-view footer { margin-top: 0; }
-/* Unterstützen-View: Section ist noch leer (nur Headline-Box). Damit das
-   vertikale Logo (absolute innerhalb der Section, bis kurz vor Section-
-   Unterkante) den Footer nicht visuell streift, schieben wir den Footer
-   um eine Viewport-Höhe nach unten — analog zum frueheren Kontakt-Fix. */
-body.unterstuetzen-view footer { margin-top: calc(100vh - 80px); }
+/* Unterstützen-View: Footer schließt direkt nach den Inhalten der Section
+   ab (zuletzt die E-Mail-Box des Mitmachen-Blocks). Die Section hat
+   inzwischen ausreichend Inhalt (Body + drei Bloecke) und waechst weit
+   ueber 100vh hinaus — kein zusaetzlicher Footer-Spacer mehr noetig. */
+body.unterstuetzen-view footer { margin-top: 0; }
 /* Unterstützen-Headline-Box: ohne Mindestbreite — der Slogan ist mit
    Bindestrich-Umbruch in "Grundrech-/te." schmaler als Mission/Team,
    die Box soll sich entsprechend auf den Inhalt zusammenziehen. */
