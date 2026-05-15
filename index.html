@@ -125,6 +125,17 @@ body {
   transition: opacity 0.18s ease;
 }
 .vertical-wordmark:hover { opacity: 0.7; }
+/* Auf schmalen Viewports faden Wortmarke + vertical-wordmark frueh aus,
+   damit das vertikale Logo am rechten Rand nicht in die Headline-Box bzw.
+   die roten Bloecke (Kontakt/Unterstuetzen) hineinwaechst. Die bestehende
+   transition: opacity 0.18s sorgt fuer einen weichen Uebergang beim Resize. */
+@media (max-width: 1024px) {
+  body.kontakt-view .vertical-wordmark,
+  body.unterstuetzen-view .vertical-wordmark {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
 .vertical-wordmark-inner {
   display: block;
   position: absolute;
@@ -655,13 +666,13 @@ body.unterstuetzen-view .mitmachen-label {
   color: var(--black);
 }
 /* Support-Block: roter Kasten um Label + Absatz + CTA. Alle drei Bloecke
-   sind gleich breit und linksbuendig. Die Breite ist so gewaehlt, dass
-   die E-Mail-Box im Mitmachen-Block (kontakt@zentrumgrundrechte.de) auch
-   bei groessten Schriftgraden ohne Umbruch in eine Zeile passt. */
+   sind gleich breit und linksbuendig. max-width schrumpft viewportgesteuert,
+   damit die Bloecke auf schmalen Bildschirmen nicht mit dem vertikalen
+   Logo am rechten Rand kollidieren. */
 .support-block { display: none; }
 body.unterstuetzen-view .support-block {
   display: block;
-  max-width: 720px;
+  max-width: min(720px, calc(100vw - 240px));
   margin: 48px 0 0;
   padding: 32px 36px 36px;
   border: 1.5px solid var(--vermil);
@@ -837,12 +848,14 @@ body.kontakt-view .contact-address a {
 body.kontakt-view .contact-address a:hover { color: var(--vermil); }
 
 /* Pressekontakt-/Adress-/Vereinsregister-Block: roter Kasten um Label +
-   Inhalt, analog zu den Support-Bloecken auf der Unterstuetzen-Seite. */
+   Inhalt, analog zu den Support-Bloecken auf der Unterstuetzen-Seite.
+   max-width schrumpft viewportgesteuert, damit der Block auf schmalen
+   Bildschirmen nicht mit dem vertikalen Logo am rechten Rand kollidiert. */
 .press-block { display: none; }
 body.kontakt-view .press-block {
   display: block;
   margin-top: 64px;
-  max-width: 720px;
+  max-width: min(720px, calc(100vw - 240px));
   padding: 32px 36px 36px;
   border: 1.5px solid var(--vermil);
 }
