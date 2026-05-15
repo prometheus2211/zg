@@ -634,22 +634,24 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   letter-spacing: -0.01em;
   color: var(--black);
 }
-/* Foerder-/Einmalspende-/Mitmachen-Label: fett-schwarzer Text ohne Box-
-   Rahmen und ohne Unterstrich — der rote Akzent kommt jetzt vom Kasten
-   um den ganzen Block. */
+/* Foerder-/Einmalspende-/Mitmachen-Label: fetter schwarzer Text mit
+   Vermil-Unterstrich. Bewusst block-level mit display:table, damit der
+   Unterstrich nur unter dem Text endet, nicht ueber die ganze Box-Breite. */
 .foerder-label,
 .einmalspende-label,
 .mitmachen-label { display: none; }
 body.unterstuetzen-view .foerder-label,
 body.unterstuetzen-view .einmalspende-label,
 body.unterstuetzen-view .mitmachen-label {
-  display: block;
+  display: table;
   margin: 0;
   font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--black);
+  border-bottom: 5px solid var(--vermil);
+  padding: 0 0 4px;
 }
 /* Support-Block: roter Kasten um Label + Absatz + CTA. Alle drei Bloecke
    sind gleich breit und linksbuendig. Die Breite ist so gewaehlt, dass
@@ -1336,7 +1338,7 @@ body.inverted .press-label { color: #fff; }
 body.inverted .press-block { border-color: #fff; }
 body.inverted .foerder-label,
 body.inverted .einmalspende-label,
-body.inverted .mitmachen-label { color: #fff; }
+body.inverted .mitmachen-label { color: #fff; border-bottom-color: #fff; }
 body.inverted .support-block { border-color: #fff; }
 body.inverted .press-contact a,
 body.inverted .contact-address a {
