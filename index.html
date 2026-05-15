@@ -683,20 +683,12 @@ body.unterstuetzen-view .foerder-label + .unterstuetzen-foerder,
 body.unterstuetzen-view .einmalspende-label + .unterstuetzen-einmalspende,
 body.unterstuetzen-view .mitmachen-label + .unterstuetzen-mitmachen { margin-top: 24px; }
 /* E-Mail-Box nach dem Mitmachen-Absatz: Abstand wie die CTA-Buttons der
-   anderen Bloecke (24px) und Standard-Vermil-Fill-Stil (statt der zuvor
-   global gesetzten transparenten Outline-Variante). */
-body.unterstuetzen-view .contact-email {
-  margin-top: 24px;
-  color: #fff;
-  background: var(--vermil);
-}
-body.unterstuetzen-view .contact-email:hover {
-  background: var(--bg);
-  color: var(--vermil);
-}
-/* CTA-Buttons "Foerdermitglied werden" + "Jetzt spenden" — Standard-
-   Vermil-Fill-Stil wie die uebrigen CTAs (Newsletter/Mitmachen/Spenden).
-   Hover invertiert auf transparent + Vermil-Schrift. */
+   anderen Bloecke (24px); invertierter Outline-Stil analog zu den
+   anderen Unterstuetzen-CTAs. */
+body.unterstuetzen-view .contact-email { margin-top: 24px; }
+/* CTA-Buttons "Foerdermitglied werden" + "Jetzt spenden" — invertierter
+   Outline-Stil: transparent + Vermil-Border + Vermil-Schrift. Hover
+   fuellt vermil mit weisser Schrift. */
 .foerder-link,
 .einmalspende-link {
   display: inline-block;
@@ -706,16 +698,16 @@ body.unterstuetzen-view .contact-email:hover {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: #fff;
+  color: var(--vermil);
   text-decoration: none;
   padding: 0.10em 0.45em;
-  background: var(--vermil);
+  background: transparent;
   border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
 .foerder-link:hover,
-.einmalspende-link:hover { background: var(--bg); color: var(--vermil); }
+.einmalspende-link:hover { background: var(--vermil); color: #fff; }
 .foerder-arrow,
 .einmalspende-arrow {
   display: inline-block;
@@ -1303,18 +1295,19 @@ body.inverted .spenden-link:hover {
   background: var(--vermil);
   color: #fff;
 }
-/* Foerder-/Einmalspende-Link im inverted-Theme: weiss-gefuellt mit
-   Vermil-Schrift (analog zu den uebrigen Standard-CTAs). */
+/* Foerder-/Einmalspende-Link im inverted-Theme: spiegelbildlicher Outline-
+   Stil — transparent + weisser Border + weisse Schrift, Hover fuellt
+   weiss mit Vermil-Schrift. */
 body.inverted .foerder-link,
 body.inverted .einmalspende-link {
-  background: #fff;
+  background: transparent;
   border-color: #fff;
-  color: var(--vermil);
+  color: #fff;
 }
 body.inverted .foerder-link:hover,
 body.inverted .einmalspende-link:hover {
-  background: var(--vermil);
-  color: #fff;
+  background: #fff;
+  color: var(--vermil);
 }
 
 /* Scroll-Hint */
