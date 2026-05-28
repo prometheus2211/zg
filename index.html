@@ -1927,6 +1927,12 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     return { viewClass: cfg.viewClass, tb: tb, bodies: bodies, blocks: blocks, cta: cta };
   }).filter(Boolean);
   if (!entries.length) return;
+  function setMax(el, px) {
+    /* setProperty mit 'important' — damit das Inline-Styling gegen jede
+       CSS-Regel (egal welcher Spezifitaet) gewinnt. */
+    if (px) el.style.setProperty('max-width', px, 'important');
+    else el.style.removeProperty('max-width');
+  }
   function syncOne(e) {
     /* Nur synchronisieren, wenn die zugehoerige Section gerade sichtbar
        ist. Sonst liefert getBoundingClientRect 0 und wir wuerden alle
@@ -1934,17 +1940,17 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     if (!document.body.classList.contains(e.viewClass)) return;
     /* Wrap-Modus auf schmalen Viewports: Inline-Styles raus, CSS-Fallback. */
     if (window.matchMedia('(max-width: 600px)').matches) {
-      e.bodies.forEach(function(el) { el.style.maxWidth = ''; });
-      e.blocks.forEach(function(el) { el.style.maxWidth = ''; });
-      if (e.cta) e.cta.style.maxWidth = '';
+      e.bodies.forEach(function(el) { setMax(el, ''); });
+      e.blocks.forEach(function(el) { setMax(el, ''); });
+      if (e.cta) setMax(e.cta, '');
       return;
     }
     var w = e.tb.getBoundingClientRect().width;
     if (!w) return;
     var px = Math.ceil(w) + 'px';
-    e.bodies.forEach(function(el) { el.style.maxWidth = px; });
-    e.blocks.forEach(function(el) { el.style.maxWidth = px; });
-    if (e.cta) e.cta.style.maxWidth = px;
+    e.bodies.forEach(function(el) { setMax(el, px); });
+    e.blocks.forEach(function(el) { setMax(el, px); });
+    if (e.cta) setMax(e.cta, px);
   }
   function sync() { entries.forEach(syncOne); }
   window.addEventListener('resize', sync);
