@@ -566,13 +566,11 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
   max-width: min(720px, calc(100vw - 240px));
   justify-content: flex-end;
 }
-/* Mission-/Team-Body bekommen ihre 720px-Fallback-Breite hier — JS misst
-   spaeter die CTA-Reihe und ueberschreibt inline. Unterstuetzen-Body NICHT
-   einschliessen: dessen Basis-Regel (.unterstuetzen-body) liefert bereits
-   die viewport-gesteuerte max-width, die hier sonst von 720px ueberlagert
-   wuerde und die rechtsbuendige CTA-Reihe deplatzieren wuerde. */
-body.mission-view .mission-body,
-body.team-view .team-body { max-width: 720px; }
+/* (Frueherer view-spezifischer 720px-Override fuer .mission-body und
+   .team-body wurde entfernt — die Basis-Regel von .mission-body/.team-body
+   liefert bereits die responsive max-width: min(720px, calc(100vw - 240px)),
+   und das JS ueberschreibt inline auf TB-Breite. Der Override hatte mit
+   seiner hoeheren Spezifitaet die responsive Formel verdraengt.) */
 @media (max-width: 600px) {
   /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
      keine Buttons über den Bildschirm hinauslaufen. */
@@ -859,7 +857,7 @@ body.kontakt-view .kontakt-oran {
 body.kontakt-view .contact-address {
   display: block;
   margin: 0;
-  max-width: 720px;
+  max-width: 100%;
   font-size: clamp(20px, 1.7vw, 26px);
   font-weight: 400;
   line-height: 1.5;
