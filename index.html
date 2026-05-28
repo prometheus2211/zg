@@ -555,15 +555,15 @@ body.unterstuetzen-view .contact-section { display: none; }
    werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
 body.mission-view .mission-section .section-cta,
-body.team-view .team-section .section-cta,
-body.kontakt-view .contact-section .section-cta {
+body.team-view .team-section .section-cta {
   flex-wrap: nowrap;
   width: max-content;
   max-width: 100%;
 }
-/* Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-Breite der Bloecke
-   darueber (per JS gesetzt) und rueckt die drei Icons als Gruppe rechts-
-   buendig zur Boxen-Aussenkante. */
+/* Kontakt + Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-Breite der
+   Bloecke darueber (per JS gesetzt) und rueckt die drei Icons als Gruppe
+   rechtsbuendig zur Boxen-Aussenkante. */
+body.kontakt-view .contact-section .section-cta,
 body.unterstuetzen-view .unterstuetzen-section .section-cta {
   flex-wrap: nowrap;
   width: 100%;
@@ -833,6 +833,8 @@ body.kontakt-view .kontakt-intro {
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: var(--black);
+  text-align: justify;
+  hyphens: auto;
 }
 body.kontakt-view .kontakt-oran {
   display: block;
@@ -1937,6 +1939,43 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     document.fonts.ready.then(sync);
   }
   /* Auch nach Sprachwechsel (innerHTML wird neu geschrieben) neu messen. */
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
+  sync();
+})();
+
+/* ── Kontakt-Layout: Intro + alle Press-Bloecke + CTA-Reihe werden auf
+   exakt die Aussen-Breite der Headline-Box (.kontakt-headline-box) gezogen.
+   Gleiches Konzept wie auf Unterstuetzen — die TB ist der Master fuer die
+   Breite aller Inhalte darunter. ── */
+(function() {
+  var section = document.querySelector('.contact-section');
+  if (!section) return;
+  var tb = section.querySelector('.kontakt-headline-box');
+  var intro = section.querySelector('.kontakt-intro');
+  var blocks = section.querySelectorAll('.press-block');
+  var cta = section.querySelector('.section-cta');
+  if (!tb || (!intro && !blocks.length && !cta)) return;
+  function sync() {
+    if (!document.body.classList.contains('kontakt-view')) return;
+    if (window.matchMedia('(max-width: 600px)').matches) {
+      if (intro) intro.style.maxWidth = '';
+      blocks.forEach(function(b) { b.style.maxWidth = ''; });
+      if (cta) cta.style.maxWidth = '';
+      return;
+    }
+    var w = tb.getBoundingClientRect().width;
+    if (!w) return;
+    var px = Math.ceil(w) + 'px';
+    if (intro) intro.style.maxWidth = px;
+    blocks.forEach(function(b) { b.style.maxWidth = px; });
+    if (cta) cta.style.maxWidth = px;
+  }
+  window.addEventListener('resize', sync);
+  window.addEventListener('hashchange', function() { setTimeout(sync, 0); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sync);
+  }
   var langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
   sync();
