@@ -570,9 +570,13 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
   max-width: min(720px, calc(100vw - 240px));
   justify-content: flex-end;
 }
+/* Mission-/Team-Body bekommen ihre 720px-Fallback-Breite hier — JS misst
+   spaeter die CTA-Reihe und ueberschreibt inline. Unterstuetzen-Body NICHT
+   einschliessen: dessen Basis-Regel (.unterstuetzen-body) liefert bereits
+   die viewport-gesteuerte max-width, die hier sonst von 720px ueberlagert
+   wuerde und die rechtsbuendige CTA-Reihe deplatzieren wuerde. */
 body.mission-view .mission-body,
-body.team-view .team-body,
-body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
+body.team-view .team-body { max-width: 720px; }
 @media (max-width: 600px) {
   /* Auf sehr schmalen Viewports darf die Reihe wieder umbrechen, damit
      keine Buttons über den Bildschirm hinauslaufen. */
