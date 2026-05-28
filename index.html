@@ -637,16 +637,13 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   color: var(--black);
 }
 /* Unterstuetzen-Body uebernimmt die Typografie der Kontakt-Intro
-   (groesser, 400er-Weight, etwas dichtere Zeilen). Aeussere Breite + Innen-
-   Offset (Padding) sind identisch zu den .support-block-Boxen darunter,
-   damit Textspalte und Boxen-Inhalt deckungsgleich fluchten — unabhaengig
-   von der Fenstergroesse. box-sizing: border-box noetig, damit max-width
-   die *Aussen*-Breite festlegt. */
+   (groesser, 400er-Weight, etwas dichtere Zeilen). max-width ist ein CSS-
+   Fallback; JS misst nach dem Layout die Breite der Headline-Box und
+   ueberschreibt max-width inline, sodass Body, Boxen und TB stets gleich
+   breit sind. */
 .unterstuetzen-body {
   margin-top: 32px;
   max-width: min(720px, calc(100vw - 240px));
-  box-sizing: border-box;
-  padding: 0 37.5px;
   font-size: clamp(20px, 1.7vw, 26px);
   font-weight: 400;
   line-height: 1.5;
@@ -1916,6 +1913,43 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     document.fonts.ready.then(sync);
   }
   /* Auch nach Sprachwechsel (innerHTML wird neu geschrieben) neu messen. */
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
+  sync();
+})();
+
+/* ── Unterstuetzen-Layout: Body + alle Support-Bloecke werden auf exakt
+   die Aussen-Breite der Headline-Box (.unterstuetzen-headline-box) gezogen,
+   damit Slogan, Intro-Absatz und die drei roten Bloecke ueber alle Viewports
+   identisch breit sind. JS misst nach dem Layout (und nach Font-Load /
+   Sprachwechsel) die TB-Breite und schreibt sie inline auf die anderen
+   Elemente. ── */
+(function() {
+  var section = document.querySelector('.unterstuetzen-section');
+  if (!section) return;
+  var tb = section.querySelector('.unterstuetzen-headline-box');
+  var body = section.querySelector('.unterstuetzen-body');
+  var blocks = section.querySelectorAll('.support-block');
+  if (!tb || (!body && !blocks.length)) return;
+  function sync() {
+    if (!document.body.classList.contains('unterstuetzen-view')) return;
+    /* Auf sehr schmalen Viewports CSS-Fallback nutzen (Inline-Styles raus). */
+    if (window.matchMedia('(max-width: 600px)').matches) {
+      if (body) body.style.maxWidth = '';
+      blocks.forEach(function(b) { b.style.maxWidth = ''; });
+      return;
+    }
+    var w = tb.getBoundingClientRect().width;
+    if (!w) return;
+    var px = Math.ceil(w) + 'px';
+    if (body) body.style.maxWidth = px;
+    blocks.forEach(function(b) { b.style.maxWidth = px; });
+  }
+  window.addEventListener('resize', sync);
+  window.addEventListener('hashchange', function() { setTimeout(sync, 0); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(sync);
+  }
   var langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
   sync();
