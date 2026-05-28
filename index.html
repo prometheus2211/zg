@@ -562,13 +562,13 @@ body.kontakt-view .contact-section .section-cta {
   max-width: 100%;
 }
 /* Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-Breite der Bloecke
-   darueber (per JS gesetzt) und verteilt die drei Icons symmetrisch via
-   justify-content: space-between. */
+   darueber (per JS gesetzt) und rueckt die drei Icons als Gruppe rechts-
+   buendig zur Boxen-Aussenkante. */
 body.unterstuetzen-view .unterstuetzen-section .section-cta {
   flex-wrap: nowrap;
   width: 100%;
   max-width: min(720px, calc(100vw - 240px));
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 body.mission-view .mission-body,
 body.team-view .team-body,
