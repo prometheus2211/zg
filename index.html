@@ -124,7 +124,9 @@ body {
   z-index: 1;
   transition: opacity 0.18s ease;
 }
-.vertical-wordmark:hover { opacity: 0.7; }
+/* Hover: gesamte vertikale Wortmarke (inkl. Unterstrich von "Grundrechte")
+   wird vermil — analog zum Hover der horizontalen .wordmark. */
+.vertical-wordmark:hover .vertical-wordmark-inner { color: var(--vermil); }
 /* Auf schmalen Viewports faden Wortmarke + vertical-wordmark frueh aus,
    damit das vertikale Logo am rechten Rand nicht in die Headline-Box bzw.
    die roten Bloecke (Kontakt/Unterstuetzen) hineinwaechst. Die bestehende
@@ -151,6 +153,7 @@ body {
   letter-spacing: 0;
   color: var(--black);
   white-space: nowrap;
+  transition: color 0.2s;
 }
 .vertical-wordmark-inner .mark {
   text-decoration-line: underline;
@@ -211,7 +214,7 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   text-decoration: none;
-  transition: opacity 0.18s ease;
+  transition: opacity 0.18s ease, color 0.2s;
 }
 .wordmark.is-hidden,
 .nav.is-hidden {
@@ -223,7 +226,8 @@ body {
   padding-bottom: 1.5px;
   transition: border-color 0.2s;
 }
-.wordmark:hover .mark { border-bottom-color: var(--black); }
+/* Hover: gesamte Wortmarke (inkl. Unterstrich von "Grundrechte") wird vermil. */
+.wordmark:hover { color: var(--vermil); }
 .lang-toggle {
   font-size: 11px;
   font-weight: 700;
@@ -1250,6 +1254,10 @@ body.inverted .vertical-wordmark-inner .mark { text-decoration-color: #fff; }
 body.inverted .wordmark { color: #fff; }
 body.inverted .wordmark .mark,
 body.inverted .wordmark:hover .mark { border-bottom-color: #fff; }
+/* Hover im Inverted-Mode: Wortmarke bleibt weiss (Vermil-Schrift waere
+   auf Vermil-Hintergrund unsichtbar). */
+body.inverted .wordmark:hover { color: #fff; }
+body.inverted .vertical-wordmark:hover .vertical-wordmark-inner { color: #fff; }
 
 /* Nav */
 body.inverted .nav-links a,
