@@ -554,15 +554,11 @@ body.unterstuetzen-view .contact-section { display: none; }
    Container schrumpft passgenau auf die Button-Reihen-Breite. Body und Intro
    werden anschließend per JS auf exakt dieselbe Breite gesetzt, damit Fließ-
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
+/* Mission/Team/Kontakt/Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-
+   Breite der Headline-Box (per JS gesetzt) und rueckt die drei Icons als
+   Gruppe rechtsbuendig zur TB-Aussenkante. */
 body.mission-view .mission-section .section-cta,
-body.team-view .team-section .section-cta {
-  flex-wrap: nowrap;
-  width: max-content;
-  max-width: 100%;
-}
-/* Kontakt + Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-Breite der
-   Bloecke darueber (per JS gesetzt) und rueckt die drei Icons als Gruppe
-   rechtsbuendig zur Boxen-Aussenkante. */
+body.team-view .team-section .section-cta,
 body.kontakt-view .contact-section .section-cta,
 body.unterstuetzen-view .unterstuetzen-section .section-cta {
   flex-wrap: nowrap;
@@ -647,12 +643,16 @@ body.team-view .team-body { max-width: 720px; }
 .mission-body,
 .team-body {
   margin-top: 28px;
-  max-width: 720px;
+  /* max-width folgt der TB-Breite (viewportgesteuerter Fallback); JS misst
+     spaeter die jeweilige Headline-Box und ueberschreibt inline. */
+  max-width: min(720px, calc(100vw - 240px));
   font-size: clamp(18px, 1.5vw, 22px);
   font-weight: 300;
   line-height: 1.6;
   letter-spacing: -0.01em;
   color: var(--black);
+  text-align: justify;
+  hyphens: auto;
 }
 /* Unterstuetzen-Body uebernimmt die Typografie der Kontakt-Intro
    (groesser, 400er-Weight, etwas dichtere Zeilen). max-width ist ein CSS-
@@ -1902,23 +1902,22 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   });
 });
 
-/* ── Mission/Team-Layout: Body auf exakt dieselbe Breite ziehen wie die
-   3-Button-CTA-Reihe, damit Text und Box-Reihe bündig sitzen. Die CTA-Reihe
-   ist via CSS auf width: max-content + nowrap konfiguriert; sie sized sich
-   also passgenau auf die Summe der drei Buttons + Gaps. JS misst diese
-   Breite und gibt sie an den Body weiter. Auf sehr schmalen Viewports
-   (Wrap-Modus) bleibt die CSS-Fallback-Breite. ── */
+/* ── Mission/Team-Layout: Body + CTA-Reihe werden auf exakt die Aussen-
+   Breite der Headline-Box gezogen — gleiches Konzept wie auf Kontakt und
+   Unterstuetzen. TB ist der Master, JS misst und schreibt die Breite
+   inline an die anderen Elemente. ── */
 (function() {
   var sections = [
-    { sel: '.mission-section', bodySel: '.mission-body', viewClass: 'mission-view' },
-    { sel: '.team-section',    bodySel: '.team-body',    viewClass: 'team-view'    }
+    { sel: '.mission-section', tbSel: '.mission-headline-box', bodySel: '.mission-body', viewClass: 'mission-view' },
+    { sel: '.team-section',    tbSel: '.team-headline-box',    bodySel: '.team-body',    viewClass: 'team-view'    }
   ].map(function(cfg) {
     var section = document.querySelector(cfg.sel);
     if (!section) return null;
+    var tb = section.querySelector(cfg.tbSel);
     var cta = section.querySelector('.section-cta');
     var body = section.querySelector(cfg.bodySel);
-    if (!cta || !body) return null;
-    return { cta: cta, body: body, viewClass: cfg.viewClass };
+    if (!tb) return null;
+    return { tb: tb, cta: cta, body: body, viewClass: cfg.viewClass };
   }).filter(Boolean);
   if (!sections.length) return;
   function syncOne(s) {
@@ -1927,14 +1926,17 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
        Messungen 0. */
     if (!document.body.classList.contains(s.viewClass)) return;
     /* Wrap-Modus auf schmalen Viewports: Inline-Styles entfernen, damit
-       der Body auf seine CSS-Fallback-max-width zurückfällt. */
+       Body und CTA auf ihre CSS-Fallback-max-width zurueckfallen. */
     if (window.matchMedia('(max-width: 600px)').matches) {
-      s.body.style.maxWidth = '';
+      if (s.body) s.body.style.maxWidth = '';
+      if (s.cta) s.cta.style.maxWidth = '';
       return;
     }
-    var w = s.cta.getBoundingClientRect().width;
+    var w = s.tb.getBoundingClientRect().width;
     if (!w) return;
-    s.body.style.maxWidth = Math.ceil(w) + 'px';
+    var px = Math.ceil(w) + 'px';
+    if (s.body) s.body.style.maxWidth = px;
+    if (s.cta) s.cta.style.maxWidth = px;
   }
   function sync() { sections.forEach(syncOne); }
   window.addEventListener('resize', sync);
