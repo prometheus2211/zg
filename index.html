@@ -830,7 +830,9 @@ body.kontakt-view .contact-label { display: none; }
 .kontakt-oran { display: none; }
 body.kontakt-view .kontakt-intro {
   display: block;
-  max-width: 720px;
+  /* max-width folgt der TB-Breite (viewportgesteuerter Fallback); JS misst
+     spaeter die kontakt-headline-box und ueberschreibt inline. */
+  max-width: min(720px, calc(100vw - 240px));
   margin: 0 0 24px;
   font-size: clamp(20px, 1.7vw, 26px);
   font-weight: 400;
