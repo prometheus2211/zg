@@ -637,13 +637,16 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
   color: var(--black);
 }
 /* Unterstuetzen-Body uebernimmt die Typografie der Kontakt-Intro
-   (groesser, 400er-Weight, etwas dichtere Zeilen), behaelt aber den
-   Drop-Cap der Mission/Team-Body. Breite folgt 1:1 den .support-block-
-   Boxen darunter (inkl. dem viewport-gesteuerten Schrumpfen), und der
-   Fliesstext laeuft im Blocksatz. */
+   (groesser, 400er-Weight, etwas dichtere Zeilen). Aeussere Breite + Innen-
+   Offset (Padding) sind identisch zu den .support-block-Boxen darunter,
+   damit Textspalte und Boxen-Inhalt deckungsgleich fluchten — unabhaengig
+   von der Fenstergroesse. box-sizing: border-box noetig, damit max-width
+   die *Aussen*-Breite festlegt. */
 .unterstuetzen-body {
   margin-top: 32px;
   max-width: min(720px, calc(100vw - 240px));
+  box-sizing: border-box;
+  padding: 0 37.5px;
   font-size: clamp(20px, 1.7vw, 26px);
   font-weight: 400;
   line-height: 1.5;
@@ -682,13 +685,13 @@ body.unterstuetzen-view .support-block {
   border: 1.5px solid var(--vermil);
 }
 /* Foerdermitgliedschafts-/Einmalspende-/Mitmachen-Absatz: gleiche
-   Typografie wie der Body, nur ohne Drop-Cap und mit etwas geringerem
-   Abstand nach oben. */
+   Typografie wie der Body. max-width: 100% laesst den Absatz die volle
+   Innenbreite der Box fuellen — die Box selbst begrenzt die Aussenkante. */
 .unterstuetzen-foerder,
 .unterstuetzen-einmalspende,
 .unterstuetzen-mitmachen {
   margin-top: 28px;
-  max-width: 720px;
+  max-width: 100%;
   font-size: clamp(20px, 1.7vw, 26px);
   font-weight: 400;
   line-height: 1.5;
