@@ -556,11 +556,19 @@ body.unterstuetzen-view .contact-section { display: none; }
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
 body.mission-view .mission-section .section-cta,
 body.team-view .team-section .section-cta,
-body.kontakt-view .contact-section .section-cta,
-body.unterstuetzen-view .unterstuetzen-section .section-cta {
+body.kontakt-view .contact-section .section-cta {
   flex-wrap: nowrap;
   width: max-content;
   max-width: 100%;
+}
+/* Unterstuetzen: CTA-Reihe spannt sich auf die Aussen-Breite der Bloecke
+   darueber (per JS gesetzt) und verteilt die drei Icons symmetrisch via
+   justify-content: space-between. */
+body.unterstuetzen-view .unterstuetzen-section .section-cta {
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: min(720px, calc(100vw - 240px));
+  justify-content: space-between;
 }
 body.mission-view .mission-body,
 body.team-view .team-body,
@@ -1946,13 +1954,15 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   var tb = section.querySelector('.unterstuetzen-headline-box');
   var body = section.querySelector('.unterstuetzen-body');
   var blocks = section.querySelectorAll('.support-block');
-  if (!tb || (!body && !blocks.length)) return;
+  var cta = section.querySelector('.section-cta');
+  if (!tb || (!body && !blocks.length && !cta)) return;
   function sync() {
     if (!document.body.classList.contains('unterstuetzen-view')) return;
     /* Auf sehr schmalen Viewports CSS-Fallback nutzen (Inline-Styles raus). */
     if (window.matchMedia('(max-width: 600px)').matches) {
       if (body) body.style.maxWidth = '';
       blocks.forEach(function(b) { b.style.maxWidth = ''; });
+      if (cta) cta.style.maxWidth = '';
       return;
     }
     var w = tb.getBoundingClientRect().width;
@@ -1960,6 +1970,7 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     var px = Math.ceil(w) + 'px';
     if (body) body.style.maxWidth = px;
     blocks.forEach(function(b) { b.style.maxWidth = px; });
+    if (cta) cta.style.maxWidth = px;
   }
   window.addEventListener('resize', sync);
   window.addEventListener('hashchange', function() { setTimeout(sync, 0); });
