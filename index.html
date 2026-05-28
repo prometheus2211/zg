@@ -556,7 +556,8 @@ body.unterstuetzen-view .contact-section { display: none; }
    text und CTA-Reihe bündig stehen. Fallback-max-width für Vor-JS-Zustand. */
 body.mission-view .mission-section .section-cta,
 body.team-view .team-section .section-cta,
-body.kontakt-view .contact-section .section-cta {
+body.kontakt-view .contact-section .section-cta,
+body.unterstuetzen-view .unterstuetzen-section .section-cta {
   flex-wrap: nowrap;
   width: max-content;
   max-width: 100%;
@@ -569,7 +570,8 @@ body.unterstuetzen-view .unterstuetzen-body { max-width: 720px; }
      keine Buttons über den Bildschirm hinauslaufen. */
   body.mission-view .mission-section .section-cta,
   body.team-view .team-section .section-cta,
-  body.kontakt-view .contact-section .section-cta {
+  body.kontakt-view .contact-section .section-cta,
+  body.unterstuetzen-view .unterstuetzen-section .section-cta {
     flex-wrap: wrap;
     width: auto;
   }
@@ -1504,6 +1506,11 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
       <p class="unterstuetzen-mitmachen" id="unterstuetzen-mitmachen" data-de="Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben." data-en="Want to support our mission through your work? Here you can experience strategic litigation first-hand and have real impact.">Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben.</p>
       <a class="contact-email" id="unterstuetzen-email" href="#" data-de="Schreiben Sie uns<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Write to us<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Schreiben Sie uns<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
+    <div class="cta-row section-cta">
+      <a class="newsletter-link" id="unterstuetzen-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="wer-link" id="unterstuetzen-wer-link" href="#mission" data-de="Wer wir sind<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Who we are<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Wer wir sind<svg class="wer-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="fragen-link" id="unterstuetzen-fragen-link" href="#kontakt" data-de="Fragen?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Questions?<svg class=&quot;fragen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Fragen?<svg class="fragen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
   </div>
 </section>
 
@@ -1738,7 +1745,8 @@ function toggleLang() {
    'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
    'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link',
    'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link',
-   'mitmachen-label','unterstuetzen-mitmachen','unterstuetzen-email'].forEach(function(id) {
+   'mitmachen-label','unterstuetzen-mitmachen','unterstuetzen-email',
+   'unterstuetzen-newsletter-link','unterstuetzen-wer-link','unterstuetzen-fragen-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
