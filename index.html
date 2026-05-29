@@ -1960,11 +1960,22 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   }
   var langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', function() { setTimeout(sync, 0); });
-  /* Initial-Sync + zwei verzoegerte Retries (250ms / 750ms): faengt
-     Late-Layout ab (Font-Swap, View-Toggle-Race, iOS-URL-Bar). */
+  /* ResizeObserver auf jede TB: feuert sync sobald die TB (oder die Section
+     bei View-Wechsel via display-Toggle) ihre Groesse aendert. Faengt alle
+     Edge-Cases ab, die hashchange/resize/font-load nicht abdecken. */
+  if (typeof ResizeObserver !== 'undefined') {
+    var ro = new ResizeObserver(function() { sync(); });
+    entries.forEach(function(e) { ro.observe(e.tb); });
+  }
+  /* Initial-Sync + verzoegerte Retries (50/150/300/750/1500ms) — faengt
+     Late-Layout-Effekte ab, die ResizeObserver bei sehr fruehem Run noch
+     nicht gesehen hat. */
   sync();
-  setTimeout(sync, 250);
+  setTimeout(sync, 50);
+  setTimeout(sync, 150);
+  setTimeout(sync, 300);
   setTimeout(sync, 750);
+  setTimeout(sync, 1500);
 })();
 
 /* ── Vertikale Wortmarke: letter-spacing so wählen, dass die rotierte
