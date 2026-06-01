@@ -777,17 +777,23 @@ body.kontakt-view .contact-email { margin-top: 24px; }
 }
 body.inverted .mission-sub { color: #fff; border-color: #fff; }
 /* Schluss-Satz im Mission-Body: groesser, bold, Icon-/Headline-Typografie.
-   Leicht nach rechts eingerueckt, kein Kasten. */
+   Leicht nach rechts eingerueckt, eingefasst von einem roten Kasten mit
+   transparentem Hintergrund. Der Outline-CTA "Jetzt unterstuetzen" sitzt
+   inline innerhalb dieser Box. */
 .mission-closing {
   display: block;
+  box-sizing: border-box;
   margin: 24px 0 24px 1.5em;
+  padding: 18px 24px;
+  border: 1.5px solid var(--vermil);
+  background: transparent;
   font-size: clamp(28px, 3.5vw, 48px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--black);
 }
-body.inverted .mission-closing { color: #fff; }
+body.inverted .mission-closing { color: #fff; border-color: #fff; }
 /* CTA hinter dem Schluss-Satz — Outline-Stil mit weissem/transparenten
    Hintergrund (analog Mitmachen-/Spende-Icons auf Unterstuetzen). Inline-
    block, sitzt rechts neben dem grossen Satz mit kleinem Abstand. */
