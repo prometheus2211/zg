@@ -127,6 +127,14 @@ body {
 /* Hover: gesamte vertikale Wortmarke (inkl. Unterstrich von "Grundrechte")
    wird vermil — analog zum Hover der horizontalen .wordmark. */
 .vertical-wordmark:hover .vertical-wordmark-inner { color: var(--vermil); }
+/* ══════════════════════════════════════════════════════════════════════
+   KILL-SWITCH: vertikale Wortmarke global testweise ausblenden.
+   Zum Reaktivieren der vertikalen "Zentrum Grundrechte"-Schrift einfach
+   die naechste Zeile loeschen (oder mit CSS-Kommentar auskommentieren).
+   Die urspruengliche CSS und das JS-Verhalten bleiben unveraendert und
+   greifen wieder, sobald dieser Override weg ist.
+   ══════════════════════════════════════════════════════════════════════ */
+.vertical-wordmark { display: none !important; }
 /* Auf schmalen Viewports faden Wortmarke + vertical-wordmark frueh aus,
    damit das vertikale Logo am rechten Rand nicht in die Headline-Box bzw.
    die roten Bloecke (Kontakt/Unterstuetzen) hineinwaechst. Die bestehende
