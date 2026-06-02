@@ -868,6 +868,16 @@ body.inverted .mission-closing-cta:hover {
   color: var(--vermil);
   opacity: 0.55;
 }
+/* Sobald ein echtes Bild im Block sitzt: Platzhalter-Label ausblenden,
+   Gradient transparent setzen, Bild fuellt die Box komplett. */
+.team-member-image--has-photo { background: transparent; overflow: hidden; }
+.team-member-image--has-photo::after { content: none; }
+.team-member-image--has-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 body.inverted .team-member-image {
   border-color: #fff;
   background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.16));
@@ -1642,7 +1652,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         </div>
       </article>
       <article class="team-member">
-        <div class="team-member-image" aria-hidden="true"></div>
+        <div class="team-member-image team-member-image--has-photo"><img src="team-nemir.jpg" alt="Nemir Ali" loading="lazy"></div>
         <div class="team-member-text">
           <p class="team-member-role" id="team-role-nemir" data-de="Stellvertretender Vorsitzender" data-en="Deputy Chair">Stellvertretender Vorsitzender</p>
           <h2 class="team-member-name">Nemir Ali</h2>
