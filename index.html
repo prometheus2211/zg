@@ -1025,11 +1025,12 @@ body.mission-view .nav { left: 0; }
    liegt ueber TB), bleibt der Hintergrund transparent. */
 body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
 body.mission-view.nav-on-vermil .nav { background: transparent; box-shadow: none; }
-/* Mission-Body bekommt einen Top-Abstand >= Ribbon-Hoehe, damit beim
+/* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
    Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
    weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
-   80px liegt sicher ueber jeder typischen Nav-Hoehe. */
-body.mission-view .mission-body { margin-top: 80px; }
+   120px liegt sicher ueber jeder typischen Nav-Hoehe (Desktop ~78px,
+   Mobile kleiner). */
+body.mission-view .mission-body { margin-top: 120px; }
 /* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
    beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
    aussieht. */
@@ -2437,7 +2438,12 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
         if (bodyEl && navEl) {
           var navH = navEl.getBoundingClientRect().height;
           var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({ top: bodyTopDoc - navH, behavior: 'smooth' });
+          /* Safety: Ziel muss IMMER >= 100vh + Puffer sein, damit die TB
+             vollstaendig nach oben weggescrollt ist und der Ribbon im
+             Endzustand bereits in der Standard-Variante (warm-weiss)
+             gerendert wird, nicht in der vermil-invertierten Phase. */
+          var target = Math.max(bodyTopDoc - navH, window.innerHeight + 20);
+          window.scrollTo({ top: target, behavior: 'smooth' });
           return;
         }
       }
