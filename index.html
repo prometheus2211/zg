@@ -683,6 +683,9 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
   text-align: justify;
   hyphens: auto;
 }
+/* Mission-Body etwas kleinere Schrift als Team-Body, damit der laengere Text
+   ruhiger lesbar bleibt. */
+.mission-body { font-size: clamp(17px, 1.4vw, 22px); }
 /* Unterstuetzen-Body uebernimmt die Typografie der Kontakt-Intro
    (groesser, 400er-Weight, etwas dichtere Zeilen). max-width ist ein CSS-
    Fallback; JS misst nach dem Layout die Breite der Headline-Box und
