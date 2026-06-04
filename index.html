@@ -998,16 +998,27 @@ body.unterstuetzen-view footer { margin-top: 0; }
    Bindestrich-Umbruch in "Grundrech-/te." schmaler als Mission/Team,
    die Box soll sich entsprechend auf den Inhalt zusammenziehen. */
 body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
-/* Mission-View: TB nimmt die volle Breite des Inhaltsbereichs ein und
-   ist nach unten verlaengert (Stil-Anlehnung an freiheitsrechte.org).
-   Body und CTA-Reihe behalten ihre eigene, schmalere CSS-Max-Breite —
-   deshalb wird Mission unten aus dem JS-Sync herausgenommen. */
+/* Mission-View: TB spannt sich edge-to-edge ueber den gesamten Viewport
+   (Stil-Anlehnung an freiheitsrechte.org). Body und CTA-Reihe behalten
+   die alte, an der frueheren TB-Breite orientierte Maximalbreite —
+   deshalb wird Mission aus dem JS-Sync herausgenommen. */
 body.mission-view .mission-headline-box {
   display: block;
-  width: 100%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   min-width: 0;
-  margin-left: 0;
-  padding: clamp(40px, 8vh, 80px) clamp(24px, 4vw, 48px) clamp(56px, 12vh, 112px);
+  padding: clamp(40px, 8vh, 80px) clamp(24px, 5vw, 72px) clamp(56px, 12vh, 112px);
+  border-radius: 0;
+}
+/* Body und CTA-Reihe behalten die alte (TB-min-width-aequivalente) Breite,
+   damit sich auf der Mission-Seite optisch sonst nichts verschiebt. */
+body.mission-view .mission-body,
+body.mission-view .mission-section .section-cta {
+  max-width: clamp(360px, 68vw, 920px);
 }
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
