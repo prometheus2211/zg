@@ -1010,9 +1010,14 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
 body.mission-view .mission-section { padding-top: 0; }
 /* Mission-View: Nav (Ribbon) UND Wortmarke muessen VOR der vermil TB
-   liegen, damit beide nicht hinter der TB verschwinden. */
-body.mission-view .nav,
-body.mission-view .wordmark { z-index: 10; }
+   liegen. Wortmarke z-index 11 (ueber Nav), damit sie nicht von der
+   deckenden Nav-Flaeche verdeckt wird. */
+body.mission-view .nav { z-index: 10; }
+body.mission-view .wordmark { z-index: 11; }
+/* Damit der Ribbon eine durchgehende, von links bis rechts deckende
+   Flaeche bildet (nicht nur die Nav-Items rechts), wird .nav in
+   Mission-View ueber die volle Viewport-Breite gestreckt. */
+body.mission-view .nav { left: 0; }
 /* Wenn der Ribbon ueber den Body schwebt (also TB nach oben weggescrollt
    ist), bekommt er eine deckende Flaeche (warm-weiss) plus dezenten
    Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
@@ -1020,6 +1025,11 @@ body.mission-view .wordmark { z-index: 10; }
    liegt ueber TB), bleibt der Hintergrund transparent. */
 body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
 body.mission-view.nav-on-vermil .nav { background: transparent; box-shadow: none; }
+/* Mission-Body bekommt einen Top-Abstand >= Ribbon-Hoehe, damit beim
+   Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
+   weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
+   80px liegt sicher ueber jeder typischen Nav-Hoehe. */
+body.mission-view .mission-body { margin-top: 80px; }
 /* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
    beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
    aussieht. */
