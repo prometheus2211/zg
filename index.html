@@ -2357,14 +2357,23 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   function update() {
     var hash = window.location.hash;
 
-    if (hash === '#mission' || hash === '#team' || hash === '#kontakt' || hash === '#unterstuetzen') {
-      /* Einfacher Scroll-Threshold fuer alle Section-Views (Mission, Team,
-         Unterstuetzen, Kontakt): Wortmarke und Nav sind bei scroll=0 immer
-         sichtbar; sobald der Nutzer ein paar Pixel nach unten scrollt
-         (SCROLL_THRESHOLD), wird beides ausgeblendet. Verhindert, dass
-         der Ribbon mit dem vertikalen Logo bzw. der Section-Headline-
-         Box visuell kollidiert. Zahl bei Bedarf anpassen — kleiner =
-         frueher faden. */
+    if (hash === '#mission') {
+      /* Mission verwendet das Hero-Pattern (TB fuellt 100vh). Der Ribbon
+         (Nav) bleibt durchgehend sichtbar, damit die Navigation auch ueber
+         der vermil TB jederzeit erreichbar ist. Die Wortmarke (oben links)
+         wird wie bei den anderen Section-Views beim Scrollen ausgeblendet. */
+      var SCROLL_THRESHOLD = 24;
+      var hideWm = window.scrollY > SCROLL_THRESHOLD;
+      if (wm) wm.classList.toggle('is-hidden', hideWm);
+      if (nav) nav.classList.remove('is-hidden');
+      return;
+    }
+    if (hash === '#team' || hash === '#kontakt' || hash === '#unterstuetzen') {
+      /* Einfacher Scroll-Threshold fuer Team/Kontakt/Unterstuetzen:
+         Wortmarke und Nav sind bei scroll=0 sichtbar; sobald der Nutzer
+         ein paar Pixel nach unten scrollt (SCROLL_THRESHOLD), wird beides
+         ausgeblendet. Verhindert, dass der Ribbon mit dem vertikalen Logo
+         bzw. der Section-Headline-Box visuell kollidiert. */
       var SCROLL_THRESHOLD = 24;
       var hideOnView = window.scrollY > SCROLL_THRESHOLD;
       if (wm) wm.classList.toggle('is-hidden', hideOnView);
