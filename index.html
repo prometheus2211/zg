@@ -1005,9 +1005,14 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    (Stil-Anlehnung an freiheitsrechte.org). Body und CTA-Reihe behalten
    die alte, an der frueheren TB-Breite orientierte Maximalbreite —
    deshalb wird Mission aus dem JS-Sync herausgenommen. */
+/* Mission-View: Hero-Pattern wie Landing — TB fuellt den ersten Viewport,
+   Body und Pfeil liegen darunter. Section-Top-Padding wird hier auf 0
+   gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
+body.mission-view .mission-section { padding-top: 0; }
 body.mission-view .mission-headline-box {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100vw;
   position: relative;
   left: 50%;
@@ -1015,11 +1020,34 @@ body.mission-view .mission-headline-box {
   margin-left: -50vw;
   margin-right: -50vw;
   min-width: 0;
-  /* Symmetrisches vertikales Padding, damit die Headline vertikal mittig
-     in der Box sitzt. Vertikal grosszuegig dimensioniert. */
-  padding: clamp(140px, 22vh, 260px) clamp(24px, 5vw, 72px);
+  /* TB fuellt den Viewport. min-height schuetzt sehr niedrige Viewports
+     (Landscape-Mobile). Headline ist per align-items mittig. */
+  height: 100vh;
+  min-height: 440px;
+  padding: clamp(80px, 14vh, 180px) clamp(24px, 5vw, 72px);
   border-radius: 0;
 }
+/* Scroll-Pfeil unter der Mission-TB (analog zur Landing-Variante,
+   nur weiss statt vermil — sitzt auf der vermil TB-Flaeche). */
+.mission-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px 14px;
+  transition: color 0.2s, transform 0.3s, opacity 0.4s;
+}
+.mission-scroll-hint svg { display: block; }
+.mission-scroll-hint:hover { transform: translateX(-50%) translateY(3px); opacity: 0.8; }
+.mission-scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); }
+@media (max-width: 640px) { .mission-scroll-hint { bottom: 28px; } }
 /* Body und CTA-Reihe behalten die alte (TB-min-width-aequivalente) Breite,
    damit sich auf der Mission-Seite optisch sonst nichts verschiebt. */
 body.mission-view .mission-body,
@@ -1702,6 +1730,11 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   <div class="mission-content">
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Wir verteidigen Abwehr-<br>rechte. <em>Konsequent.</em>" data-en="We defend defensive<br>rights. <em>Resolutely.</em>">Wir verteidigen Abwehr-<br>rechte. <em>Konsequent.</em></h1>
+      <a class="mission-scroll-hint" href="#" aria-label="Weiter nach unten">
+        <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
     <!-- Fruehere Fettungen im Mission-Body (DE), zum spaeteren Wiederherstellen:
          (a) "Als überparteilicher, unabhängiger und eingetragener Verein stellt das Zentrum Grundrechte durch Klagen gegen staatliches Handeln sicher, dass Gesetzgeber, Regierung und Behörden ihre grundgesetzlichen Befugnisse nicht überschreiten."
@@ -2287,20 +2320,25 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   fitAll();
 })();
 
-/* ── Scroll-Pfeil ausblenden, sobald gescrollt wird ── */
+/* ── Scroll-Pfeile (Landing UND Mission) ausblenden, sobald gescrollt wird ── */
 (function() {
-  var hint = document.querySelector('.scroll-hint');
-  if (!hint) return;
+  var hints = document.querySelectorAll('.scroll-hint, .mission-scroll-hint');
+  if (!hints.length) return;
   var toggle = function() {
-    if (window.scrollY > 40) hint.classList.add('hidden');
-    else hint.classList.remove('hidden');
+    var hidden = window.scrollY > 40;
+    hints.forEach(function(h) {
+      if (hidden) h.classList.add('hidden');
+      else h.classList.remove('hidden');
+    });
   };
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
-  /* Click: nur weich nach unten scrollen – KEINE Navigation. */
-  hint.addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+  hints.forEach(function(h) {
+    /* Click: nur weich nach unten scrollen – KEINE Navigation. */
+    h.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    });
   });
 })();
 
