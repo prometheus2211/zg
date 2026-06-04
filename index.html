@@ -1019,10 +1019,11 @@ body.mission-view .wordmark { z-index: 10; }
 body.mission-view .wordmark { transition: opacity 0.18s ease, color 0.25s ease; }
 body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
 /* Solange die Wortmarke ueber der vermil TB liegt: Schrift + Unterstrich
-   weiss (analog zu den anderen Ribbon-Elementen). */
+   weiss (analog zu den anderen Ribbon-Elementen). Highlight beim Hover
+   per leichter Opacity-Modulation. */
 body.mission-view.nav-on-vermil .wordmark { color: #fff; }
 body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
-body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; }
+body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; opacity: 0.7; }
 /* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
    Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
    invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
@@ -1049,7 +1050,16 @@ body.mission-view.nav-on-vermil .nav-cta:hover {
   background: rgba(255,255,255,0.85);
   color: var(--vermil);
 }
-body.mission-view.nav-on-vermil .lang-toggle { color: #fff; }
+/* EN/DE-Toggle: Default-Opacity ist 0.35 (zu blass auf vermil). In
+   nav-on-vermil auf 0.85 anheben, beim Hover auf 1.0 als Highlight. */
+body.mission-view.nav-on-vermil .lang-toggle { color: #fff; opacity: 0.85; }
+body.mission-view.nav-on-vermil .lang-toggle:hover { opacity: 1; }
+/* Ribbon-Links: weisser Unterstrich erscheint beim Hover als Highlight. */
+body.mission-view.nav-on-vermil .nav-links a:hover,
+body.mission-view.nav-on-vermil .nav-kontakt:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
 body.mission-view .mission-headline-box {
   display: flex;
   align-items: center;
