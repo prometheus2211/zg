@@ -1023,8 +1023,8 @@ body.mission-view .nav { left: 0; }
    Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
    und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
    liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
-body.mission-view.nav-on-vermil .nav { background: transparent; box-shadow: none; }
+body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease; }
+body.mission-view.nav-on-vermil .nav { background: transparent; }
 /* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
    Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
    weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
