@@ -1013,6 +1013,13 @@ body.mission-view .mission-section { padding-top: 0; }
    liegen, damit beide nicht hinter der TB verschwinden. */
 body.mission-view .nav,
 body.mission-view .wordmark { z-index: 10; }
+/* Wenn der Ribbon ueber den Body schwebt (also TB nach oben weggescrollt
+   ist), bekommt er eine deckende Flaeche (warm-weiss) plus dezenten
+   Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
+   und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
+   liegt ueber TB), bleibt der Hintergrund transparent. */
+body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+body.mission-view.nav-on-vermil .nav { background: transparent; box-shadow: none; }
 /* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
    beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
    aussieht. */
@@ -2409,9 +2416,21 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
   hints.forEach(function(h) {
-    /* Click: nur weich nach unten scrollen – KEINE Navigation. */
+    /* Click: weich nach unten scrollen. Spezialfall Mission-Pfeil:
+       so weit scrollen, dass der Body-Anfang exakt unter dem Ribbon
+       sitzt (Ribbon-Hoehe per getBoundingClientRect ermittelt). */
     h.addEventListener('click', function(e) {
       e.preventDefault();
+      if (h.classList.contains('mission-scroll-hint')) {
+        var bodyEl = document.querySelector('.mission-body');
+        var navEl = document.querySelector('.nav');
+        if (bodyEl && navEl) {
+          var navH = navEl.getBoundingClientRect().height;
+          var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({ top: bodyTopDoc - navH, behavior: 'smooth' });
+          return;
+        }
+      }
       window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     });
   });
