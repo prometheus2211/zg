@@ -1009,9 +1009,20 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    Body und Pfeil liegen darunter. Section-Top-Padding wird hier auf 0
    gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
 body.mission-view .mission-section { padding-top: 0; }
-/* Mission-View: Nav (Ribbon) muss VOR der vermil TB liegen, damit der
-   Ribbon nicht hinter der TB verschwindet. */
-body.mission-view .nav { z-index: 10; }
+/* Mission-View: Nav (Ribbon) UND Wortmarke muessen VOR der vermil TB
+   liegen, damit beide nicht hinter der TB verschwinden. */
+body.mission-view .nav,
+body.mission-view .wordmark { z-index: 10; }
+/* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
+   beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
+   aussieht. */
+body.mission-view .wordmark { transition: opacity 0.18s ease, color 0.25s ease; }
+body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
+/* Solange die Wortmarke ueber der vermil TB liegt: Schrift + Unterstrich
+   weiss (analog zu den anderen Ribbon-Elementen). */
+body.mission-view.nav-on-vermil .wordmark { color: #fff; }
+body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
+body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; }
 /* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
    Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
    invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
@@ -2412,13 +2423,11 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     var hash = window.location.hash;
 
     if (hash === '#mission') {
-      /* Mission verwendet das Hero-Pattern (TB fuellt 100vh). Der Ribbon
-         (Nav) bleibt durchgehend sichtbar, damit die Navigation auch ueber
-         der vermil TB jederzeit erreichbar ist. Die Wortmarke (oben links)
-         wird wie bei den anderen Section-Views beim Scrollen ausgeblendet. */
-      var SCROLL_THRESHOLD = 24;
-      var hideWm = window.scrollY > SCROLL_THRESHOLD;
-      if (wm) wm.classList.toggle('is-hidden', hideWm);
+      /* Mission verwendet das Hero-Pattern (TB fuellt 100vh). Sowohl der
+         Ribbon (Nav) als auch die Wortmarke (oben links) bleiben durch-
+         gehend sichtbar — die Farben wechseln je nach TB-Ueberlappung
+         (separater Handler 'nav-on-vermil' weiter unten). */
+      if (wm) wm.classList.remove('is-hidden');
       if (nav) nav.classList.remove('is-hidden');
       return;
     }
