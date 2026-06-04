@@ -1026,25 +1026,23 @@ body.mission-view .mission-body,
 body.mission-view .mission-section .section-cta {
   max-width: clamp(360px, 68vw, 920px);
 }
-/* Mission: TB-Headline, Body, Boxen mittig — CTA-Reihe-Block mittig,
-   die Icons darin bleiben aber rechtsbuendig (justify-content: flex-end
-   ist weiter aktiv). */
+/* Mission: Body-Block, TB-Headline, Boxen sind horizontal mittig — der
+   Text-Inhalt darin bleibt aber linksbuendig. Body-Text ist Blocksatz.
+   CTA-Reihe-Block mittig, Icons darin rechtsbuendig (flex-end). */
 body.mission-view .mission-headline-box {
-  text-align: center;
   justify-content: center;
 }
+body.mission-view .mission-headline {
+  text-align: left;
+}
 body.mission-view .mission-body {
-  text-align: center;
+  text-align: justify;
   margin-left: auto;
   margin-right: auto;
 }
 body.mission-view .mission-sub,
 body.mission-view .mission-closing {
-  width: fit-content;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  text-align: left;
 }
 body.mission-view .mission-section .section-cta {
   margin-left: auto;
