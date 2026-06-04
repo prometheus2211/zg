@@ -998,6 +998,17 @@ body.unterstuetzen-view footer { margin-top: 0; }
    Bindestrich-Umbruch in "Grundrech-/te." schmaler als Mission/Team,
    die Box soll sich entsprechend auf den Inhalt zusammenziehen. */
 body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
+/* Mission-View: TB nimmt die volle Breite des Inhaltsbereichs ein und
+   ist nach unten verlaengert (Stil-Anlehnung an freiheitsrechte.org).
+   Body und CTA-Reihe behalten ihre eigene, schmalere CSS-Max-Breite —
+   deshalb wird Mission unten aus dem JS-Sync herausgenommen. */
+body.mission-view .mission-headline-box {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin-left: 0;
+  padding: clamp(40px, 8vh, 80px) clamp(24px, 4vw, 48px) clamp(56px, 12vh, 112px);
+}
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
@@ -2124,7 +2135,10 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
    schreibt die Breite inline auf alle abhaengigen Elemente. ── */
 (function() {
   var configs = [
-    { viewClass: 'mission-view',      sectionSel: '.mission-section',     tbSel: '.mission-headline-box',     bodySels: ['.mission-body'],                                       blockSel: null              },
+    /* Mission ist absichtlich nicht in der Sync-Liste: die Mission-TB ist
+       full-width (100%), Body und CTA-Reihe behalten ihre CSS-Default-
+       Breiten. Wuerde JS hier laufen, wuerde es Body und CTA auf 100%
+       ziehen. */
     { viewClass: 'team-view',         sectionSel: '.team-section',        tbSel: '.team-headline-box',        bodySels: ['.team-body'],                                          blockSel: null              },
     { viewClass: 'kontakt-view',      sectionSel: '.contact-section',     tbSel: '.kontakt-headline-box',     bodySels: ['.kontakt-intro'],                                      blockSel: '.press-block'    },
     { viewClass: 'unterstuetzen-view',sectionSel: '.unterstuetzen-section',tbSel: '.unterstuetzen-headline-box',bodySels: ['.unterstuetzen-body'],                                 blockSel: '.support-block'  }
