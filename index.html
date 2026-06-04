@@ -1009,6 +1009,12 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    Body und Pfeil liegen darunter. Section-Top-Padding wird hier auf 0
    gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
 body.mission-view .mission-section { padding-top: 0; }
+/* Mission-View: Nav (Ribbon) muss VOR der vermil TB liegen, damit der
+   Ribbon nicht hinter der TB verschwindet. Default-Nav-z-index ist 5,
+   TB-z-index ist 6 — hier wird Nav auf 10 angehoben. Nav-Schrift bleibt
+   in der vermil-Phase weiterhin dunkel; sollte das nicht reichen, gibt
+   es separat eine inverted-Variante. */
+body.mission-view .nav { z-index: 10; }
 body.mission-view .mission-headline-box {
   display: flex;
   align-items: center;
