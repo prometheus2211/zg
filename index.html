@@ -502,6 +502,36 @@ body {
   transition: transform 0.2s;
 }
 .spenden-link:hover .spenden-arrow { transform: translateX(3px); }
+/* Landing-Page-CTAs (Wer wir sind / Newsletter / Mitmachen): invertiertes
+   Farbschema — transparent + Vermil-Border + Vermil-Schrift, Hover fuellt
+   vermil mit weisser Schrift. Scope ueber .satz-section, damit die gleichen
+   Klassen auf Mission/Team/Kontakt/Unterstuetzen ihren Standard-Vermil-
+   Fill behalten. */
+.satz-section .wer-link,
+.satz-section .newsletter-link,
+.satz-section .mitmachen-link {
+  color: var(--vermil);
+  background: transparent;
+}
+.satz-section .wer-link:hover,
+.satz-section .newsletter-link:hover,
+.satz-section .mitmachen-link:hover {
+  background: var(--vermil);
+  color: #fff;
+}
+body.inverted .satz-section .wer-link,
+body.inverted .satz-section .newsletter-link,
+body.inverted .satz-section .mitmachen-link {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+body.inverted .satz-section .wer-link:hover,
+body.inverted .satz-section .newsletter-link:hover,
+body.inverted .satz-section .mitmachen-link:hover {
+  background: #fff;
+  color: var(--vermil);
+}
 
 /* Pfeile in den CTA-Boxen kräftiger zeichnen, passend zum bold gesetzten
    Text (font-weight: 700). Inline-SVG hat stroke-width="2.6" als Default;
