@@ -1010,11 +1010,35 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
 body.mission-view .mission-section { padding-top: 0; }
 /* Mission-View: Nav (Ribbon) muss VOR der vermil TB liegen, damit der
-   Ribbon nicht hinter der TB verschwindet. Default-Nav-z-index ist 5,
-   TB-z-index ist 6 — hier wird Nav auf 10 angehoben. Nav-Schrift bleibt
-   in der vermil-Phase weiterhin dunkel; sollte das nicht reichen, gibt
-   es separat eine inverted-Variante. */
+   Ribbon nicht hinter der TB verschwindet. */
 body.mission-view .nav { z-index: 10; }
+/* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
+   Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
+   invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
+   wird die Klasse entfernt und die Default-Farben (dunkel auf bg)
+   greifen wieder. Smooth-Transitions sorgen fuer weiches Umblenden. */
+body.mission-view .nav-links a,
+body.mission-view .nav-kontakt,
+body.mission-view .nav-cta,
+body.mission-view .lang-toggle {
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+body.mission-view.nav-on-vermil .nav-links a,
+body.mission-view.nav-on-vermil .nav-kontakt { color: #fff; }
+body.mission-view.nav-on-vermil .nav-links a.is-active,
+body.mission-view.nav-on-vermil .nav-kontakt.is-active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+body.mission-view.nav-on-vermil .nav-cta {
+  background: #fff;
+  color: var(--vermil);
+}
+body.mission-view.nav-on-vermil .nav-cta:hover {
+  background: rgba(255,255,255,0.85);
+  color: var(--vermil);
+}
+body.mission-view.nav-on-vermil .lang-toggle { color: #fff; }
 body.mission-view .mission-headline-box {
   display: flex;
   align-items: center;
@@ -2324,6 +2348,30 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   var langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', function() { setTimeout(fitAll, 0); });
   fitAll();
+})();
+
+/* ── Mission-View: Nav-Farben invertieren (weiss), solange Ribbon
+   ueber der vermil TB liegt. Toggle anhand vertikaler Ueberlappung
+   zwischen TB und Nav. ── */
+(function() {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  function update() {
+    if (!document.body.classList.contains('mission-view')) {
+      document.body.classList.remove('nav-on-vermil');
+      return;
+    }
+    var tb = document.querySelector('.mission-headline-box');
+    if (!tb) { document.body.classList.remove('nav-on-vermil'); return; }
+    var tbRect = tb.getBoundingClientRect();
+    var navRect = nav.getBoundingClientRect();
+    var overlap = tbRect.top < navRect.bottom && tbRect.bottom > navRect.top;
+    document.body.classList.toggle('nav-on-vermil', overlap);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  window.addEventListener('hashchange', function() { setTimeout(update, 0); });
+  update();
 })();
 
 /* ── Scroll-Pfeile (Landing UND Mission) ausblenden, sobald gescrollt wird ── */
