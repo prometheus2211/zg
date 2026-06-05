@@ -1202,6 +1202,41 @@ body.team-view .team-section .section-cta {
   /* CTA-Reihe analog zu Mission ausgeblendet (HTML bleibt). */
   display: none;
 }
+
+/* ─── Kontakt-View: Mission-Format auch hier ─────────────────────────
+   Intro + Press-Blocks mittig und schmaler, kleinere Schrift, CTA-
+   Reihe aus, Schluss-CTA-Box analog Mission/Team. */
+body.kontakt-view .kontakt-intro {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.55;
+}
+body.kontakt-view .press-block {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 22px 26px 26px;
+  margin-top: 32px;
+}
+body.kontakt-view .press-label {
+  font-size: clamp(17px, 2vw, 26px);
+  margin: 0 0 14px;
+}
+body.kontakt-view .press-contact,
+body.kontakt-view .contact-address {
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.55;
+}
+body.kontakt-view .contact-email {
+  font-size: clamp(15px, 1.8vw, 22px);
+  margin-top: 16px;
+}
+body.kontakt-view .contact-section .section-cta {
+  /* CTA-Reihe analog zu Mission/Team ausgeblendet (HTML bleibt). */
+  display: none;
+}
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
@@ -2007,6 +2042,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         VR 42503 B
       </p>
     </div>
+    <div class="mission-closing" id="kontakt-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br><span class=mission-closing-line2>Sind Sie dabei? <a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're putting fundamental rights on the agenda.<br><span class=mission-closing-line2>Will you join us? <a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br><span class=mission-closing-line2>Sind Sie dabei? <a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="kontakt-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="kontakt-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2360,11 +2396,10 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
    schreibt die Breite inline auf alle abhaengigen Elemente. ── */
 (function() {
   var configs = [
-    /* Mission und Team sind absichtlich nicht in der Sync-Liste: ihre TBs
-       sind full-width (100vw), Body und CTA-Reihe behalten ihre CSS-
-       Default-Breiten. Wuerde JS hier laufen, wuerde es Body und CTA
+    /* Mission, Team und Kontakt sind absichtlich nicht in der Sync-Liste:
+       ihre TBs sind full-width (100vw), Body und CTA-Reihe behalten ihre
+       CSS-Default-Breiten. Wuerde JS hier laufen, wuerde es Body und CTA
        auf 100vw ziehen. */
-    { viewClass: 'kontakt-view',      sectionSel: '.contact-section',     tbSel: '.kontakt-headline-box',     bodySels: ['.kontakt-intro'],                                      blockSel: '.press-block'    },
     { viewClass: 'unterstuetzen-view',sectionSel: '.unterstuetzen-section',tbSel: '.unterstuetzen-headline-box',bodySels: ['.unterstuetzen-body'],                                 blockSel: '.support-block'  }
   ];
   var entries = configs.map(function(cfg) {
