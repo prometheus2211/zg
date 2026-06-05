@@ -1065,6 +1065,13 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
   /* CTA-Reihe analog zu Mission/Team/Kontakt ausgeblendet. */
   display: none;
 }
+/* Schluss-Box auf Unterstuetzen auf die schmalere Body-Breite ziehen und
+   mittig setzen (parent ist hier die Section, nicht der schmale Body). */
+body.unterstuetzen-view .mission-closing {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* Nav (Ribbon) + Wortmarke: z-index ueber TB (z=6), Nav volle Breite,
    deckende warm-weisse Flaeche (im Standard-Modus). */
