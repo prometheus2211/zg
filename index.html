@@ -1237,6 +1237,13 @@ body.kontakt-view .contact-section .section-cta {
   /* CTA-Reihe analog zu Mission/Team ausgeblendet (HTML bleibt). */
   display: none;
 }
+/* Schluss-Box auf Kontakt auf die schmalere Body-Breite ziehen und
+   mittig setzen (parent ist hier die Section, nicht der schmale Body). */
+body.kontakt-view .mission-closing {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+}
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
