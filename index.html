@@ -1052,7 +1052,9 @@ body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
    damit beim Hover kein Layout-Sprung entsteht. */
 body.mission-view.nav-on-vermil .wordmark {
   color: #fff;
-  padding: 6px 12px;
+  /* Bottom-Padding groesser als top, damit der Unterstrich unter
+     "Grundrechte" bequem in der weissen Hover-Box Platz findet. */
+  padding: 6px 12px 12px;
   border-radius: 3px;
   top: 22px;
   left: 60px;
