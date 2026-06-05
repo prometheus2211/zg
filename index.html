@@ -1023,17 +1023,16 @@ body.mission-view .nav { left: 0; }
    Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
    und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
    liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease; }
+body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease; }
 body.mission-view.nav-on-vermil .nav { background: transparent; }
-/* Ribbon-fading nutzt visibility (binaer) statt opacity (transitional),
-   damit es waehrend des Aus-/Einblendens KEINEN halb-transparenten
-   Zwischenzustand gibt, durch den Body-Text scheinen koennte. */
+/* Ribbon-fading: weicher Opacity-Fade, getriggert nur waehrend die TB-
+   Headline-Schrift durch den Ribbon-Bereich scrollt. */
 /* Fade-Band: Ribbon + Wortmarke blenden kurz aus, wenn die TB-Unterkante
    den Body-Anfang erreicht (per JS Klasse 'ribbon-fading' am body). Beide
    bekommen opacity-Transitions, damit das Ein-/Ausblenden weich ist. */
 body.mission-view.ribbon-fading .nav,
 body.mission-view.ribbon-fading .wordmark {
-  visibility: hidden;
+  opacity: 0;
   pointer-events: none;
 }
 /* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
@@ -2429,15 +2428,19 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
        Nav-Unterkante landet (= Body-Top genau unter dem Ribbon). Band
        endet ca. 10px vor reachY, damit beim Pfeil-Klick (Ziel = reachY)
        der Ribbon im Endzustand schon wieder sichtbar ist. */
-    var bodyEl = document.querySelector('.mission-body');
-    if (bodyEl) {
-      var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
-      var reachY = bodyTopDoc - navRect.height;
-      /* Ausblendband breit genug, damit beim normalen Scroll der Wechsel
-         deutlich ist; Ende kurz vor reachY (Body-Top genau unter Ribbon),
-         damit der Pfeil-Klick (Ziel = reachY) auf sichtbaren Standard-
-         Ribbon trifft. */
-      var inFadeBand = window.scrollY > reachY - 140 && window.scrollY < reachY - 2;
+    /* Fade-Band: aktiv, solange die TB-Headline-Schrift vertikal mit dem
+       Ribbon ueberlappt. Das schliesst den Moment ein, in dem die Schrift
+       in den Ribbon-Bereich hineinscrollt, bleibt waehrend des Durchlaufs
+       hidden, und endet, sobald die Schrift komplett darueber hinaus-
+       gescrollt ist. */
+    var headlineEl = document.querySelector('.mission-headline');
+    if (headlineEl) {
+      var hRect = headlineEl.getBoundingClientRect();
+      var hTopDoc = hRect.top + window.scrollY;
+      var hBottomDoc = hRect.bottom + window.scrollY;
+      var fadeStart = hTopDoc - navRect.height;
+      var fadeEnd = hBottomDoc;
+      var inFadeBand = window.scrollY > fadeStart && window.scrollY < fadeEnd;
       document.body.classList.toggle('ribbon-fading', inFadeBand);
     } else {
       document.body.classList.remove('ribbon-fading');
