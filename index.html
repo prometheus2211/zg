@@ -1149,9 +1149,21 @@ body.mission-view .mission-body {
   margin-left: auto;
   margin-right: auto;
 }
-body.mission-view .mission-sub,
-body.mission-view .mission-closing {
+body.mission-view .mission-sub {
   text-align: left;
+}
+/* Mission-Schluss-Box erstreckt sich edge-to-edge ueber den vollen
+   Viewport (analog zur TB). Text innerhalb mittig zentriert. */
+body.mission-view .mission-closing {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  text-align: center;
+  border-left: none;
+  border-right: none;
 }
 /* Mission: CTA-Icons (Newsletter / Mitmachen / Fragen) proportional zur
    kleineren Body-Schrift verkleinert. */
