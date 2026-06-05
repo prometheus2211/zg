@@ -1307,9 +1307,11 @@ body.kontakt-view .contact-address a:hover { color: var(--vermil); }
 .press-block { display: none; }
 body.kontakt-view .press-block {
   display: block;
-  margin-top: 64px;
-  max-width: min(720px, calc(100vw - 240px));
-  padding: 32px 36px 36px;
+  margin-top: 32px;
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 22px 26px 26px;
   border: 1.5px solid var(--vermil);
 }
 /* Adress-Kasten schliesst dichter an den Einleitungstext darueber an —
