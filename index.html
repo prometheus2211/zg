@@ -1020,6 +1020,10 @@ body.mission-view .mission-section,
 body.team-view .team-section,
 body.kontakt-view .contact-section,
 body.unterstuetzen-view .unterstuetzen-section { padding-top: 0; }
+/* Section-Bottom auf das Mission/Team-Niveau bringen — contact-section
+   bringt von Haus aus padding-bottom 72px mit, was im Hero-Pattern zu
+   viel Luft zum Footer erzeugt. */
+body.kontakt-view .contact-section { padding-bottom: 16px; }
 
 /* Nav (Ribbon) + Wortmarke: z-index ueber TB (z=6), Nav volle Breite,
    deckende warm-weisse Flaeche (im Standard-Modus). */
