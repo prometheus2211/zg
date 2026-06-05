@@ -1052,21 +1052,23 @@ body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
    damit beim Hover kein Layout-Sprung entsteht. */
 body.mission-view.nav-on-vermil .wordmark {
   color: #fff;
-  /* Bottom-Padding groesser als top, damit der Unterstrich unter
-     "Grundrechte" bequem in der weissen Hover-Box Platz findet. */
+  /* Padding + Border-Slot vorhalten: Border ist im Default transparent,
+     wird beim Hover weiss → kein Layout-Sprung. */
   padding: 6px 12px 12px;
   border-radius: 3px;
-  top: 22px;
-  left: 60px;
-  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  border: 1.5px solid transparent;
+  top: 20px;
+  left: 58px;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }
 body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
 body.mission-view.nav-on-vermil .wordmark:hover {
-  background: #fff;
-  color: var(--vermil);
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
   opacity: 1;
 }
-body.mission-view.nav-on-vermil .wordmark:hover .mark { border-bottom-color: var(--vermil); }
+body.mission-view.nav-on-vermil .wordmark:hover .mark { border-bottom-color: #fff; }
 /* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
    Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
    invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
