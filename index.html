@@ -1025,6 +1025,47 @@ body.unterstuetzen-view .unterstuetzen-section { padding-top: 0; }
    viel Luft zum Footer erzeugt. */
 body.kontakt-view .contact-section { padding-bottom: 16px; }
 
+/* ─── Unterstuetzen-View: Mission-Format auch hier ──────────────────
+   Body + Support-Blocks mittig und schmaler, kleinere Schrift, CTA-
+   Reihe aus, Schluss-CTA-Box mit Newsletter-Trigger. */
+body.unterstuetzen-view .unterstuetzen-body {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.55;
+}
+body.unterstuetzen-view .support-block {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+  padding: 22px 26px 26px;
+}
+body.unterstuetzen-view .foerder-label,
+body.unterstuetzen-view .einmalspende-label,
+body.unterstuetzen-view .mitmachen-label {
+  font-size: clamp(17px, 2vw, 26px);
+  margin: 0 0 14px;
+}
+body.unterstuetzen-view .unterstuetzen-foerder,
+body.unterstuetzen-view .unterstuetzen-einmalspende,
+body.unterstuetzen-view .unterstuetzen-mitmachen {
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.55;
+  margin-top: 0;
+}
+body.unterstuetzen-view .foerder-link,
+body.unterstuetzen-view .einmalspende-link,
+body.unterstuetzen-view .support-block .contact-email {
+  font-size: clamp(15px, 1.8vw, 22px);
+  margin-top: 16px;
+}
+body.unterstuetzen-view .unterstuetzen-section .section-cta {
+  /* CTA-Reihe analog zu Mission/Team/Kontakt ausgeblendet. */
+  display: none;
+}
+
 /* Nav (Ribbon) + Wortmarke: z-index ueber TB (z=6), Nav volle Breite,
    deckende warm-weisse Flaeche (im Standard-Modus). */
 body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav {
@@ -2002,6 +2043,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
       <p class="unterstuetzen-mitmachen" id="unterstuetzen-mitmachen" data-de="Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben." data-en="Want to support our mission through your work? Here you can experience strategic litigation first-hand and have real impact.">Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben.</p>
       <a class="contact-email" id="unterstuetzen-email" href="#" data-de="Schreiben Sie uns<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Write to us<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Schreiben Sie uns<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
+    <div class="mission-closing" id="unterstuetzen-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br><span class=mission-closing-line2>Sind Sie dabei? <a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Unser Newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're putting fundamental rights on the agenda.<br><span class=mission-closing-line2>Will you join us? <a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Our newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br><span class=mission-closing-line2>Sind Sie dabei? <a class="mission-closing-cta js-newsletter-trigger" href="#">Unser Newsletter<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="unterstuetzen-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="wer-link" id="unterstuetzen-wer-link" href="#mission" data-de="Wer wir sind<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Who we are<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Wer wir sind<svg class="wer-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2406,11 +2448,9 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
    schreibt die Breite inline auf alle abhaengigen Elemente. ── */
 (function() {
   var configs = [
-    /* Mission, Team und Kontakt sind absichtlich nicht in der Sync-Liste:
-       ihre TBs sind full-width (100vw), Body und CTA-Reihe behalten ihre
-       CSS-Default-Breiten. Wuerde JS hier laufen, wuerde es Body und CTA
-       auf 100vw ziehen. */
-    { viewClass: 'unterstuetzen-view',sectionSel: '.unterstuetzen-section',tbSel: '.unterstuetzen-headline-box',bodySels: ['.unterstuetzen-body'],                                 blockSel: '.support-block'  }
+    /* Alle vier Section-Views (Mission, Team, Kontakt, Unterstuetzen)
+       laufen jetzt im Hero-Pattern mit fester Body-Breite. Kein JS-
+       Width-Sync mehr noetig. */
   ];
   var entries = configs.map(function(cfg) {
     var section = document.querySelector(cfg.sectionSel);
