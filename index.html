@@ -1047,11 +1047,24 @@ body.mission-view .mission-body { margin-top: 120px; }
 body.mission-view .wordmark { transition: opacity 0.18s ease, color 0.25s ease; }
 body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
 /* Solange die Wortmarke ueber der vermil TB liegt: Schrift + Unterstrich
-   weiss (analog zu den anderen Ribbon-Elementen). Highlight beim Hover
-   per leichter Opacity-Modulation. */
-body.mission-view.nav-on-vermil .wordmark { color: #fff; }
+   weiss. Beim Hover Farbumkehr: weisse Box + rote Schrift. Padding +
+   Position-Kompensation halten die Glyphen visuell an gleicher Stelle,
+   damit beim Hover kein Layout-Sprung entsteht. */
+body.mission-view.nav-on-vermil .wordmark {
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 3px;
+  top: 22px;
+  left: 60px;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
 body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
-body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; opacity: 0.7; }
+body.mission-view.nav-on-vermil .wordmark:hover {
+  background: #fff;
+  color: var(--vermil);
+  opacity: 1;
+}
+body.mission-view.nav-on-vermil .wordmark:hover .mark { border-bottom-color: var(--vermil); }
 /* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
    Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
    invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
@@ -1073,10 +1086,14 @@ body.mission-view.nav-on-vermil .nav-kontakt.is-active {
 body.mission-view.nav-on-vermil .nav-cta {
   background: #fff;
   color: var(--vermil);
+  /* Transparente Border vorhalten, damit das spaetere Hover-Border den
+     Button nicht vergroessert (kein Layout-Sprung). */
+  border: 1.5px solid transparent;
 }
 body.mission-view.nav-on-vermil .nav-cta:hover {
-  background: rgba(255,255,255,0.85);
-  color: var(--vermil);
+  background: var(--vermil);
+  color: #fff;
+  border-color: #fff;
 }
 /* EN/DE-Toggle: Default-Opacity ist 0.35 (zu blass auf vermil). In
    nav-on-vermil auf 0.85 anheben, beim Hover auf 1.0 als Highlight. */
