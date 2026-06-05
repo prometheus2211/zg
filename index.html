@@ -1207,11 +1207,13 @@ body.team-view .team-section .section-cta {
    Intro + Press-Blocks mittig und schmaler, kleinere Schrift, CTA-
    Reihe aus, Schluss-CTA-Box analog Mission/Team. */
 body.kontakt-view .kontakt-intro {
-  max-width: clamp(280px, 48vw, 640px);
-  margin-left: auto;
-  margin-right: auto;
-  font-size: clamp(14px, 1.15vw, 18px);
-  line-height: 1.55;
+  /* Einleitungs-Absatz ueber den Adress-Boxen ausgeblendet — die Boxen
+     selbst sind eindeutig genug. Margin-Top fuer Ribbon-Abstand wandert
+     deshalb auf die erste Press-Box (unten). */
+  display: none;
+}
+body.kontakt-view .contact-section .press-block:first-of-type {
+  margin-top: 120px;
 }
 body.kontakt-view .press-block {
   max-width: clamp(280px, 48vw, 640px);
