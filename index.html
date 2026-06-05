@@ -1023,14 +1023,17 @@ body.mission-view .nav { left: 0; }
    Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
    und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
    liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease, opacity 0.3s ease; }
+body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease; }
 body.mission-view.nav-on-vermil .nav { background: transparent; }
+/* Ribbon-fading nutzt visibility (binaer) statt opacity (transitional),
+   damit es waehrend des Aus-/Einblendens KEINEN halb-transparenten
+   Zwischenzustand gibt, durch den Body-Text scheinen koennte. */
 /* Fade-Band: Ribbon + Wortmarke blenden kurz aus, wenn die TB-Unterkante
    den Body-Anfang erreicht (per JS Klasse 'ribbon-fading' am body). Beide
    bekommen opacity-Transitions, damit das Ein-/Ausblenden weich ist. */
 body.mission-view.ribbon-fading .nav,
 body.mission-view.ribbon-fading .wordmark {
-  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 /* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
@@ -2430,7 +2433,11 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     if (bodyEl) {
       var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
       var reachY = bodyTopDoc - navRect.height;
-      var inFadeBand = window.scrollY > reachY - 80 && window.scrollY < reachY - 10;
+      /* Ausblendband breit genug, damit beim normalen Scroll der Wechsel
+         deutlich ist; Ende kurz vor reachY (Body-Top genau unter Ribbon),
+         damit der Pfeil-Klick (Ziel = reachY) auf sichtbaren Standard-
+         Ribbon trifft. */
+      var inFadeBand = window.scrollY > reachY - 140 && window.scrollY < reachY - 2;
       document.body.classList.toggle('ribbon-fading', inFadeBand);
     } else {
       document.body.classList.remove('ribbon-fading');
