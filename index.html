@@ -2219,6 +2219,16 @@ function applyView() {
     if (activeEl) activeEl.classList.add('is-active');
   }
   window.scrollTo(0, 0);
+  /* Ribbon-State (nav-on-vermil / ribbon-fading) sofort neu setzen,
+     damit beim Wechsel von Landing zu einer Section-View nicht kurz der
+     Standard-Ribbon im warm-weissen Hintergrund aufblitzt, bevor das
+     Scroll-Event-Handling greift. Doppelter Aufruf (sync + nach Layout)
+     deckt sowohl die DOM-Klassen-Aenderung als auch das fertige Layout
+     der TB ab. */
+  if (window.__updateRibbonState) {
+    window.__updateRibbonState();
+    requestAnimationFrame(window.__updateRibbonState);
+  }
 }
 function navigate(view) {
   var newUrl;
@@ -2485,6 +2495,10 @@ window.__SECTION_VIEW_CONFIGS = [
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   window.addEventListener('hashchange', function() { setTimeout(update, 0); });
+  /* Expose, damit applyView() (history.pushState-Routen) den Ribbon-State
+     direkt nach View-Wechsel synchron neu setzen kann — sonst flasht der
+     Ribbon kurz im warm-weissen Standard, bevor nav-on-vermil greift. */
+  window.__updateRibbonState = update;
   update();
 })();
 
