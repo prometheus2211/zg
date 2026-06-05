@@ -1163,6 +1163,40 @@ body.mission-view .mission-section .section-cta {
      Wiedereinblenden einfach diese Regel auskommentieren. */
   display: none;
 }
+
+/* ─── Team-View: Mission-Format auf Team-Body uebertragen ────────────
+   Body-Block mittig, schmalere Lesezeile, kleinere Mitglieds-Texte,
+   CTA-Icons ausgeblendet. Eine .mission-closing-Box am Ende des
+   team-body uebernimmt die rote Call-to-Action-Optik aus Mission. */
+body.team-view .team-body {
+  max-width: clamp(280px, 48vw, 640px);
+  margin-left: auto;
+  margin-right: auto;
+}
+body.team-view .team-member {
+  margin: 0 0 36px;
+  gap: 24px;
+}
+body.team-view .team-member-image {
+  flex: 0 0 140px;
+  width: 140px;
+  height: 140px;
+}
+body.team-view .team-member-name {
+  font-size: clamp(20px, 2.1vw, 28px);
+  margin: 0 0 8px;
+}
+body.team-view .team-member-bio {
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.55;
+}
+body.team-view .team-member-role {
+  margin: 0 0 4px;
+}
+body.team-view .team-section .section-cta {
+  /* CTA-Reihe analog zu Mission ausgeblendet (HTML bleibt). */
+  display: none;
+}
 /* Kontakt-View: Abstand zwischen Headline-Box und Intro-Absatz */
 body.kontakt-view .kontakt-headline-box { margin-bottom: 32px; }
 /* Kontakt-View: graues "Kontakt"-Label über der Headline-Box ausblenden,
@@ -1880,6 +1914,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
           <p class="team-member-bio" id="team-bio-constantin" data-de="Hier steht später eine kurze Vorstellung — beruflicher Hintergrund, Schwerpunkte und Motivation für das Engagement im Zentrum Grundrechte. Bis dahin füllt dieser Platzhalter den vorgesehenen Bereich und gibt einen Eindruck vom Layout." data-en="A brief introduction will appear here — professional background, focus areas and motivation for the work at Zentrum Grundrechte. Until then, this placeholder fills the intended area and gives an impression of the layout.">Hier steht später eine kurze Vorstellung — beruflicher Hintergrund, Schwerpunkte und Motivation für das Engagement im Zentrum Grundrechte. Bis dahin füllt dieser Platzhalter den vorgesehenen Bereich und gibt einen Eindruck vom Layout.</p>
         </div>
       </article>
+      <div class="mission-closing" id="team-closing" data-de="Wir bauen das Zentrum gemeinsam auf.<br><span class=mission-closing-line2>Sind Sie dabei? <a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're building the Zentrum together.<br><span class=mission-closing-line2>Will you join us? <a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir bauen das Zentrum gemeinsam auf.<br><span class=mission-closing-line2>Sind Sie dabei? <a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     </div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="team-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2320,11 +2355,10 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
    schreibt die Breite inline auf alle abhaengigen Elemente. ── */
 (function() {
   var configs = [
-    /* Mission ist absichtlich nicht in der Sync-Liste: die Mission-TB ist
-       full-width (100%), Body und CTA-Reihe behalten ihre CSS-Default-
-       Breiten. Wuerde JS hier laufen, wuerde es Body und CTA auf 100%
-       ziehen. */
-    { viewClass: 'team-view',         sectionSel: '.team-section',        tbSel: '.team-headline-box',        bodySels: ['.team-body'],                                          blockSel: null              },
+    /* Mission und Team sind absichtlich nicht in der Sync-Liste: ihre TBs
+       sind full-width (100vw), Body und CTA-Reihe behalten ihre CSS-
+       Default-Breiten. Wuerde JS hier laufen, wuerde es Body und CTA
+       auf 100vw ziehen. */
     { viewClass: 'kontakt-view',      sectionSel: '.contact-section',     tbSel: '.kontakt-headline-box',     bodySels: ['.kontakt-intro'],                                      blockSel: '.press-block'    },
     { viewClass: 'unterstuetzen-view',sectionSel: '.unterstuetzen-section',tbSel: '.unterstuetzen-headline-box',bodySels: ['.unterstuetzen-body'],                                 blockSel: '.support-block'  }
   ];
