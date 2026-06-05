@@ -688,7 +688,7 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
 }
 /* Mission-Body etwas kleinere Schrift als Team-Body, damit der laengere Text
    ruhiger lesbar bleibt. */
-.mission-body { font-size: clamp(17px, 1.4vw, 22px); }
+.mission-body { font-size: clamp(14px, 1.15vw, 18px); }
 /* Unterstuetzen-Body uebernimmt die Typografie der Kontakt-Intro
    (groesser, 400er-Weight, etwas dichtere Zeilen). max-width ist ein CSS-
    Fallback; JS misst nach dem Layout die Breite der Headline-Box und
@@ -802,11 +802,11 @@ body.kontakt-view .contact-email { margin-top: 24px; }
 .mission-sub {
   display: block;
   box-sizing: border-box;
-  margin: 36px 0 24px;
-  padding: 14px 22px;
+  margin: 32px 0 20px;
+  padding: 12px 18px;
   background: #fff;
   border: 1.5px solid var(--vermil);
-  font-size: clamp(22px, 2.8vw, 36px);
+  font-size: clamp(18px, 2.3vw, 30px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -820,11 +820,11 @@ body.inverted .mission-sub { background: var(--vermil); color: #fff; border-colo
 .mission-closing {
   display: block;
   box-sizing: border-box;
-  margin: 24px 0 24px;
-  padding: 18px 24px;
+  margin: 20px 0 20px;
+  padding: 14px 20px;
   border: 1.5px solid var(--vermil);
   background: var(--vermil);
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: clamp(20px, 2.5vw, 32px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -841,7 +841,7 @@ body.inverted .mission-closing { background: #fff; color: var(--vermil); border-
   display: inline-block;
   margin-left: 0;
   font-family: inherit;
-  font-size: clamp(18px, 2.2vw, 30px);
+  font-size: clamp(15px, 1.8vw, 24px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -1125,11 +1125,11 @@ body.mission-view .mission-body,
 body.team-view .team-body,
 body.kontakt-view .kontakt-intro,
 body.unterstuetzen-view .unterstuetzen-body { margin-top: 120px; }
-/* Body und CTA-Reihe behalten die alte (TB-min-width-aequivalente) Breite,
-   damit sich auf der Mission-Seite optisch sonst nichts verschiebt. */
+/* Body und CTA-Reihe: Breite an die kleinere Mission-Schrift angepasst —
+   knapp 80% der frueheren Werte fuer eine entspannte Lesezeile. */
 body.mission-view .mission-body,
 body.mission-view .mission-section .section-cta {
-  max-width: clamp(360px, 68vw, 920px);
+  max-width: clamp(320px, 56vw, 760px);
 }
 /* Mission: Body-Block, TB-Headline, Boxen sind horizontal mittig — der
    Text-Inhalt darin bleibt aber linksbuendig. Body-Text ist Blocksatz.
