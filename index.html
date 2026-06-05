@@ -1129,10 +1129,13 @@ body.unterstuetzen-view .unterstuetzen-headline-box {
 /* Body unter der TB bekommt Top-Abstand > Ribbon-Hoehe, damit beim Pfeil-
    Klick (Ziel = body.top - navH) die TB vollstaendig weg ist und der
    Ribbon im Endzustand bereits in der Standard-Variante gerendert wird. */
-body.mission-view .mission-body,
 body.team-view .team-body,
 body.kontakt-view .kontakt-intro,
 body.unterstuetzen-view .unterstuetzen-body { margin-top: 120px; }
+/* Mission verwendet das neue Hero/Ribbon-Verhalten: kein Abstand zwischen
+   TB und Body — Pfeil-Klick scrollt so weit, dass die Ribbon-Unterkante
+   genau mit der TB-Unterkante abschliesst. */
+body.mission-view .mission-body { margin-top: 0; }
 /* Body und CTA-Reihe: Breite an die kleinere Mission-Schrift angepasst,
    etwas schmaler fuer eine entspannte Lesezeile. */
 body.mission-view .mission-body,
@@ -2595,23 +2598,36 @@ window.__SECTION_VIEW_CONFIGS = [
       if (h.classList.contains('section-scroll-hint')) {
         var navEl = document.querySelector('.nav');
         var cfgs = window.__SECTION_VIEW_CONFIGS || [];
-        var bodyEl = null;
+        var activeCfg = null;
         for (var i = 0; i < cfgs.length; i++) {
           if (document.body.classList.contains(cfgs[i].view)) {
-            bodyEl = document.querySelector(cfgs[i].body);
+            activeCfg = cfgs[i];
             break;
           }
         }
-        if (bodyEl && navEl) {
+        if (activeCfg && navEl) {
           var navH = navEl.getBoundingClientRect().height;
-          var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
-          /* Safety: Ziel muss IMMER >= 100vh + Puffer sein, damit die TB
-             vollstaendig nach oben weggescrollt ist und der Ribbon im
-             Endzustand bereits in der Standard-Variante (warm-weiss)
-             gerendert wird, nicht in der vermil-invertierten Phase. */
-          var target = Math.max(bodyTopDoc - navH, window.innerHeight + 20);
-          window.scrollTo({ top: target, behavior: 'smooth' });
-          return;
+          /* Mission: Spezielles Verhalten — Ribbon-Unterkante landet
+             exakt auf der TB-Unterkante (TB.bottom - navH). Beim weiteren
+             Scrollen wechselt nav-on-vermil dann von rot auf weiss. */
+          if (activeCfg.view === 'mission-view') {
+            var tbEl = document.querySelector(activeCfg.tb);
+            if (tbEl) {
+              var tbBottomDoc = tbEl.getBoundingClientRect().bottom + window.scrollY;
+              window.scrollTo({ top: tbBottomDoc - navH, behavior: 'smooth' });
+              return;
+            }
+          }
+          /* Team/Kontakt/Unterstuetzen: Body-Top knapp unter den Ribbon
+             schieben, dabei mindestens 100vh + Puffer scrollen, damit die
+             TB komplett aus dem Viewport ist. */
+          var bodyEl = document.querySelector(activeCfg.body);
+          if (bodyEl) {
+            var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
+            var target = Math.max(bodyTopDoc - navH, window.innerHeight + 20);
+            window.scrollTo({ top: target, behavior: 'smooth' });
+            return;
+          }
         }
       }
       window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
