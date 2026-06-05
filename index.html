@@ -1009,74 +1009,27 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    Body und Pfeil liegen darunter. Section-Top-Padding wird hier auf 0
    gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
 body.mission-view .mission-section { padding-top: 0; }
-/* Mission-View: Nav (Ribbon) UND Wortmarke muessen VOR der vermil TB
-   liegen. Wortmarke z-index 11 (ueber Nav), damit sie nicht von der
-   deckenden Nav-Flaeche verdeckt wird. */
-body.mission-view .nav { z-index: 10; }
+/* Mission-View: Nav + Wortmarke spannen sich ueber die volle Viewport-
+   Breite (durchgehender Ribbon-Streifen). Wortmarke z-index 11 (ueber
+   Nav), damit sie nicht von der deckenden Nav-Flaeche verdeckt wird. */
+body.mission-view .nav { z-index: 10; left: 0; }
 body.mission-view .wordmark { z-index: 11; }
-/* Damit der Ribbon eine durchgehende, von links bis rechts deckende
-   Flaeche bildet (nicht nur die Nav-Items rechts), wird .nav in
-   Mission-View ueber die volle Viewport-Breite gestreckt. */
-body.mission-view .nav { left: 0; }
-/* Wenn der Ribbon ueber den Body schwebt (also TB nach oben weggescrollt
-   ist), bekommt er eine deckende Flaeche (warm-weiss) plus dezenten
-   Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
-   und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
-   liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease; }
-body.mission-view.nav-on-vermil .nav { background: transparent; }
 /* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
    Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
-   weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
-   120px liegt sicher ueber jeder typischen Nav-Hoehe (Desktop ~78px,
-   Mobile kleiner). */
+   weggescrollt ist und der Ribbon ueber neutraler Flaeche sitzt. */
 body.mission-view .mission-body { margin-top: 120px; }
-/* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
-   beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
-   aussieht. */
-body.mission-view .wordmark { transition: opacity 0.18s ease, color 0.25s ease; }
-body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
-/* Solange die Wortmarke ueber der vermil TB liegt: Schrift + Unterstrich
-   weiss (analog zu den anderen Ribbon-Elementen). Highlight beim Hover
-   per leichter Opacity-Modulation. */
-body.mission-view.nav-on-vermil .wordmark { color: #fff; }
-body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
-body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; opacity: 0.7; }
-/* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
-   Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
-   invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
-   wird die Klasse entfernt und die Default-Farben (dunkel auf bg)
-   greifen wieder. Smooth-Transitions sorgen fuer weiches Umblenden. */
-body.mission-view .nav-links a,
-body.mission-view .nav-kontakt,
-body.mission-view .nav-cta,
-body.mission-view .lang-toggle {
-  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-}
-body.mission-view.nav-on-vermil .nav-links a,
-body.mission-view.nav-on-vermil .nav-kontakt { color: #fff; }
-body.mission-view.nav-on-vermil .nav-links a.is-active,
-body.mission-view.nav-on-vermil .nav-kontakt.is-active {
-  color: #fff;
-  border-bottom-color: #fff;
-}
-body.mission-view.nav-on-vermil .nav-cta {
-  background: #fff;
-  color: var(--vermil);
-}
-body.mission-view.nav-on-vermil .nav-cta:hover {
-  background: rgba(255,255,255,0.85);
-  color: var(--vermil);
-}
-/* EN/DE-Toggle: Default-Opacity ist 0.35 (zu blass auf vermil). In
-   nav-on-vermil auf 0.85 anheben, beim Hover auf 1.0 als Highlight. */
-body.mission-view.nav-on-vermil .lang-toggle { color: #fff; opacity: 0.85; }
-body.mission-view.nav-on-vermil .lang-toggle:hover { opacity: 1; }
-/* Ribbon-Links: weisser Unterstrich erscheint beim Hover als Highlight. */
-body.mission-view.nav-on-vermil .nav-links a:hover,
-body.mission-view.nav-on-vermil .nav-kontakt:hover {
-  color: #fff;
-  border-bottom-color: #fff;
+/* Standard-Stil ueber neutralem (warm-weissem) Hintergrund: Ribbon
+   bekommt eine deckende Flaeche, damit Body-Text NIE durch den Ribbon
+   sichtbar scheint. Weiche opacity-Transition fuer das Ein-/Ausblenden. */
+body.mission-view .nav { background: var(--bg); transition: opacity 0.3s ease; }
+body.mission-view .wordmark { transition: opacity 0.3s ease; }
+/* Solange Nav + Wortmarke ueber der vermil TB liegen (Klasse
+   'nav-on-vermil' am body), werden BEIDE komplett ausgeblendet. Sie
+   erscheinen erst, wenn der Hintergrund neutral ist (TB weggescrollt). */
+body.mission-view.nav-on-vermil .nav,
+body.mission-view.nav-on-vermil .wordmark {
+  opacity: 0;
+  pointer-events: none;
 }
 body.mission-view .mission-headline-box {
   display: flex;
