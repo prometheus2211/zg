@@ -1129,14 +1129,15 @@ body.unterstuetzen-view .unterstuetzen-headline-box {
 /* Body unter der TB bekommt Top-Abstand > Ribbon-Hoehe, damit beim Pfeil-
    Klick (Ziel = body.top - navH) die TB vollstaendig weg ist und der
    Ribbon im Endzustand bereits in der Standard-Variante gerendert wird. */
-body.kontakt-view .kontakt-intro,
-body.unterstuetzen-view .unterstuetzen-body { margin-top: 120px; }
-/* Mission + Team: Pfeil-Klick scrollt so weit, dass die Ribbon-Unterkante
-   mit der TB-Unterkante abschliesst. Body bekommt einen kleinen Top-
-   Abstand (analog zum Abstand zwischen Zwischenueberschriften und Absatz).
-   Team braucht etwas mehr Luft zwischen Hero und erstem Profil. */
+body.kontakt-view .kontakt-intro { margin-top: 120px; }
+/* Mission + Team + Unterstuetzen: Pfeil-Klick scrollt so weit, dass die
+   Ribbon-Unterkante mit der TB-Unterkante abschliesst. Body bekommt
+   einen kleinen Top-Abstand (analog zum Abstand zwischen Zwischen-
+   ueberschriften und Absatz). Team braucht etwas mehr Luft zwischen
+   Hero und erstem Profil. */
 body.mission-view .mission-body { margin-top: 20px; }
 body.team-view .team-body { margin-top: 56px; }
+body.unterstuetzen-view .unterstuetzen-body { margin-top: 20px; }
 /* Body und CTA-Reihe: Breite an die kleinere Mission-Schrift angepasst,
    etwas schmaler fuer eine entspannte Lesezeile. */
 body.mission-view .mission-body,
@@ -2552,7 +2553,7 @@ window.__SECTION_VIEW_CONFIGS = [
     var tbRect = tb.getBoundingClientRect();
     var navRect = nav.getBoundingClientRect();
     var overlap;
-    if (cfg.view === 'mission-view' || cfg.view === 'team-view' || cfg.view === 'kontakt-view') {
+    if (cfg.view === 'mission-view' || cfg.view === 'team-view' || cfg.view === 'kontakt-view' || cfg.view === 'unterstuetzen-view') {
       /* Mission + Team: nav-on-vermil aktiv solange die TB-Unterkante
          AUF oder UNTERHALB der Ribbon-Unterkante liegt. Genau am Pfeil-
          Klick-Ziel (TB.bottom == navRect.bottom) bleibt es noch rot —
@@ -2622,7 +2623,7 @@ window.__SECTION_VIEW_CONFIGS = [
              landet exakt auf der TB-Unterkante (TB.bottom - navH). Beim
              weiteren Scrollen wechselt nav-on-vermil dann von rot auf
              weiss. */
-          if (activeCfg.view === 'mission-view' || activeCfg.view === 'team-view' || activeCfg.view === 'kontakt-view') {
+          if (activeCfg.view === 'mission-view' || activeCfg.view === 'team-view' || activeCfg.view === 'kontakt-view' || activeCfg.view === 'unterstuetzen-view') {
             var tbEl = document.querySelector(activeCfg.tb);
             if (tbEl) {
               var tbBottomDoc = tbEl.getBoundingClientRect().bottom + window.scrollY;
