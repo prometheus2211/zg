@@ -1149,28 +1149,9 @@ body.mission-view .mission-body {
   margin-left: auto;
   margin-right: auto;
 }
-body.mission-view .mission-sub {
-  text-align: left;
-}
-/* Mission-Schluss-Box erstreckt sich edge-to-edge ueber den vollen
-   Viewport (analog zur TB). Text innerhalb linksbuendig, beginnt aber
-   exakt an der linken Kante des Body-Blocks: dafuer Padding-Left/Right
-   = (100vw - body-Breite) / 2 — body benutzt clamp(280px, 48vw, 640px). */
+body.mission-view .mission-sub,
 body.mission-view .mission-closing {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  /* Mehr Luft zum Textkoerper darueber. */
-  margin-top: clamp(48px, 7vh, 96px);
-  box-sizing: border-box;
-  padding-left: calc((100vw - clamp(280px, 48vw, 640px)) / 2);
-  padding-right: calc((100vw - clamp(280px, 48vw, 640px)) / 2);
   text-align: left;
-  border-left: none;
-  border-right: none;
 }
 /* Mission: CTA-Icons (Newsletter / Mitmachen / Fragen) proportional zur
    kleineren Body-Schrift verkleinert. */
