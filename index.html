@@ -1184,7 +1184,7 @@ body.team-view .team-body {
   margin-right: auto;
 }
 body.team-view .team-member {
-  margin: 0 0 36px;
+  margin: 0 0 64px;
   gap: 24px;
 }
 body.team-view .team-member-image {
@@ -1312,10 +1312,10 @@ body.kontakt-view .press-block {
   border: 1.5px solid var(--vermil);
 }
 /* Adress-Kasten ist das erste sichtbare Body-Element nach der TB —
-   bekommt deshalb den 120px-Sicherheitsabstand zum Ribbon. (Frueher
-   margin-top: 0, weil ein Intro-Absatz darueber stand — der ist jetzt
-   weg.) */
-body.kontakt-view .address-block { margin-top: 120px; }
+   schliesst mit kleinem 20px-Abstand an (analog Mission/Team-Body).
+   Sicherheitsabstand zum Ribbon entsteht durch das neue Pfeil-Ziel
+   (TB.bottom - navH) + nav-on-vermil-Logik. */
+body.kontakt-view .address-block { margin-top: 20px; }
 body.kontakt-view .press-label {
   display: block;
   font-size: clamp(22px, 2.8vw, 36px);
@@ -2551,7 +2551,7 @@ window.__SECTION_VIEW_CONFIGS = [
     var tbRect = tb.getBoundingClientRect();
     var navRect = nav.getBoundingClientRect();
     var overlap;
-    if (cfg.view === 'mission-view' || cfg.view === 'team-view') {
+    if (cfg.view === 'mission-view' || cfg.view === 'team-view' || cfg.view === 'kontakt-view') {
       /* Mission + Team: nav-on-vermil aktiv solange die TB-Unterkante
          AUF oder UNTERHALB der Ribbon-Unterkante liegt. Genau am Pfeil-
          Klick-Ziel (TB.bottom == navRect.bottom) bleibt es noch rot —
@@ -2621,7 +2621,7 @@ window.__SECTION_VIEW_CONFIGS = [
              landet exakt auf der TB-Unterkante (TB.bottom - navH). Beim
              weiteren Scrollen wechselt nav-on-vermil dann von rot auf
              weiss. */
-          if (activeCfg.view === 'mission-view' || activeCfg.view === 'team-view') {
+          if (activeCfg.view === 'mission-view' || activeCfg.view === 'team-view' || activeCfg.view === 'kontakt-view') {
             var tbEl = document.querySelector(activeCfg.tb);
             if (tbEl) {
               var tbBottomDoc = tbEl.getBoundingClientRect().bottom + window.scrollY;
