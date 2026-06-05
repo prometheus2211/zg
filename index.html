@@ -984,8 +984,8 @@ body.mission-view,
 body.team-view,
 body.kontakt-view,
 body.unterstuetzen-view { background: var(--bg); }
-/* Kontakt-View: Kontakt-Sektion bekommt Hero-ähnlichen Top-Abstand */
-body.kontakt-view .contact-section { padding-top: 14vh; }
+/* (Kontakt-Section bekommt jetzt padding-top: 0 im neuen Hero-Pattern-
+   Block weiter unten — frueherer 14vh-Override entfernt.) */
 /* Kontakt-View: Footer schließt direkt nach den Inhalten der Section ab
    (zuletzt die CTA-Reihe Newsletter/Mitmachen/Spenden). Kein zusätzlicher
    Spacer — die Section selbst hat min-height: 100vh und sorgt damit auf
@@ -1005,95 +1005,81 @@ body.unterstuetzen-view .unterstuetzen-headline-box { min-width: 0; }
    (Stil-Anlehnung an freiheitsrechte.org). Body und CTA-Reihe behalten
    die alte, an der frueheren TB-Breite orientierte Maximalbreite —
    deshalb wird Mission aus dem JS-Sync herausgenommen. */
-/* Mission-View: Hero-Pattern wie Landing — TB fuellt den ersten Viewport,
-   Body und Pfeil liegen darunter. Section-Top-Padding wird hier auf 0
-   gesetzt, damit die TB nahtlos ab scrollY=0 beginnt. */
-body.mission-view .mission-section { padding-top: 0; }
-/* Mission-View: Nav (Ribbon) UND Wortmarke muessen VOR der vermil TB
-   liegen. Wortmarke z-index 11 (ueber Nav), damit sie nicht von der
-   deckenden Nav-Flaeche verdeckt wird. */
-body.mission-view .nav { z-index: 10; }
-body.mission-view .wordmark { z-index: 11; }
-/* Damit der Ribbon eine durchgehende, von links bis rechts deckende
-   Flaeche bildet (nicht nur die Nav-Items rechts), wird .nav in
-   Mission-View ueber die volle Viewport-Breite gestreckt. */
-body.mission-view .nav { left: 0; }
-/* Wenn der Ribbon ueber den Body schwebt (also TB nach oben weggescrollt
-   ist), bekommt er eine deckende Flaeche (warm-weiss) plus dezenten
-   Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
-   und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
-   liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease; }
-body.mission-view.nav-on-vermil .nav { background: transparent; }
-/* Ribbon-fading: weicher Opacity-Fade, getriggert nur waehrend die TB-
-   Headline-Schrift durch den Ribbon-Bereich scrollt. */
-/* Fade-Band: Ribbon + Wortmarke blenden kurz aus, wenn die TB-Unterkante
-   den Body-Anfang erreicht (per JS Klasse 'ribbon-fading' am body). Beide
-   bekommen opacity-Transitions, damit das Ein-/Ausblenden weich ist. */
-body.mission-view.ribbon-fading .nav,
-body.mission-view.ribbon-fading .wordmark {
-  opacity: 0;
-  pointer-events: none;
+/* ════════════════════════════════════════════════════════════════
+   SECTION-HERO-PATTERN (Mission, Team, Kontakt, Unterstuetzen):
+   TB fuellt den ersten Viewport, Scroll-Pfeil unten, Body startet
+   danach. Ribbon-Verhalten: invertiert/transparent ueber TB,
+   deckend/Standard ueber Body. Verhalten wird per JS-Klassen
+   'nav-on-vermil' (Ribbon liegt ueber TB) und 'ribbon-fading'
+   (Headline-Schrift kreuzt den Ribbon) gesteuert.
+═══════════════════════════════════════════════════════════════════ */
+
+/* Section-Top-Padding auf 0, damit TB nahtlos ab scrollY=0 beginnt. */
+body.mission-view .mission-section,
+body.team-view .team-section,
+body.kontakt-view .contact-section,
+body.unterstuetzen-view .unterstuetzen-section { padding-top: 0; }
+
+/* Nav (Ribbon) + Wortmarke: z-index ueber TB (z=6), Nav volle Breite,
+   deckende warm-weisse Flaeche (im Standard-Modus). */
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav {
+  z-index: 10;
+  left: 0;
+  background: var(--bg);
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease;
 }
-/* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
-   Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
-   weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
-   120px liegt sicher ueber jeder typischen Nav-Hoehe (Desktop ~78px,
-   Mobile kleiner). */
-body.mission-view .mission-body { margin-top: 120px; }
-/* Wortmarke bekommt eine weiche Farb-Transition, damit das Umblenden
-   beim Scrollen ueber die TB-Kante hinweg analog zum Ribbon weich
-   aussieht. */
-body.mission-view .wordmark { transition: opacity 0.18s ease, color 0.25s ease; }
-body.mission-view .wordmark .mark { transition: border-color 0.25s ease; }
-/* Solange die Wortmarke ueber der vermil TB liegt: Schrift + Unterstrich
-   weiss. Beim Hover Farbumkehr: weisse Box + rote Schrift. Padding +
-   Position-Kompensation halten die Glyphen visuell an gleicher Stelle,
-   damit beim Hover kein Layout-Sprung entsteht. */
-body.mission-view.nav-on-vermil .wordmark { color: #fff; }
-body.mission-view.nav-on-vermil .wordmark .mark { border-bottom-color: #fff; }
-body.mission-view.nav-on-vermil .wordmark:hover { color: #fff; opacity: 0.7; }
-/* Mission-View: Solange der Ribbon ueber der vermil TB liegt (per JS
-   Klasse 'nav-on-vermil' am body), werden Nav-Schrift und CTA-Button
-   invertiert — weiss auf rot. Sobald die TB darueber gescrollt ist,
-   wird die Klasse entfernt und die Default-Farben (dunkel auf bg)
-   greifen wieder. Smooth-Transitions sorgen fuer weiches Umblenden. */
-body.mission-view .nav-links a,
-body.mission-view .nav-kontakt,
-body.mission-view .nav-cta,
-body.mission-view .lang-toggle {
-  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark {
+  z-index: 11;
+  transition: opacity 0.18s ease, color 0.25s ease;
 }
-body.mission-view.nav-on-vermil .nav-links a,
-body.mission-view.nav-on-vermil .nav-kontakt { color: #fff; }
-body.mission-view.nav-on-vermil .nav-links a.is-active,
-body.mission-view.nav-on-vermil .nav-kontakt.is-active {
-  color: #fff;
-  border-bottom-color: #fff;
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark .mark {
+  transition: border-color 0.25s ease;
 }
-body.mission-view.nav-on-vermil .nav-cta {
+
+/* Ueber der vermil TB (Klasse 'nav-on-vermil'): Nav transparent, Schrift
+   weiss, CTA invertiert. */
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav { background: transparent; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark { color: #fff; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark .mark { border-bottom-color: #fff; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark:hover { color: #fff; opacity: 0.7; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-links a,
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-kontakt { color: #fff; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-links a.is-active,
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-kontakt.is-active { color: #fff; border-bottom-color: #fff; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-links a:hover,
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-kontakt:hover { color: #fff; border-bottom-color: #fff; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-cta {
   background: #fff;
   color: var(--vermil);
-  /* Transparente Border vorhalten, damit das spaetere Hover-Border den
-     Button nicht vergroessert (kein Layout-Sprung). */
   border: 1.5px solid transparent;
 }
-body.mission-view.nav-on-vermil .nav-cta:hover {
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-cta:hover {
   background: var(--vermil);
   color: #fff;
   border-color: #fff;
 }
-/* EN/DE-Toggle: Default-Opacity ist 0.35 (zu blass auf vermil). In
-   nav-on-vermil auf 0.85 anheben, beim Hover auf 1.0 als Highlight. */
-body.mission-view.nav-on-vermil .lang-toggle { color: #fff; opacity: 0.85; }
-body.mission-view.nav-on-vermil .lang-toggle:hover { opacity: 1; }
-/* Ribbon-Links: weisser Unterstrich erscheint beim Hover als Highlight. */
-body.mission-view.nav-on-vermil .nav-links a:hover,
-body.mission-view.nav-on-vermil .nav-kontakt:hover {
-  color: #fff;
-  border-bottom-color: #fff;
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .lang-toggle { color: #fff; opacity: 0.85; }
+body.nav-on-vermil:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .lang-toggle:hover { opacity: 1; }
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-links a,
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-kontakt,
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav-cta,
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .lang-toggle {
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
-body.mission-view .mission-headline-box {
+
+/* Fade-Band: Ribbon + Wortmarke unsichtbar, waehrend die Headline-Schrift
+   durch den Ribbon-Bereich scrollt. */
+body.ribbon-fading:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .nav,
+body.ribbon-fading:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hero-TB: 100vh hoch, edge-to-edge, Headline flex-mittig. */
+body.mission-view .mission-headline-box,
+body.team-view .team-headline-box,
+body.kontakt-view .kontakt-headline-box,
+body.unterstuetzen-view .unterstuetzen-headline-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1104,16 +1090,15 @@ body.mission-view .mission-headline-box {
   margin-left: -50vw;
   margin-right: -50vw;
   min-width: 0;
-  /* TB fuellt den Viewport. min-height schuetzt sehr niedrige Viewports
-     (Landscape-Mobile). Headline ist per align-items mittig. */
   height: 100vh;
   min-height: 440px;
   padding: clamp(80px, 14vh, 180px) clamp(24px, 5vw, 72px);
   border-radius: 0;
 }
-/* Scroll-Pfeil unter der Mission-TB (analog zur Landing-Variante,
-   nur weiss statt vermil — sitzt auf der vermil TB-Flaeche). */
-.mission-scroll-hint {
+
+/* Scroll-Pfeil unter jeder Section-TB (analog zur Landing-Variante,
+   weiss auf vermil). */
+.section-scroll-hint {
   position: absolute;
   bottom: 40px;
   left: 50%;
@@ -1128,10 +1113,18 @@ body.mission-view .mission-headline-box {
   padding: 8px 14px;
   transition: color 0.2s, transform 0.3s, opacity 0.4s;
 }
-.mission-scroll-hint svg { display: block; }
-.mission-scroll-hint:hover { transform: translateX(-50%) translateY(3px); opacity: 0.8; }
-.mission-scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); }
-@media (max-width: 640px) { .mission-scroll-hint { bottom: 28px; } }
+.section-scroll-hint svg { display: block; }
+.section-scroll-hint:hover { transform: translateX(-50%) translateY(3px); opacity: 0.8; }
+.section-scroll-hint.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); }
+@media (max-width: 640px) { .section-scroll-hint { bottom: 28px; } }
+
+/* Body unter der TB bekommt Top-Abstand > Ribbon-Hoehe, damit beim Pfeil-
+   Klick (Ziel = body.top - navH) die TB vollstaendig weg ist und der
+   Ribbon im Endzustand bereits in der Standard-Variante gerendert wird. */
+body.mission-view .mission-body,
+body.team-view .team-body,
+body.kontakt-view .kontakt-intro,
+body.unterstuetzen-view .unterstuetzen-body { margin-top: 120px; }
 /* Body und CTA-Reihe behalten die alte (TB-min-width-aequivalente) Breite,
    damit sich auf der Mission-Seite optisch sonst nichts verschiebt. */
 body.mission-view .mission-body,
@@ -1814,7 +1807,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   <div class="mission-content">
     <div class="mission-headline-box">
       <h1 class="mission-headline" id="mission-headline" data-de="Wir verteidigen Abwehr-<br>rechte. <em>Konsequent.</em>" data-en="We defend defensive<br>rights. <em>Resolutely.</em>">Wir verteidigen Abwehr-<br>rechte. <em>Konsequent.</em></h1>
-      <a class="mission-scroll-hint" href="#" aria-label="Weiter nach unten">
+      <a class="section-scroll-hint" href="#" aria-label="Weiter nach unten">
         <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
           <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -1845,6 +1838,11 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   <div class="team-content">
     <div class="team-headline-box">
       <h1 class="team-headline" id="team-headline" data-de="Macht braucht Grenzen.<br><em>Wir ziehen sie</em>." data-en="Power needs limits.<br><em>We set them</em>.">Macht braucht Grenzen.<br><em>Wir ziehen sie</em>.</h1>
+      <a class="section-scroll-hint" href="#" aria-label="Weiter nach unten">
+        <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
     <div class="team-body" id="team-body">
       <article class="team-member">
@@ -1886,6 +1884,11 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   <div class="unterstuetzen-content">
     <div class="unterstuetzen-headline-box">
       <h1 class="unterstuetzen-headline" id="unterstuetzen-headline" data-de="Wir klagen.<br><em>Sie machen es möglich.</em>" data-en="We litigate.<br><em>You make it possible.</em>">Wir klagen.<br><em>Sie machen es möglich.</em></h1>
+      <a class="section-scroll-hint" href="#" aria-label="Weiter nach unten">
+        <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
     <p class="unterstuetzen-body" id="unterstuetzen-body" data-de="Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise." data-en="Fundamental rights matter for every one of us. That is why we stand up for them. In doing so, we accept no government funding whatsoever. That is why we welcome your support — financial, through your ideas, or through your expertise.">Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise.</p>
     <div class="support-block">
@@ -1920,6 +1923,11 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     <p class="contact-label" id="contact-label" data-de="Kontakt" data-en="Contact">Kontakt</p>
     <div class="kontakt-headline-box">
       <h1 class="kontakt-headline" id="kontakt-headline" data-de="Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em>" data-en="Want to learn more?<br><em>Write to us.</em>">Sie wollen mehr erfahren?<br><em>Schreiben Sie uns.</em></h1>
+      <a class="section-scroll-hint" href="#" aria-label="Weiter nach unten">
+        <svg viewBox="0 0 36 18" width="38" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M2 2 L18 16 L34 2" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
     <p class="kontakt-intro" id="kontakt-intro" data-de="Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:" data-en="Want to support us with expertise and ideas? Or get in touch? Write to:">Sie wollen uns mit Expertise und Ideen unterstützen? Oder sich mit uns austauschen? Schreiben Sie an:</p>
     <div class="press-block address-block">
@@ -2404,20 +2412,34 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   fitAll();
 })();
 
-/* ── Mission-View: Nav-Farben invertieren (weiss), solange Ribbon
-   ueber der vermil TB liegt. Zusaetzlich kurzes Aus-/Einblenden
-   (ribbon-fading), wenn die TB-Unterkante an den Body-Text
-   heranscrollt — verhindert harten Farb-Sprung am Uebergang. ── */
+/* ── Section-Views (Mission, Team, Kontakt, Unterstuetzen): Nav-Farben
+   invertieren (nav-on-vermil), solange der Ribbon ueber der vermil TB
+   liegt. Zusaetzlich kurzes Aus-/Einblenden (ribbon-fading), waehrend
+   die TB-Headline-Schrift durch den Ribbon-Bereich scrollt. ── */
+window.__SECTION_VIEW_CONFIGS = [
+  { view: 'mission-view',      tb: '.mission-headline-box',      headline: '.mission-headline',      body: '.mission-body' },
+  { view: 'team-view',         tb: '.team-headline-box',         headline: '.team-headline',         body: '.team-body' },
+  { view: 'kontakt-view',      tb: '.kontakt-headline-box',      headline: '.kontakt-headline',      body: '.kontakt-intro' },
+  { view: 'unterstuetzen-view',tb: '.unterstuetzen-headline-box',headline: '.unterstuetzen-headline',body: '.unterstuetzen-body' }
+];
 (function() {
   var nav = document.querySelector('.nav');
   if (!nav) return;
+  function activeCfg() {
+    for (var i = 0; i < window.__SECTION_VIEW_CONFIGS.length; i++) {
+      var cfg = window.__SECTION_VIEW_CONFIGS[i];
+      if (document.body.classList.contains(cfg.view)) return cfg;
+    }
+    return null;
+  }
   function update() {
-    if (!document.body.classList.contains('mission-view')) {
+    var cfg = activeCfg();
+    if (!cfg) {
       document.body.classList.remove('nav-on-vermil');
       document.body.classList.remove('ribbon-fading');
       return;
     }
-    var tb = document.querySelector('.mission-headline-box');
+    var tb = document.querySelector(cfg.tb);
     if (!tb) {
       document.body.classList.remove('nav-on-vermil');
       document.body.classList.remove('ribbon-fading');
@@ -2428,17 +2450,7 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
     var overlap = tbRect.top < navRect.bottom && tbRect.bottom > navRect.top;
     document.body.classList.toggle('nav-on-vermil', overlap);
 
-    /* Fade-Band um den Punkt, an dem die TB-Unterkante den Body erreicht.
-       reachY = scroll-Position, an der die TB-Unterkante auf Hoehe der
-       Nav-Unterkante landet (= Body-Top genau unter dem Ribbon). Band
-       endet ca. 10px vor reachY, damit beim Pfeil-Klick (Ziel = reachY)
-       der Ribbon im Endzustand schon wieder sichtbar ist. */
-    /* Fade-Band: aktiv, solange die TB-Headline-Schrift vertikal mit dem
-       Ribbon ueberlappt. Das schliesst den Moment ein, in dem die Schrift
-       in den Ribbon-Bereich hineinscrollt, bleibt waehrend des Durchlaufs
-       hidden, und endet, sobald die Schrift komplett darueber hinaus-
-       gescrollt ist. */
-    var headlineEl = document.querySelector('.mission-headline');
+    var headlineEl = document.querySelector(cfg.headline);
     if (headlineEl) {
       var hRect = headlineEl.getBoundingClientRect();
       var hTopDoc = hRect.top + window.scrollY;
@@ -2457,9 +2469,10 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   update();
 })();
 
-/* ── Scroll-Pfeile (Landing UND Mission) ausblenden, sobald gescrollt wird ── */
+/* ── Scroll-Pfeile (Landing UND alle Section-Hero-Pfeile) ausblenden,
+   sobald gescrollt wird. ── */
 (function() {
-  var hints = document.querySelectorAll('.scroll-hint, .mission-scroll-hint');
+  var hints = document.querySelectorAll('.scroll-hint, .section-scroll-hint');
   if (!hints.length) return;
   var toggle = function() {
     var hidden = window.scrollY > 40;
@@ -2471,14 +2484,20 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
   hints.forEach(function(h) {
-    /* Click: weich nach unten scrollen. Spezialfall Mission-Pfeil:
-       so weit scrollen, dass der Body-Anfang exakt unter dem Ribbon
-       sitzt (Ribbon-Hoehe per getBoundingClientRect ermittelt). */
+    /* Click: weich nach unten scrollen. Fuer Section-Hero-Pfeile gezielt
+       so weit, dass der Body-Anfang exakt unter dem Ribbon sitzt. */
     h.addEventListener('click', function(e) {
       e.preventDefault();
-      if (h.classList.contains('mission-scroll-hint')) {
-        var bodyEl = document.querySelector('.mission-body');
+      if (h.classList.contains('section-scroll-hint')) {
         var navEl = document.querySelector('.nav');
+        var cfgs = window.__SECTION_VIEW_CONFIGS || [];
+        var bodyEl = null;
+        for (var i = 0; i < cfgs.length; i++) {
+          if (document.body.classList.contains(cfgs[i].view)) {
+            bodyEl = document.querySelector(cfgs[i].body);
+            break;
+          }
+        }
         if (bodyEl && navEl) {
           var navH = navEl.getBoundingClientRect().height;
           var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
@@ -2511,25 +2530,13 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
   function update() {
     var hash = window.location.hash;
 
-    if (hash === '#mission') {
-      /* Mission verwendet das Hero-Pattern (TB fuellt 100vh). Sowohl der
-         Ribbon (Nav) als auch die Wortmarke (oben links) bleiben durch-
-         gehend sichtbar — die Farben wechseln je nach TB-Ueberlappung
-         (separater Handler 'nav-on-vermil' weiter unten). */
+    if (hash === '#mission' || hash === '#team' || hash === '#kontakt' || hash === '#unterstuetzen') {
+      /* Alle vier Section-Views verwenden das Hero-Pattern (TB fuellt 100vh).
+         Ribbon und Wortmarke bleiben durchgehend sichtbar — Farben und
+         Sichtbarkeit werden je nach TB-/Headline-Position vom Handler
+         'nav-on-vermil' / 'ribbon-fading' weiter unten gesteuert. */
       if (wm) wm.classList.remove('is-hidden');
       if (nav) nav.classList.remove('is-hidden');
-      return;
-    }
-    if (hash === '#team' || hash === '#kontakt' || hash === '#unterstuetzen') {
-      /* Einfacher Scroll-Threshold fuer Team/Kontakt/Unterstuetzen:
-         Wortmarke und Nav sind bei scroll=0 sichtbar; sobald der Nutzer
-         ein paar Pixel nach unten scrollt (SCROLL_THRESHOLD), wird beides
-         ausgeblendet. Verhindert, dass der Ribbon mit dem vertikalen Logo
-         bzw. der Section-Headline-Box visuell kollidiert. */
-      var SCROLL_THRESHOLD = 24;
-      var hideOnView = window.scrollY > SCROLL_THRESHOLD;
-      if (wm) wm.classList.toggle('is-hidden', hideOnView);
-      if (nav) nav.classList.toggle('is-hidden', hideOnView);
       return;
     }
 
