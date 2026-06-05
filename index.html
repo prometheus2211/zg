@@ -1023,8 +1023,16 @@ body.mission-view .nav { left: 0; }
    Bottom-Shadow — damit Body-Text NIE optisch durch den Ribbon scheint
    und die Trennung klar ist. Solange wir in nav-on-vermil sind (Ribbon
    liegt ueber TB), bleibt der Hintergrund transparent. */
-body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease; }
+body.mission-view .nav { background: var(--bg); transition: background 0.25s ease, color 0.25s ease, opacity 0.3s ease; }
 body.mission-view.nav-on-vermil .nav { background: transparent; }
+/* Fade-Band: Ribbon + Wortmarke blenden kurz aus, wenn die TB-Unterkante
+   den Body-Anfang erreicht (per JS Klasse 'ribbon-fading' am body). Beide
+   bekommen opacity-Transitions, damit das Ein-/Ausblenden weich ist. */
+body.mission-view.ribbon-fading .nav,
+body.mission-view.ribbon-fading .wordmark {
+  opacity: 0;
+  pointer-events: none;
+}
 /* Mission-Body bekommt einen Top-Abstand > Ribbon-Hoehe, damit beim
    Pfeil-Klick (Scrollziel = body.top - navH) die TB vollstaendig
    weggescrollt ist und kein roter Streifen mehr oben sichtbar bleibt.
@@ -2390,22 +2398,43 @@ document.querySelectorAll('.wordmark, .vertical-wordmark').forEach(function(wm) 
 })();
 
 /* ── Mission-View: Nav-Farben invertieren (weiss), solange Ribbon
-   ueber der vermil TB liegt. Toggle anhand vertikaler Ueberlappung
-   zwischen TB und Nav. ── */
+   ueber der vermil TB liegt. Zusaetzlich kurzes Aus-/Einblenden
+   (ribbon-fading), wenn die TB-Unterkante an den Body-Text
+   heranscrollt — verhindert harten Farb-Sprung am Uebergang. ── */
 (function() {
   var nav = document.querySelector('.nav');
   if (!nav) return;
   function update() {
     if (!document.body.classList.contains('mission-view')) {
       document.body.classList.remove('nav-on-vermil');
+      document.body.classList.remove('ribbon-fading');
       return;
     }
     var tb = document.querySelector('.mission-headline-box');
-    if (!tb) { document.body.classList.remove('nav-on-vermil'); return; }
+    if (!tb) {
+      document.body.classList.remove('nav-on-vermil');
+      document.body.classList.remove('ribbon-fading');
+      return;
+    }
     var tbRect = tb.getBoundingClientRect();
     var navRect = nav.getBoundingClientRect();
     var overlap = tbRect.top < navRect.bottom && tbRect.bottom > navRect.top;
     document.body.classList.toggle('nav-on-vermil', overlap);
+
+    /* Fade-Band um den Punkt, an dem die TB-Unterkante den Body erreicht.
+       reachY = scroll-Position, an der die TB-Unterkante auf Hoehe der
+       Nav-Unterkante landet (= Body-Top genau unter dem Ribbon). Band
+       endet ca. 10px vor reachY, damit beim Pfeil-Klick (Ziel = reachY)
+       der Ribbon im Endzustand schon wieder sichtbar ist. */
+    var bodyEl = document.querySelector('.mission-body');
+    if (bodyEl) {
+      var bodyTopDoc = bodyEl.getBoundingClientRect().top + window.scrollY;
+      var reachY = bodyTopDoc - navRect.height;
+      var inFadeBand = window.scrollY > reachY - 80 && window.scrollY < reachY - 10;
+      document.body.classList.toggle('ribbon-fading', inFadeBand);
+    } else {
+      document.body.classList.remove('ribbon-fading');
+    }
   }
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
