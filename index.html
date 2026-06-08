@@ -172,10 +172,10 @@ body {
   position: relative;
   /* Hero immer 100vh hoch: garantiert, dass die Titelbox beim
      Maximal-Scroll IMMER aus dem Viewport geschoben wird – auch bei
-     schmal gezogenem Fenster. Auf sehr kleinen Viewports schützt
-     min-height. (Trade-off: auf schmalen, hohen Fenstern entsteht
-     etwas mehr Leerraum unter der TB.) */
+     schmal gezogenem Fenster. dvh respektiert auf Mobile die URL-
+     Leiste, damit der Scroll-Pfeil schon im First View liegt. */
   height: 100vh;
+  height: 100dvh;
   min-height: 440px;
   display: flex;
   flex-direction: column;
@@ -573,6 +573,7 @@ body.inverted .satz-section .mitmachen-link:hover {
      Headline-Box per z-index die fixed Wortmarke (z 5) überdecken,
      während die Section selbst hinter der Wortmarke liegt. */
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 14vh 72px 16px;
   background: var(--bg);
 }
@@ -1147,7 +1148,11 @@ body.unterstuetzen-view .unterstuetzen-headline-box {
   margin-left: -50vw;
   margin-right: -50vw;
   min-width: 0;
+  /* 100vh ist auf Mobile inkl. URL-Leiste — dvh wertet die tatsaechlich
+     sichtbare Hoehe aus, damit der Scroll-Pfeil unten direkt im First
+     View liegt. Aeltere Browser fallen auf 100vh zurueck. */
   height: 100vh;
+  height: 100dvh;
   min-height: 440px;
   padding: clamp(80px, 14vh, 180px) clamp(24px, 5vw, 72px);
   border-radius: 0;
@@ -1416,6 +1421,7 @@ body.kontakt-view .press-contact a:hover { color: var(--vermil); }
      vertikale Wortmarke am rechten Rand die volle Bildschirmhöhe nutzen
      kann (analog Mission/Team-Section). */
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 56px 72px 72px;
 }
 .contact-label {
@@ -1730,7 +1736,7 @@ body.nav-on-vermil .menu-toggle { color: #fff; }
   .scroll-hint { bottom: 28px; }
   /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
      min-height schützt extrem niedrige Landscape-Viewports. */
-  .hero { height: 100vh; min-height: 440px; }
+  .hero { height: 100vh; height: 100dvh; min-height: 440px; }
   .satz-section { padding: clamp(32px, 7vh, 80px) 24px clamp(32px, 7vh, 80px); }
   .mission-section,
   .team-section { padding: 10vh 24px 8px; }
