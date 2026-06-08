@@ -2183,6 +2183,15 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   </div>
 </div>
 
+<!-- ══ MODAL: COMING SOON (Foerdermitgliedschaft / Einmalspende) ══ -->
+<div class="modal-overlay" id="modal-coming-soon" onclick="if(event.target===this)closeModal('coming-soon')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('coming-soon')" aria-label="Schließen">✕</button>
+    <h2 data-de="Demnächst verfügbar" data-en="Coming soon">Demnächst verfügbar</h2>
+    <p data-de="Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Kontakt</a> erreichen — wir freuen uns über jede Nachricht." data-en="This option will be available shortly. In the meantime, please feel free to reach us via the <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Contact</a> page — we welcome every message.">Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href="#kontakt" onclick="closeModal('coming-soon')">Kontakt</a> erreichen — wir freuen uns über jede Nachricht.</p>
+  </div>
+</div>
+
 <!-- ══ MODAL: NEWSLETTER ══ -->
 <div class="modal-overlay" id="modal-newsletter" onclick="if(event.target===this)closeModal('newsletter')">
   <div class="modal">
@@ -2422,6 +2431,11 @@ document.addEventListener('click', function(e) {
   }
   if (e.target.closest('.newsletter-link') || e.target.closest('.js-newsletter-trigger')) {
     openNewsletterModal(e);
+    return;
+  }
+  if (e.target.closest('.foerder-link') || e.target.closest('.einmalspende-link')) {
+    e.preventDefault();
+    openModal('coming-soon');
     return;
   }
   if (e.target.closest('.fragen-link')) {
