@@ -1490,7 +1490,10 @@ footer {
   position: fixed;
   inset: 0;
   background: rgba(17,17,17,0.5);
-  z-index: 100;
+  /* z-index ueber dem Mobile-Menue (1000), damit das Newsletter-/
+     Coming-Soon-Fenster bei offenem Menue obenauf liegt — beim Schliessen
+     blickt der User wieder auf das Menue. */
+  z-index: 1100;
   justify-content: center;
   align-items: flex-start;
   overflow-y: auto;
@@ -2035,7 +2038,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     <a href="#" id="menu-mission" data-de="Mission" data-en="Mission" onclick="closeMobileMenu(); navigate('mission'); return false;">Mission</a>
     <a href="#" id="menu-team" data-de="Team" data-en="Team" onclick="closeMobileMenu(); navigate('team'); return false;">Team</a>
     <a href="#" id="menu-kontakt" data-de="Kontakt" data-en="Contact" onclick="closeMobileMenu(); navigate('kontakt'); return false;">Kontakt</a>
-    <a href="#" id="menu-newsletter" class="js-newsletter-trigger" data-de="Newsletter" data-en="Newsletter" onclick="closeMobileMenu()">Newsletter</a>
+    <a href="#" id="menu-newsletter" class="js-newsletter-trigger" data-de="Newsletter" data-en="Newsletter">Newsletter</a>
     <a href="#" id="menu-unterstuetzen" data-de="Unterstützen" data-en="Support" onclick="closeMobileMenu(); navigate('unterstuetzen'); return false;">Unterstützen</a>
   </nav>
   <button class="mobile-menu-lang" id="menu-lang-toggle" onclick="toggleLang()">EN</button>
@@ -2445,7 +2448,12 @@ function openModal(id) {
 }
 function closeModal(id) {
   document.getElementById('modal-' + id).classList.remove('open');
-  document.body.style.overflow = '';
+  /* Body-Scroll nur freigeben, wenn das Mobile-Menue NICHT offen ist —
+     sonst blockiert das Menue im Hintergrund den Scroll weiterhin. */
+  var menu = document.getElementById('mobile-menu');
+  if (!menu || !menu.classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
 }
 function openMobileMenu() {
   document.getElementById('mobile-menu').classList.add('open');
