@@ -822,7 +822,10 @@ body.inverted .mission-sub { background: var(--vermil); color: #fff; border-colo
 .mission-closing {
   display: block;
   box-sizing: border-box;
-  margin: 20px 0 20px;
+  /* 32px ist der einheitliche Abstand zwischen den Kaesten auf
+     Kontakt/Unterstuetzen/Team — die Schluss-Box reiht sich damit
+     visuell als weitere Box ein. */
+  margin: 32px 0;
   padding: 14px 20px;
   border: 1.5px solid var(--vermil);
   background: #fff;
