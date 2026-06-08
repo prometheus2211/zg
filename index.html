@@ -2429,11 +2429,12 @@ document.addEventListener('click', function(e) {
     navigate('mission');
     return;
   }
-  if (e.target.closest('.newsletter-link') || e.target.closest('.js-newsletter-trigger')) {
-    openNewsletterModal(e);
-    return;
-  }
-  if (e.target.closest('.foerder-link') || e.target.closest('.einmalspende-link')) {
+  if (
+    e.target.closest('.newsletter-link') ||
+    e.target.closest('.js-newsletter-trigger') ||
+    e.target.closest('.foerder-link') ||
+    e.target.closest('.einmalspende-link')
+  ) {
     e.preventDefault();
     openModal('coming-soon');
     return;
