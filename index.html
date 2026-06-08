@@ -1492,6 +1492,86 @@ footer {
   padding: 48px 24px;
 }
 .modal-overlay.open { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE HAMBURGER-MENU
+═══════════════════════════════════════════════════════════════ */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--black);
+  padding: 0;
+  transition: color 0.25s ease;
+}
+.menu-toggle svg { display: block; }
+body.nav-on-vermil .menu-toggle { color: #fff; }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--vermil);
+  padding: 80px 32px 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  max-width: 360px;
+}
+.mobile-menu-links a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 6vw, 32px);
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, opacity 0.2s;
+}
+.mobile-menu-links a:hover,
+.mobile-menu-links a:active { border-bottom-color: #fff; }
+.mobile-menu-lang {
+  margin-top: 36px;
+  color: #fff;
+  opacity: 0.85;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+.mobile-menu-lang:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  /* Klassischen Ribbon auf Mobile komplett ausblenden. */
+  .nav { display: none !important; }
+  #menu-toggle { display: flex; }
+  /* Bei offenem Menü Hamburger-Button ausblenden — sonst doppeltes
+     Icon (Hamburger + X) im selben Eck. */
+  body.menu-open #menu-toggle { display: none; }
+}
 .modal {
   background: var(--bg);
   max-width: 640px;
@@ -1929,6 +2009,31 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   </div>
 </nav>
 
+<!-- ══ MOBILE HAMBURGER + MENU OVERLAY ══ -->
+<button class="menu-toggle" id="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" onclick="openMobileMenu()">
+  <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="3" y1="7" x2="21" y2="7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="3" y1="17" x2="21" y2="17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</button>
+<div class="mobile-menu" id="mobile-menu" onclick="if(event.target===this)closeMobileMenu()">
+  <button class="menu-toggle" id="menu-close" aria-label="Menü schließen" onclick="closeMobileMenu()" style="display:flex; color:#fff; z-index:1002;">
+    <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav class="mobile-menu-links" aria-label="Mobile Navigation">
+    <a href="#" id="menu-mission" data-de="Mission" data-en="Mission" onclick="closeMobileMenu(); navigate('mission'); return false;">Mission</a>
+    <a href="#" id="menu-team" data-de="Team" data-en="Team" onclick="closeMobileMenu(); navigate('team'); return false;">Team</a>
+    <a href="#" id="menu-kontakt" data-de="Kontakt" data-en="Contact" onclick="closeMobileMenu(); navigate('kontakt'); return false;">Kontakt</a>
+    <a href="#" id="menu-newsletter" class="js-newsletter-trigger" data-de="Newsletter" data-en="Newsletter" onclick="closeMobileMenu()">Newsletter</a>
+    <a href="#" id="menu-unterstuetzen" data-de="Unterstützen" data-en="Support" onclick="closeMobileMenu(); navigate('unterstuetzen'); return false;">Unterstützen</a>
+  </nav>
+  <button class="mobile-menu-lang" id="menu-lang-toggle" onclick="toggleLang()">EN</button>
+</div>
+
 <!-- ══ HERO (transparent, scrolls over fixed bg) ══ -->
 <section class="hero" id="top">
   <div class="content">
@@ -2335,9 +2440,23 @@ function closeModal(id) {
   document.getElementById('modal-' + id).classList.remove('open');
   document.body.style.overflow = '';
 }
+function openMobileMenu() {
+  document.getElementById('mobile-menu').classList.add('open');
+  document.getElementById('menu-toggle').setAttribute('aria-expanded', 'true');
+  document.body.classList.add('menu-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+  document.body.style.overflow = '';
+}
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+    var menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.remove('open');
     document.body.style.overflow = '';
   }
 });
