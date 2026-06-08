@@ -824,12 +824,12 @@ body.inverted .mission-sub { background: var(--vermil); color: #fff; border-colo
   margin: 20px 0 20px;
   padding: 14px 20px;
   border: 1.5px solid var(--vermil);
-  background: var(--vermil);
+  background: #fff;
   font-size: clamp(17px, 2vw, 26px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  color: #fff;
+  color: var(--vermil);
 }
 /* Zeile 2 (Frage + CTA-Icon) soll geschlossen bleiben: kein Umbruch
    zwischen "Sind Sie dabei?" und dem "Jetzt unterstützen >"-Icon. */
@@ -842,19 +842,20 @@ body.inverted .mission-closing { background: #fff; color: var(--vermil); border-
   display: inline-block;
   margin-left: 0;
   font-family: inherit;
+  /* Schrifttyp identisch zu den Zwischenueberschriften (.mission-sub). */
   font-size: clamp(13px, 1.6vw, 20px);
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--vermil);
   text-decoration: none;
   padding: 0.10em 0.45em;
   background: #fff;
-  border: 1.5px solid #fff;
+  border: 1.5px solid var(--vermil);
   transition: color 0.2s, background 0.2s;
   vertical-align: baseline;
 }
-.mission-closing-cta:hover { background: transparent; color: #fff; }
+.mission-closing-cta:hover { background: var(--vermil); color: #fff; }
 .mission-closing-arrow {
   display: inline-block;
   margin-left: 0.32em;
