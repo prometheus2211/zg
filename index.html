@@ -1589,8 +1589,12 @@ br.mobile-only { display: none; }
   br.desktop-only { display: none; }
   .mission-closing { font-size: 15px; }
   .mission-closing-cta { margin-top: 8px; }
-  /* Klassischen Ribbon auf Mobile komplett ausblenden. */
-  .nav { display: none !important; }
+  /* Auf Mobile bleibt der Ribbon-Hintergrund sichtbar (analog Desktop)
+     — Nav-Inhalte werden ausgeblendet, weil das Hamburger-Menue die
+     Navigation uebernimmt; die Ribbon-Flaeche und ihre Klassen-Logik
+     (nav-on-vermil, ribbon-fading, grauer Bottom-Shadow) bleiben aktiv. */
+  .nav-right { display: none; }
+  .nav { min-height: 56px; padding: 0 24px; }
   #menu-toggle { display: flex; }
   /* Vertikal mit der Wortmarke ausgerichtet, etwas weiter oben gesetzt. */
   #menu-toggle { top: 6px; right: 16px; }
