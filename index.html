@@ -1593,7 +1593,9 @@ br.mobile-only { display: none; }
      — Nav-Inhalte werden ausgeblendet, weil das Hamburger-Menue die
      Navigation uebernimmt; die Ribbon-Flaeche und ihre Klassen-Logik
      (nav-on-vermil, ribbon-fading, grauer Bottom-Shadow) bleiben aktiv. */
-  .nav-right { display: none; }
+  /* !important wegen einer .nav-right-Basis-Regel weiter unten im File,
+     die sonst per source-order display:flex zurueckkippt. */
+  .nav-right { display: none !important; }
   .nav { min-height: 56px; padding: 0 24px; }
   #menu-toggle { display: flex; }
   /* Vertikal mit der Wortmarke ausgerichtet, etwas weiter oben gesetzt. */
