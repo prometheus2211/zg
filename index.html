@@ -283,9 +283,16 @@ body {
 }
 /* Englische Variante braucht mehr Breite, damit "No one is above the
    law." auf Desktop auf eine Zeile passt. body.lang-en wird in
-   toggleLang() umgeschaltet. */
-body.lang-en .headline {
-  max-width: 10em;
+   toggleLang() umgeschaltet. Wert grosszuegig (none = keine
+   Begrenzung), damit der Browser nur an unseren expliziten <br>
+   umbricht — gilt allerdings nur auf Desktop, Tablet/Mobile haben
+   eigene Media-Query-Overrides. */
+body.lang-en .headline { max-width: none; }
+@media (max-width: 1024px) {
+  body.lang-en .headline { max-width: 6em; }
+}
+@media (max-width: 640px) {
+  body.lang-en .headline { max-width: 4.5em; }
 }
 .headline em {
   font-style: normal;
