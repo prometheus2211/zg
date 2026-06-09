@@ -281,13 +281,15 @@ body {
      Wird in Tablet- und Mobile-Breakpoints weiter eingeengt. */
   max-width: 7.55em;
 }
-/* Englische Variante braucht mehr Breite, damit "No one is above the
-   law." auf Desktop auf eine Zeile passt. body.lang-en wird in
-   toggleLang() umgeschaltet. Wert grosszuegig (none = keine
-   Begrenzung), damit der Browser nur an unseren expliziten <br>
-   umbricht — gilt allerdings nur auf Desktop, Tablet/Mobile haben
-   eigene Media-Query-Overrides. */
-body.lang-en .headline { max-width: none; }
+/* Englische Variante braucht mehr Breite. Erzwingt 3 Zeilen via expliziter
+   <br>: "No one is above the law." / "Not" / "even the state." Mit
+   white-space:nowrap auf der ersten Zeile verhindert wir den Soft-Wrap.
+   Auf schmalen Viewports faellt die Regel weg, damit der Text dort doch
+   wrappen darf. */
+@media (min-width: 1025px) {
+  body.lang-en .headline { max-width: 12em; }
+  body.lang-en .headline-no-wrap { white-space: nowrap; }
+}
 @media (max-width: 1024px) {
   body.lang-en .headline { max-width: 6em; }
 }
@@ -2122,7 +2124,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <section class="hero" id="top">
   <div class="content">
     <div class="headline-box">
-      <h1 class="headline" id="headline" data-de="Das Recht <br class=mobile-only>bindet<br>auch den <br class=mobile-only><em>Staat.</em>" data-en="No one is <br class=mobile-only>above the law.<br>Not <br class=desktop-only>even the <br class=mobile-only><em>state.</em>">Das Recht <br class="mobile-only">bindet<br>auch den <br class="mobile-only"><em>Staat.</em></h1>
+      <h1 class="headline" id="headline" data-de="Das Recht <br class=mobile-only>bindet<br>auch den <br class=mobile-only><em>Staat.</em>" data-en="<span class=headline-no-wrap>No one is <br class=mobile-only>above the law.</span><br>Not <br class=desktop-only>even the <br class=mobile-only><em>state.</em>">Das Recht <br class="mobile-only">bindet<br>auch den <br class="mobile-only"><em>Staat.</em></h1>
     </div>
   </div>
   <a class="scroll-hint" href="#" aria-label="Weiter nach unten">
