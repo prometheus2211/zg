@@ -1579,12 +1579,20 @@ body.nav-on-vermil .menu-toggle { color: #fff; }
 br.mobile-only { display: none; }
 @media (max-width: 640px) {
   br.mobile-only { display: inline; }
-  /* Schluss-Box auf Mobile: CTA-Icon rutscht in eine eigene dritte Zeile,
-     damit es nicht aus der Box herausragt. */
-  .mission-closing-cta {
+  /* Schluss-Box auf Mobile: drei Zeilen. Zeile-2-Huelle wird zum Block
+     (sonst nowrap-Konflikt mit dem Block-CTA darin), CTA bekommt eigene
+     dritte Zeile. */
+  .mission-closing-line2 {
     display: block;
+    white-space: normal;
+  }
+  .mission-closing-cta {
+    display: inline-block;
     margin-top: 8px;
-    width: fit-content;
+  }
+  .mission-closing-cta::before {
+    content: '';
+    display: block;
   }
   /* Klassischen Ribbon auf Mobile komplett ausblenden. */
   .nav { display: none !important; }
