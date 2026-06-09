@@ -281,9 +281,12 @@ body {
      Wird in Tablet- und Mobile-Breakpoints weiter eingeengt. */
   max-width: 7.55em;
 }
-/* (Frueherer lang-en-max-width-Override entfernt — neuer Slogan
-   "Even the state is not above the law." kommt mit dem deutschen
-   max-width klar, weil er ueber explizite <br> umgebrochen wird.) */
+/* Landing-Headline auf Englisch: line-height knapp groesser, damit der
+   Unterstrich von <em>the state</em> (Ende Zeile 1) nicht in die Zeile
+   darunter ("is not above") herein haengt. Default-Landing-line-height
+   ist 1.0 — auf Deutsch unkritisch, weil dort die em-Phrase nur in der
+   letzten Zeile sitzt und keine Folgezeile gibt. */
+body.lang-en .headline { line-height: 1.2; }
 .headline em {
   font-style: normal;
   color: #fff;
