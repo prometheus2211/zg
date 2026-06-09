@@ -1579,6 +1579,13 @@ body.nav-on-vermil .menu-toggle { color: #fff; }
 br.mobile-only { display: none; }
 @media (max-width: 640px) {
   br.mobile-only { display: inline; }
+  /* Schluss-Box auf Mobile: CTA-Icon rutscht in eine eigene dritte Zeile,
+     damit es nicht aus der Box herausragt. */
+  .mission-closing-cta {
+    display: block;
+    margin-top: 8px;
+    width: fit-content;
+  }
   /* Klassischen Ribbon auf Mobile komplett ausblenden. */
   .nav { display: none !important; }
   #menu-toggle { display: flex; }
