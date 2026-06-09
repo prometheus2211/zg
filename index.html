@@ -277,9 +277,11 @@ body {
   line-height: 1.0;
   letter-spacing: -0.04em;
   /* max-width steuert die Zeilenanzahl: kleiner Viewport → schmalere Box → mehr Zeilen.
-     Default: 3 Zeilen ("Das Recht / bindet / auch den Staat.").
-     Wird in Tablet- und Mobile-Breakpoints weiter eingeengt. */
-  max-width: 7.55em;
+     10em ist breit genug, damit die englische Variante
+     "No one is above the law." auf Desktop auf eine Zeile passt — das
+     deutsche Pendant wird durch explizite <br> ohnehin in zwei Zeilen
+     gehalten. */
+  max-width: 10em;
 }
 .headline em {
   font-style: normal;
