@@ -277,10 +277,14 @@ body {
   line-height: 1.0;
   letter-spacing: -0.04em;
   /* max-width steuert die Zeilenanzahl: kleiner Viewport → schmalere Box → mehr Zeilen.
-     10em ist breit genug, damit die englische Variante
-     "No one is above the law." auf Desktop auf eine Zeile passt — das
-     deutsche Pendant wird durch explizite <br> ohnehin in zwei Zeilen
-     gehalten. */
+     Default: 3 Zeilen ("Das Recht / bindet / auch den Staat.").
+     Wird in Tablet- und Mobile-Breakpoints weiter eingeengt. */
+  max-width: 7.55em;
+}
+/* Englische Variante braucht mehr Breite, damit "No one is above the
+   law." auf Desktop auf eine Zeile passt. body.lang-en wird in
+   toggleLang() umgeschaltet. */
+body.lang-en .headline {
   max-width: 10em;
 }
 .headline em {
@@ -2485,6 +2489,9 @@ function toggleLang() {
   currentLang = currentLang === 'de' ? 'en' : 'de';
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
+  /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
+     (z. B. breitere .headline auf Englisch) greifen koennen. */
+  document.body.classList.toggle('lang-en', currentLang === 'en');
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
