@@ -281,12 +281,9 @@ body {
      Wird in Tablet- und Mobile-Breakpoints weiter eingeengt. */
   max-width: 7.55em;
 }
-/* Landing-Headline auf Englisch: line-height knapp groesser, damit der
-   Unterstrich von <em>the state</em> (Ende Zeile 1) nicht in die Zeile
-   darunter ("is not above") herein haengt. Default-Landing-line-height
-   ist 1.0 — auf Deutsch unkritisch, weil dort die em-Phrase nur in der
-   letzten Zeile sitzt und keine Folgezeile gibt. */
-body.lang-en .headline { line-height: 1.2; }
+/* (Frueherer line-height-Override fuer EN entfernt — der em-Unterstrich
+   sitzt jetzt unter "the law." in der letzten Zeile, also kein
+   Bleed-Risiko mehr; default line-height 1.0 reicht.) */
 .headline em {
   font-style: normal;
   color: #fff;
@@ -2115,7 +2112,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <section class="hero" id="top">
   <div class="content">
     <div class="headline-box">
-      <h1 class="headline" id="headline" data-de="Das Recht <br class=mobile-only>bindet<br>auch den <br class=mobile-only><em>Staat.</em>" data-en="Even <br class=mobile-only><em>the state</em><br>is not above<br>the law.">Das Recht <br class="mobile-only">bindet<br>auch den <br class="mobile-only"><em>Staat.</em></h1>
+      <h1 class="headline" id="headline" data-de="Das Recht <br class=mobile-only>bindet<br>auch den <br class=mobile-only><em>Staat.</em>" data-en="Even <br class=mobile-only>the state<br>is not above<br><em>the law.</em>">Das Recht <br class="mobile-only">bindet<br>auch den <br class="mobile-only"><em>Staat.</em></h1>
     </div>
   </div>
   <a class="scroll-hint" href="#" aria-label="Weiter nach unten">
