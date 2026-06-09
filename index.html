@@ -1255,6 +1255,10 @@ body.team-view .team-member-image {
   height: 140px;
   /* Auf der Team-Seite ohne rote Umrandung. */
   border: none;
+  /* Mobile-Override: padding-bottom: 100% aus der allgemeinen Mobile-
+     Regel zurueck auf 0 — sonst kollabiert mit border-box die
+     Content-Hoehe auf 0 und das Bild ist unsichtbar. */
+  padding-bottom: 0;
 }
 body.team-view .team-member-name {
   font-size: clamp(20px, 2.1vw, 28px);
