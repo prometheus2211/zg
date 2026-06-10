@@ -1582,6 +1582,20 @@ body.nav-on-vermil .menu-toggle { color: #fff; }
 }
 .mobile-menu-lang:hover { opacity: 1; }
 
+/* Ribbon → Hamburger schon vor dem eigentlichen Mobile-Breakpoint
+   umschalten. Ab ca. 900px laufen die Ribbon-Links (Mission/Team/
+   Kontakt/Newsletter/Unterstuetzen + EN) sonst in die Wortmarke und
+   ueberlappen sie optisch. Andere Mobile-Anpassungen (Headline-Schrift,
+   Padding, gestapelte CTA-Reihe) bleiben bei <=640px — hier wechselt
+   wirklich nur die Navigation auf Hamburger. */
+@media (max-width: 900px) {
+  .nav-right { display: none !important; }
+  #menu-toggle { display: flex; }
+  /* Bei offenem Menue Hamburger-Button ausblenden — sonst doppeltes
+     Icon (Hamburger + X) im selben Eck. */
+  body.menu-open #menu-toggle { display: none; }
+}
+
 /* Helfer-Zeilenumbruch, der NUR auf Mobile greift. */
 br.mobile-only { display: none; }
 @media (max-width: 640px) {
