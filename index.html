@@ -2537,8 +2537,11 @@ let currentLang = (function() {
 function applyLang(lang) {
   currentLang = lang;
   var label = currentLang === 'de' ? 'EN' : 'DE';
-  var btn = document.getElementById('lang-toggle');
-  if (btn) btn.textContent = label;
+  /* Beide Sprach-Toggles (Nav + Mobile-Menue) auf den neuen Label-Wert setzen. */
+  ['lang-toggle', 'menu-lang-toggle'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (btn) btn.textContent = label;
+  });
   /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
      (z. B. breitere .headline auf Englisch) greifen koennen. */
   document.body.classList.toggle('lang-en', currentLang === 'en');
