@@ -1751,6 +1751,9 @@ br.mobile-only { display: none; }
   .wordmark { top: 24px; left: 48px; }
   .content { padding: 0 48px; }
   .headline { max-width: 5em; }   /* 4 Zeilen */
+  /* EN braucht hier mehr Breite, sonst wrappt "is not above" zu zwei
+     Visualzeilen und die EN-TB laeuft aus dem Hero heraus. */
+  body.lang-en .headline { max-width: 7em; }
   .headline-box { padding: 28px 36px 32px; }
   /* .scroll-hint bleibt zentriert (left: 50%) auch im Tablet-Layout */
   .satz-section { padding: clamp(40px, 8vh, 96px) 48px clamp(40px, 8vh, 96px); }
@@ -1774,6 +1777,12 @@ br.mobile-only { display: none; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
   .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift; klein genug, dass TB bei 100dvh-Hero nicht ueberlaeuft */
+  /* EN-Slogan hat mit "is not above" eine breitere Zeile als DE. Mit
+     max-width 4em wuerde sie weiter umbrechen, die EN-TB wuerde dadurch
+     hoeher als der Hero und ihr Unterrand wuerde nach dem Pfeil-Klick
+     sichtbar. 7em laesst "is not above" auf einer Zeile, EN bleibt
+     wieder 4-zeilig. */
+  body.lang-en .headline { max-width: 7em; }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
