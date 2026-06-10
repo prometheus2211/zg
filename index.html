@@ -170,15 +170,13 @@ body {
 ══════════════════════════════════════ */
 .hero {
   position: relative;
-  /* Hero ist MINDESTENS 100vh hoch (dvh fuer Mobile-URL-Leiste). Auf
-     ueblichen Viewports fuellt er also den ersten Screen vollstaendig.
-     WICHTIG: min-height (nicht height) — damit der Hero bei sehr
-     schmalen/kurzen Fenstern, in denen die mehrzeilige Titelbox in der
-     Hoehe waechst, MITWAECHST. Sonst lief der untere Teil der Titelbox
-     aus dem Hero heraus und erschien optisch in der unteren Seitenhaelfte
-     (oberhalb der Satz-Section). */
-  min-height: 100vh;
-  min-height: 100dvh;
+  /* Hero immer 100vh hoch: garantiert, dass die Titelbox beim
+     Maximal-Scroll IMMER aus dem Viewport geschoben wird – auch bei
+     schmal gezogenem Fenster. dvh respektiert auf Mobile die URL-
+     Leiste, damit der Scroll-Pfeil schon im First View liegt. */
+  height: 100vh;
+  height: 100dvh;
+  min-height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1761,18 +1759,16 @@ br.mobile-only { display: none; }
   .wordmark { top: 20px; left: 24px; font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
-  .headline { font-size: clamp(60px, 15vw, 96px); max-width: 4em; }   /* groessere mobile Schrift -> groessere TB */
+  .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift; klein genug, dass TB bei 100dvh-Hero nicht ueberlaeuft */
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
   .vertical-wordmark { display: none; }
   /* .scroll-hint bleibt zentriert; nur bottom anpassen */
   .scroll-hint { bottom: 28px; }
-  /* Mobile: Hero ist mindestens 100dvh hoch und waechst bei sehr schmalen
-     Viewports MIT der Titelbox (die hier 4-5-zeilig wird), damit die
-     Box-Unterkante niemals unter den Hero hinaus in die Satz-Section
-     ragt. */
-  .hero { min-height: 100vh; min-height: 100dvh; }
+  /* Mobile: Hero füllt den Viewport (Headline ist hier groß+5-zeilig).
+     min-height schützt extrem niedrige Landscape-Viewports. */
+  .hero { height: 100vh; height: 100dvh; min-height: 440px; }
   .satz-section { padding: clamp(32px, 7vh, 80px) 24px clamp(32px, 7vh, 80px); }
   /* Mobile Landing-CTAs: alle drei Icons gleich breit (volle Spaltenbreite),
      Text linksbuendig + Pfeil rechtsbuendig — Pfeile stehen damit auf
