@@ -1829,8 +1829,12 @@ br.mobile-only { display: none; }
      groesszuegigere line-height. */
   .mission-headline,
   .team-headline,
-  .kontakt-headline,
-  .unterstuetzen-headline { line-height: 1.4; }
+  .kontakt-headline { line-height: 1.4; }
+  /* Unterstuetzen-Headline: Zwischen "Wir klagen." (ohne Unterstrich)
+     und "Sie machen es möglich." reicht die enge line-height — der
+     großzügige Wert war nur fuer mehrzeilige em-Phrasen mit Umlaut-
+     Kollision noetig. */
+  .unterstuetzen-headline { line-height: 1.2; }
   .mission-headline em,
   .team-headline em,
   .kontakt-headline em,
