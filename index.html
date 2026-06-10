@@ -2510,12 +2510,22 @@ function toggleInvert() {
 }
 applyInvert();
 
-/* ── Language toggle ── */
-let currentLang = 'de';
-function toggleLang() {
-  currentLang = currentLang === 'de' ? 'en' : 'de';
+/* ── Language toggle ──
+   Sprache wird in localStorage ('zg-lang') gespeichert, damit ein Reload
+   die zuletzt gewaehlte Sprache erhaelt. Default-HTML ist Deutsch; bei
+   gespeichertem 'en' wird beim Page-Load einmal applyLang('en') geschwenkt. */
+let currentLang = (function() {
+  try {
+    var saved = localStorage.getItem('zg-lang');
+    return (saved === 'en' || saved === 'de') ? saved : 'de';
+  } catch (e) { return 'de'; }
+})();
+
+function applyLang(lang) {
+  currentLang = lang;
   var label = currentLang === 'de' ? 'EN' : 'DE';
-  document.getElementById('lang-toggle').textContent = label;
+  var btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = label;
   /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
      (z. B. breitere .headline auf Englisch) greifen koennen. */
   document.body.classList.toggle('lang-en', currentLang === 'en');
@@ -2540,6 +2550,15 @@ function toggleLang() {
      worden sein (z. B. newsletter-consent). href erneut setzen. */
   if (typeof applyEmailObfuscation === 'function') applyEmailObfuscation();
 }
+
+function toggleLang() {
+  var next = currentLang === 'de' ? 'en' : 'de';
+  try { localStorage.setItem('zg-lang', next); } catch (e) {}
+  applyLang(next);
+}
+
+/* Beim initialen Laden: gespeicherte Sprache anwenden, falls nicht DE. */
+if (currentLang === 'en') { applyLang('en'); }
 
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
