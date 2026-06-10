@@ -1096,6 +1096,11 @@ body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark
   z-index: 11;
   transition: opacity 0.18s ease, color 0.25s ease;
 }
+/* Hamburger-Toggle erbt das wordmark-Pattern auf den Section-Views:
+   ueber der TB (z=11), damit er klickbar bleibt. */
+body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .menu-toggle {
+  z-index: 11;
+}
 body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark .mark {
   transition: border-color 0.25s ease;
 }
@@ -1519,7 +1524,11 @@ footer {
   position: fixed;
   top: 16px;
   right: 16px;
-  z-index: 1001;
+  /* z-index 5 = wordmark → Hamburger verschwindet beim Scrollen hinter
+     der Hero-TB (z=6) und taucht analog zur Wortmarke spaeter wieder auf.
+     Wenn das Mobile-Menue offen ist, ist der Toggle display:none, daher
+     spielt z-index gegenueber dem Overlay (z=1000) keine Rolle. */
+  z-index: 5;
   width: 44px;
   height: 44px;
   align-items: center;
