@@ -1830,15 +1830,12 @@ br.mobile-only { display: none; }
   .wordmark { top: 20px; left: 24px; font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
-  /* Mobile Headline: groesser als der Default-Schritt (clamp 48-72),
-     aber unter dem alten 96er-Max, das im 640x<=500-Viewport zu Overflow
-     fuehrte. 84er-Cap haelt die TB bei typischen Telefonen (390x844 etc.)
-     vollstaendig im 100dvh-Hero, max-width 7em verhindert ungewolltes
-     Wrappen einzelner Worte ("Das Recht", "auch den") auf schmalen Wid-
-     ths. EN bekommt unten denselben Wert, damit "is not above" auf einer
-     Zeile bleibt. */
-  .headline { font-size: clamp(54px, 13vw, 84px); max-width: 7em; }
-  body.lang-en .headline { max-width: 7em; }
+  /* Mobile Landing-Headline: jedes Wort eine eigene Zeile (via mobile-
+     only-br im HTML-Markup). Schrift kleiner als der Tablet-/Desktop-
+     Default, damit der 8-zeilige EN-Slogan ('Even / the / state / is /
+     not / above / the / law.') auf typischen Telefonen (iPhone SE 568h
+     bis Galaxy 800h) in den 100dvh-Hero passt. DE ist 6-zeilig. */
+  .headline { font-size: clamp(36px, 10vw, 56px); max-width: 4em; }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
@@ -2191,7 +2188,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <section class="hero" id="top">
   <div class="content">
     <div class="headline-box">
-      <h1 class="headline" id="headline" data-de="Das Recht <br class=mobile-only>bindet<br>auch den <br class=mobile-only><em>Staat.</em>" data-en="Even <br class=mobile-only>the state<br>is not above<br><em>the law.</em>">Das Recht <br class="mobile-only">bindet<br>auch den <br class="mobile-only"><em>Staat.</em></h1>
+      <h1 class="headline" id="headline" data-de="Das<br class=mobile-only> Recht<br class=mobile-only> bindet<br>auch<br class=mobile-only> den<br class=mobile-only> <em>Staat.</em>" data-en="Even<br class=mobile-only> the<br class=mobile-only> state<br>is<br class=mobile-only> not<br class=mobile-only> above<br><em>the<br class=mobile-only> law.</em>">Das<br class="mobile-only"> Recht<br class="mobile-only"> bindet<br>auch<br class="mobile-only"> den<br class="mobile-only"> <em>Staat.</em></h1>
     </div>
   </div>
   <a class="scroll-hint" href="#" aria-label="Weiter nach unten">
