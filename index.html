@@ -1841,8 +1841,11 @@ br.mobile-only { display: none; }
      HOEHE (8vh) — der kleinere Wert gewinnt. Damit ist die Schrift auf
      grossen Telefonen wirklich gross, schrumpft aber automatisch auf
      kurzen Viewports (iPhone SE 568h oder schmalen Landscape-Browsern),
-     bevor der 8-zeilige EN-Slogan den 100dvh-Hero sprengt. */
-  .headline { font-size: clamp(44px, min(14vw, 8vh), 72px); max-width: 4em; }
+     bevor der 8-zeilige EN-Slogan den 100dvh-Hero sprengt.
+     line-height 1.15: bei EN spannt der <em>-Unterstrich ueber zwei
+     Zeilen ('the' + br + 'law.') — mit line-height 1.0 ragt der Unter-
+     strich von 'the' in die 'law.'-Zeile hinein. 1.15 schafft Luft. */
+  .headline { font-size: clamp(44px, min(14vw, 8vh), 72px); max-width: 4em; line-height: 1.15; }
   /* Auf Mobile dehnt sich die Box nach rechts auf 80vw (Default-Layout
      ist 'inline-block', also natuerlich content-breit). min-width gibt
      den roten Block visuelle Praesenz; der Text bleibt links, der Rest
