@@ -1843,11 +1843,6 @@ br.mobile-only { display: none; }
      kurzen Viewports (iPhone SE 568h oder schmalen Landscape-Browsern),
      bevor der 8-zeilige EN-Slogan den 100dvh-Hero sprengt. */
   .headline { font-size: clamp(44px, min(14vw, 8vh), 72px); max-width: 4em; }
-  /* Nur die em-Zeilen ('the' + 'law.' im EN, 'Staat.' im DE) bekommen
-     etwas mehr Zeilenhoehe, damit der Unterstrich von 'the' nicht in
-     'law.' der naechsten Zeile reinragt. Restliche Headline-Zeilen
-     behalten line-height 1.0 (eng gestapelt). */
-  .headline em { line-height: 1.4; }
   /* Auf Mobile dehnt sich die Box nach rechts auf 80vw (Default-Layout
      ist 'inline-block', also natuerlich content-breit). min-width gibt
      den roten Block visuelle Praesenz; der Text bleibt links, der Rest
