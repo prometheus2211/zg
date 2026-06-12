@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zentrum Grundrechte</title>
 <meta name="description" content="Zentrum Grundrechte e.V. — strategische Prozessführung für individuelle Freiheitsrechte. Das Recht bindet auch den Staat.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="keywords" content="Grundrechte, Verfassungsklage, strategische Prozessführung, Freiheitsrechte, Abwehrrechte, Verfassungsbeschwerde, Bürgerrechte, Zentrum Grundrechte, Berlin, Verein">
 <link rel="canonical" href="https://zentrumgrundrechte.de/">
+<link rel="alternate" hreflang="de" href="https://zentrumgrundrechte.de/">
+<link rel="alternate" hreflang="en" href="https://zentrumgrundrechte.de/">
+<link rel="alternate" hreflang="x-default" href="https://zentrumgrundrechte.de/">
 
 <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Slack, Bluesky, etc.) -->
 <meta property="og:title" content="Zentrum Grundrechte">
@@ -32,20 +37,66 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "NGO",
   "name": "Zentrum Grundrechte e.V.",
   "alternateName": "Zentrum Grundrechte",
   "url": "https://zentrumgrundrechte.de/",
   "logo": "https://zentrumgrundrechte.de/favicon-192.png",
+  "image": "https://zentrumgrundrechte.de/favicon-192.png",
   "description": "Verein für strategische Prozessführung. Wir verteidigen individuelle Freiheitsrechte gegenüber staatlichem Zugriff.",
+  "slogan": "Das Recht bindet auch den Staat.",
   "email": "kontakt@zentrumgrundrechte.de",
+  "telephone": "+49-155-60476989",
+  "foundingDate": "2025",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Berlin, Deutschland"
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Hauptstraße 2b",
     "postalCode": "13158",
     "addressLocality": "Berlin",
+    "addressRegion": "Berlin",
     "addressCountry": "DE"
   },
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "contactType": "general",
+    "email": "kontakt@zentrumgrundrechte.de",
+    "availableLanguage": ["German", "English"]
+  }, {
+    "@type": "ContactPoint",
+    "contactType": "press",
+    "email": "kontakt@zentrumgrundrechte.de",
+    "availableLanguage": ["German", "English"]
+  }],
+  "founder": [{
+    "@type": "Person",
+    "name": "Josef Städter",
+    "jobTitle": "Vorsitzender"
+  }],
+  "member": [{
+    "@type": "Person",
+    "name": "Josef Städter",
+    "jobTitle": "Vorsitzender"
+  }, {
+    "@type": "Person",
+    "name": "Nemir Ali",
+    "jobTitle": "Stellvertretender Vorsitzender"
+  }],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Deutschland"
+  },
+  "knowsAbout": [
+    "strategische Prozessführung",
+    "Grundrechte",
+    "Verfassungsrecht",
+    "Abwehrrechte",
+    "Bürgerrechte",
+    "Verfassungsbeschwerde"
+  ],
   "inLanguage": ["de", "en"]
 }
 </script>
@@ -1096,11 +1147,6 @@ body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark
   z-index: 11;
   transition: opacity 0.18s ease, color 0.25s ease;
 }
-/* Hamburger-Toggle erbt das wordmark-Pattern auf den Section-Views:
-   ueber der TB (z=11), damit er klickbar bleibt. */
-body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .menu-toggle {
-  z-index: 11;
-}
 body:is(.mission-view, .team-view, .kontakt-view, .unterstuetzen-view) .wordmark .mark {
   transition: border-color 0.25s ease;
 }
@@ -1524,11 +1570,7 @@ footer {
   position: fixed;
   top: 16px;
   right: 16px;
-  /* z-index 5 = wordmark → Hamburger verschwindet beim Scrollen hinter
-     der Hero-TB (z=6) und taucht analog zur Wortmarke spaeter wieder auf.
-     Wenn das Mobile-Menue offen ist, ist der Toggle display:none, daher
-     spielt z-index gegenueber dem Overlay (z=1000) keine Rolle. */
-  z-index: 5;
+  z-index: 1001;
   width: 44px;
   height: 44px;
   align-items: center;
@@ -1785,11 +1827,7 @@ br.mobile-only { display: none; }
   .wordmark { top: 20px; left: 24px; font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
-  /* Mobile-Hero-Headline: vergroessert (56-72px), aber Max 72px ist die
-     Obergrenze, ab der die 5-zeilige TB bei 100dvh-Hero ueberlaeuft.
-     Tritt insbesondere am Breakpoint-Rand (~500-640px Viewport) auf,
-     wenn ein Desktop-Browser geschrumpft wird. */
-  .headline { font-size: clamp(56px, 16vw, 72px); max-width: 4em; }
+  .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift; klein genug, dass TB bei 100dvh-Hero nicht ueberlaeuft */
   /* EN-Slogan hat mit "is not above" eine breitere Zeile als DE. Mit
      max-width 4em wuerde sie weiter umbrechen, die EN-TB wuerde dadurch
      hoeher als der Hero und ihr Unterrand wuerde nach dem Pfeil-Klick
@@ -1842,12 +1880,8 @@ br.mobile-only { display: none; }
      groesszuegigere line-height. */
   .mission-headline,
   .team-headline,
-  .kontakt-headline { line-height: 1.4; }
-  /* Unterstuetzen-Headline: Zwischen "Wir klagen." (ohne Unterstrich)
-     und "Sie machen es möglich." reicht die enge line-height — der
-     großzügige Wert war nur fuer mehrzeilige em-Phrasen mit Umlaut-
-     Kollision noetig. */
-  .unterstuetzen-headline { line-height: 1.2; }
+  .kontakt-headline,
+  .unterstuetzen-headline { line-height: 1.4; }
   .mission-headline em,
   .team-headline em,
   .kontakt-headline em,
@@ -2194,7 +2228,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
          (f) "Jedem von uns setzt der Staat Grenzen. Regeln sind unverzichtbar für das Zusammenleben. Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält?" (Lead-Block)
          (g) "Regeln sind unverzichtbar für das Zusammenleben." (Satz 2)
          (h) "Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält?" (Satz 3) -->
-    <p class="mission-body" id="mission-body" data-de="Jedem von uns setzt der Staat Grenzen. Regeln sind unverzichtbar für das Zusammenleben. Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält? Als überparteilicher, unabhängiger und eingetragener Verein stellt das Zentrum Grundrechte durch Klagen gegen staatliches Handeln sicher, dass Gesetzgeber, Regierung und Behörden ihre grundgesetzlichen Befugnisse nicht überschreiten. Denn: Nicht nur Bürgerinnen und Bürger müssen sich an Gesetze halten. Das gleiche gilt für den Staat.<strong class=mission-sub>Unsere Strategie</strong>Das Zentrum Grundrechte ist keine Rechtshilfe. <strong>Unser Ziel ist vielmehr, durch strategische Klagen Fragen von Verfassungsrang zu klären.</strong> Damit verschieben wir das Gewicht in der Gesellschaft: Weg vom Staat und hin zur Zivilgesellschaft. Von zentraler Bedeutung sind dafür die Abwehrrechte, mit denen das Grundgesetz die Macht des Staates begrenzt. Sie konsequent durchzusetzen, ist unsere Mission.<br><br>Als jüngst gegründeter Verein entscheiden wir gegenwärtig, mit welchen Themen wir starten wollen. Klar ist: <strong>Unsere Vision ist ein liberales Deutschland.</strong> Nichts anderes sieht das Grundgesetz vor. Unsere Klagen werden sich an diesem Anspruch messen.<strong class=mission-sub>Ihre Unterstützung</strong>Gemeinsam mit Verbündeten in Wissenschaft und Zivilgesellschaft werden wir in den nächsten Monaten unsere ersten Klagen präsentieren. Selbstverständlich nehmen wir dafür keine staatlichen Gelder – nur so können wir unsere Unabhängigkeit garantieren. Das bedeutet aber auch: <strong>Wir sind auf Ihre Unterstützung angewiesen.</strong> Ihre Spende hilft dabei, den Staat in seine rechtlichen Schranken zu verweisen. Durch eine Fördermitgliedschaft unterstützen Sie uns regelmäßig. Und durch Ihre ehrenamtliche Mitarbeit können Sie unserer Arbeit mehr Schlagkraft und Impact verleihen.<span class=mission-closing>Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span></span>" data-en="The state sets limits for every one of us. Living in society requires rules. But who makes sure that the state itself plays by the rules? As a non-partisan, independent and registered association, Zentrum Grundrechte uses litigation against state action to ensure that legislators and government bodies do not exceed their constitutional limits. Citizens need to follow the law. The same applies to the state.<strong class=mission-sub>Our strategy</strong>Zentrum Grundrechte is not a legal aid service. <strong>Our aim is to decide questions of constitutional importance through strategic litigation.</strong> In doing so we shift the balance — away from the state and towards civil society. The fundamental rights enshrined in Germany's Basic Law are central to our effort to limit state power. Our mission is to defend them rigorously.<br><br>As a newly founded association, we are currently deciding which lawsuits to prioritise. One thing is clear: <strong>We work for a liberal Germany.</strong> These are the values of our constitution. They will be the values guiding our lawsuits.<strong class=mission-sub>Your support</strong>Working with academics and civil society, we will present our first cases in the months ahead. Naturally, we accept no state funding — this is necessary to guarantee our independence. But this also means that <strong>we depend on your support.</strong> Your donation is a contribution against unconstitutional government action. If you would like to support us regularly, become a sponsoring member. And as a volunteer at Zentrum Grundrechte, you can achieve lasting impact while experiencing first-hand how strategic litigation works.<span class=mission-closing>We defend fundamental rights. <br class=desktop-only><span class=mission-closing-line2>And you? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span></span>">Jedem von uns setzt der Staat Grenzen. Regeln sind unverzichtbar für das Zusammenleben. Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält? Als überparteilicher, unabhängiger und eingetragener Verein stellt das Zentrum Grundrechte durch Klagen gegen staatliches Handeln sicher, dass Gesetzgeber, Regierung und Behörden ihre grundgesetzlichen Befugnisse nicht überschreiten. Denn: Nicht nur Bürgerinnen und Bürger müssen sich an Gesetze halten. Das gleiche gilt für den Staat.<strong class=mission-sub>Unsere Strategie</strong>Das Zentrum Grundrechte ist keine Rechtshilfe. <strong>Unser Ziel ist vielmehr, durch strategische Klagen Fragen von Verfassungsrang zu klären.</strong> Damit verschieben wir das Gewicht in der Gesellschaft: Weg vom Staat und hin zur Zivilgesellschaft. Von zentraler Bedeutung sind dafür die Abwehrrechte, mit denen das Grundgesetz die Macht des Staates begrenzt. Sie konsequent durchzusetzen, ist unsere Mission.<br><br>Als jüngst gegründeter Verein entscheiden wir gegenwärtig, mit welchen Themen wir starten wollen. Klar ist: <strong>Unsere Vision ist ein liberales Deutschland.</strong> Nichts anderes sieht das Grundgesetz vor. Unsere Klagen werden sich an diesem Anspruch messen.<strong class=mission-sub>Ihre Unterstützung</strong>Gemeinsam mit Verbündeten in Wissenschaft und Zivilgesellschaft werden wir in den nächsten Monaten unsere ersten Klagen präsentieren. Selbstverständlich nehmen wir dafür keine staatlichen Gelder – nur so können wir unsere Unabhängigkeit garantieren. Das bedeutet aber auch: <strong>Wir sind auf Ihre Unterstützung angewiesen.</strong> Ihre Spende hilft dabei, den Staat in seine rechtlichen Schranken zu verweisen. Durch eine Fördermitgliedschaft unterstützen Sie uns regelmäßig. Und durch Ihre ehrenamtliche Mitarbeit können Sie unserer Arbeit mehr Schlagkraft und Impact verleihen.<span class=mission-closing>Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></span></p>
+    <p class="mission-body" id="mission-body" data-de="Jedem von uns setzt der Staat Grenzen. Regeln sind unverzichtbar für das Zusammenleben. Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält? Als überparteilicher, unabhängiger und eingetragener Verein stellt das Zentrum Grundrechte durch Klagen gegen staatliches Handeln sicher, dass Gesetzgeber, Regierung und Behörden ihre grundgesetzlichen Befugnisse nicht überschreiten. Denn: Nicht nur Bürgerinnen und Bürger müssen sich an Gesetze halten. Das gleiche gilt für den Staat.<strong class=mission-sub>Unsere Strategie</strong>Das Zentrum Grundrechte ist keine Rechtshilfe. <strong>Unser Ziel ist vielmehr, durch strategische Klagen Fragen von Verfassungsrang zu klären.</strong> Damit verschieben wir das Gewicht in der Gesellschaft: Weg vom Staat und hin zur Zivilgesellschaft. Von zentraler Bedeutung sind dafür die Abwehrrechte, mit denen das Grundgesetz die Macht des Staates begrenzt. Sie konsequent durchzusetzen, ist unsere Mission.<br><br>Als jüngst gegründeter Verein entscheiden wir gegenwärtig, mit welchen Themen wir starten wollen. Klar ist: <strong>Unsere Vision ist ein liberales Deutschland.</strong> Nichts anderes sieht das Grundgesetz vor. Unsere Klagen werden sich an diesem Anspruch messen.<strong class=mission-sub>Ihre Unterstützung</strong>Gemeinsam mit Verbündeten in Wissenschaft und Zivilgesellschaft werden wir in den nächsten Monaten unsere ersten Klagen präsentieren. Selbstverständlich nehmen wir dafür keine staatlichen Gelder – nur so können wir unsere Unabhängigkeit garantieren. Das bedeutet aber auch: <strong>Wir sind auf Ihre Unterstützung angewiesen.</strong> Ihre Spende hilft dabei, den Staat in seine rechtlichen Schranken zu verweisen. Durch eine Fördermitgliedschaft unterstützen Sie uns regelmäßig. Und durch Ihre ehrenamtliche Mitarbeit können Sie unserer Arbeit mehr Schlagkraft und Impact verleihen.<span class=mission-closing>Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span></span>" data-en="The state sets limits for every one of us. Without rules, we cannot live as a society. But who ensures that the state itself plays by the rules? As a non-partisan, independent and registered association, Zentrum Grundrechte uses litigation against state action to ensure that parliament, cabinet and government bodies do not exceed their constitutional powers. Not only citizens need to follow the law. The same applies to the state.<strong class=mission-sub>Our Strategy</strong>Zentrum Grundrechte is not a legal aid service. <strong>Our aim is to clarify questions of constitutional importance through strategic litigation.</strong> In doing so we shift the balance — away from the state and towards civil society. The fundamental rights enshrined in Germany's Basic Law are central to our effort to limit state power. Our mission is to defend them rigorously.<br><br>As a newly founded association, we are currently deciding which lawsuits to prioritise. One thing is clear: <strong>We work for a liberal Germany.</strong> These are the values of our constitution. They will be the values guiding our lawsuits.<strong class=mission-sub>Your Support</strong>Working with academics and civil society, we will present our first cases in the months ahead. Naturally, we accept no state funding — this is necessary to guarantee our independence. But this also means that <strong>we depend on your support.</strong> Your donation is a contribution against unconstitutional government action. If you would like to support us regularly, become a sponsoring member. And as a volunteer at Zentrum Grundrechte, you can achieve lasting impact while experiencing first-hand how strategic litigation works.<span class=mission-closing>We're putting fundamental rights on the agenda.<br class=desktop-only><span class=mission-closing-line2>Will you join us? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span></span>">Jedem von uns setzt der Staat Grenzen. Regeln sind unverzichtbar für das Zusammenleben. Aber wer sorgt dafür, dass sich auch der Staat an Regeln hält? Als überparteilicher, unabhängiger und eingetragener Verein stellt das Zentrum Grundrechte durch Klagen gegen staatliches Handeln sicher, dass Gesetzgeber, Regierung und Behörden ihre grundgesetzlichen Befugnisse nicht überschreiten. Denn: Nicht nur Bürgerinnen und Bürger müssen sich an Gesetze halten. Das gleiche gilt für den Staat.<strong class=mission-sub>Unsere Strategie</strong>Das Zentrum Grundrechte ist keine Rechtshilfe. <strong>Unser Ziel ist vielmehr, durch strategische Klagen Fragen von Verfassungsrang zu klären.</strong> Damit verschieben wir das Gewicht in der Gesellschaft: Weg vom Staat und hin zur Zivilgesellschaft. Von zentraler Bedeutung sind dafür die Abwehrrechte, mit denen das Grundgesetz die Macht des Staates begrenzt. Sie konsequent durchzusetzen, ist unsere Mission.<br><br>Als jüngst gegründeter Verein entscheiden wir gegenwärtig, mit welchen Themen wir starten wollen. Klar ist: <strong>Unsere Vision ist ein liberales Deutschland.</strong> Nichts anderes sieht das Grundgesetz vor. Unsere Klagen werden sich an diesem Anspruch messen.<strong class=mission-sub>Ihre Unterstützung</strong>Gemeinsam mit Verbündeten in Wissenschaft und Zivilgesellschaft werden wir in den nächsten Monaten unsere ersten Klagen präsentieren. Selbstverständlich nehmen wir dafür keine staatlichen Gelder – nur so können wir unsere Unabhängigkeit garantieren. Das bedeutet aber auch: <strong>Wir sind auf Ihre Unterstützung angewiesen.</strong> Ihre Spende hilft dabei, den Staat in seine rechtlichen Schranken zu verweisen. Durch eine Fördermitgliedschaft unterstützen Sie uns regelmäßig. Und durch Ihre ehrenamtliche Mitarbeit können Sie unserer Arbeit mehr Schlagkraft und Impact verleihen.<span class=mission-closing>Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></span></p>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="mission-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="mission-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2221,7 +2255,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         <div class="team-member-text">
           <p class="team-member-role" id="team-role-josef" data-de="Vorsitzender" data-en="Chair">Vorsitzender</p>
           <h2 class="team-member-name">Josef Städter</h2>
-          <p class="team-member-bio" id="team-bio-josef" data-de="Josef Städter hat nach seinem Ökonomiestudium am King’s College London und der Universität Oxford zwei britische Ministerien zu Wirtschaftsfragen beraten. Bis März 2025 war er Wissenschaftlicher Mitarbeiter der rechtspolitischen Sprecherin der FDP-Fraktion im Deutschen Bundestag." data-en="After studying economics at King’s College London and the University of Oxford, Josef Städter advised two UK government departments on economic policy. Until March 2025 he served as a parliamentary assistant to the spokesperson for justice of the FDP parliamentary group in the German Bundestag.">Josef Städter hat nach seinem Ökonomiestudium am King’s College London und der Universität Oxford zwei britische Ministerien zu Wirtschaftsfragen beraten. Bis März 2025 war er Wissenschaftlicher Mitarbeiter der rechtspolitischen Sprecherin der FDP-Fraktion im Deutschen Bundestag.</p>
+          <p class="team-member-bio" id="team-bio-josef" data-de="Josef Städter hat nach seinem Ökonomiestudium am King’s College London und der Universität Oxford zwei britische Ministerien zu Wirtschaftsfragen beraten. Bis März 2025 war er Wissenschaftlicher Mitarbeiter der rechtspolitischen Sprecherin der FDP-Fraktion im Deutschen Bundestag." data-en="After studying economics at King’s College London and the University of Oxford, Josef Städter advised two UK government departments on economic policy. Until March 2025 he served as a research associate to the legal-policy spokesperson of the FDP parliamentary group in the German Bundestag.">Josef Städter hat nach seinem Ökonomiestudium am King’s College London und der Universität Oxford zwei britische Ministerien zu Wirtschaftsfragen beraten. Bis März 2025 war er Wissenschaftlicher Mitarbeiter der rechtspolitischen Sprecherin der FDP-Fraktion im Deutschen Bundestag.</p>
         </div>
       </article>
       <article class="team-member">
@@ -2229,7 +2263,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         <div class="team-member-text">
           <p class="team-member-role" id="team-role-nemir" data-de="Stellvertretender Vorsitzender" data-en="Deputy Chair">Stellvertretender Vorsitzender</p>
           <h2 class="team-member-name">Nemir Ali</h2>
-          <p class="team-member-bio" id="team-bio-nemir" data-de="Nemir Ali ist Rechtsanwalt mit Schwerpunkt Energierecht in einer internationalen Wirtschaftskanzlei. Er hat Rechtswissenschaften in Osnabrück und A Coruña studiert. Ehrenamtlich ist er bei der FDP engagiert, wo er unter anderem Beisitzer im Bundesvorstand ist." data-en="Nemir Ali is a lawyer specialising in energy law at an international law firm. He studied law in Osnabrück and A Coruña. As an active member of the FDP, he serves, among others, as a member of the party's federal executive board.">Nemir Ali ist Rechtsanwalt mit Schwerpunkt Energierecht in einer internationalen Wirtschaftskanzlei. Er hat Rechtswissenschaften in Osnabrück und A Coruña studiert. Ehrenamtlich ist er bei der FDP engagiert, wo er unter anderem Beisitzer im Bundesvorstand ist.</p>
+          <p class="team-member-bio" id="team-bio-nemir" data-de="Nemir Ali ist Rechtsanwalt mit Schwerpunkt Energierecht in einer internationalen Wirtschaftskanzlei. Er hat Rechtswissenschaften in Osnabrück und A Coruña studiert. Ehrenamtlich ist er bei der FDP engagiert, wo er unter anderem Beisitzer im Bundesvorstand ist." data-en="Nemir Ali is a lawyer specialising in energy law at an international commercial law firm. He studied law in Osnabrück and A Coruña. He volunteers for the FDP, where he serves among other roles as a member of the federal executive board.">Nemir Ali ist Rechtsanwalt mit Schwerpunkt Energierecht in einer internationalen Wirtschaftskanzlei. Er hat Rechtswissenschaften in Osnabrück und A Coruña studiert. Ehrenamtlich ist er bei der FDP engagiert, wo er unter anderem Beisitzer im Bundesvorstand ist.</p>
         </div>
       </article>
       <!-- Constantin-Hartmann-Profil temporaer ausgeblendet. Zum Wieder-
@@ -2242,7 +2276,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
           <p class="team-member-bio" id="team-bio-constantin" data-de="Hier steht später eine kurze Vorstellung — beruflicher Hintergrund, Schwerpunkte und Motivation für das Engagement im Zentrum Grundrechte. Bis dahin füllt dieser Platzhalter den vorgesehenen Bereich und gibt einen Eindruck vom Layout." data-en="A brief introduction will appear here — professional background, focus areas and motivation for the work at Zentrum Grundrechte. Until then, this placeholder fills the intended area and gives an impression of the layout.">Hier steht später eine kurze Vorstellung — beruflicher Hintergrund, Schwerpunkte und Motivation für das Engagement im Zentrum Grundrechte. Bis dahin füllt dieser Platzhalter den vorgesehenen Bereich und gibt einen Eindruck vom Layout.</p>
         </div>
       </article>
-      <div class="mission-closing" id="team-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We defend fundamental rights. <br class=desktop-only><span class=mission-closing-line2>And you? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
+      <div class="mission-closing" id="team-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're putting fundamental rights on the agenda.<br class=desktop-only><span class=mission-closing-line2>Will you join us? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     </div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="team-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2266,8 +2300,8 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     </div>
     <p class="unterstuetzen-body" id="unterstuetzen-body" data-de="Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise." data-en="Fundamental rights matter for every one of us. That is why we stand up for them. In doing so, we accept no government funding whatsoever. That is why we welcome your support — financial, through your ideas, or through your expertise.">Grundrechte zählen für jeden Einzelnen von uns. Deshalb setzen wir uns für sie ein. Dabei nehmen wir keinerlei staatliche Förderung an. Deshalb freuen wir uns über Ihre Unterstützung — finanziell, durch Ihre Ideen oder Ihre Expertise.</p>
     <div class="support-block">
-      <p class="foerder-label" id="foerder-label" data-de="Fördermitgliedschaft" data-en="Sponsoring membership">Fördermitgliedschaft</p>
-      <p class="unterstuetzen-foerder" id="unterstuetzen-foerder" data-de="Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert." data-en="From 100 euros annually onwards, a sponsoring membership supports our work for the long term. Amounts above the minimum qualify as tax-deductible donations and are confirmed with a receipt.">Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert.</p>
+      <p class="foerder-label" id="foerder-label" data-de="Fördermitgliedschaft" data-en="Supporting membership">Fördermitgliedschaft</p>
+      <p class="unterstuetzen-foerder" id="unterstuetzen-foerder" data-de="Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert." data-en="A supporting membership backs our work for the long term — from 100 euros a year onwards. Amounts above the minimum qualify as tax-deductible donations and are confirmed with a receipt.">Mit einer Fördermitgliedschaft tragen Sie unsere Arbeit dauerhaft mit — bereits ab 100 Euro im Jahr. Beträge darüber hinaus gelten steuerlich als Spende und werden mit einer Zuwendungsbestätigung quittiert.</p>
       <a class="foerder-link" id="foerder-link" href="#" data-de="Fördermitglied werden<svg class=&quot;foerder-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Become a member<svg class=&quot;foerder-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Fördermitglied werden<svg class="foerder-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <div class="support-block">
@@ -2277,10 +2311,10 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
     </div>
     <div class="support-block">
       <p class="mitmachen-label" id="mitmachen-label" data-de="Mitmachen" data-en="Get involved">Mitmachen</p>
-      <p class="unterstuetzen-mitmachen" id="unterstuetzen-mitmachen" data-de="Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben." data-en="Want to support our mission through your work? Becoming a volunteer helps drive your impact and allows you to experience strategic litigation first-hand. We are open to different ways of collaborating with you. What matters is commitment and conviction.">Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben.</p>
+      <p class="unterstuetzen-mitmachen" id="unterstuetzen-mitmachen" data-de="Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben." data-en="Want to support our mission through your work? Here you can experience strategic litigation first-hand and have real impact.">Sie möchten unsere Mission durch Ihre Mitarbeit unterstützen? Hier haben Sie die Möglichkeit, strategische Prozessführung aus erster Hand kennenzulernen und dabei echten Impact zu haben.</p>
       <a class="contact-email" id="unterstuetzen-email" href="#" data-de="Schreiben Sie uns<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Write to us<svg class=&quot;contact-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Schreiben Sie uns<svg class="contact-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
-    <div class="mission-closing" id="unterstuetzen-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Unser Newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We defend fundamental rights. <br class=desktop-only><span class=mission-closing-line2>And you? <br class=mobile-only><a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Our newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class="mission-closing-cta js-newsletter-trigger" href="#">Unser Newsletter<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
+    <div class="mission-closing" id="unterstuetzen-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Unser Newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're putting fundamental rights on the agenda.<br class=desktop-only><span class=mission-closing-line2>Will you join us? <br class=mobile-only><a class=&quot;mission-closing-cta js-newsletter-trigger&quot; href=#>Our newsletter<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class="mission-closing-cta js-newsletter-trigger" href="#">Unser Newsletter<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="unterstuetzen-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="wer-link" id="unterstuetzen-wer-link" href="#mission" data-de="Wer wir sind<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Who we are<svg class=&quot;wer-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Wer wir sind<svg class="wer-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2331,7 +2365,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
         VR 42503 B
       </p>
     </div>
-    <div class="mission-closing" id="kontakt-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We defend fundamental rights. <br class=desktop-only><span class=mission-closing-line2>And you? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
+    <div class="mission-closing" id="kontakt-closing" data-de="Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>" data-en="We're putting fundamental rights on the agenda.<br class=desktop-only><span class=mission-closing-line2>Will you join us? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Support now<svg class=&quot;mission-closing-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg></a></span>">Wir setzen Grundrechte auf die Agenda.<br class=desktop-only><span class=mission-closing-line2>Sind Sie dabei? <br class=mobile-only><a class=mission-closing-cta href=#unterstuetzen>Jetzt unterstützen<svg class="mission-closing-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></div>
     <div class="cta-row section-cta">
       <a class="newsletter-link" id="kontakt-newsletter-link" href="#" data-de="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Newsletter<svg class=&quot;newsletter-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Newsletter<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="mitmachen-link" id="kontakt-mitmachen-link" href="#unterstuetzen" data-de="Mitmachen<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>" data-en="Get involved<svg class=&quot;mitmachen-arrow&quot; viewBox=&quot;0 0 14 24&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;><path d=&quot;M3 3 L11 12 L3 21&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.6&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/></svg>">Mitmachen<svg class="mitmachen-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -2405,7 +2439,7 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <!-- ══ MODAL: COMING SOON (Foerdermitgliedschaft / Einmalspende) ══ -->
 <div class="modal-overlay" id="modal-coming-soon" onclick="if(event.target===this)closeModal('coming-soon')">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('coming-soon')" aria-label="Schließen" data-de-aria-label="Schließen" data-en-aria-label="Close">✕</button>
+    <button class="modal-close" onclick="closeModal('coming-soon')" aria-label="Schließen">✕</button>
     <h2 data-de="Demnächst verfügbar" data-en="Coming soon">Demnächst verfügbar</h2>
     <p data-de="Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Kontakt</a> erreichen — wir freuen uns über jede Nachricht." data-en="This option will be available shortly. In the meantime, please feel free to reach us via the <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Contact</a> page — we welcome every message.">Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href="#kontakt" onclick="closeModal('coming-soon')">Kontakt</a> erreichen — wir freuen uns über jede Nachricht.</p>
   </div>
@@ -2414,19 +2448,19 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <!-- ══ MODAL: NEWSLETTER ══ -->
 <div class="modal-overlay" id="modal-newsletter" onclick="if(event.target===this)closeModal('newsletter')">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('newsletter')" aria-label="Schließen" data-de-aria-label="Schließen" data-en-aria-label="Close">✕</button>
+    <button class="modal-close" onclick="closeModal('newsletter')" aria-label="Schließen">✕</button>
     <h2><span class="mark">Newsletter</span></h2>
-    <p class="newsletter-intro" data-de="Melden Sie sich jetzt schon für unseren künftigen Newsletter an:" data-en="Sign up now for our upcoming newsletter:">Melden Sie sich jetzt schon für unseren künftigen Newsletter an:</p>
+    <p class="newsletter-intro">Melden Sie sich jetzt schon für unseren künftigen Newsletter an:</p>
     <form id="newsletter-form" novalidate>
-      <label for="newsletter-email" style="position:absolute;left:-9999px;" data-de="E-Mail-Adresse" data-en="Email address">E-Mail-Adresse</label>
-      <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de" data-de-placeholder="ihre@email.de" data-en-placeholder="your@email.com" autocomplete="email">
+      <label for="newsletter-email" style="position:absolute;left:-9999px;">E-Mail-Adresse</label>
+      <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de" autocomplete="email">
       <label class="newsletter-consent">
         <input type="checkbox" id="newsletter-consent" required>
-        <span data-de="Ich willige ein, dass das Zentrum Grundrechte e.V. die von mir angegebene E-Mail-Adresse zum Zweck des Newsletter-Versands speichert und verarbeitet (Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, etwa per E-Mail an <a id=&quot;email-newsletter-consent&quot; href=&quot;#&quot;>kontakt@zentrumgrundrechte.de</a>. Weitere Informationen in der <a href=&quot;#&quot; onclick=&quot;closeModal('newsletter');openModal('datenschutz');return false;&quot;>Datenschutzerklärung</a>." data-en="I consent to Zentrum Grundrechte e.V. storing and processing the email address I have provided for the purpose of sending the newsletter (legal basis: Art. 6(1)(a) GDPR). Consent can be withdrawn at any time with effect for the future, for example by email to <a id=&quot;email-newsletter-consent&quot; href=&quot;#&quot;>kontakt@zentrumgrundrechte.de</a>. Further information is available in the <a href=&quot;#&quot; onclick=&quot;closeModal('newsletter');openModal('datenschutz');return false;&quot;>Privacy Policy</a>.">Ich willige ein, dass das Zentrum Grundrechte e.V. die von mir angegebene E-Mail-Adresse zum Zweck des Newsletter-Versands speichert und verarbeitet (Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, etwa per E-Mail an <a id="email-newsletter-consent" href="#">kontakt@zentrumgrundrechte.de</a>. Weitere Informationen in der <a href="#" onclick="closeModal('newsletter');openModal('datenschutz');return false;">Datenschutzerklärung</a>.</span>
+        <span>Ich willige ein, dass das Zentrum Grundrechte e.V. die von mir angegebene E-Mail-Adresse zum Zweck des Newsletter-Versands speichert und verarbeitet (Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, etwa per E-Mail an <a id="email-newsletter-consent" href="#">kontakt@zentrumgrundrechte.de</a>. Weitere Informationen in der <a href="#" onclick="closeModal('newsletter');openModal('datenschutz');return false;">Datenschutzerklärung</a>.</span>
       </label>
-      <button type="submit" class="newsletter-submit" data-de="Anmelden" data-en="Sign up">Anmelden</button>
+      <button type="submit" class="newsletter-submit">Anmelden</button>
     </form>
-    <p class="newsletter-thanks" style="display:none;" data-de="Vielen Dank — wir notieren Ihre Adresse vor und melden uns, sobald der Newsletter startet." data-en="Thank you — we've noted your address and will be in touch as soon as the newsletter launches.">Vielen Dank — wir notieren Ihre Adresse vor und melden uns, sobald der Newsletter startet.</p>
+    <p class="newsletter-thanks" style="display:none;">Vielen Dank — wir notieren Ihre Adresse vor und melden uns, sobald der Newsletter startet.</p>
   </div>
 </div>
 
@@ -2482,10 +2516,8 @@ if (document.fonts && document.fonts.ready) {
 setTimeout(scheduleAlignBg, 250);
 setTimeout(scheduleAlignBg, 750);
 
-/* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest.
-   Extracted as a named function so the language toggle can re-apply it whenever
-   innerHTML rewrites (e.g. newsletter consent span) recreate the obfuscated <a>s. ── */
-function applyEmailObfuscation() {
+/* ── Email obfuscation: keep mailto: out of raw HTML so crawlers can't harvest ── */
+(function() {
   var d = 'zentrumgrundrechte' + '.' + 'de';
   var mailto = ['mai', 'lto', ':'].join('');
   var hrefKontakt = mailto + 'kontakt' + '@' + d;
@@ -2496,8 +2528,7 @@ function applyEmailObfuscation() {
   });
   var presseEl = document.getElementById('presse-mail-icon');
   if (presseEl) presseEl.href = hrefStaedter;
-}
-applyEmailObfuscation();
+})();
 
 /* ── Inverted-Modus Toggle (A/B-Vergleich) ──
    Feature-Flag steuert, ob der Invert-Modus überhaupt zur Verfügung steht.
@@ -2523,58 +2554,34 @@ function toggleInvert() {
 }
 applyInvert();
 
-/* ── Language toggle ──
-   Sprache wird in localStorage ('zg-lang') gespeichert, damit ein Reload
-   die zuletzt gewaehlte Sprache erhaelt. Default-HTML ist Deutsch; bei
-   gespeichertem 'en' wird beim Page-Load einmal applyLang('en') geschwenkt. */
-let currentLang = (function() {
-  try {
-    var saved = localStorage.getItem('zg-lang');
-    return (saved === 'en' || saved === 'de') ? saved : 'de';
-  } catch (e) { return 'de'; }
-})();
-
-function applyLang(lang) {
-  currentLang = lang;
+/* ── Language toggle ── */
+let currentLang = 'de';
+function toggleLang() {
+  currentLang = currentLang === 'de' ? 'en' : 'de';
   var label = currentLang === 'de' ? 'EN' : 'DE';
-  /* Beide Sprach-Toggles (Nav + Mobile-Menue) auf den neuen Label-Wert setzen. */
-  ['lang-toggle', 'menu-lang-toggle'].forEach(function(id) {
-    var btn = document.getElementById(id);
-    if (btn) btn.textContent = label;
-  });
+  document.getElementById('lang-toggle').textContent = label;
   /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
      (z. B. breitere .headline auf Englisch) greifen koennen. */
   document.body.classList.toggle('lang-en', currentLang === 'en');
-
-  /* Generischer Sprach-Swap: erfasst jedes Element mit data-de/data-en
-     (Text), data-de-placeholder/data-en-placeholder (Form-Felder) und
-     data-de-aria-label/data-en-aria-label (Buttons/Icons). */
-  document.querySelectorAll('[data-' + currentLang + ']').forEach(function(el) {
+  ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
+   'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
+   'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
+   'team-headline','team-newsletter-link','team-mitmachen-link','team-fragen-link',
+   'team-role-josef','team-bio-josef','team-role-nemir','team-bio-nemir','team-role-constantin','team-bio-constantin',
+   'kontakt-headline','kontakt-intro','address-label','press-label','register-label',
+   'kontakt-mail-icon','presse-mail-icon',
+   'kontakt-newsletter-link','kontakt-mitmachen-link','kontakt-spenden-link',
+   'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link',
+   'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link',
+   'mitmachen-label','unterstuetzen-mitmachen','unterstuetzen-email',
+   'unterstuetzen-newsletter-link','unterstuetzen-wer-link','unterstuetzen-fragen-link'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
     var val = el.getAttribute('data-' + currentLang);
     if (val !== null) el.innerHTML = val;
   });
-  document.querySelectorAll('[data-' + currentLang + '-placeholder]').forEach(function(el) {
-    var val = el.getAttribute('data-' + currentLang + '-placeholder');
-    if (val !== null) el.setAttribute('placeholder', val);
-  });
-  document.querySelectorAll('[data-' + currentLang + '-aria-label]').forEach(function(el) {
-    var val = el.getAttribute('data-' + currentLang + '-aria-label');
-    if (val !== null) el.setAttribute('aria-label', val);
-  });
 
-  /* Nach innerHTML-Swap koennen obfuskierte E-Mail-Anker neu erzeugt
-     worden sein (z. B. newsletter-consent). href erneut setzen. */
-  if (typeof applyEmailObfuscation === 'function') applyEmailObfuscation();
 }
-
-function toggleLang() {
-  var next = currentLang === 'de' ? 'en' : 'de';
-  try { localStorage.setItem('zg-lang', next); } catch (e) {}
-  applyLang(next);
-}
-
-/* Beim initialen Laden: gespeicherte Sprache anwenden, falls nicht DE. */
-if (currentLang === 'en') { applyLang('en'); }
 
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
