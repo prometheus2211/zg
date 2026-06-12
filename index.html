@@ -2567,11 +2567,17 @@ function toggleLang() {
   currentLang = currentLang === 'de' ? 'en' : 'de';
   var label = currentLang === 'de' ? 'EN' : 'DE';
   document.getElementById('lang-toggle').textContent = label;
+  /* Mobile-Menue: eigener Lang-Toggle-Button im Hamburger-Overlay zeigt
+     dasselbe Label wie der Desktop-Toggle (sonst stehen Desktop und
+     Mobile aus dem Tritt). */
+  var menuLangBtn = document.getElementById('menu-lang-toggle');
+  if (menuLangBtn) menuLangBtn.textContent = label;
   /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
      (z. B. breitere .headline auf Englisch) greifen koennen. */
   document.body.classList.toggle('lang-en', currentLang === 'en');
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
+   'menu-mission','menu-team','menu-kontakt','menu-newsletter','menu-unterstuetzen',
    'mission-headline','mission-body','mission-newsletter-link','mission-mitmachen-link','mission-fragen-link',
    'team-headline','team-newsletter-link','team-mitmachen-link','team-fragen-link',
    'team-role-josef','team-bio-josef','team-role-nemir','team-bio-nemir','team-role-constantin','team-bio-constantin',
