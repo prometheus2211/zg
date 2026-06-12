@@ -1830,12 +1830,14 @@ br.mobile-only { display: none; }
   .wordmark { top: 20px; left: 24px; font-size: 18px; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
-  .headline { font-size: clamp(48px, 12vw, 72px); max-width: 4em; }   /* 5 Zeilen, große Schrift; klein genug, dass TB bei 100dvh-Hero nicht ueberlaeuft */
-  /* EN-Slogan hat mit "is not above" eine breitere Zeile als DE. Mit
-     max-width 4em wuerde sie weiter umbrechen, die EN-TB wuerde dadurch
-     hoeher als der Hero und ihr Unterrand wuerde nach dem Pfeil-Klick
-     sichtbar. 7em laesst "is not above" auf einer Zeile, EN bleibt
-     wieder 4-zeilig. */
+  /* Mobile Headline: groesser als der Default-Schritt (clamp 48-72),
+     aber unter dem alten 96er-Max, das im 640x<=500-Viewport zu Overflow
+     fuehrte. 84er-Cap haelt die TB bei typischen Telefonen (390x844 etc.)
+     vollstaendig im 100dvh-Hero, max-width 7em verhindert ungewolltes
+     Wrappen einzelner Worte ("Das Recht", "auch den") auf schmalen Wid-
+     ths. EN bekommt unten denselben Wert, damit "is not above" auf einer
+     Zeile bleibt. */
+  .headline { font-size: clamp(54px, 13vw, 84px); max-width: 7em; }
   body.lang-en .headline { max-width: 7em; }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
