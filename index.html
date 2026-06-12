@@ -1831,11 +1831,12 @@ br.mobile-only { display: none; }
   .wordmark .mark { border-bottom-width: 2px; padding-bottom: 1px; }
   .content { padding: 0 24px; }
   /* Mobile Landing-Headline: jedes Wort eine eigene Zeile (via mobile-
-     only-br im HTML-Markup). Schrift kleiner als der Tablet-/Desktop-
-     Default, damit der 8-zeilige EN-Slogan ('Even / the / state / is /
-     not / above / the / law.') auf typischen Telefonen (iPhone SE 568h
-     bis Galaxy 800h) in den 100dvh-Hero passt. DE ist 6-zeilig. */
-  .headline { font-size: clamp(36px, 10vw, 56px); max-width: 4em; }
+     only-br im HTML-Markup). Schrift skaliert mit BREITE (14vw) UND
+     HOEHE (8vh) — der kleinere Wert gewinnt. Damit ist die Schrift auf
+     grossen Telefonen wirklich gross, schrumpft aber automatisch auf
+     kurzen Viewports (iPhone SE 568h oder schmalen Landscape-Browsern),
+     bevor der 8-zeilige EN-Slogan den 100dvh-Hero sprengt. */
+  .headline { font-size: clamp(44px, min(14vw, 8vh), 72px); max-width: 4em; }
   .headline-box { padding: 20px 24px 24px; border-radius: 4px; }
   .bg-text { padding: 88px 24px 88px; font-size: 13px; line-height: 26px; }
   /* Vertikale Wortmarke auf Mobile ausblenden — kein Platz am Rand */
