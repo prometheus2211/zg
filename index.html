@@ -2574,10 +2574,15 @@ applyInvert();
 
 /* ── Language toggle ── */
 let currentLang = 'de';
-function toggleLang() {
-  currentLang = currentLang === 'de' ? 'en' : 'de';
-  var label = currentLang === 'de' ? 'EN' : 'DE';
-  document.getElementById('lang-toggle').textContent = label;
+/* applyLang(lang): setzt die Sprache und aktualisiert alle data-*-Felder
+   + UI-Toggles + localStorage. Wird sowohl von toggleLang (Klick) als
+   auch vom Init-Code beim Seitenstart (Restore aus localStorage) auf-
+   gerufen, sodass nach Reload die Sprachwahl erhalten bleibt. */
+function applyLang(lang) {
+  currentLang = lang;
+  var label = lang === 'de' ? 'EN' : 'DE';
+  var langToggle = document.getElementById('lang-toggle');
+  if (langToggle) langToggle.textContent = label;
   /* Mobile-Menue: eigener Lang-Toggle-Button im Hamburger-Overlay zeigt
      dasselbe Label wie der Desktop-Toggle (sonst stehen Desktop und
      Mobile aus dem Tritt). */
@@ -2585,7 +2590,7 @@ function toggleLang() {
   if (menuLangBtn) menuLangBtn.textContent = label;
   /* body-Klasse umschalten, damit sprach-spezifische CSS-Overrides
      (z. B. breitere .headline auf Englisch) greifen koennen. */
-  document.body.classList.toggle('lang-en', currentLang === 'en');
+  document.body.classList.toggle('lang-en', lang === 'en');
   ['headline','satz','satz-tail','contact-label','link-impressum','link-datenschutz',
    'nav-mission','nav-team','nav-unterstuetzen','nav-kontakt','wer-link','newsletter-link','mitmachen-link',
    'menu-mission','menu-team','menu-kontakt','menu-newsletter','menu-unterstuetzen',
@@ -2601,11 +2606,27 @@ function toggleLang() {
    'unterstuetzen-newsletter-link','unterstuetzen-wer-link','unterstuetzen-fragen-link'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
-    var val = el.getAttribute('data-' + currentLang);
+    var val = el.getAttribute('data-' + lang);
     if (val !== null) el.innerHTML = val;
   });
-
+  /* Sprachwahl persistieren, damit ein Reload die Auswahl behaelt. */
+  try { localStorage.setItem('zg-lang', lang); } catch (e) { /* ignore */ }
 }
+
+/* toggleLang: Klick-Handler — flippt aktuelle Sprache und ruft applyLang. */
+function toggleLang() {
+  applyLang(currentLang === 'de' ? 'en' : 'de');
+}
+
+/* Bei Seitenstart die gespeicherte Sprache wiederherstellen. Direkter
+   IIFE-Aufruf (nicht in DOMContentLoaded), damit das Sprach-Swap mit
+   der Rest-Initialisierung zusammen passiert. */
+(function() {
+  try {
+    var stored = localStorage.getItem('zg-lang');
+    if (stored === 'en' || stored === 'de') applyLang(stored);
+  } catch (e) { /* localStorage gesperrt o. ä. — Standard-DE bleibt aktiv */ }
+})();
 
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
