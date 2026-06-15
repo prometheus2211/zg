@@ -2453,8 +2453,8 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <div class="modal-overlay" id="modal-coming-soon" onclick="if(event.target===this)closeModal('coming-soon')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('coming-soon')" aria-label="Schließen">✕</button>
-    <h2 data-de="Demnächst verfügbar" data-en="Coming soon">Demnächst verfügbar</h2>
-    <p data-de="Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Kontakt</a> erreichen — wir freuen uns über jede Nachricht." data-en="This option will be available shortly. In the meantime, please feel free to reach us via the <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Contact</a> page — we welcome every message.">Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href="#kontakt" onclick="closeModal('coming-soon')">Kontakt</a> erreichen — wir freuen uns über jede Nachricht.</p>
+    <h2 id="coming-soon-title" data-de="Demnächst verfügbar" data-en="Coming soon">Demnächst verfügbar</h2>
+    <p id="coming-soon-body" data-de="Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Kontakt</a> erreichen — wir freuen uns über jede Nachricht." data-en="This option will be available shortly. In the meantime, please feel free to reach us via the <a href=&quot;#kontakt&quot; onclick=&quot;closeModal('coming-soon')&quot;>Contact</a> page — we welcome every message.">Diese Option wird in Kürze verfügbar sein. Bis dahin können Sie uns gerne unter <a href="#kontakt" onclick="closeModal('coming-soon')">Kontakt</a> erreichen — wir freuen uns über jede Nachricht.</p>
   </div>
 </div>
 
@@ -2598,7 +2598,8 @@ function applyLang(lang) {
    'unterstuetzen-headline','unterstuetzen-body','foerder-label','unterstuetzen-foerder','foerder-link',
    'einmalspende-label','unterstuetzen-einmalspende','einmalspende-link',
    'mitmachen-label','unterstuetzen-mitmachen','unterstuetzen-email',
-   'unterstuetzen-newsletter-link','unterstuetzen-wer-link','unterstuetzen-fragen-link'].forEach(function(id) {
+   'unterstuetzen-newsletter-link','unterstuetzen-wer-link','unterstuetzen-fragen-link',
+   'coming-soon-title','coming-soon-body'].forEach(function(id) {
     var el = document.getElementById(id);
     if (!el) return;
     var val = el.getAttribute('data-' + lang);
