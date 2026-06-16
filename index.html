@@ -1675,6 +1675,11 @@ br.mobile-only { display: none; }
    einem desktop-spezifischen Wortbruch). Auf Mobile ausgeblendet. */
 .desktop-only-inline { display: inline; }
 @media (max-width: 640px) { .desktop-only-inline { display: none; } }
+/* Sprach-Blocks: ein DE- und ein EN-Block pro Modal. Sichtbar ist nur
+   der zum aktuellen body.lang-* passende. Default = DE sichtbar. */
+.lang-block-en { display: none; }
+body.lang-en .lang-block-de { display: none; }
+body.lang-en .lang-block-en { display: block; }
 @media (max-width: 640px) {
   br.mobile-only { display: inline; }
   /* Schluss-Box auf Mobile: drei Zeilen.
@@ -2420,25 +2425,48 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <div class="modal-overlay" id="modal-impressum" onclick="if(event.target===this)closeModal('impressum')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('impressum')" aria-label="Schließen" data-aria-de="Schließen" data-aria-en="Close">✕</button>
-    <h2>Impressum</h2>
-    <h3>Angaben gemäß § 5 TMG</h3>
-    <address>
-      Zentrum Grundrechte e.V.<br>
-      Hauptstraße 2b<br>
-      13158 Berlin
-    </address>
-    <h3>Vertretungsberechtigter Vorstand</h3>
-    <p>
-      Josef Städter (Vorsitzender)<br>
-      Nemir Ali (stellv. Vorsitzender)<br>
-      Constantin Hartmann (stellv. Vorsitzender)
-    </p>
-    <h3>Kontakt</h3>
-    <p><a id="email-impressum" href="#">kontakt@zentrumgrundrechte.de</a></p>
-    <h3>Vereinsregister</h3>
-    <p>Amtsgericht Charlottenburg, VR 42503 B</p>
-    <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
-    <p>Josef Städter, Hauptstraße 2b, 13158 Berlin</p>
+    <div class="lang-block-de">
+      <h2>Impressum</h2>
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <address>
+        Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b<br>
+        13158 Berlin
+      </address>
+      <h3>Vertretungsberechtigter Vorstand</h3>
+      <p>
+        Josef Städter (Vorsitzender)<br>
+        Nemir Ali (stellv. Vorsitzender)<br>
+        Constantin Hartmann (stellv. Vorsitzender)
+      </p>
+      <h3>Kontakt</h3>
+      <p><a id="email-impressum" href="#">kontakt@zentrumgrundrechte.de</a></p>
+      <h3>Vereinsregister</h3>
+      <p>Amtsgericht Charlottenburg, VR 42503 B</p>
+      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+      <p>Josef Städter, Hauptstraße 2b, 13158 Berlin</p>
+    </div>
+    <div class="lang-block-en">
+      <h2>Legal Notice</h2>
+      <h3>Information pursuant to § 5 TMG</h3>
+      <address>
+        Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b<br>
+        13158 Berlin, Germany
+      </address>
+      <h3>Executive Board</h3>
+      <p>
+        Josef Städter (Chair)<br>
+        Nemir Ali (Deputy Chair)<br>
+        Constantin Hartmann (Deputy Chair)
+      </p>
+      <h3>Contact</h3>
+      <p><a id="email-impressum-en" href="#">kontakt@zentrumgrundrechte.de</a></p>
+      <h3>Association Register</h3>
+      <p>Charlottenburg District Court, VR 42503 B</p>
+      <h3>Responsible for content pursuant to § 18 (2) MStV</h3>
+      <p>Josef Städter, Hauptstraße 2b, 13158 Berlin, Germany</p>
+    </div>
   </div>
 </div>
 
@@ -2446,25 +2474,48 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
 <div class="modal-overlay" id="modal-datenschutz" onclick="if(event.target===this)closeModal('datenschutz')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('datenschutz')" aria-label="Schließen" data-aria-de="Schließen" data-aria-en="Close">✕</button>
-    <h2>Datenschutzerklärung</h2>
-    <h3>Verantwortlicher</h3>
-    <address>
-      Zentrum Grundrechte e.V.<br>
-      Hauptstraße 2b, 13158 Berlin<br>
-      <a id="email-datenschutz" href="#">kontakt@zentrumgrundrechte.de</a>
-    </address>
-    <h3>Erhebung personenbezogener Daten</h3>
-    <p>Diese Website erhebt keine personenbezogenen Daten. Es werden keine Cookies gesetzt, kein Tracking durchgeführt und keine Analyse-Tools eingesetzt.</p>
-    <h3>Kontaktaufnahme per E-Mail</h3>
-    <p>Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-    <h3>Hosting</h3>
-    <p>Diese Website wird über GitHub Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf werden technische Zugriffsdaten im Serverlog gespeichert. Weitere Informationen: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection" target="_blank" rel="noopener">GitHub Pages Datenschutz</a>.</p>
-    <h3>Ihre Rechte</h3>
-    <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer personenbezogenen Daten. Beschwerden richten Sie an die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
-    <h3>Newsletter</h3>
-    <p>Wenn Sie sich für unseren Newsletter anmelden, verarbeiten wir die von Ihnen angegebene E-Mail-Adresse zu dem Zweck, Ihnen Informationen über die Tätigkeit des Zentrum Grundrechte e.V. zuzusenden. Rechtsgrundlage ist Ihre ausdrückliche Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen, etwa per E-Mail an <a href="#" id="email-datenschutz-nl">kontakt@zentrumgrundrechte.de</a>; durch den Widerruf wird die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung nicht berührt. Wir speichern Ihre E-Mail-Adresse, bis Sie die Einwilligung widerrufen. Eine Weitergabe an Dritte findet, abgesehen von einer technischen Versanddienstleistung, nicht statt; sobald wir einen Versanddienstleister einsetzen, ergänzen wir diese Erklärung entsprechend.</p>
-    <h3>Stand</h3>
-    <p>April 2026</p>
+    <div class="lang-block-de">
+      <h2>Datenschutzerklärung</h2>
+      <h3>Verantwortlicher</h3>
+      <address>
+        Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b, 13158 Berlin<br>
+        <a id="email-datenschutz" href="#">kontakt@zentrumgrundrechte.de</a>
+      </address>
+      <h3>Erhebung personenbezogener Daten</h3>
+      <p>Diese Website erhebt keine personenbezogenen Daten. Es werden keine Cookies gesetzt, kein Tracking durchgeführt und keine Analyse-Tools eingesetzt.</p>
+      <h3>Kontaktaufnahme per E-Mail</h3>
+      <p>Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+      <h3>Hosting</h3>
+      <p>Diese Website wird über GitHub Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf werden technische Zugriffsdaten im Serverlog gespeichert. Weitere Informationen: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection" target="_blank" rel="noopener">GitHub Pages Datenschutz</a>.</p>
+      <h3>Ihre Rechte</h3>
+      <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer personenbezogenen Daten. Beschwerden richten Sie an die Berliner Beauftragte für Datenschutz und Informationsfreiheit.</p>
+      <h3>Newsletter</h3>
+      <p>Wenn Sie sich für unseren Newsletter anmelden, verarbeiten wir die von Ihnen angegebene E-Mail-Adresse zu dem Zweck, Ihnen Informationen über die Tätigkeit des Zentrum Grundrechte e.V. zuzusenden. Rechtsgrundlage ist Ihre ausdrückliche Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen, etwa per E-Mail an <a href="#" id="email-datenschutz-nl">kontakt@zentrumgrundrechte.de</a>; durch den Widerruf wird die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung nicht berührt. Wir speichern Ihre E-Mail-Adresse, bis Sie die Einwilligung widerrufen. Eine Weitergabe an Dritte findet, abgesehen von einer technischen Versanddienstleistung, nicht statt; sobald wir einen Versanddienstleister einsetzen, ergänzen wir diese Erklärung entsprechend.</p>
+      <h3>Stand</h3>
+      <p>April 2026</p>
+    </div>
+    <div class="lang-block-en">
+      <h2>Privacy Policy</h2>
+      <h3>Controller</h3>
+      <address>
+        Zentrum Grundrechte e.V.<br>
+        Hauptstraße 2b, 13158 Berlin, Germany<br>
+        <a id="email-datenschutz-en" href="#">kontakt@zentrumgrundrechte.de</a>
+      </address>
+      <h3>Collection of personal data</h3>
+      <p>This website does not collect personal data. No cookies are set, no tracking is carried out, and no analytics tools are used.</p>
+      <h3>Contact via email</h3>
+      <p>If you contact us by email, your information will be stored to process your request. We will not pass this data on to third parties without your consent.</p>
+      <h3>Hosting</h3>
+      <p>This website is hosted via GitHub Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). When the site is accessed, technical access data is stored in the server log. Further information: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection" target="_blank" rel="noopener">GitHub Pages privacy</a>.</p>
+      <h3>Your rights</h3>
+      <p>You have the right to information about, correction of, and deletion of your personal data. Complaints may be addressed to the Berlin Commissioner for Data Protection and Freedom of Information.</p>
+      <h3>Newsletter</h3>
+      <p>If you sign up for our newsletter, we process the email address you provide in order to send you information about the work of Zentrum Grundrechte e.V. The legal basis is your express consent pursuant to Art. 6 (1) lit. a GDPR. You may withdraw your consent at any time with effect for the future, for example by emailing <a href="#" id="email-datenschutz-nl-en">kontakt@zentrumgrundrechte.de</a>; the lawfulness of processing carried out before withdrawal remains unaffected. We store your email address until you withdraw your consent. We do not pass it on to third parties, with the exception of a technical mailing service; as soon as we use such a service, we will update this statement accordingly.</p>
+      <h3>Last updated</h3>
+      <p>April 2026</p>
+    </div>
   </div>
 </div>
 
@@ -2554,7 +2605,7 @@ setTimeout(scheduleAlignBg, 750);
   var mailto = ['mai', 'lto', ':'].join('');
   var hrefKontakt = mailto + 'kontakt' + '@' + d;
   var hrefStaedter = mailto + 'staedter' + '@' + d;
-  ['email-main', 'email-impressum', 'email-datenschutz', 'email-datenschutz-nl', 'email-newsletter-consent', 'unterstuetzen-email', 'kontakt-mail-icon'].forEach(function(id) {
+  ['email-main', 'email-impressum', 'email-impressum-en', 'email-datenschutz', 'email-datenschutz-en', 'email-datenschutz-nl', 'email-datenschutz-nl-en', 'email-newsletter-consent', 'unterstuetzen-email', 'kontakt-mail-icon'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) el.href = hrefKontakt;
   });
