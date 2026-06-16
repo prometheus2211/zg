@@ -2970,10 +2970,12 @@ window.__SECTION_VIEW_CONFIGS = [
     var overlap;
     if (cfg.view === 'mission-view' || cfg.view === 'team-view' || cfg.view === 'kontakt-view' || cfg.view === 'unterstuetzen-view') {
       /* Mission + Team: nav-on-vermil aktiv solange die TB-Unterkante
-         AUF oder UNTERHALB der Ribbon-Unterkante liegt. Genau am Pfeil-
-         Klick-Ziel (TB.bottom == navRect.bottom) bleibt es noch rot —
-         ein Pixel weiter und es springt sofort auf weiss. */
-      overlap = tbRect.bottom >= navRect.bottom;
+         AUF oder knapp UNTERHALB der Ribbon-Unterkante liegt. 3-Pixel-
+         Toleranz schluckt das Subpixel-Overshoot, das auf Mobile beim
+         Smooth-Scroll auf TB.bottom - navH typischerweise auftritt —
+         sonst springt nav-on-vermil direkt nach dem Klick auf weiss.
+         Beim weiteren User-Scrollen (>3 px) flippt es dann sauber um. */
+      overlap = tbRect.bottom + 3 >= navRect.bottom;
     } else {
       /* Andere Views: klassische Rechteck-Ueberlappung TB <-> Nav. */
       overlap = tbRect.top < navRect.bottom && tbRect.bottom > navRect.top;
