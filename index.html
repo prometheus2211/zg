@@ -909,6 +909,23 @@ body.inverted .mission-sub { background: var(--vermil); color: #fff; border-colo
 /* Zeile 2 (Frage + CTA-Icon) soll geschlossen bleiben: kein Umbruch
    zwischen "Sind Sie dabei?" und dem "Jetzt unterstützen >"-Icon. */
 .mission-closing-line2 { white-space: nowrap; }
+/* EN-Slogan ('We're putting fundamental rights on the agen-da. Will
+   you join us? Support now') ist deutlich laenger als die DE-Variante.
+   Bei der schmalen Body-Spalte (max-width 640px) wuerde Zeile 1 naturl-
+   ich zusaetzlich umbrechen und '-da.' isoliert auf eine eigene Zeile
+   rutschen. Negative seitliche Margins ziehen die Closing-Box NUR im
+   EN-Modus ueber den Body-Rahmen hinaus, sodass beide Zeilen jeweils
+   ohne Zusatz-Wrap auf einer Linie bleiben. */
+body.lang-en .mission-closing {
+  margin-left: -48px;
+  margin-right: -48px;
+}
+@media (max-width: 640px) {
+  /* Auf Mobile bleibt die Box im Body-Rahmen (Layout dort ist 3-zeilig
+     und sehr platzsparend; negative Margins wuerden ueber den Bildschirm-
+     rand laufen). */
+  body.lang-en .mission-closing { margin-left: 0; margin-right: 0; }
+}
 body.inverted .mission-closing { background: #fff; color: var(--vermil); border-color: #fff; }
 /* CTA hinter dem Schluss-Satz — Outline-Stil mit weissem/transparenten
    Hintergrund (analog Mitmachen-/Spende-Icons auf Unterstuetzen). Inline-
