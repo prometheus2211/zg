@@ -405,6 +405,16 @@ body {
      Fenster-Vergrößerung nicht zuverlässig (Layout bleibt im engeren
      Stand „eingerastet"). Der nowrap-Atom (.satz-tail-wrap) hält
      Doppelpunkt + Box ohnehin zwingend zusammen. */
+  text-align: justify;
+  hyphens: auto;
+}
+/* CTA-Reihe auf gleiche Maximalbreite ziehen und mit space-between an
+   die Textraender ausrichten — damit schliessen Text und Icons buendig
+   ab (Blocksatz-Effekt auch auf der Icon-Reihe). */
+.satz-section .cta-row {
+  max-width: 880px;
+  width: 100%;
+  justify-content: space-between;
 }
 /* Letzter Textbaustein + "Wer wir sind"-Box als unteilbare Einheit:
    sorgt dafür, dass Doppelpunkt und Box IMMER auf derselben Zeile landen,
