@@ -408,13 +408,21 @@ body {
   text-align: justify;
   hyphens: auto;
 }
-/* CTA-Reihe auf gleiche Maximalbreite ziehen und mit space-between an
-   die Textraender ausrichten — damit schliessen Text und Icons buendig
-   ab (Blocksatz-Effekt auch auf der Icon-Reihe). */
+/* CTA-Reihe auf gleiche Maximalbreite wie der Satz (880px), die Icons
+   selbst auf gleichen Anteil (flex: 1) — Buttons werden dadurch breiter,
+   die urspruengliche Luecke (gap) zwischen ihnen bleibt erhalten. Erster
+   Button bündig links, letzter bündig rechts (Blocksatz-Effekt). */
 .satz-section .cta-row {
   max-width: 880px;
   width: 100%;
+}
+.satz-section .wer-link,
+.satz-section .newsletter-link,
+.satz-section .mitmachen-link {
+  flex: 1;
+  display: inline-flex;
   justify-content: space-between;
+  align-items: center;
 }
 /* Letzter Textbaustein + "Wer wir sind"-Box als unteilbare Einheit:
    sorgt dafür, dass Doppelpunkt und Box IMMER auf derselben Zeile landen,
