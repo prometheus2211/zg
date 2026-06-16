@@ -681,7 +681,15 @@ body.unterstuetzen-view .unterstuetzen-section .section-cta {
 }
 .mission-content,
 .team-content,
-.unterstuetzen-content { max-width: 1300px; }
+.unterstuetzen-content {
+  max-width: 1300px;
+  /* Zentriert relativ zur Section, damit der 'edge-to-edge'-Break-Out
+     (width: 100vw; margin-left: -50vw) auf der TB symmetrisch nach links
+     und rechts gleich weit ueber den Parent hinausragt. Ohne margin auto
+     blieb die Box links haengen und liess rechts einen weissen Streifen. */
+  margin-left: auto;
+  margin-right: auto;
+}
 .mission-headline-box,
 .team-headline-box,
 .kontakt-headline-box,
