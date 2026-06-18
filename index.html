@@ -1657,6 +1657,18 @@ body.nav-on-vermil .menu-toggle { color: #fff; }
 }
 .mobile-menu-links a:hover,
 .mobile-menu-links a:active { border-bottom-color: #fff; }
+/* "Unterstützen"-Link als CTA hervorgehoben: weißer Rahmen, mehr
+   Padding, kein Underline-on-Hover (das Rechteck ist die Auszeichnung). */
+.mobile-menu-links a#menu-unterstuetzen {
+  border: 2px solid #fff;
+  padding: 10px 22px;
+  margin-top: 6px;
+}
+.mobile-menu-links a#menu-unterstuetzen:hover,
+.mobile-menu-links a#menu-unterstuetzen:active {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
 .mobile-menu-lang {
   margin-top: 36px;
   color: #fff;
