@@ -1625,21 +1625,28 @@ footer {
   color: var(--black);
   margin: 0 0 18px;
 }
-/* Button wie die CTA-Boxen der Startseite (Newsletter / Mitmachen), mit rotem Fond */
+/* Button: Optik wie die CTA-Boxen der Startseite (eckig, Pfeil, roter Fond; Hover: beiger Fond),
+   Größe wie der Button der Brevo-Mail (16px, Padding 15px 28px). */
 .confirm-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   margin-top: 14px;
   font-family: inherit;
-  font-size: clamp(22px, 2.8vw, 36px);
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.01em;
+  line-height: 20px;
   color: #fff;
-  padding: 0.10em 0.45em;
+  padding: 15px 28px;
   background: var(--vermil);
   border: 1.5px solid var(--vermil);
   cursor: pointer;
+  transition: color 0.2s, background 0.2s;
 }
+.confirm-btn:hover { background: var(--bg); color: var(--vermil); }
+.confirm-btn .newsletter-arrow { margin-left: 0; transition: transform 0.2s; }
+.confirm-btn:hover .newsletter-arrow { transform: translateX(3px); }
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE HAMBURGER-MENU
