@@ -1639,10 +1639,7 @@ footer {
   background: var(--vermil);
   border: 1.5px solid var(--vermil);
   cursor: pointer;
-  transition: color 0.2s, background 0.2s;
 }
-.confirm-btn:hover { background: var(--bg); color: var(--vermil); }
-.confirm-btn:hover .newsletter-arrow { transform: translateX(3px); }
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE HAMBURGER-MENU
@@ -2618,6 +2615,23 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
   </div>
 </div>
 
+<!-- ══ SEITE: NEWSLETTER ANGEMELDET (Weiterleitung nach Klick auf den Bestätigungslink; Link: /#newsletter-angemeldet) ══ -->
+<div class="modal-overlay confirm-page" id="modal-newsletter-angemeldet">
+  <button class="modal-close" onclick="closeModal('newsletter-angemeldet')" aria-label="Schließen" data-aria-de="Schließen" data-aria-en="Close">✕</button>
+  <div class="confirm-inner">
+    <div class="lang-block-de">
+      <h1>Vielen Dank für Ihre Anmeldung.</h1>
+      <p>Sie haben sich erfolgreich angemeldet.</p>
+      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-angemeldet')">Zur Startseite<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="lang-block-en">
+      <h1>Thank you for subscribing.</h1>
+      <p>You have successfully subscribed.</p>
+      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-angemeldet')">Back to home page<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ MODAL: COMING SOON (Foerdermitgliedschaft / Einmalspende) ══ -->
 <div class="modal-overlay" id="modal-coming-soon" onclick="if(event.target===this)closeModal('coming-soon')">
   <div class="modal">
@@ -2804,8 +2818,8 @@ function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-/* Modals mit Direktlink (Hash): zentrumgrundrechte.de/#datenschutz, /#newsletter-bestaetigung */
-var HASH_MODALS = ['datenschutz', 'newsletter-bestaetigung'];
+/* Modals mit Direktlink (Hash): zentrumgrundrechte.de/#datenschutz, /#newsletter-bestaetigung, /#newsletter-angemeldet */
+var HASH_MODALS = ['datenschutz', 'newsletter-bestaetigung', 'newsletter-angemeldet'];
 function closeModal(id) {
   document.getElementById('modal-' + id).classList.remove('open');
   /* Direktlink: Hash beim Schließen entfernen */
