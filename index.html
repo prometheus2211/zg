@@ -1625,22 +1625,24 @@ footer {
   color: var(--black);
   margin: 0 0 18px;
 }
+/* Button wie die CTA-Boxen der Startseite (Newsletter / Mitmachen), mit rotem Fond */
 .confirm-btn {
   display: inline-block;
   margin-top: 14px;
-  padding: 15px 28px;
   font-family: inherit;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: clamp(22px, 2.8vw, 36px);
   font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   color: #fff;
+  padding: 0.10em 0.45em;
   background: var(--vermil);
-  border: none;
-  border-radius: 6px;
+  border: 1.5px solid var(--vermil);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
-.confirm-btn:hover { opacity: 0.9; }
+.confirm-btn:hover { background: var(--bg); color: var(--vermil); }
+.confirm-btn:hover .newsletter-arrow { transform: translateX(3px); }
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE HAMBURGER-MENU
@@ -2604,14 +2606,14 @@ body.inverted.unterstuetzen-view { background: var(--vermil); }
       <p>Wir müssen Ihre E-Mail-Adresse bestätigen, um den Registrierungsprozess abzuschließen.</p>
       <p>Klicken Sie bitte auf den Link in der E-Mail, die wir Ihnen gerade gesendet haben.</p>
       <p>Sie werden nicht registriert, wenn Sie nicht auf den Bestätigungslink klicken.</p>
-      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-bestaetigung')">Zur Startseite</button>
+      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-bestaetigung')">Zur Startseite<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
     <div class="lang-block-en">
       <h1>Confirm your subscription</h1>
       <p>We need to confirm your email address to complete the registration process.</p>
       <p>Please click the link in the email we have just sent you.</p>
       <p>You will not be registered unless you click the confirmation link.</p>
-      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-bestaetigung')">Back to home page</button>
+      <button type="button" class="confirm-btn" onclick="closeModal('newsletter-bestaetigung')">Back to home page<svg class="newsletter-arrow" viewBox="0 0 14 24" aria-hidden="true" focusable="false"><path d="M3 3 L11 12 L3 21" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </div>
